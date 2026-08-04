@@ -22,12 +22,12 @@ export const siteConfig = {
   contact: {
     email: "info@sv-fisch.de",
     phone: "+49 0000 000000",
-    addressLines: ["Sportplatz SV Fisch", "Musterstraße 1", "12345 Musterort"],
+    addressLines: ["Sportplatz SV Fisch", "Im Asbüsch 10", "54439 Fisch"],
     // Jakobushaus = Vereinsheim, siehe Kontaktseite
     venueName: "Sportplatz & Jakobushaus",
     // OpenStreetMap-Koordinaten [BITTE PRÜFEN/ERGÄNZEN]
-    lat: 50.943,
-    lng: 6.9601,
+    lat: 49.6198,
+    lng: 6.4883,
   },
 
   register: {
@@ -36,14 +36,14 @@ export const siteConfig = {
   },
 
   social: {
-    instagram: "https://instagram.com/svfisch1964",
+    instagram: "https://www.instagram.com/sv.fisch/",
     facebook: "https://facebook.com/svfisch1964",
     youtube: "",
     tiktok: "",
   },
 
   // Platzhalter-Link, per ENV leicht austauschbar sobald ein echter Shop existiert
-  fanshopUrl: process.env.NEXT_PUBLIC_FANSHOP_URL || "https://www.spreadshirt.de/",
+  fanshopUrl: process.env.NEXT_PUBLIC_FANSHOP_URL || "https://sv-fisch.fan12.de/",
 
   numbers: {
     founded: 1964,
