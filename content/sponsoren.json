@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Sparkasse",
+    "stufe": "Hauptsponsor",
+    "logo": "/sponsoren/sparkasse.png",
+    "url": "https://www.sparkasse.de"
+  },
+  {
+    "name": "IT-WM",
+    "stufe": "Premiumpartner",
+    "logo": "/sponsoren/it-wm.png",
+    "url": "#"
+  },
+  {
+    "name": "Höllen",
+    "stufe": "Premiumpartner",
+    "logo": "/sponsoren/hoellen.png",
+    "url": "#"
+  },
+  {
+    "name": "Getränke Bauer",
+    "stufe": "Partner",
+    "logo": "/sponsoren/getraenke-bauer.png",
+    "url": "#"
+  },
+  {
+    "name": "Autohaus Klein",
+    "stufe": "Partner",
+    "logo": "/sponsoren/autohaus-klein.png",
+    "url": "#"
+  },
+  {
+    "name": "Bäckerei Ofenfrisch",
+    "stufe": "Partner",
+    "logo": "/sponsoren/baeckerei-ofenfrisch.png",
+    "url": "#"
+  },
+  {
+    "name": "Metzgerei Wurstmann",
+    "stufe": "Förderer",
+    "logo": "/sponsoren/metzgerei-wurstmann.png",
+    "url": "#"
+  },
+  {
+    "name": "Physio am Sportplatz",
+    "stufe": "Förderer",
+    "logo": "/sponsoren/physio-am-sportplatz.png",
+    "url": "#"
+  }
+]

@@ -1,0 +1,72 @@
+[
+  {
+    "datum": "2026-07-12",
+    "uhrzeit": "15:30",
+    "wettbewerb": "Kreisliga A",
+    "heim": "SV Fisch 1964",
+    "auswaerts": "TSV Grünau",
+    "ort": "Heim",
+    "spielstaette": "Sportplatz SV Fisch",
+    "ergebnis": "3:1",
+    "gespielt": true
+  },
+  {
+    "datum": "2026-07-19",
+    "uhrzeit": "15:30",
+    "wettbewerb": "Kreisliga A",
+    "heim": "FC Eintracht Nord",
+    "auswaerts": "SV Fisch 1964",
+    "ort": "Auswärts",
+    "ergebnis": "1:1",
+    "gespielt": true
+  },
+  {
+    "datum": "2026-07-26",
+    "uhrzeit": "15:30",
+    "wettbewerb": "Kreisliga A",
+    "heim": "SV Fisch 1964",
+    "auswaerts": "SG Am Weiher",
+    "ort": "Heim",
+    "spielstaette": "Sportplatz SV Fisch",
+    "ergebnis": "4:0",
+    "gespielt": true
+  },
+  {
+    "datum": "2026-08-09",
+    "uhrzeit": "15:30",
+    "wettbewerb": "Kreisliga A",
+    "heim": "SV Fisch 1964",
+    "auswaerts": "SC Rotweiß Ahlen",
+    "ort": "Heim",
+    "spielstaette": "Sportplatz SV Fisch",
+    "gespielt": false
+  },
+  {
+    "datum": "2026-08-16",
+    "uhrzeit": "15:30",
+    "wettbewerb": "Kreisliga A",
+    "heim": "TuS Feldkirchen",
+    "auswaerts": "SV Fisch 1964",
+    "ort": "Auswärts",
+    "gespielt": false
+  },
+  {
+    "datum": "2026-08-23",
+    "uhrzeit": "15:30",
+    "wettbewerb": "Kreispokal",
+    "heim": "SV Fisch 1964",
+    "auswaerts": "FC Waldstadt",
+    "ort": "Heim",
+    "spielstaette": "Sportplatz SV Fisch",
+    "gespielt": false
+  },
+  {
+    "datum": "2026-08-30",
+    "uhrzeit": "15:00",
+    "wettbewerb": "Kreisliga A",
+    "heim": "SV Oberdorf",
+    "auswaerts": "SV Fisch 1964",
+    "ort": "Auswärts",
+    "gespielt": false
+  }
+]

@@ -1,0 +1,44 @@
+[
+  {
+    "name": "[Name eintragen]",
+    "rolle": "1. Vorsitzende(r)",
+    "bereich": "Verein",
+    "email": "vorstand@sv-fisch.de"
+  },
+  {
+    "name": "[Name eintragen]",
+    "rolle": "2. Vorsitzende(r)",
+    "bereich": "Verein",
+    "email": "vorstand@sv-fisch.de"
+  },
+  {
+    "name": "[Name eintragen]",
+    "rolle": "Kassenwart/in",
+    "bereich": "Verein",
+    "email": "kasse@sv-fisch.de"
+  },
+  {
+    "name": "[Name eintragen]",
+    "rolle": "Schriftführer/in",
+    "bereich": "Verein",
+    "email": "info@sv-fisch.de"
+  },
+  {
+    "name": "[Name eintragen]",
+    "rolle": "Abteilungsleitung Fußball",
+    "bereich": "Fußball",
+    "email": "fussball@sv-fisch.de"
+  },
+  {
+    "name": "[Name eintragen]",
+    "rolle": "Jugendwart/in",
+    "bereich": "Jugend",
+    "email": "jugend@sv-fisch.de"
+  },
+  {
+    "name": "[Name eintragen]",
+    "rolle": "Abteilungsleitung Gymnastik",
+    "bereich": "Gymnastik",
+    "email": "gymnastik@sv-fisch.de"
+  }
+]

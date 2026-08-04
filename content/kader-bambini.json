@@ -1,0 +1,11 @@
+[
+  { "nummer": null, "name": "[Name eintragen]", "position": "Trainer" },
+  { "nummer": null, "name": "[Name eintragen]", "position": "Trainer" },
+  { "nummer": 1, "name": "[Name eintragen]", "position": "Torwart" },
+  { "nummer": 3, "name": "[Name eintragen]", "position": "Abwehr" },
+  { "nummer": 4, "name": "[Name eintragen]", "position": "Abwehr" },
+  { "nummer": 6, "name": "[Name eintragen]", "position": "Mittelfeld" },
+  { "nummer": 8, "name": "[Name eintragen]", "position": "Mittelfeld" },
+  { "nummer": 9, "name": "[Name eintragen]", "position": "Sturm" },
+  { "nummer": 11, "name": "[Name eintragen]", "position": "Sturm" }
+]

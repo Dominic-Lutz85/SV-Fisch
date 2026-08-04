@@ -1,0 +1,35 @@
+[
+  {
+    "slug": "saison-2025-26",
+    "titel": "Saison 2025/26",
+    "datum": "2026-05-01",
+    "cover": "/gallery/saison-2025-26/1.png",
+    "bilder": [
+      { "src": "/gallery/saison-2025-26/1.png", "alt": "Mannschaftsfoto der 1. Mannschaft vor Saisonstart [Platzhalter – Datei ersetzen]" },
+      { "src": "/gallery/saison-2025-26/2.png", "alt": "Torjubel beim Heimspiel [Platzhalter – Datei ersetzen]" },
+      { "src": "/gallery/saison-2025-26/3.png", "alt": "Anstoß auf dem Sportplatz SV Fisch [Platzhalter – Datei ersetzen]" },
+      { "src": "/gallery/saison-2025-26/4.png", "alt": "Fans auf der Tribüne [Platzhalter – Datei ersetzen]" }
+    ]
+  },
+  {
+    "slug": "vereinsfeste",
+    "titel": "Vereinsfeste",
+    "datum": "2025-09-20",
+    "cover": "/gallery/vereinsfeste/1.png",
+    "bilder": [
+      { "src": "/gallery/vereinsfeste/1.png", "alt": "Sommerfest auf dem Vereinsgelände [Platzhalter – Datei ersetzen]" },
+      { "src": "/gallery/vereinsfeste/2.png", "alt": "Grillstand beim Vereinsfest [Platzhalter – Datei ersetzen]" },
+      { "src": "/gallery/vereinsfeste/3.png", "alt": "Kinder beim Vereinsfest [Platzhalter – Datei ersetzen]" }
+    ]
+  },
+  {
+    "slug": "bambini",
+    "titel": "Bambini in Aktion",
+    "datum": "2026-03-10",
+    "cover": "/gallery/bambini/1.png",
+    "bilder": [
+      { "src": "/gallery/bambini/1.png", "alt": "Bambini-Mannschaft beim Training [Platzhalter – Datei ersetzen]" },
+      { "src": "/gallery/bambini/2.png", "alt": "Bambini-Spieltag auf dem Sportplatz [Platzhalter – Datei ersetzen]" }
+    ]
+  }
+]

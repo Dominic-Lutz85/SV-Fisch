@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+/*
+ * SV Fisch 1964 e.V. — Design Tokens
+ * Farben nach RAL-Vorgabe des Vereins. Bitte NICHT ohne Rücksprache ändern,
+ * die Werte entsprechen den offiziellen Vereinsfarben (Wappen, Trikots, Banden).
+ */
+:root {
+  --color-fisch-yellow: #f3da0b; /* RAL 1021 */
+  --color-fisch-yellow-dark: #d9c209; /* Hover/aktiv-Zustand für Gelb */
+  --color-fisch-black: #0a0a0a; /* RAL 9005 */
+  --color-fisch-white: #f6f6f6; /* RAL 9016 */
+
+  --color-fisch-ink: #1a1a1a; /* etwas weicher als Vollschwarz für Fließtext */
+  --color-fisch-muted: #5c5c5c; /* Sekundärtext auf Weiß */
+  --color-fisch-line: #e3e1d8; /* dezente Trennlinien auf Off-White */
+
+  --background: var(--color-fisch-white);
+  --foreground: var(--color-fisch-ink);
+}
+
+@theme inline {
+  --color-fisch-yellow: var(--color-fisch-yellow);
+  --color-fisch-yellow-dark: var(--color-fisch-yellow-dark);
+  --color-fisch-black: var(--color-fisch-black);
+  --color-fisch-white: var(--color-fisch-white);
+  --color-fisch-ink: var(--color-fisch-ink);
+  --color-fisch-muted: var(--color-fisch-muted);
+  --color-fisch-line: var(--color-fisch-line);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --font-display: var(--font-sora);
+  --font-body: var(--font-inter);
+
+  --animate-fade-up: fade-up 0.6s ease-out both;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display), system-ui, sans-serif;
+}
+
+::selection {
+  background: var(--color-fisch-yellow);
+  color: var(--color-fisch-black);
+}
+
+/* Sichtbarer Fokusring für Tastaturbedienung (Barrierefreiheit) */
+:focus-visible {
+  outline: 3px solid var(--color-fisch-yellow);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.container-fisch {
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .container-fisch {
+    padding-inline: 2rem;
+  }
+}

@@ -1,0 +1,50 @@
+[
+  {
+    "id": "jhv-2026",
+    "titel": "Jahreshauptversammlung",
+    "datum": "2026-08-21T19:00:00",
+    "ort": "Jakobushaus",
+    "kategorie": "Verein",
+    "beschreibung": "Alle Mitglieder sind herzlich eingeladen. Tagesordnung hängt im Vereinsheim aus und wird per Newsletter verschickt."
+  },
+  {
+    "id": "heimspiel-rotweiss",
+    "titel": "Heimspiel gegen SC Rotweiß Ahlen",
+    "datum": "2026-08-09T15:30:00",
+    "ort": "Sportplatz SV Fisch",
+    "kategorie": "Fußball"
+  },
+  {
+    "id": "gymnastik-schnuppertag",
+    "titel": "Schnuppertag Gymnastikabteilung",
+    "datum": "2026-08-27T18:00:00",
+    "ort": "Jakobushaus, Turnraum",
+    "kategorie": "Gymnastik",
+    "beschreibung": "Neue Gesichter sind jederzeit willkommen – einfach vorbeikommen, Sportkleidung reicht."
+  },
+  {
+    "id": "elfer-turnier-2026",
+    "titel": "Elfer-Turnier 2026",
+    "datum": "2026-09-05T13:00:00",
+    "endDatum": "2026-09-05T20:00:00",
+    "ort": "Sportplatz SV Fisch",
+    "kategorie": "Fest",
+    "beschreibung": "Das traditionelle Elfmeterturnier für Vereine aus der Region, anschließend Feier auf dem Sportplatz."
+  },
+  {
+    "id": "kreispokal-waldstadt",
+    "titel": "Kreispokal gegen FC Waldstadt",
+    "datum": "2026-08-23T15:30:00",
+    "ort": "Sportplatz SV Fisch",
+    "kategorie": "Fußball"
+  },
+  {
+    "id": "vereinsfest-2026",
+    "titel": "Sommerfest SV Fisch",
+    "datum": "2026-09-19T14:00:00",
+    "endDatum": "2026-09-19T23:00:00",
+    "ort": "Sportplatz & Jakobushaus",
+    "kategorie": "Fest",
+    "beschreibung": "Musik, Grill und Programm für die ganze Familie – Helfer sind herzlich willkommen."
+  }
+]

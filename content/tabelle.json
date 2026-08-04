@@ -1,0 +1,14 @@
+[
+  { "platz": 1, "team": "TuS Bergheim", "spiele": 14, "siege": 11, "unentschieden": 2, "niederlagen": 1, "tore": "38:14", "differenz": 24, "punkte": 35 },
+  { "platz": 2, "team": "FC Waldstadt", "spiele": 14, "siege": 10, "unentschieden": 2, "niederlagen": 2, "tore": "33:17", "differenz": 16, "punkte": 32 },
+  { "platz": 3, "team": "SV Fisch 1964", "spiele": 14, "siege": 9, "unentschieden": 3, "niederlagen": 2, "tore": "29:18", "differenz": 11, "punkte": 30, "hervorgehoben": true },
+  { "platz": 4, "team": "SG Talblick", "spiele": 14, "siege": 8, "unentschieden": 3, "niederlagen": 3, "tore": "27:20", "differenz": 7, "punkte": 27 },
+  { "platz": 5, "team": "SC Rotweiß Ahlen", "spiele": 14, "siege": 7, "unentschieden": 4, "niederlagen": 3, "tore": "24:19", "differenz": 5, "punkte": 25 },
+  { "platz": 6, "team": "TSV Grünau", "spiele": 14, "siege": 6, "unentschieden": 4, "niederlagen": 4, "tore": "22:21", "differenz": 1, "punkte": 22 },
+  { "platz": 7, "team": "FC Eintracht Nord", "spiele": 14, "siege": 5, "unentschieden": 4, "niederlagen": 5, "tore": "20:22", "differenz": -2, "punkte": 19 },
+  { "platz": 8, "team": "SV Oberdorf", "spiele": 14, "siege": 5, "unentschieden": 2, "niederlagen": 7, "tore": "19:24", "differenz": -5, "punkte": 17 },
+  { "platz": 9, "team": "TuS Feldkirchen", "spiele": 14, "siege": 4, "unentschieden": 3, "niederlagen": 7, "tore": "17:25", "differenz": -8, "punkte": 15 },
+  { "platz": 10, "team": "SG Am Weiher", "spiele": 14, "siege": 3, "unentschieden": 3, "niederlagen": 8, "tore": "16:27", "differenz": -11, "punkte": 12 },
+  { "platz": 11, "team": "FC Blau-Gelb Hausen", "spiele": 14, "siege": 2, "unentschieden": 3, "niederlagen": 9, "tore": "15:29", "differenz": -14, "punkte": 9 },
+  { "platz": 12, "team": "SV Neuhof", "spiele": 14, "siege": 1, "unentschieden": 2, "niederlagen": 11, "tore": "11:35", "differenz": -24, "punkte": 5 }
+]

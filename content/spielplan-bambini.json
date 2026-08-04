@@ -1,0 +1,32 @@
+[
+  {
+    "datum": "2026-07-13",
+    "uhrzeit": "10:00",
+    "wettbewerb": "Bambini-Spieltag",
+    "heim": "SV Fisch 1964",
+    "auswaerts": "diverse Teams",
+    "ort": "Heim",
+    "spielstaette": "Sportplatz SV Fisch",
+    "gespielt": true,
+    "ergebnis": "Turnierform"
+  },
+  {
+    "datum": "2026-08-10",
+    "uhrzeit": "10:00",
+    "wettbewerb": "Bambini-Spieltag",
+    "heim": "TSV Grünau",
+    "auswaerts": "diverse Teams",
+    "ort": "Auswärts",
+    "gespielt": false
+  },
+  {
+    "datum": "2026-09-07",
+    "uhrzeit": "10:00",
+    "wettbewerb": "Bambini-Spieltag",
+    "heim": "SV Fisch 1964",
+    "auswaerts": "diverse Teams",
+    "ort": "Heim",
+    "spielstaette": "Sportplatz SV Fisch",
+    "gespielt": false
+  }
+]
