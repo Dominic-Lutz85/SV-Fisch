@@ -30,6 +30,7 @@ export const mainNav: NavItem[] = [
       { label: "Bambini: Spielplan", href: "/fussball/bambini/spielplan" },
     ],
   },
+  { label: "Darts", href: "/darts" },
   { label: "Gymnastik", href: "/gymnastik" },
   { label: "Aktuelles", href: "/aktuelles" },
   { label: "Kalender", href: "/kalender" },

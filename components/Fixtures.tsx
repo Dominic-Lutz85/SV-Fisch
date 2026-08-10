@@ -5,20 +5,29 @@ import { cn } from "@/lib/utils";
 export default function Fixtures({
   spiele,
   compact = false,
+  variant = "light",
 }: {
   spiele: Spiel[];
   compact?: boolean;
+  variant?: "light" | "dark";
 }) {
+  const dark = variant === "dark";
+
   if (spiele.length === 0) {
     return (
-      <p className="text-sm text-fisch-muted">
+      <p className={cn("text-sm", dark ? "text-fisch-white/60" : "text-fisch-muted")}>
         Aktuell sind keine Spiele hinterlegt.
       </p>
     );
   }
 
   return (
-    <ul className="flex flex-col divide-y divide-fisch-line">
+    <ul
+      className={cn(
+        "flex flex-col divide-y",
+        dark ? "divide-white/10" : "divide-fisch-line"
+      )}
+    >
       {spiele.map((spiel) => {
         const istFisch = (t: string) => t.toLowerCase().includes("fisch");
         return (
@@ -30,26 +39,52 @@ export default function Fixtures({
             )}
           >
             <div className="flex flex-col gap-0.5">
-              <span className="text-xs font-semibold uppercase tracking-wide text-fisch-muted">
+              <span
+                className={cn(
+                  "text-xs font-semibold uppercase tracking-wide",
+                  dark ? "text-fisch-white/60" : "text-fisch-muted"
+                )}
+              >
                 {spiel.wettbewerb} · {formatDatum(spiel.datum)}
                 {!compact && `, ${spiel.uhrzeit} Uhr`}
               </span>
-              <span className="font-semibold text-fisch-black">
+              <span
+                className={cn(
+                  "font-semibold",
+                  dark ? "text-fisch-white" : "text-fisch-black"
+                )}
+              >
                 <span className={istFisch(spiel.heim) ? "font-bold" : ""}>
                   {spiel.heim}
                 </span>{" "}
-                <span className="text-fisch-muted">vs.</span>{" "}
+                <span className={dark ? "text-fisch-white/50" : "text-fisch-muted"}>
+                  vs.
+                </span>{" "}
                 <span className={istFisch(spiel.auswaerts) ? "font-bold" : ""}>
                   {spiel.auswaerts}
                 </span>
               </span>
               {!compact && spiel.spielstaette && (
-                <span className="text-xs text-fisch-muted">{spiel.spielstaette}</span>
+                <span
+                  className={cn(
+                    "text-xs",
+                    dark ? "text-fisch-white/60" : "text-fisch-muted"
+                  )}
+                >
+                  {spiel.spielstaette}
+                </span>
               )}
             </div>
             <div className="shrink-0">
               {spiel.gespielt ? (
-                <span className="inline-block rounded-full bg-fisch-black px-3 py-1.5 text-sm font-bold text-fisch-white">
+                <span
+                  className={cn(
+                    "inline-block rounded-full px-3 py-1.5 text-sm font-bold",
+                    dark
+                      ? "bg-fisch-white text-fisch-black"
+                      : "bg-fisch-black text-fisch-white"
+                  )}
+                >
                   {spiel.ergebnis}
                 </span>
               ) : (

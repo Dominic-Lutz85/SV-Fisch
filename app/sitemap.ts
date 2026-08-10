@@ -13,6 +13,7 @@ const staticRoutes = [
   "/fussball/spielplan",
   "/fussball/bambini",
   "/fussball/bambini/spielplan",
+  "/darts",
   "/gymnastik",
   "/aktuelles",
   "/kalender",

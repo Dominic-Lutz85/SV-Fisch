@@ -1,7 +1,7 @@
 export interface VorstandsMitglied {
   name: string;
   rolle: string;
-  bereich: "Verein" | "Fußball" | "Gymnastik" | "Jugend";
+  bereich: "Verein" | "Fußball" | "Gymnastik" | "Jugend" | "Darts";
   email?: string;
   telefon?: string;
   foto?: string;

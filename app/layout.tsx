@@ -46,7 +46,7 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "SportsOrganization",
   name: siteConfig.name,
-  sport: ["Fußball", "Gymnastik"],
+  sport: ["Fußball", "Gymnastik", "Darts"],
   foundingDate: `${siteConfig.founded}`,
   url: siteConfig.url,
   logo: `${siteConfig.url}/logo.svg`,

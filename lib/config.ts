@@ -16,7 +16,7 @@ export const siteConfig = {
   founded: 1964,
   url: "https://www.sv-fisch.de",
   description:
-    "SV Fisch 1964 e.V. – Fußball und Gymnastik mitten im Ort. Erste Mannschaft, Bambini, Gymnastikabteilung und ein starkes Vereinsleben seit 1964.",
+    "SV Fisch 1964 e.V. – Fußball, Gymnastik und Darts mitten im Ort. Erste Mannschaft, Bambini, Gymnastik- und Darts-Abteilung und ein starkes Vereinsleben seit 1964.",
 
   // [BITTE PRÜFEN/ERGÄNZEN] echte Kontaktdaten eintragen
   contact: {
@@ -48,7 +48,7 @@ export const siteConfig = {
   numbers: {
     founded: 1964,
     members: 420,
-    departments: 2,
+    departments: 3,
     teams: 4,
   },
 } as const;

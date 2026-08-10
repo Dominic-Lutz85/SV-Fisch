@@ -62,6 +62,11 @@ export default function Footer() {
               </li>
             ))}
             <li>
+              <Link href="/darts" className="text-fisch-white/80 hover:text-fisch-white">
+                Darts
+              </Link>
+            </li>
+            <li>
               <Link href="/gymnastik" className="text-fisch-white/80 hover:text-fisch-white">
                 Gymnastik
               </Link>

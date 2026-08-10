@@ -5,12 +5,14 @@ import NewsCard from "@/components/NewsCard";
 import StatsRow from "@/components/StatsRow";
 import SponsorWall from "@/components/SponsorWall";
 import Fixtures from "@/components/Fixtures";
+import TeamTableMini from "@/components/TeamTableMini";
 import {
   getAllNews,
   getSponsoren,
   getSpielplan,
   getKommendeSpiele,
   getNaechsterTermin,
+  getTabelle,
 } from "@/lib/content";
 
 export default function Home() {
@@ -18,6 +20,7 @@ export default function Home() {
   const sponsoren = getSponsoren();
   const kommendeSpiele = getKommendeSpiele(getSpielplan(), 3);
   const naechsterTermin = getNaechsterTermin();
+  const tabelle = getTabelle();
 
   return (
     <>
@@ -90,8 +93,11 @@ export default function Home() {
               </Link>
             </div>
           </div>
-          <div className="rounded-2xl bg-white/5 p-2 sm:p-4">
-            <Fixtures spiele={kommendeSpiele} compact />
+          <div className="flex flex-col gap-6">
+            <div className="rounded-2xl bg-white/5 p-2 sm:p-4">
+              <Fixtures spiele={kommendeSpiele} compact variant="dark" />
+            </div>
+            {tabelle.length > 0 && <TeamTableMini zeilen={tabelle} />}
           </div>
         </div>
       </section>
