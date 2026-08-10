@@ -1,19 +1,19 @@
 [
   {
-    "name": "[Name eintragen]",
-    "rolle": "1. Vorsitzende(r)",
+    "name": "Benedict Britten",
+    "rolle": "1. Vorsitzender",
     "bereich": "Verein",
     "email": "vorstand@sv-fisch.de"
   },
   {
-    "name": "[Name eintragen]",
-    "rolle": "2. Vorsitzende(r)",
+    "name": "Robin Rauen",
+    "rolle": "2. Vorsitzender",
     "bereich": "Verein",
     "email": "vorstand@sv-fisch.de"
   },
   {
-    "name": "[Name eintragen]",
-    "rolle": "Kassenwart/in",
+    "name": "Alexander Roth",
+    "rolle": "Kassenwart",
     "bereich": "Verein",
     "email": "kasse@sv-fisch.de"
   },
