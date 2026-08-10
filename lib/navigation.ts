@@ -30,11 +30,21 @@ export const mainNav: NavItem[] = [
       { label: "Bambini: Spielplan", href: "/fussball/bambini/spielplan" },
     ],
   },
-  { label: "Darts", href: "/darts" },
-  { label: "Gymnastik", href: "/gymnastik" },
-  { label: "Aktuelles", href: "/aktuelles" },
-  { label: "Kalender", href: "/kalender" },
-  { label: "Elfer-Turnier", href: "/elfer-turnier" },
+  {
+    label: "Abteilungen",
+    children: [
+      { label: "Darts", href: "/darts" },
+      { label: "Gymnastik", href: "/gymnastik" },
+    ],
+  },
+  {
+    label: "Aktuelles",
+    children: [
+      { label: "Neuigkeiten", href: "/aktuelles" },
+      { label: "Kalender", href: "/kalender" },
+      { label: "Elfer-Turnier", href: "/elfer-turnier" },
+    ],
+  },
   { label: "Galerie", href: "/galerie" },
   { label: "Kontakt", href: "/kontakt" },
 ];
