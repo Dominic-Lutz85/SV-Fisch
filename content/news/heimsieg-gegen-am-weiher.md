@@ -1,5 +1,5 @@
 ---
-title: "SV Fisch schreibet Geschichte"
+title: "SV Fisch schreibt Geschichte"
 slug: "heimsieg"
 date: "2026-08-02"
 kategorie: "Fußball"
