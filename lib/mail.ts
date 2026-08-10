@@ -24,7 +24,7 @@ interface SendMailInput {
 export async function sendMail({ subject, replyTo, html, text }: SendMailInput) {
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.CONTACT_TO_EMAIL || siteConfig.contact.email;
-  const from = process.env.MAIL_FROM || "SV Fisch Website <onboarding@resend.dev>";
+  const from = process.env.MAIL_FROM || "SV Fisch Website <kasse@sv-fisch.de>";
 
   if (!apiKey) {
     console.warn(
