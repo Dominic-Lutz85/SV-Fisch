@@ -1,8 +1,9 @@
 import { getTermine } from "@/lib/content";
 import { siteConfig } from "@/lib/config";
 
-function toICSDate(iso: string): string {
+function toICSDate(iso: string): string | null {
   const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return null;
   return d.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
 }
 
@@ -17,6 +18,9 @@ export async function GET() {
     .map((t) => {
       const start = toICSDate(t.datum);
       const end = toICSDate(t.endDatum || t.datum);
+      // Termin mit nicht auswertbarem Datum überspringen, statt den
+      // gesamten Kalender-Export für alle anderen Termine zu zerschießen.
+      if (!start || !end) return null;
       return [
         "BEGIN:VEVENT",
         `UID:${t.id}@sv-fisch.de`,
@@ -32,6 +36,7 @@ export async function GET() {
         .filter(Boolean)
         .join("\r\n");
     })
+    .filter(Boolean)
     .join("\r\n");
 
   const ics = [

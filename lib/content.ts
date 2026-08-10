@@ -23,6 +23,7 @@ import type {
   NewsFrontmatter,
   GalerieAlbum,
 } from "@/types/content";
+import { normalizeAssetPath } from "@/lib/utils";
 
 const NEWS_DIR = path.join(process.cwd(), "content", "news");
 
@@ -31,7 +32,10 @@ export function getVorstand(): VorstandsMitglied[] {
 }
 
 export function getSponsoren(): Sponsor[] {
-  return sponsorenData as Sponsor[];
+  return (sponsorenData as Sponsor[]).map((s) => ({
+    ...s,
+    logo: normalizeAssetPath(s.logo)!,
+  }));
 }
 
 export function getKader(): Spieler[] {
@@ -81,7 +85,14 @@ export function getNaechsterTermin(): Termin | undefined {
 }
 
 export function getGalerie(): GalerieAlbum[] {
-  return galerieData as GalerieAlbum[];
+  return (galerieData as GalerieAlbum[]).map((album) => ({
+    ...album,
+    cover: normalizeAssetPath(album.cover)!,
+    bilder: album.bilder.map((bild) => ({
+      ...bild,
+      src: normalizeAssetPath(bild.src)!,
+    })),
+  }));
 }
 
 export function getAllNews(): NewsArtikel[] {
@@ -92,7 +103,12 @@ export function getAllNews(): NewsArtikel[] {
   const artikel = dateien.map((dateiname) => {
     const rohtext = fs.readFileSync(path.join(NEWS_DIR, dateiname), "utf8");
     const { data, content } = matter(rohtext);
-    return { ...(data as NewsFrontmatter), content };
+    const frontmatter = data as NewsFrontmatter;
+    return {
+      ...frontmatter,
+      teaserbild: normalizeAssetPath(frontmatter.teaserbild),
+      content,
+    };
   });
 
   return artikel.sort(
