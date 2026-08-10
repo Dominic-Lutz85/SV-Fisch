@@ -4,7 +4,7 @@ slug: "heimsieg"
 date: "2026-08-02"
 kategorie: "Fußball"
 teaser: "In seinem ersten Spiel in der Vereinsgeschichte, holt der SV Fisch die ersten 3 Punkte in der B-Klasse. Mit einem 2:1 setzte sich die erste Mannschaft am vergangenen Sonntag gegen den SV SerrigII durch."
-teaserbild: "news/heimsieg-gegen-am-weiher.jpg"
+teaserbild: "/news/heimsieg-gegen-am-weiher.jpg"
 ---
 
 Vor heimischem Publikum zeigte unsere erste Mannschaft eine starke Leistung und gewann verdient mit 2:1 in der letzten Spielminute gegen den SV Serrig II,
