@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Plain CommonJS bootstrap script for Hostinger's Node.js hosting,
+    // run directly by Passenger without a build step.
+    "server.js",
   ]),
 ]);
 

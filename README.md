@@ -10,6 +10,7 @@ Next.js (App Router), TypeScript, Tailwind CSS und Framer Motion.
 - [Bilder & Logos austauschen](#bilder--logos-austauschen)
 - [ENV-Variablen & Mailversand](#env-variablen--mailversand)
 - [Deployment auf Vercel](#deployment-auf-vercel)
+- [Deployment auf Hostinger](#deployment-auf-hostinger-nodejs-app)
 - [Vor dem Go-Live prüfen](#vor-dem-go-live-prüfen-wichtig)
 - [Projektstruktur](#projektstruktur)
 
@@ -163,6 +164,40 @@ API-Routes ändern sich dabei nicht.
 4. Deployen. Danach in `lib/config.ts` `url: "https://www.sv-fisch.de"`
    final auf die echte Domain prüfen (steuert u. a. Sitemap und
    Open-Graph-Bilder).
+
+## Deployment auf Hostinger (Node.js App)
+
+Alternative zu Vercel, z. B. wenn die Domain (`sv-fisch.com`) bereits bei
+Hostinger liegt und dort auch gehostet werden soll. Voraussetzung: ein
+Hostinger-Tarif mit **"Node.js App"**-Funktion (z. B. Business Web
+Hosting) im hPanel unter Website → Erweitert.
+
+Diese Seite braucht anders als auf Vercel eine eigene Startdatei
+(`server.js` im Projekt-Root), weil Hostingers Node.js-Hosting (Passenger)
+keinen eigenen `npm start`-Befehl ausführt, sondern eine konkrete
+JS-Datei erwartet, die selbst einen HTTP-Server startet.
+
+1. In hPanel: **Website → Node.js** → neue App anlegen, Domain
+   `sv-fisch.com` zuweisen, Node-Version **20 oder höher** wählen
+   (siehe `engines` in `package.json`).
+2. Code auf den Server bringen – entweder über die Git-Funktion im
+   hPanel (Repository-URL: `https://github.com/TwerkiTwerk/SV-Fisch.git`)
+   oder per Datei-Upload/SFTP.
+3. **Application startup file** auf `server.js` setzen.
+4. Im hPanel-Bereich der Node.js-App: "NPM Install" ausführen, danach
+   `npm run build` (falls im UI kein separater Build-Schritt angeboten
+   wird, per SSH-Terminal in hPanel ausführen).
+5. Die unter [ENV-Variablen & Mailversand](#env-variablen--mailversand)
+   genannten Variablen im Node.js-App-Bereich eintragen, zusätzlich
+   `NODE_ENV=production`.
+6. App (neu)starten. Zum manuellen Testen ohne hPanel-UI:
+   `npm run start:hostinger` (führt `server.js` lokal im
+   Produktionsmodus aus).
+
+Nach jeder inhaltlichen Änderung, die über GitHub eingespielt wird, muss
+die Node.js-App in hPanel neu gezogen (Git-Pull) und neu gestartet
+werden – das läuft, anders als bei Vercel, nicht automatisch, sofern in
+hPanel kein Auto-Deploy-Hook eingerichtet ist.
 
 ## Vor dem Go-Live prüfen (wichtig)
 
