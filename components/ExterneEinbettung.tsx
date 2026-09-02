@@ -78,7 +78,7 @@ export default function ExterneEinbettung({
         </button>
         <Link
           href="/datenschutz"
-          className="text-sm font-semibold text-fisch-black underline underline-offset-2 hover:text-fisch-gold"
+          className="text-sm font-semibold text-fisch-black underline underline-offset-2 hover:decoration-fisch-yellow"
         >
           Datenschutz
         </Link>

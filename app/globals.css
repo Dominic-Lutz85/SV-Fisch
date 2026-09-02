@@ -7,12 +7,20 @@
  */
 :root {
   --color-fisch-yellow: #f3da0b; /* RAL 1021 */
-  --color-fisch-yellow-dark: #d9c209; /* NUR als Hover-Fläche unter Schwarz. Als
-     Schriftfarbe auf hellem Grund ist dieses Gelb unlesbar: gemessen 1,66 zu 1
-     gegen #f6f6f6, gefordert sind 4,5. Dafür ist --color-fisch-gold da. */
-  --color-fisch-gold: #806b00; /* Vereinsgelb so weit abgedunkelt, dass es als
-     Schrift und als Symbol auf hellem Grund trägt: 4,87 zu 1 gegen #f6f6f6,
-     5,27 zu 1 gegen Weiß. Beide Werte im Browser nachgerechnet, nicht geschätzt. */
+  --color-fisch-yellow-dark: #d9c209; /* NUR als Hover-Fläche unter schwarzer
+     Schrift. Als Schriftfarbe auf hellem Grund ist dieses Gelb unlesbar,
+     gemessen 1,66 zu 1 gegen #f6f6f6, gefordert sind 4,5.
+
+     Hier stand einmal ein abgedunkeltes --color-fisch-gold (#806b00) für genau
+     diesen Fall. Es hielt den Kontrast ein, sah aber olivgrün aus und nicht
+     mehr nach dem Verein. Am 02.09.2026 wieder entfernt.
+
+     Die Regel dahinter: Auf hellem Grund entsteht Auffälligkeit durch
+     Helligkeit und Lesbarkeit durch Dunkelheit, das ist derselbe Regler in
+     zwei Richtungen. Am Farbton zu drehen führt deshalb zu einem Ton, der
+     weder auffällt noch nach Vereinsgelb aussieht. Vereinsgelb gehört auf Hell
+     in die FLÄCHE (Knopf, Pille, Balken) oder in eine LINIE (Unterstreichung),
+     nie in die Schrift. Schrift und Symbole sind dort schwarz. */
   --color-fisch-black: #0a0a0a; /* RAL 9005 */
   --color-fisch-white: #f6f6f6; /* RAL 9016 */
 
@@ -27,7 +35,6 @@
 @theme inline {
   --color-fisch-yellow: var(--color-fisch-yellow);
   --color-fisch-yellow-dark: var(--color-fisch-yellow-dark);
-  --color-fisch-gold: var(--color-fisch-gold);
   --color-fisch-black: var(--color-fisch-black);
   --color-fisch-white: var(--color-fisch-white);
   --color-fisch-ink: var(--color-fisch-ink);

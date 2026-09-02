@@ -72,7 +72,7 @@ export default async function NewsDetailPage({
           <ArrowLeft className="h-4 w-4" aria-hidden="true" />
           Zurück zu allen Neuigkeiten
         </Link>
-        <div className="flex flex-col gap-4 text-fisch-ink [&_h2]:mt-6 [&_h2]:font-display [&_h2]:text-xl [&_h2]:font-bold [&_ol]:list-decimal [&_ol]:pl-5 [&_ul]:list-disc [&_ul]:pl-5 [&_a]:underline [&_a]:decoration-fisch-gold [&_strong]:font-semibold [&_li]:leading-relaxed [&_p]:leading-relaxed">
+        <div className="flex flex-col gap-4 text-fisch-ink [&_h2]:mt-6 [&_h2]:font-display [&_h2]:text-xl [&_h2]:font-bold [&_ol]:list-decimal [&_ol]:pl-5 [&_ul]:list-disc [&_ul]:pl-5 [&_a]:underline [&_a]:decoration-fisch-yellow [&_strong]:font-semibold [&_li]:leading-relaxed [&_p]:leading-relaxed">
           <ReactMarkdown remarkPlugins={[remarkGfm]}>{artikel.content}</ReactMarkdown>
         </div>
       </div>

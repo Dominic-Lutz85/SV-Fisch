@@ -48,7 +48,7 @@ export default function TabellePage() {
             href="https://www.fupa.net/club/sv-fisch"
             target="_blank"
             rel="noopener noreferrer"
-            className="font-semibold underline underline-offset-2 hover:text-fisch-gold"
+            className="font-semibold underline underline-offset-2 hover:decoration-fisch-yellow"
           >
             FuPa
           </a>{" "}

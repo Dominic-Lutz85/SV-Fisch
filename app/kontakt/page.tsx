@@ -36,21 +36,21 @@ export default function KontaktPage() {
 
           <div className="mt-12 flex flex-col gap-3 border border-fisch-line bg-white p-6">
             <p className="flex items-center gap-3 text-sm text-fisch-ink">
-              <MapPin className="h-5 w-5 shrink-0 text-fisch-gold" aria-hidden="true" />
+              <MapPin className="h-5 w-5 shrink-0 text-fisch-black" aria-hidden="true" />
               {siteConfig.contact.addressLines.join(", ")}
             </p>
             <a
               href={`mailto:${siteConfig.contact.email}`}
               className="flex items-center gap-3 text-sm text-fisch-ink hover:text-fisch-black"
             >
-              <Mail className="h-5 w-5 shrink-0 text-fisch-gold" aria-hidden="true" />
+              <Mail className="h-5 w-5 shrink-0 text-fisch-black" aria-hidden="true" />
               {siteConfig.contact.email}
             </a>
             <a
               href={`tel:${siteConfig.contact.phone}`}
               className="flex items-center gap-3 text-sm text-fisch-ink hover:text-fisch-black"
             >
-              <Phone className="h-5 w-5 shrink-0 text-fisch-gold" aria-hidden="true" />
+              <Phone className="h-5 w-5 shrink-0 text-fisch-black" aria-hidden="true" />
               {siteConfig.contact.phone}
             </a>
           </div>

@@ -62,7 +62,7 @@ export default function Home() {
           </div>
           <Link
             href="/aktuelles"
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-fisch-black hover:text-fisch-gold"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-fisch-black hover:decoration-fisch-yellow"
           >
             Alle Neuigkeiten <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>

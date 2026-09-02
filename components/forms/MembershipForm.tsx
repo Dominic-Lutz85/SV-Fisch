@@ -28,7 +28,7 @@ export default function MembershipForm() {
       </div>
       <div className="flex flex-col gap-1.5">
         <label htmlFor="abteilung" className="text-sm font-semibold text-fisch-black">
-          Interesse an <span className="text-fisch-gold">*</span>
+          Interesse an <span className="text-fisch-ink">*</span>
         </label>
         <select
           id="abteilung"
