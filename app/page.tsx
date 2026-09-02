@@ -164,9 +164,9 @@ export default function Home() {
 
       {sponsoren.length > 0 && (
         <section className="container-fisch py-20 sm:py-28">
-          <Eyebrow className="mb-2">Danke an unsere Partner</Eyebrow>
+          <Eyebrow className="mb-2">Danke an unsere Sponsoren</Eyebrow>
           <h2 className="mb-10 font-display text-3xl font-bold text-text sm:text-4xl">
-            Sponsoren & Förderer
+            Sponsoren
           </h2>
           <SponsorWall sponsoren={sponsoren} />
         </section>

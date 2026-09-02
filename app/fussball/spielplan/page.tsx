@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import PageHeader from "@/components/PageHeader";
+import PraesentiertVon from "@/components/PraesentiertVon";
 import Fixtures from "@/components/Fixtures";
 import {
   getSpielplan,
@@ -45,6 +46,7 @@ export default function SpielplanPage() {
         eyebrow="Fußball · 1. Mannschaft"
         title="Spielplan"
         description="Alle Termine und Ergebnisse der Saison, Heimspiele am gelben Rand zu erkennen."
+        beiwerk={<PraesentiertVon />}
       />
 
       <div className="container-fisch mx-auto max-w-3xl py-14 sm:py-20">

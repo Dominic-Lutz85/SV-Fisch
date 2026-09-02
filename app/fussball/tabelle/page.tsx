@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import PageHeader from "@/components/PageHeader";
+import PraesentiertVon from "@/components/PraesentiertVon";
 import FupaWidget from "@/components/FupaWidget";
 
 export const metadata: Metadata = {
@@ -35,7 +36,11 @@ export const metadata: Metadata = {
 export default function TabellePage() {
   return (
     <>
-      <PageHeader eyebrow="Fußball · 1. Mannschaft" title="Tabelle" />
+      <PageHeader
+        eyebrow="Fußball · 1. Mannschaft"
+        title="Tabelle"
+        beiwerk={<PraesentiertVon />}
+      />
       <div className="container-fisch py-16 sm:py-20">
         <FupaWidget
           containerId="fp-widget_root-3ImOg9e9ZE7oYqJGP3IxRrUlYCt"

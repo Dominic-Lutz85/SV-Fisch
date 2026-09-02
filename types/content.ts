@@ -9,8 +9,17 @@ export interface VorstandsMitglied {
 
 export interface Sponsor {
   name: string;
-  stufe: "Hauptsponsor" | "Premiumpartner" | "Partner" | "Förderer";
+  stufe: "Hauptsponsor" | "Co-Sponsor";
   logo: string;
+  /*
+   * Die echten Masse der Logodatei. Sie stehen hier, damit next/image das
+   * Seitenverhaeltnis kennt und keinen Platz falsch reserviert. Wer ein Logo
+   * austauscht, traegt die neuen Masse mit ein, sonst wird es verzerrt oder
+   * die Seite springt beim Laden.
+   */
+  breite: number;
+  hoehe: number;
+  /* Nur setzen, wenn die Adresse bekannt ist. Kein Ziel heisst kein Link. */
   url?: string;
 }
 

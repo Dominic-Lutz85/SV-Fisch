@@ -1,50 +1,66 @@
 [
   {
-    "name": "Sparkasse",
+    "name": "Tobias Weber Meisterbetrieb",
     "stufe": "Hauptsponsor",
-    "logo": "/sponsoren/sparkasse.png",
-    "url": "https://www.sparkasse.de"
+    "logo": "/sponsoren/tobias-weber.svg",
+    "breite": 9643,
+    "hoehe": 4904,
+    "url": "https://www.saardach.de"
   },
   {
-    "name": "IT-WM",
-    "stufe": "Premiumpartner",
-    "logo": "/sponsoren/it-wm.png",
-    "url": "#"
+    "name": "Elektro Benzmüller",
+    "stufe": "Co-Sponsor",
+    "logo": "/sponsoren/elektro-benzmueller.png",
+    "breite": 282,
+    "hoehe": 60
   },
   {
-    "name": "Höllen",
-    "stufe": "Premiumpartner",
-    "logo": "/sponsoren/hoellen.png",
-    "url": "#"
+    "name": "Edelobst-Brennerei Roland Lutz",
+    "stufe": "Co-Sponsor",
+    "logo": "/sponsoren/brennerei-roland-lutz.png",
+    "breite": 304,
+    "hoehe": 125
   },
   {
-    "name": "Getränke Bauer",
-    "stufe": "Partner",
-    "logo": "/sponsoren/getraenke-bauer.png",
-    "url": "#"
+    "name": "Fleischerei Klassen",
+    "stufe": "Co-Sponsor",
+    "logo": "/sponsoren/fleischerei-klassen.png",
+    "breite": 250,
+    "hoehe": 78
   },
   {
-    "name": "Autohaus Klein",
-    "stufe": "Partner",
-    "logo": "/sponsoren/autohaus-klein.png",
-    "url": "#"
+    "name": "Brocker Holzbau",
+    "stufe": "Co-Sponsor",
+    "logo": "/sponsoren/brocker-holzbau.png",
+    "breite": 288,
+    "hoehe": 167
   },
   {
-    "name": "Bäckerei Ofenfrisch",
-    "stufe": "Partner",
-    "logo": "/sponsoren/baeckerei-ofenfrisch.png",
-    "url": "#"
+    "name": "Adam Rauls",
+    "stufe": "Co-Sponsor",
+    "logo": "/sponsoren/adam-rauls.png",
+    "breite": 83,
+    "hoehe": 58
   },
   {
-    "name": "Metzgerei Wurstmann",
-    "stufe": "Förderer",
-    "logo": "/sponsoren/metzgerei-wurstmann.png",
-    "url": "#"
+    "name": "Roth Munch Steuerberatungsgesellschaft",
+    "stufe": "Co-Sponsor",
+    "logo": "/sponsoren/roth-munch.png",
+    "breite": 220,
+    "hoehe": 46
   },
   {
-    "name": "Physio am Sportplatz",
-    "stufe": "Förderer",
-    "logo": "/sponsoren/physio-am-sportplatz.png",
-    "url": "#"
+    "name": "Höllen Design",
+    "stufe": "Co-Sponsor",
+    "logo": "/sponsoren/hoellen-design.png",
+    "breite": 314,
+    "hoehe": 219
+  },
+  {
+    "name": "Sparkasse Trier",
+    "stufe": "Co-Sponsor",
+    "logo": "/sponsoren/sparkasse-trier.png",
+    "breite": 156,
+    "hoehe": 65
   }
 ]

@@ -64,7 +64,7 @@ export default function Vereinsbild({
       <p className="max-w-[26ch] text-sm leading-relaxed text-text-leise">
         {hinweis}
       </p>
-      <code className="text-[11px] text-text-leise/80">{src}</code>
+      <code className="text-[11px] text-text-leise">{src}</code>
     </div>
   );
 }

@@ -8,7 +8,7 @@ import { getSponsoren } from "@/lib/content";
 export const metadata: Metadata = {
   title: "Sponsoren",
   description:
-    "Unsere Sponsoren und Partner unterstützen den SV Fisch 1964 e.V. Werdet auch ihr Teil des Vereins.",
+    "Unsere Sponsoren unterstützen den SV Fisch 1964 e.V. Werdet auch ihr Teil des Vereins.",
 };
 
 export default function SponsorenPage() {
@@ -18,7 +18,7 @@ export default function SponsorenPage() {
     <>
       <PageHeader
         eyebrow="Der Verein"
-        title="Sponsoren & Partner"
+        title="Sponsoren"
         description="Ohne unsere Sponsoren wäre vieles im Verein nicht möglich – von der Ausrüstung bis zum Vereinsfest. Danke für die Unterstützung!"
       />
       <div className="container-fisch py-16 sm:py-20">

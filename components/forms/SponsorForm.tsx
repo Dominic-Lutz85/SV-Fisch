@@ -29,7 +29,7 @@ export default function SponsorForm() {
       <TextField
         label="Wunschpaket (optional)"
         name="paket"
-        placeholder="z. B. Bandenwerbung, Trikotsponsoring, Förderer …"
+        placeholder="z. B. Bandenwerbung, Trikotsponsoring, Co-Sponsoring …"
       />
       <TextAreaField
         label="Nachricht"
