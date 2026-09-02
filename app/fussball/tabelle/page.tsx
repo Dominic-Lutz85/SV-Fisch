@@ -39,7 +39,7 @@ export default function TabellePage() {
       <PageHeader
         eyebrow="Fußball · 1. Mannschaft"
         title="Tabelle"
-        beiwerk={<PraesentiertVon />}
+        beiwerk={<PraesentiertVon className="items-start lg:items-end" />}
       />
       <div className="container-fisch py-16 sm:py-20">
         <FupaWidget

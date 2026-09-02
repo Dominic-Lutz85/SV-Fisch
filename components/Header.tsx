@@ -101,8 +101,8 @@ export default function Header() {
             sponsor={
               <PraesentiertVon
                 key="sponsor"
-                groesse="h-12 w-auto sm:h-14"
-                className="sm:items-end"
+                groesse="h-16 w-auto sm:h-20 lg:h-24"
+                className="items-start lg:items-center"
               />
             }
           />

@@ -91,7 +91,14 @@ export default function PraesentiertVon({
     </>
   );
 
-  const klassen = `flex flex-col items-start gap-2.5 sm:items-end ${className ?? ""}`;
+  /*
+   * Die Ausrichtung steht NICHT hier drin, sondern kommt von aussen. Vorher
+   * war sm:items-end fest eingebaut und die Aufrufer setzten zusaetzlich ihre
+   * eigene Ausrichtung. Zwei Klassen derselben Eigenschaft in einer Liste
+   * entscheidet nicht die Reihenfolge im Attribut, sondern die im Stylesheet,
+   * und das ist geraten statt bestimmt. Jetzt gibt es genau eine Quelle.
+   */
+  const klassen = `flex flex-col gap-2.5 ${className ?? "items-start"}`;
 
   /*
     Ohne hinterlegte Adresse ein div und kein a. Begruendung steht ausfuehrlich

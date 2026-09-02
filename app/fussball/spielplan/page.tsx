@@ -46,7 +46,7 @@ export default function SpielplanPage() {
         eyebrow="Fußball · 1. Mannschaft"
         title="Spielplan"
         description="Alle Termine und Ergebnisse der Saison, Heimspiele am gelben Rand zu erkennen."
-        beiwerk={<PraesentiertVon />}
+        beiwerk={<PraesentiertVon className="items-start lg:items-end" />}
       />
 
       <div className="container-fisch mx-auto max-w-3xl py-14 sm:py-20">

@@ -307,7 +307,14 @@ export default function MainMenu({
 
           <div
             data-menue-fade
-            className="mt-auto flex flex-col gap-6 border-t border-linie pt-6 lg:flex-row lg:items-end lg:justify-between"
+            /*
+              lg:items-center und nicht items-end: unten ausgerichtet klebte
+              der Sponsor auf Hoehe der Anschrift und wirkte wie eine Fussnote
+              zu ihr. Mittig steht er auf Hoehe des ganzen linken Blocks.
+              Der rechte Teil nimmt den uebrigen Platz und zentriert darin,
+              statt am Rand zu kleben.
+            */
+            className="mt-auto flex flex-col gap-6 border-t border-linie pt-6 lg:flex-row lg:items-center lg:justify-between"
           >
             <div className="flex flex-col gap-5">
             <div className="flex items-center gap-4">
@@ -342,7 +349,7 @@ export default function MainMenu({
               Links ohnehin landet. Auf schmalen Bildschirmen steht er unter
               der Anschrift, dort gibt es kein Rechts.
             */}
-            {sponsor && <div className="shrink-0">{sponsor}</div>}
+            {sponsor && <div className="shrink-0 lg:flex-1 lg:pl-10">{sponsor}</div>}
           </div>
         </div>
       </div>
