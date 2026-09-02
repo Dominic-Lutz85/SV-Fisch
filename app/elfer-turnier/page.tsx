@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import Vereinsbild from "@/components/Vereinsbild";
 import { CalendarDays, MapPin, Trophy } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 import { getTermine } from "@/lib/content";
@@ -24,11 +24,11 @@ export default function ElferTurnierPage() {
 
       <div className="container-fisch grid gap-14 py-16 sm:py-20 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
         <div className="relative aspect-[4/3] w-full overflow-hidden bg-fisch-black">
-          <Image
+          <Vereinsbild
             src="/gallery/vereinsfeste/1.png"
             alt="Impression vom Elfer-Turnier"
-            fill
-            className="object-cover"
+            hinweis="Ein Foto vom letzten Elfer-Turnier passt hier gut. Datei unter diesem Namen in den Ordner public legen."
+            sizes="(min-width: 1024px) 48vw, 100vw"
           />
         </div>
 

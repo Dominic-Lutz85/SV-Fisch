@@ -9,7 +9,26 @@ const kategorieStyles: Record<string, string> = {
   Verein: "bg-fisch-white text-fisch-black",
 };
 
-export default function NewsCard({ artikel }: { artikel: NewsFrontmatter }) {
+/*
+ * Die Ueberschriftebene ist eine Eigenschaft und keine feste Entscheidung.
+ *
+ * Auf der Startseite steht ueber den Karten ein h2 ("Neues aus dem Verein"),
+ * dort ist h3 richtig. Auf /aktuelles gibt es diese Zwischenueberschrift nicht,
+ * dort folgte auf das h1 der Seite direkt ein h3, und damit war eine Ebene
+ * uebersprungen. Wer sich mit einer Vorlesehilfe durch die Ueberschriften
+ * hangelt, faellt bei so einer Luecke aus dem Takt.
+ *
+ * Gefunden hat das nicht das Auge, sondern Lighthouse auf /aktuelles: 99 statt
+ * 100. Ein einziger Punkt, aber er stand fuer eine echte Huerde.
+ */
+export default function NewsCard({
+  artikel,
+  ebene: Ueberschrift = "h3",
+}: {
+  artikel: NewsFrontmatter;
+  /** h2 auf Seiten ohne eigene Zwischenueberschrift, sonst h3 */
+  ebene?: "h2" | "h3";
+}) {
   return (
     <Link
       href={`/aktuelles/${artikel.slug}`}
@@ -40,9 +59,9 @@ export default function NewsCard({ artikel }: { artikel: NewsFrontmatter }) {
         >
           {formatDatum(artikel.date)}
         </time>
-        <h3 className="font-display text-lg font-bold leading-snug text-text group-hover:underline decoration-fisch-yellow decoration-2 underline-offset-4">
+        <Ueberschrift className="font-display text-lg font-bold leading-snug text-text group-hover:underline decoration-fisch-yellow decoration-2 underline-offset-4">
           {artikel.title}
-        </h3>
+        </Ueberschrift>
         <p className="line-clamp-3 text-sm leading-relaxed text-text-leise">
           {artikel.teaser}
         </p>

@@ -8,7 +8,20 @@ const stufenReihenfolge: Sponsor["stufe"][] = [
   "Förderer",
 ];
 
-export default function SponsorWall({ sponsoren }: { sponsoren: Sponsor[] }) {
+/*
+ * Die Ebene der Stufenueberschrift ist eine Eigenschaft, aus demselben Grund
+ * wie bei NewsCard: auf der Startseite steht darueber ein h2 ("Sponsoren &
+ * Foerderer"), auf /verein/sponsoren nicht. Dort sprang die Gliederung von h1
+ * direkt auf h3. Lighthouse hat das gemeldet, im Bild sieht man es nicht.
+ */
+export default function SponsorWall({
+  sponsoren,
+  ebene: Stufentitel = "h3",
+}: {
+  sponsoren: Sponsor[];
+  /** h2 auf Seiten ohne eigene Zwischenueberschrift, sonst h3 */
+  ebene?: "h2" | "h3";
+}) {
   return (
     <div className="flex flex-col gap-10">
       {stufenReihenfolge.map((stufe) => {
@@ -16,9 +29,9 @@ export default function SponsorWall({ sponsoren }: { sponsoren: Sponsor[] }) {
         if (liste.length === 0) return null;
         return (
           <div key={stufe}>
-            <h3 className="mb-4 text-xs font-bold uppercase tracking-wider text-text-leise">
+            <Stufentitel className="mb-4 text-xs font-bold uppercase tracking-wider text-text-leise">
               {stufe}
-            </h3>
+            </Stufentitel>
             <div className="flex flex-wrap gap-4">
               {liste.map((s) => {
                 const ziel = s.url && s.url !== "#" ? s.url : undefined;

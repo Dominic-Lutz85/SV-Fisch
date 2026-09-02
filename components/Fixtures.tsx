@@ -68,11 +68,12 @@ function Ergebniskasten({ wert }: { wert: string }) {
   return (
     <span className="flex items-center gap-1" aria-label={`Ergebnis ${wert}`}>
       {/* Umgekehrt zur hellen Fassung: dort dunkle Kaesten auf heller Karte,
-          hier helle auf dunkler. 18,3 zu 1. */}
-      <span className="min-w-8 bg-fisch-white px-2 py-1 text-center font-display text-lg font-extrabold text-text">
+          hier helle auf dunkler. Schwarz auf Weiss, 18,3 zu 1. Beim Farbumbau
+          stand hier kurz text-text, also hell auf hell bei 1,21. */}
+      <span className="min-w-8 bg-fisch-white px-2 py-1 text-center font-display text-lg font-extrabold text-fisch-black">
         {a}
       </span>
-      <span className="min-w-8 bg-fisch-white px-2 py-1 text-center font-display text-lg font-extrabold text-text">
+      <span className="min-w-8 bg-fisch-white px-2 py-1 text-center font-display text-lg font-extrabold text-fisch-black">
         {b}
       </span>
     </span>
@@ -180,7 +181,16 @@ function Zeile({
                   Ergebnis fehlt
                 </span>
               ) : (
-                <span className="font-display text-base font-extrabold text-text">
+                /*
+                  Gelb, weil die Anstosszeit hier der Blickfang zwischen den
+                  beiden Mannschaftsnamen ist. Sie stand auf text-fisch-black
+                  und kam damit auf 1,20 zu 1: der Codemod beim Farbumbau hat
+                  sie zwar erwischt, aber die Ausnahme fuer schwarze Schrift auf
+                  gelber Flaeche griff hier faelschlich. Gefunden beim Messen
+                  der Spielplanseite, nicht beim Ansehen der Startseite, denn
+                  dort steht die Kurzform.
+                */
+                <span className="font-display text-base font-extrabold text-fisch-yellow">
                   {spiel.uhrzeit}
                 </span>
               )}
@@ -212,42 +222,39 @@ function Zeile({
 export default function Fixtures({
   spiele,
   compact = false,
-  variant = "light",
   gruppiert = false,
   erstesHervorheben = false,
 }: {
   spiele: Spiel[];
   /** Kurzform für die Startseite: eine Zeile je Spiel, ohne Karten */
   compact?: boolean;
-  variant?: "light" | "dark";
   /** Nach Monaten gruppieren, wie bei Man City und Bayern */
   gruppiert?: boolean;
   /** Das erste Spiel als "Nächstes Spiel" markieren */
   erstesHervorheben?: boolean;
 }) {
-  const dark = variant === "dark";
   const heute = heuteInDeutschland();
 
   if (spiele.length === 0) {
     return (
-      <p className={cn("text-sm", dark ? "text-text-leise" : "text-text-leise")}>
+      <p className="text-sm text-text-leise">
         Aktuell sind keine Spiele hinterlegt.
       </p>
     );
   }
 
   /*
-   * Kurzform für die Startseite. Dort steht die Liste auf schwarzem Grund neben
-   * der Tabelle, da wären Karten mit Datumsleisten zu laut.
-   */
-  /*
-   * Kurzform für die Startseite, dunkle Fassung derselben Formensprache wie die
-   * Karten auf der Spielplanseite: Datumszeile oben, Paarung mittig, farbige
+   * Kurzform für die Startseite: dieselbe Formensprache wie die Karten auf der
+   * Spielplanseite, nur schmaler. Datumszeile oben, Paarung mittig, farbige
    * Kante links für Heim oder auswärts.
    *
-   * Vorher standen hier linksbündige Zeilen mit einer gelben Pille rechts. Das
-   * war ein anderer Stil als der Spielplan, und zwei Stile für dieselbe Sache
-   * auf einer Seite sehen nach Zufall aus.
+   * Die frühere Umschaltung zwischen heller und dunkler Fassung ist entfallen.
+   * Auf einer durchgehend dunklen Seite hat sie nichts mehr entschieden, aber
+   * jeder Zweig musste gepflegt werden, und genau das ging schief: beim
+   * Farbumbau wurde aus dem Ergebniskasten "bg-fisch-white text-text", also
+   * heller Text auf hellem Grund bei 1,21 zu 1. Gefunden wurde das nicht durch
+   * Messen, denn auf der Startseite steht kein gespieltes Spiel, sondern beim
+   * Lesen des toten Zweigs. Ein Zweig, den niemand sieht, wird nicht gepflegt.
    */
   if (compact) {
     return (
@@ -257,84 +264,47 @@ export default function Fixtures({
           return (
             <li
               key={`${spiel.datum}-${spiel.heim}`}
-              className={cn(
-                "relative px-4 py-3",
-                dark ? "bg-flaeche-hoch" : "border border-linie bg-flaeche-hoch"
-              )}
+              className="relative border border-linie bg-flaeche-hoch px-4 py-3"
             >
               <span
                 aria-hidden="true"
                 className={cn(
                   "absolute inset-y-0 left-0 w-1",
-                  heimspiel
-                    ? "bg-fisch-yellow"
-                    : dark
-                      ? "bg-flaeche-hoch"
-                      : "bg-linie"
+                  heimspiel ? "bg-fisch-yellow" : "bg-linie"
                 )}
               />
-              <div
-                className={cn(
-                  "flex items-center justify-between text-[11px] font-bold uppercase tracking-wider",
-                  dark ? "text-text-leise" : "text-text-leise"
-                )}
-              >
+              <div className="flex items-center justify-between text-[11px] font-bold uppercase tracking-wider text-text-leise">
                 <span>{formatDatum(spiel.datum)}</span>
                 <span>{heimspiel ? "Heim" : "Auswärts"}</span>
               </div>
               <div className="mt-1 flex items-center justify-center gap-3">
                 <span
                   className={cn(
-                    "flex-1 truncate text-right text-sm",
-                    istFisch(spiel.heim)
-                      ? "font-extrabold"
-                      : "font-medium opacity-80",
-                    dark ? "text-text" : "text-text"
+                    "flex-1 truncate text-right text-sm text-text",
+                    istFisch(spiel.heim) ? "font-extrabold" : "font-medium opacity-80"
                   )}
                 >
                   {spiel.heim}
                 </span>
                 <span className="shrink-0">
                   {spiel.ergebnis ? (
-                    <span
-                      className={cn(
-                        "px-2 py-0.5 font-display text-sm font-extrabold",
-                        dark
-                          ? "bg-fisch-white text-text"
-                          : "bg-fisch-white text-text"
-                      )}
-                    >
+                    <span className="bg-fisch-white px-2 py-0.5 font-display text-sm font-extrabold text-fisch-black">
                       {spiel.ergebnis}
                     </span>
                   ) : spiel.datum < heute ? (
-                    <span
-                      className={cn(
-                        "px-2 py-0.5 text-[11px] font-semibold",
-                        dark
-                          ? "bg-flaeche-hoch text-text-leise"
-                          : "bg-flaeche-hoch-2 text-text-leise"
-                      )}
-                    >
+                    <span className="bg-flaeche-hoch-2 px-2 py-0.5 text-[11px] font-semibold text-text-leise">
                       offen
                     </span>
                   ) : (
-                    <span
-                      className={cn(
-                        "font-display text-sm font-extrabold",
-                        dark ? "text-fisch-yellow" : "text-text"
-                      )}
-                    >
+                    <span className="font-display text-sm font-extrabold text-fisch-yellow">
                       {spiel.uhrzeit}
                     </span>
                   )}
                 </span>
                 <span
                   className={cn(
-                    "flex-1 truncate text-left text-sm",
-                    istFisch(spiel.auswaerts)
-                      ? "font-extrabold"
-                      : "font-medium opacity-80",
-                    dark ? "text-text" : "text-text"
+                    "flex-1 truncate text-left text-sm text-text",
+                    istFisch(spiel.auswaerts) ? "font-extrabold" : "font-medium opacity-80"
                   )}
                 >
                   {spiel.auswaerts}

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import Vereinsbild from "@/components/Vereinsbild";
 import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
 import { getVorstand } from "@/lib/content";
@@ -74,11 +74,11 @@ export default function GymnastikPage() {
 
         <div className="flex flex-col gap-6">
           <div className="relative aspect-[4/3] w-full overflow-hidden bg-fisch-black">
-            <Image
+            <Vereinsbild
               src="/gallery/vereinsfeste/2.png"
               alt="Impression aus der Gymnastikabteilung"
-              fill
-              className="object-cover"
+              hinweis="Ein Foto aus einer Gymnastikstunde passt hier gut. Datei unter diesem Namen in den Ordner public legen."
+              sizes="(min-width: 1024px) 40vw, 100vw"
             />
           </div>
           {leitung && (

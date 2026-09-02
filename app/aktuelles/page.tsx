@@ -47,7 +47,7 @@ export default async function AktuellesPage({
         {news.length > 0 ? (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {news.map((artikel) => (
-              <NewsCard key={artikel.slug} artikel={artikel} />
+              <NewsCard key={artikel.slug} artikel={artikel} ebene="h2" />
             ))}
           </div>
         ) : (

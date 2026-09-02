@@ -112,7 +112,11 @@ export default function Hero({ naechsterTermin, naechstesSpiel }: HeroProps) {
 
         {naechstesSpiel && (
           <div
-            style={{ animationDelay: "150ms" }}
+            /*
+              Ohne Verzoegerung. Die 150 ms haben den Spieltermin nach hinten
+              geschoben, und das ist die konkreteste Angabe auf der ganzen
+              Seite. Sie soll zuerst da sein, nicht als Letztes.
+            */
             className="animate-fade-up flex flex-col gap-4 border-t-2 border-fisch-yellow pt-5 sm:flex-row sm:items-end sm:justify-between"
           >
             <div>

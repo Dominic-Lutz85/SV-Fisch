@@ -36,10 +36,20 @@ export const metadata: Metadata = {
     title: `${siteConfig.name} — Fußball & Gymnastik`,
     description: siteConfig.description,
   },
-  icons: {
-    icon: "/icon.svg",
-    apple: "/apple-icon.png",
-  },
+  /*
+   * Hier stand eine icons-Angabe mit festen Adressen. Sie war falsch und hat
+   * dabei noch die richtige verdraengt.
+   *
+   * Next legt die Verweise selbst an, sobald app/icon.svg und app/apple-icon.tsx
+   * existieren, und zwar auf /icon.svg und /apple-icon mit angehaengtem
+   * Streuwert gegen alte Zwischenspeicher. Die Handangabe hat daraus
+   * /apple-icon.png gemacht, und diese Adresse gibt es nicht: Apple-Geraete
+   * bekamen beim Ablegen auf dem Startbildschirm eine 404 statt des Wappens.
+   *
+   * Gefunden ueber die 404 in der Netzwerkliste, nicht im Browser sichtbar.
+   * Nachlesbar in node_modules/next/dist/docs/01-app/03-api-reference/
+   * 03-file-conventions/01-metadata/app-icons.md.
+   */
 };
 
 const jsonLd = {

@@ -66,18 +66,35 @@ export default function Home() {
         {news.length > 0 ? (
           <NewsSlider
             artikel={news}
+            /*
+              Die Schluessel an diesen drei Geschwistern sehen ueberfluessig aus,
+              sie sind es aber nicht. Der Kopf wird als Eigenschaft von einer
+              Serverkomponente an eine Clientkomponente gereicht und dabei ueber
+              die RSC-Grenze serialisiert. Was hier als fest verdrahtetes JSX
+              steht, kommt drueben als gewoehnliches Feld an, und React verlangt
+              fuer Felder Schluessel. Ohne sie warnt die Konsole bei jedem
+              Aufbau der Startseite.
+              Nachgewiesen, nicht vermutet: mit einem blossen Text als Kopf
+              verschwand die Warnung vollstaendig.
+            */
             kopf={
               <div>
-                <Eyebrow className="mb-2">Aktuelles</Eyebrow>
-                <h2 className="font-display text-4xl font-extrabold text-text sm:text-5xl">
+                <Eyebrow key="augenbraue" className="mb-2">
+                  Aktuelles
+                </Eyebrow>
+                <h2
+                  key="ueberschrift"
+                  className="font-display text-4xl font-extrabold text-text sm:text-5xl"
+                >
                   Neues aus dem Verein
                 </h2>
                 <Link
+                  key="verweis"
                   href="/aktuelles"
                   className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-text underline underline-offset-4 hover:decoration-fisch-yellow"
                 >
-                  Alle Neuigkeiten{" "}
-                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  <span key="text">Alle Neuigkeiten</span>
+                  <ArrowRight key="pfeil" className="h-4 w-4" aria-hidden="true" />
                 </Link>
               </div>
             }
@@ -104,7 +121,7 @@ export default function Home() {
         unterschiedlich hohem Inhalt nebeneinanderzustellen erzeugt das
         zuverlässig.
       */}
-      <section className="bg-flaeche-hoch py-16 text-text sm:py-24">
+      <section className="border-y border-linie bg-flaeche py-16 text-text sm:py-24">
         <div className="container-fisch">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
             <div>
@@ -138,7 +155,7 @@ export default function Home() {
               <h3 className="mb-3 font-display text-lg font-bold text-text">
                 Nächste Spiele
               </h3>
-              <Fixtures spiele={kommendeSpiele} compact variant="dark" />
+              <Fixtures spiele={kommendeSpiele} compact />
             </div>
             {tabelle.length > 0 && <TeamTableMini zeilen={tabelle} />}
           </div>

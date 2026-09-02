@@ -130,7 +130,7 @@ export function getNaechsterTermin(): Termin | undefined {
 const PUBLIC_DIR = path.join(process.cwd(), "public");
 
 /** Liegt die Datei wirklich unter /public? */
-function bildVorhanden(src: string): boolean {
+export function bildVorhanden(src: string): boolean {
   if (!src.startsWith("/")) return true; // externe Adresse, können wir nicht prüfen
   return fs.existsSync(path.join(PUBLIC_DIR, src.replace(/^\//, "")));
 }

@@ -38,18 +38,26 @@
    *   Flaeche hoch   #1f1f1f  Kontrast 1,20 zum Grund. Darunter sieht man eine
    *                           Karte nicht, darueber verliert der Grund seine Tiefe.
    *   Flaeche hoch 2 #2c2c2c  Kontrast 1,18 zur Karte, fuer Leisten auf Karten
-   *   Linie          #414141  Kontrast 1,61 zur Karte, trennt ohne zu dominieren
+   *   Linie          #555555  2,21 zur Karte. Sie umreisst die Karte, statt sie
+   *                           nur aufzuhellen: grau aufhellen macht grau,
+   *                           Kontur macht Form.
    *   Text           #e1e1e1  15,14 zum Grund. Bewusst nicht Reinweiss, das
    *                           flimmert auf fast schwarzem Grund.
-   *   Text leise     #939393  6,44 zum Grund, 5,37 auf Karten, 4,55 auf der
-   *                           zweiten Stufe. Der dunkelste Ton, der auf ALLEN
-   *                           DREI Flaechen die 4,5 haelt.
+   *   Text leise     #b8b8b8  9,98 zum Grund, 8,31 auf Karten, 7,04 auf der
+   *                           zweiten Stufe.
    *
-   *                           Erster Anlauf war #868686, gerechnet nur gegen
-   *                           Grund und Karte. Auf der zweiten Stufe kam er auf
-   *                           3,84, und Lighthouse hat es auf zwei Seiten
-   *                           gefunden. Wer eine vierte Flaeche ergaenzt, muss
-   *                           diesen Wert erneut gegen alle rechnen.
+   *                           Dieser Wert hat zwei Anlaeufe gebraucht, und der
+   *                           Fehler dahinter ist lehrreich. Zuerst #868686,
+   *                           gerechnet nur gegen zwei der drei Flaechen; auf
+   *                           der dritten kam er auf 3,84. Dann #939393, der
+   *                           dunkelste Ton, der ueberall die 4,5 gerade noch
+   *                           haelt. Auf dem Bildschirm war das schlicht grau.
+   *
+   *                           Die 4,5 sind eine Untergrenze fuer den Anwalt und
+   *                           kein Ziel fuer die Gestaltung. Gesucht war der
+   *                           dunkelste Ton mit mindestens 7,0 auf ALLEN drei
+   *                           Flaechen. Wer hier wieder auf das Minimum
+   *                           optimiert, bekommt wieder Grau.
    *
    * Gelb bleibt, wie es ist: 13,99 auf dem Grund, 11,65 auf einer Karte. Auf
    * Gelb gehoert weiterhin Vereinsschwarz (13,99). Heller Text auf Gelb kaeme
@@ -58,9 +66,9 @@
   --color-flaeche: #0a0a0a;
   --color-flaeche-hoch: #1f1f1f;
   --color-flaeche-hoch-2: #2c2c2c;
-  --color-linie: #414141;
+  --color-linie: #555555;
   --color-text: #e1e1e1;
-  --color-text-leise: #939393;
+  --color-text-leise: #b8b8b8;
 
   --background: var(--color-flaeche);
   --foreground: var(--color-text);
@@ -88,15 +96,58 @@
   --font-display: var(--font-sora);
   --font-body: var(--font-inter);
 
-  --animate-fade-up: fade-up 0.6s ease-out both;
+  /*
+   * Der Hero bewegt sich beim Ankommen, versteckt sich aber nicht mehr.
+   *
+   * Vorher begann die Einblendung bei Deckkraft 0, der zweite Block zusaetzlich
+   * mit 150 ms Verzoegerung. Damit war der wichtigste Text des ersten
+   * Bildschirms, die Zeile zum naechsten Spiel, fuer einen guten halben
+   * Moment unsichtbar. Genau dieses Element hat Lighthouse als groesstes
+   * Element gemessen, und genau dort kam der schlechte Wert her: der Inhalt
+   * war laengst da, er wurde nur zurueckgehalten.
+   *
+   * Jetzt verschiebt sich der Block nur noch. Er ist vom ersten Bild an
+   * lesbar, die Bewegung bleibt. Eine Verschiebung zaehlt fuer die Messung
+   * als gezeichnet, eine Deckkraft von 0 nicht, und das ist keine Finte,
+   * sondern deckt sich damit, was der Besucher tatsaechlich sieht.
+   */
+  /*
+   * Ein- und Ausfahren der Hinweisleiste am unteren Rand. Ersetzt die
+   * Bewegungsbibliothek, die vorher nur fuer diese eine Leiste auf jeder Seite
+   * mitgeladen wurde. Siehe components/CookieBanner.tsx.
+   */
+  --animate-leiste-ein: leiste-ein 0.3s ease-out both;
+  --animate-leiste-aus: leiste-aus 0.3s ease-in both;
 
-  @keyframes fade-up {
+  @keyframes leiste-ein {
     from {
       opacity: 0;
-      transform: translateY(16px);
+      transform: translateY(100%);
     }
     to {
       opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes leiste-aus {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(100%);
+    }
+  }
+
+  --animate-fade-up: fade-up 0.5s ease-out both;
+
+  @keyframes fade-up {
+    from {
+      transform: translateY(14px);
+    }
+    to {
       transform: translateY(0);
     }
   }

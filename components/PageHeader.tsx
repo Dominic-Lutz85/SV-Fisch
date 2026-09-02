@@ -11,7 +11,7 @@ export default function PageHeader({ eyebrow, title, description }: PageHeaderPr
    * Fassung war er der schwarze Kontrastblock.
    */
   return (
-    <section className="border-b-4 border-fisch-yellow bg-flaeche-hoch text-text">
+    <section className="border-b-4 border-fisch-yellow bg-flaeche text-text">
       <div className="container-fisch py-14 sm:py-20">
         {eyebrow && (
           <p className="text-sm font-bold uppercase tracking-wider text-fisch-yellow">

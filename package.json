@@ -10,11 +10,12 @@
     "build": "next build",
     "start": "next start",
     "start:hostinger": "NODE_ENV=production node server.js",
-    "lint": "eslint"
+    "lint": "eslint",
+    "pruefe:bilder": "node scripts/pruefe-bilder.mjs",
+    "prebuild": "node scripts/pruefe-bilder.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",
-    "framer-motion": "^12.43.0",
     "gray-matter": "^4.0.3",
     "gsap": "^3.15.0",
     "lucide-react": "^1.28.0",

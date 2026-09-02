@@ -22,7 +22,7 @@ export default function SponsorenPage() {
         description="Ohne unsere Sponsoren wäre vieles im Verein nicht möglich – von der Ausrüstung bis zum Vereinsfest. Danke für die Unterstützung!"
       />
       <div className="container-fisch py-16 sm:py-20">
-        <SponsorWall sponsoren={sponsoren} />
+        <SponsorWall sponsoren={sponsoren} ebene="h2" />
       </div>
 
       <div className="bg-flaeche">

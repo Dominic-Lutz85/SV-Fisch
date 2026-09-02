@@ -16,7 +16,7 @@ export default function TeamTableMini({ zeilen }: { zeilen: TabellenZeile[] }) {
       : topN;
 
   return (
-    <div className="bg-flaeche-hoch p-5 sm:p-6">
+    <div className="border border-linie bg-flaeche-hoch p-5 sm:p-6">
       <div className="mb-4 flex items-center justify-between">
         <h3 className="font-display text-lg font-bold text-text">Tabelle</h3>
         <Link

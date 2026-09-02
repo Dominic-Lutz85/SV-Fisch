@@ -58,11 +58,20 @@ export default function Header() {
             {/* Schwarz, weil die Kopfleiste gelb ist. Das Gelb steht am header und
                 nicht in dieser Klassenliste, deshalb muss es hier ausdruecklich
                 stehen. */}
-            <span className="font-display text-lg font-bold tracking-tight text-fisch-black">
+            <span className="font-display text-xl font-extrabold uppercase tracking-tight text-fisch-black">
               {siteConfig.shortName}
             </span>
-            <span className="text-xs font-medium text-fisch-black/70">
-              gegr. {siteConfig.founded}
+            {/*
+              Die Jahreszahl steht jetzt ohne "gegr." da. Damit sie als Teil des
+              Schriftzugs gelesen wird und nicht als abgeschnittener Satz, bekommt
+              sie die Behandlung, die grosse Vereine ihrer Gruendungszahl geben:
+              klein, fett, weit gesperrt. Der Name darueber wird dafuer eine Stufe
+              groesser und in Versalien gesetzt, sonst tragen die beiden Zeilen
+              gleich viel Gewicht und der Block franst aus.
+              Schwarz auf Gelb bei 80 Prozent Deckung ergibt 8,89 zu 1.
+            */}
+            <span className="mt-1.5 font-display text-[11px] font-bold tracking-[0.35em] text-fisch-black/80">
+              {siteConfig.founded}
             </span>
           </span>
         </Link>
