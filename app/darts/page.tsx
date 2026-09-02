@@ -76,7 +76,7 @@ export default function DartsPage() {
           <div className="relative aspect-[4/3] w-full overflow-hidden bg-fisch-black">
             <Image
               src="/darts/uebersicht.png"
-              alt="Impression aus der Darts-Abteilung [Platzhalter – Datei ersetzen]"
+              alt="Impression aus der Darts-Abteilung"
               fill
               className="object-cover"
             />

@@ -59,8 +59,9 @@ export default function Fixtures({
                 <span className={istFisch(spiel.heim) ? "font-bold" : ""}>
                   {spiel.heim}
                 </span>{" "}
-                <span className={dark ? "text-fisch-white/50" : "text-fisch-muted"}>
-                  vs.
+                {/* Bindestrich wie im Fußball üblich, siehe Hero.tsx. */}
+                <span className={dark ? "text-fisch-yellow" : "text-fisch-black"}>
+                  -
                 </span>{" "}
                 <span className={istFisch(spiel.auswaerts) ? "font-bold" : ""}>
                   {spiel.auswaerts}
@@ -109,7 +110,16 @@ export default function Fixtures({
                   Ergebnis fehlt noch
                 </span>
               ) : (
-                <span className="inline-block rounded-full border border-fisch-yellow-dark bg-fisch-yellow/40 px-3 py-1.5 text-sm font-bold text-fisch-black">
+                /*
+                  Volles Vereinsgelb statt bg-fisch-yellow/40. Halbdurchsichtig
+                  gemischt sich die Fläche mit dem Untergrund: auf dem schwarzen
+                  Abschnitt ergab das ein Olivgrün (#6e6412), und schwarze Schrift
+                  darauf kam auf 3,29 zu 1 statt der geforderten 4,5. Lighthouse
+                  hat es gefunden, eine Prüfung der reinen Schriftfarben nicht,
+                  weil die Farbe stimmte und die Fläche darunter das Problem war.
+                  Deckend sind es 13,99 zu 1, in beiden Abschnitten gleich.
+                */
+                <span className="inline-block rounded-full bg-fisch-yellow px-3 py-1.5 text-sm font-bold text-fisch-black">
                   {spiel.ort === "Heim" ? "Heimspiel" : "Auswärts"}
                 </span>
               )}

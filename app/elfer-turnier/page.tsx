@@ -26,7 +26,7 @@ export default function ElferTurnierPage() {
         <div className="relative aspect-[4/3] w-full overflow-hidden bg-fisch-black">
           <Image
             src="/gallery/vereinsfeste/1.png"
-            alt="Impression vom Elfer-Turnier [Platzhalter – Datei ersetzen]"
+            alt="Impression vom Elfer-Turnier"
             fill
             className="object-cover"
           />

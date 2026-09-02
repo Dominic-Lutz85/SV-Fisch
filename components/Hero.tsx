@@ -106,9 +106,15 @@ export default function Hero({ naechsterTermin, naechstesSpiel }: HeroProps) {
               <p className="text-xs font-bold uppercase tracking-widest text-fisch-yellow">
                 Nächstes Spiel
               </p>
+              {/*
+                Bindestrich statt des Wortes "gegen". Zwei Gründe: So schreibt
+                der Fußball eine Paarung, und das Wort stand auf white/40, also
+                bei 3,56 zu 1 gegen Vereinsschwarz, gefordert sind 4,5. Der
+                Trenner ist jetzt so hell wie die Namen und damit lesbar.
+              */}
               <p className="mt-1 font-display text-xl font-bold sm:text-2xl">
                 {siteConfig.shortName}{" "}
-                <span className="text-fisch-white/40">gegen</span> {gegner}
+                <span className="text-fisch-yellow">-</span> {gegner}
               </p>
               <p className="mt-1 text-sm text-fisch-white/70">
                 {formatDatumLang(naechstesSpiel.datum)}, {naechstesSpiel.uhrzeit}{" "}

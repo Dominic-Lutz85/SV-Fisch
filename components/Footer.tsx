@@ -97,24 +97,49 @@ export default function Footer() {
               Unsere Sponsoren
             </p>
             <div className="flex flex-wrap items-center justify-center gap-6">
-              {sponsoren.map((s) => (
-                <a
-                  key={s.name}
-                  href={s.url && s.url !== "#" ? s.url : undefined}
-                  target={s.url && s.url !== "#" ? "_blank" : undefined}
-                  rel="noopener noreferrer"
-                  className="opacity-70 grayscale transition hover:opacity-100 hover:grayscale-0"
-                  aria-label={s.name}
-                >
+              {sponsoren.map((s) => {
+                const ziel = s.url && s.url !== "#" ? s.url : undefined;
+                const logo = (
                   <Image
                     src={s.logo}
-                    alt={`Logo ${s.name} [Platzhalter – Datei ersetzen]`}
+                    alt={`Logo ${s.name}`}
                     width={100}
                     height={50}
-                    className="h-10 w-auto rounded bg-fisch-white/5 object-contain"
+                    className="h-10 w-auto bg-fisch-white/5 object-contain"
                   />
-                </a>
-              ))}
+                );
+
+                /*
+                  Ohne hinterlegte Adresse ein span statt eines Ankers, siehe
+                  SponsorWall.tsx. Ein a ohne href ist kein Link, sondern sieht
+                  nur so aus, und Lighthouse zählt es unter "Links are not
+                  crawlable" gegen die Seite.
+                */
+                if (!ziel) {
+                  return (
+                    <span
+                      key={s.name}
+                      className="opacity-70 grayscale"
+                      aria-label={s.name}
+                    >
+                      {logo}
+                    </span>
+                  );
+                }
+
+                return (
+                  <a
+                    key={s.name}
+                    href={ziel}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="opacity-70 grayscale transition hover:opacity-100 hover:grayscale-0"
+                    aria-label={s.name}
+                  >
+                    {logo}
+                  </a>
+                );
+              })}
             </div>
           </div>
         </div>

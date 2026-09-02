@@ -76,7 +76,7 @@ export default function GymnastikPage() {
           <div className="relative aspect-[4/3] w-full overflow-hidden bg-fisch-black">
             <Image
               src="/gallery/vereinsfeste/2.png"
-              alt="Impression aus der Gymnastikabteilung [Platzhalter – Datei ersetzen]"
+              alt="Impression aus der Gymnastikabteilung"
               fill
               className="object-cover"
             />
