@@ -4,34 +4,28 @@ import { useSyncExternalStore } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
-const STORAGE_KEY = "sv-fisch-cookie-consent";
-
-type Consent = "all" | "essential";
-
-const listeners = new Set<() => void>();
-
-function subscribe(callback: () => void) {
-  listeners.add(callback);
-  return () => listeners.delete(callback);
-}
-
-function getSnapshot() {
-  return window.localStorage.getItem(STORAGE_KEY);
-}
-
-function getServerSnapshot() {
-  return "all"; // serverseitig immer als "bereits entschieden" behandeln, kein Banner im initialen HTML
-}
-
-function setConsent(consent: Consent) {
-  window.localStorage.setItem(STORAGE_KEY, consent);
-  window.dispatchEvent(new CustomEvent("sv-fisch-consent-change", { detail: consent }));
-  listeners.forEach((listener) => listener());
-}
+import { useConsent, setConsent } from "@/lib/consent";
 
 export default function CookieBanner() {
-  const stored = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
-  const visible = stored === null;
+  const stored = useConsent();
+
+  /*
+   * Der Banner erscheint erst nach dem ersten Rendern im Browser. Sonst stünde
+   * er im ausgelieferten HTML und wäre für einen kurzen Moment auch bei
+   * Besuchern zu sehen, die längst entschieden haben. Die Entscheidung selbst
+   * liegt in lib/consent.ts, damit eingebettete Inhalte dieselbe Quelle lesen.
+   *
+   * Bewusst über useSyncExternalStore und nicht über einen Effect, der Zustand
+   * setzt: React liest beim Rendern auf dem Server den dritten Parameter und
+   * im Browser den zweiten. Das ist derselbe Zweck ohne zusätzliches Rendern.
+   */
+  const imBrowser = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  );
+
+  const visible = imBrowser && stored === null;
 
   return (
     <AnimatePresence>

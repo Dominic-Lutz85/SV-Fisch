@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Mail, Phone, MapPin } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
+import ExterneEinbettung from "@/components/ExterneEinbettung";
 import PersonCard from "@/components/PersonCard";
 import ContactForm from "@/components/forms/ContactForm";
 import { getVorstand } from "@/lib/content";
@@ -60,17 +61,28 @@ export default function KontaktPage() {
             <h2 className="mb-2 font-display text-2xl font-bold text-fisch-black">Anfahrt</h2>
             <p className="mb-4 text-sm text-fisch-muted">
               {siteConfig.contact.venueName}. [BITTE PRÜFEN/ERGÄNZEN – genaue
-              Anfahrtsbeschreibung, Parkmöglichkeiten]. Die Karte lädt Inhalte
-              von openstreetmap.org.
+              Anfahrtsbeschreibung, Parkmöglichkeiten].
             </p>
-            <div className="overflow-hidden border border-fisch-line">
-              <iframe
-                title="Karte: Anfahrt zum Sportplatz SV Fisch"
-                src={mapSrc}
-                className="h-80 w-full"
-                loading="lazy"
-              />
-            </div>
+            {/*
+              Die Karte lud vorher immer, unabhängig davon, was jemand im
+              Cookie-Banner angeklickt hatte. Jetzt steht bis zur Zustimmung
+              ein Platzhalter, und openstreetmap.org bekommt die IP-Adresse
+              der Besucher erst danach zu sehen.
+            */}
+            <ExterneEinbettung
+              anbieter="openstreetmap.org"
+              beschreibung="Karte mit dem Weg zum Sportplatz"
+              className="min-h-80"
+            >
+              <div className="overflow-hidden border border-fisch-line">
+                <iframe
+                  title="Karte: Anfahrt zum Sportplatz SV Fisch"
+                  src={mapSrc}
+                  className="h-80 w-full"
+                  loading="lazy"
+                />
+              </div>
+            </ExterneEinbettung>
           </div>
 
           <div>
