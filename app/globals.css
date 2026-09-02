@@ -164,8 +164,14 @@ h6 {
     );
   background-size: var(--halbton-gitter) var(--halbton-gitter);
   opacity: 0.3;
-  -webkit-mask-image: linear-gradient(to top, #000 0%, rgba(0, 0, 0, 0.35) 45%, transparent 80%);
-  mask-image: linear-gradient(to top, #000 0%, rgba(0, 0, 0, 0.35) 45%, transparent 80%);
+  /*
+   * Von links nach rechts abfallend, so gewuenscht. Vorher lief der Verlauf von
+   * unten nach oben. Links dicht, rechts ausgeblendet: dadurch bleibt die
+   * rechte Seite frei, wo das Wappen steht, und das Raster konkurriert nicht
+   * mit dessen Kanten.
+   */
+  -webkit-mask-image: linear-gradient(to right, #000 0%, rgba(0, 0, 0, 0.45) 50%, transparent 88%);
+  mask-image: linear-gradient(to right, #000 0%, rgba(0, 0, 0, 0.45) 50%, transparent 88%);
 }
 
 /* Feiner auf kleinen Bildschirmen, sonst wird das Raster zum Muster. */

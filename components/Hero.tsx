@@ -149,26 +149,38 @@ export default function Hero({ naechsterTermin, naechstesSpiel }: HeroProps) {
         zu nehmen.
       */}
       {naechsterTermin && (
-        <div className="relative border-t border-white/10 bg-white/5">
-          <div className="container-fisch flex flex-wrap items-center gap-x-3 gap-y-1 py-3 text-sm">
-            <CalendarDays
-              className="h-4 w-4 shrink-0 text-fisch-yellow"
-              aria-hidden="true"
-            />
-            <span className="font-bold uppercase tracking-wide text-fisch-yellow">
-              Termin
-            </span>
-            <span className="font-semibold">{naechsterTermin.titel}</span>
-            <span className="text-fisch-white/60">
-              {formatDatumLang(naechsterTermin.datum)}
-              {naechsterTermin.uhrzeit
-                ? `, ${formatUhrzeit(naechsterTermin.datum)} Uhr`
-                : ""}
-              {naechsterTermin.ort ? ` · ${naechsterTermin.ort}` : ""}
-            </span>
+        /*
+          Vollbreites Band in Vereinsgelb, nach dem Muster des BVB, der seine
+          Aktionen genauso unter die Kopfleiste setzt.
+          
+          Vorher war das ein dünner dunkler Streifen mit kleiner Schrift. Er sah
+          angeklebt aus, und auf einem breiten Bildschirm lagen Text und Link
+          fast tausend Pixel auseinander, weil ein ml-auto den Link an den Rand
+          drückte. Jetzt steht der Inhalt als Gruppe zusammen und das Band
+          schließt den Kopfbereich in Vereinsfarbe ab, passend zur Kopfleiste
+          darüber.
+        */
+        <div className="relative bg-fisch-yellow text-fisch-black">
+          <div className="container-fisch flex flex-col gap-3 py-3.5 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+              <span className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-widest">
+                <CalendarDays className="h-4 w-4 shrink-0" aria-hidden="true" />
+                Termin
+              </span>
+              <span className="font-display text-base font-extrabold sm:text-lg">
+                {naechsterTermin.titel}
+              </span>
+              <span className="text-sm font-semibold">
+                {formatDatumLang(naechsterTermin.datum)}
+                {naechsterTermin.uhrzeit
+                  ? `, ${formatUhrzeit(naechsterTermin.datum)} Uhr`
+                  : ""}
+                {naechsterTermin.ort ? ` · ${naechsterTermin.ort}` : ""}
+              </span>
+            </div>
             <Link
               href="/kalender"
-              className="ml-auto inline-flex shrink-0 items-center gap-1.5 font-semibold text-fisch-white underline-offset-4 hover:text-fisch-yellow hover:underline"
+              className="inline-flex shrink-0 items-center gap-1.5 self-start rounded-full bg-fisch-black px-4 py-2 text-sm font-bold text-fisch-yellow transition-colors hover:bg-fisch-ink sm:self-auto"
             >
               Alle Termine <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>

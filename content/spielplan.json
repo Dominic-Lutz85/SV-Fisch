@@ -17,17 +17,19 @@
     "heim": "SV Wasserliesch/Oberbillig",
     "auswaerts": "SV Fisch 1964",
     "ort": "Auswärts",
-    "gespielt": false
+    "gespielt": true,
+    "ergebnis": "1:3"
   },
   {
     "datum": "2026-08-23",
     "uhrzeit": "14:00",
     "wettbewerb": "Kreisliga B Staffel 10 Trier-Saarburg",
     "heim": "SV Fisch 1964",
-    "auswaerts": "SV Konz II",
+    "auswaerts": "SV Konz",
     "ort": "Heim",
     "spielstaette": "Sportplatz SV Fisch",
-    "gespielt": false
+    "gespielt": true,
+    "ergebnis": "5:0"
   },
   {
     "datum": "2026-08-30",
@@ -36,7 +38,8 @@
     "heim": "VfL Trier II",
     "auswaerts": "SV Fisch 1964",
     "ort": "Auswärts",
-    "gespielt": false
+    "gespielt": true,
+    "ergebnis": "2:4"
   },
   {
     "datum": "2026-09-06",
@@ -147,7 +150,7 @@
     "datum": "2026-11-22",
     "uhrzeit": "15:00",
     "wettbewerb": "Kreisliga B Staffel 10 Trier-Saarburg",
-    "heim": "SV Konz II",
+    "heim": "SV Konz",
     "auswaerts": "SV Fisch 1964",
     "ort": "Auswärts",
     "gespielt": false

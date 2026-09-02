@@ -33,7 +33,14 @@ export default function Header() {
      * die Falle muss hier nicht wieder aufgestellt werden.
      */
     <header className="sticky top-0 z-[60] border-b-2 border-fisch-black bg-fisch-yellow">
-      <div className="container-fisch flex h-20 items-center justify-between gap-4">
+      {/*
+        Drei Spalten statt links/rechts: 1fr auto 1fr sorgt dafür, dass der
+        Fanshop-Knopf WIRKLICH mittig steht und nicht dorthin rutscht, wo die
+        beiden Seiten ihn gerade hinlassen. Wäre es ein einfaches
+        justify-between mit drei Kindern, verschöbe sich die Mitte mit jeder
+        Änderung an Wappen oder Menü-Beschriftung.
+      */}
+      <div className="container-fisch grid h-20 grid-cols-[1fr_auto_1fr] items-center gap-3">
         <Link
           href="/"
           className="flex shrink-0 items-center gap-3"
@@ -57,16 +64,19 @@ export default function Header() {
           </span>
         </Link>
 
-        <div className="flex items-center gap-3 sm:gap-5">
+        <div className="flex justify-center">
           <a
             href={siteConfig.fanshopUrl}
             target="_blank"
             rel="noopener noreferrer"
             /* Auf gelbem Grund muss der Knopf schwarz sein, sonst verschwindet er. */
-            className="rounded-full bg-fisch-black px-5 py-2.5 text-sm font-bold text-fisch-yellow transition-colors hover:bg-fisch-ink"
+            className="whitespace-nowrap rounded-full bg-fisch-black px-5 py-2.5 text-sm font-bold text-fisch-yellow transition-colors hover:bg-fisch-ink sm:px-7"
           >
             Fanshop
           </a>
+        </div>
+
+        <div className="flex justify-end">
           <MainMenu />
         </div>
       </div>
