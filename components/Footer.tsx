@@ -123,7 +123,8 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="container-fisch flex flex-col items-center justify-between gap-4 py-6 text-xs text-fisch-white/60 sm:flex-row">
           <p>
-            © {jahr} {siteConfig.name} · Alle Rechte vorbehalten
+            © {jahr} {siteConfig.name} · Alle Rechte vorbehalten · Design &amp;
+            Umsetzung: Dominic Lutz
           </p>
           <nav aria-label="Rechtliches" className="flex flex-wrap items-center gap-x-5 gap-y-2">
             <Link href="/impressum" className="hover:text-fisch-white">
