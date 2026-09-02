@@ -31,7 +31,7 @@ export default function Home() {
 
   return (
     <>
-      <Hero naechsterTermin={naechsterTermin} />
+      <Hero naechsterTermin={naechsterTermin} naechstesSpiel={kommendeSpiele[0]} />
 
       {/*
         Hier stand ein Band aus vier gleich grossen Zahlenkacheln: 1964,
