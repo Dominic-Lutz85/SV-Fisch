@@ -1,10 +1,10 @@
 "use client";
 
-import { useSyncExternalStore } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { useConsent, setConsent } from "@/lib/consent";
+import { useImBrowser } from "@/lib/useImBrowser";
 
 export default function CookieBanner() {
   const stored = useConsent();
@@ -19,11 +19,7 @@ export default function CookieBanner() {
    * setzt: React liest beim Rendern auf dem Server den dritten Parameter und
    * im Browser den zweiten. Das ist derselbe Zweck ohne zusätzliches Rendern.
    */
-  const imBrowser = useSyncExternalStore(
-    () => () => {},
-    () => true,
-    () => false
-  );
+  const imBrowser = useImBrowser();
 
   const visible = imBrowser && stored === null;
 
