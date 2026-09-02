@@ -78,7 +78,13 @@ export default function Hero({ naechsterTermin, naechstesSpiel }: HeroProps) {
         ÜBER dem Verlauf und unter dem Text: so bekommt die dunkle Fläche unten
         eine Textur, ohne dass die Schrift darauf schlechter lesbar wird.
       */}
-      <div className="halbton pointer-events-none absolute inset-x-0 bottom-0 h-2/3" aria-hidden="true" />
+      {/*
+        Volle Fläche, nicht mehr h-2/3 am unteren Rand. Vorher entstand dort, wo
+        das Element anfing, eine harte waagerechte Kante quer durch den
+        Kopfbereich, weil der Verlauf inzwischen von links nach rechts läuft und
+        oben nichts mehr ausblendet.
+      */}
+      <div className="halbton pointer-events-none absolute inset-0" aria-hidden="true" />
 
       <div className="container-fisch relative flex min-h-[400px] flex-col justify-end gap-7 py-12 sm:min-h-[560px] sm:gap-8 sm:py-16">
         <div className="animate-fade-up">

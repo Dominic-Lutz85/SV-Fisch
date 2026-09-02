@@ -142,7 +142,8 @@ h6 {
  * Zu den Werten: Der erste Versuch stand bei 1,15px Punkten auf 5px Gitter und
  * 14 Prozent Deckkraft. Im Browser nachgesehen war davon nichts zu erkennen,
  * also genau die halbherzige Loesung, die nichts zeigt und trotzdem da ist.
- * 1,5px auf 6px Gitter bei 30 Prozent ist sichtbar und bleibt leise.
+ * 1,5px auf 6px Gitter bei 30 Prozent war dann sichtbar, aber ueber die ganze
+ * Flaeche zu praesent. Bei 19 Prozent bleibt es eine Textur.
  *
  * Wer die Punkte weiter vergroessert: ab etwa 8px Gitter wird daraus ein
  * Muster statt einer Textur, und dann konkurriert es mit dem Wappen.
@@ -163,7 +164,7 @@ h6 {
       transparent 100%
     );
   background-size: var(--halbton-gitter) var(--halbton-gitter);
-  opacity: 0.3;
+  opacity: 0.19;
   /*
    * Von links nach rechts abfallend, so gewuenscht. Vorher lief der Verlauf von
    * unten nach oben. Links dicht, rechts ausgeblendet: dadurch bleibt die
@@ -178,6 +179,6 @@ h6 {
 @media (max-width: 640px) {
   .halbton {
     --halbton-gitter: 5px;
-    opacity: 0.24;
+    opacity: 0.15;
   }
 }
