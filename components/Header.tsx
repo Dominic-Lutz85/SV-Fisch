@@ -70,7 +70,7 @@ export default function Header() {
               gleich viel Gewicht und der Block franst aus.
               Schwarz auf Gelb bei 80 Prozent Deckung ergibt 8,89 zu 1.
             */}
-            <span className="mt-1.5 font-display text-[11px] font-bold tracking-[0.35em] text-fisch-black/80">
+            <span className="mt-1.5 font-display text-[11px] font-extrabold tracking-[0.35em] text-fisch-black">
               {siteConfig.founded}
             </span>
           </span>

@@ -11,7 +11,17 @@ export default function Footer() {
   const jahr = new Date().getFullYear();
 
   const vereinLinks = mainNav.find((i) => i.label === "Der Verein")?.children ?? [];
-  const fussballLinks = mainNav.find((i) => i.label === "Fußball")?.children ?? [];
+
+  /*
+   * Nicht die Gruppe "Fussball" abgreifen, sondern jeden Menuepunkt, der unter
+   * /fussball liegt. Der Liveticker haengt im Menue unter "Home", weil er
+   * waehrend eines Spiels sofort erreichbar sein soll, gehoert hier unten aber
+   * genauso in die Fussballspalte. Ueber den Pfad statt ueber die Gruppe
+   * gefiltert, dann kann beim naechsten Umbau des Menues nichts verloren gehen.
+   */
+  const fussballLinks = mainNav
+    .flatMap((i) => i.children ?? [])
+    .filter((l) => l.href.startsWith("/fussball"));
 
   return (
     <footer className="mt-24 border-t border-linie bg-flaeche text-text">
@@ -99,14 +109,25 @@ export default function Footer() {
             <div className="flex flex-wrap items-center justify-center gap-6">
               {sponsoren.map((s) => {
                 const ziel = s.url && s.url !== "#" ? s.url : undefined;
+                /*
+                  Helle Platte in fester Groesse, das Logo wird hineingerechnet.
+                  Zwei Gruende, beide stehen ausfuehrlich in SponsorWall.tsx:
+                  Fuenf der neun Logos sind schwarze Schrift ohne eigenen
+                  Hintergrund und waren auf der dunklen Flaeche unsichtbar. Und
+                  mit fester Hoehe plus automatischer Breite bestimmt das
+                  Seitenverhaeltnis die Flaeche, ein flaches Logo wird dreimal
+                  so breit wie ein hohes.
+                */
                 const logo = (
-                  <Image
-                    src={s.logo}
-                    alt={`Logo ${s.name}`}
-                    width={100}
-                    height={50}
-                    className="h-10 w-auto bg-flaeche-hoch object-contain"
-                  />
+                  <span className="flex h-14 w-28 items-center justify-center bg-fisch-white p-2">
+                    <Image
+                      src={s.logo}
+                      alt={`Logo ${s.name}`}
+                      width={s.breite}
+                      height={s.hoehe}
+                      className="h-full w-full object-contain"
+                    />
+                  </span>
                 );
 
                 /*
@@ -157,6 +178,15 @@ export default function Footer() {
             </Link>
             <Link href="/datenschutz" className="hover:text-text">
               Datenschutz
+            </Link>
+            {/*
+              Kontakt stand bisher nur im Hauptmenue und auf den
+              Nachrichtenseiten. Auf der Startseite, also der Seite, auf der
+              fast jeder ankommt, war die Kontaktseite von nirgendwo verlinkt.
+              Das Hauptmenue entsteht erst im Browser und zaehlt dafuer nicht.
+            */}
+            <Link href="/kontakt" className="hover:text-text">
+              Kontakt
             </Link>
             <Link href="/verein/sponsoren" className="hover:text-text">
               Links & Partner

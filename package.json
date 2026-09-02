@@ -13,7 +13,9 @@
     "lint": "eslint",
     "pruefe:bilder": "node scripts/pruefe-bilder.mjs",
     "prebuild": "node scripts/pruefe-bilder.mjs && node scripts/pruefe-sitemap.mjs",
-    "pruefe:sitemap": "node scripts/pruefe-sitemap.mjs"
+    "pruefe:sitemap": "node scripts/pruefe-sitemap.mjs",
+    "pruefe:verlinkung": "node scripts/pruefe-verlinkung.mjs",
+    "postbuild": "node scripts/pruefe-verlinkung.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",
