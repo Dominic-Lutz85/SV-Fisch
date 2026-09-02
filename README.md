@@ -181,7 +181,7 @@ JS-Datei erwartet, die selbst einen HTTP-Server startet.
    `sv-fisch.com` zuweisen, Node-Version **20 oder höher** wählen
    (siehe `engines` in `package.json`).
 2. Code auf den Server bringen – entweder über die Git-Funktion im
-   hPanel (Repository-URL: `https://github.com/TwerkiTwerk/SV-Fisch.git`)
+   hPanel (Repository-URL: `https://github.com/Dominic-Lutz85/SV-Fisch.git`)
    oder per Datei-Upload/SFTP.
 3. **Application startup file** auf `server.js` setzen.
 4. Im hPanel-Bereich der Node.js-App: "NPM Install" ausführen, danach
