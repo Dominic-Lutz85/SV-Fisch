@@ -80,3 +80,71 @@ Zwei Läufe, sie finden verschiedene Sachen:
 2. Lighthouse über **alle** Seitentypen, nicht über die eine, an der gerade
    gearbeitet wurde. Beim letzten Mal saßen zwei von drei Funden auf Seiten,
    die niemand im Verdacht hatte.
+
+## Drei Wächter laufen am Bau, alle drei sind gegengeprüft
+
+`npm run build` bricht ab, wenn einer davon anschlägt:
+
+- **`pruefe:bilder`** (vorher): ein Bildverweis ohne Datei. Im dunklen Layout
+  sieht man ein fehlendes Bild nicht, es ist schwarze Fläche auf schwarzem
+  Grund. Sichtbar war es nur als 400 in der Netzwerkliste.
+- **`pruefe:sitemap`** (vorher): `app/sitemap.ts` pflegt seine Liste von Hand
+  und passt nicht mehr zu den Seiten unter `app/`, in beide Richtungen.
+- **`pruefe:verlinkung`** (nachher): eine Seite ist in keinem ausgelieferten
+  HTML verlinkt. Sie prüft das gebaute Ergebnis unter `.next/server/app`, nicht
+  den Quelltext. Grund steht in der Datei.
+
+Wer einen weiteren Wächter dazulegt, prüft ihn **vorher in beide Richtungen**:
+ein eingebauter Verstoß muss ihn rot machen, der saubere Stand grün. Ein
+Wächter, dessen Rotwerden man nie gesehen hat, bewacht nichts.
+
+## Das Hauptmenü verlinkt nichts
+
+`MainMenu` hängt per Portal am `body` und entsteht erst im Browser. Im
+ausgelieferten HTML steht es **nicht**. Eine Seite, die nur dort verlinkt ist,
+existiert für Suchmaschinen und für jeden ohne JavaScript nicht. Genau so waren
+`/kontakt` und `/elfer-turnier` monatelang unsichtbar.
+
+Jede neue Seite braucht deshalb zusätzlich einen festen Verweis aus etwas, das
+der Server ausliefert, in der Regel `components/Footer.tsx`. `pruefe:verlinkung`
+achtet darauf, aber der Gedanke gehört an den Anfang und nicht ans Ende.
+
+## Server nach Client, nicht umgekehrt
+
+`MainMenu` läuft im Browser, `PraesentiertVon` liest beim Bauen Dateien vom
+Datenträger. Das Menü kann den Sponsorblock deshalb nicht selbst einbinden.
+`Header` erzeugt ihn und reicht ihn als Eigenschaft hinein.
+
+Dabei die Falle im Kopf behalten: Fest verdrahtetes JSX, das über diese Grenze
+gereicht wird, kommt drüben als gewöhnliches Feld an, und React verlangt für
+Felder Schlüssel. Wer hier etwas ergänzt, prüft die Konsole auf
+"unique key"-Warnungen, siehe die Begründung in `app/page.tsx`.
+
+## Eine Eigenschaft, eine Quelle
+
+`PraesentiertVon` hatte `sm:items-end` fest eingebaut, während jeder Aufrufer
+zusätzlich seine eigene Ausrichtung mitgab. Zwei Klassen derselben CSS-
+Eigenschaft in einer Liste entscheidet **nicht** die Reihenfolge im Attribut,
+sondern die im Stylesheet. Das Ergebnis ist damit geraten statt bestimmt.
+
+Wenn ein Baustein an mehreren Stellen anders aussehen soll, gehört der Wert an
+die Aufrufstelle und nirgendwo sonst hin. Gleiches gilt für Größen: `groesse`
+steht beim Aufruf, weil dieselbe Marke neben einer Überschrift groß und im Menü
+kleiner steht und beides Absicht ist.
+
+## Sponsorendaten: nachsehen statt annehmen
+
+`content/sponsoren.json` ist die einzige Quelle für Name, Stufe, Logo, Maße und
+Adresse. Beim Ergänzen gilt:
+
+- **Jede Adresse vor dem Eintragen aufrufen** und gegen die Firma auf dem Logo
+  prüfen. Eine plausibel klingende Domain ist kein Beleg.
+- **Die Schreibweise von der Firma übernehmen**, nicht vom Logo ablesen. So
+  wurde aus "Edelobst-Brennerei Roland Lutz" das eigene "Edelobstbrennerei" und
+  aus "Höllen Design" das durchgehend verwendete "Hoellen Design".
+- **`breite` und `hoehe` sind die echten Maße der Datei.** Wer ein Logo
+  austauscht, trägt die neuen mit ein, sonst wird es verzerrt.
+- **Ohne bekannte Adresse kein `url`.** Die Kachel wird dann ein `div` statt
+  eines Ankers. Ein `a` ohne `href` ist kein Link, es sieht nur so aus.
+- **Fremde Logos nie umfärben.** Wer eine helle Fassung braucht, fragt beim
+  Sponsor nach; sonst kommt das Logo auf eine helle Platte.
