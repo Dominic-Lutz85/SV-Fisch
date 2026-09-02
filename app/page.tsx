@@ -3,7 +3,6 @@ import { ArrowRight } from "lucide-react";
 import Hero from "@/components/Hero";
 import NewsCard from "@/components/NewsCard";
 import Eyebrow from "@/components/Eyebrow";
-import StatsRow from "@/components/StatsRow";
 import SponsorWall from "@/components/SponsorWall";
 import Fixtures from "@/components/Fixtures";
 import TeamTableMini from "@/components/TeamTableMini";
@@ -34,9 +33,24 @@ export default function Home() {
     <>
       <Hero naechsterTermin={naechsterTermin} />
 
-      <section className="container-fisch -mt-14 relative z-10 sm:-mt-20">
-        <StatsRow />
-      </section>
+      {/*
+        Hier stand ein Band aus vier gleich grossen Zahlenkacheln: 1964,
+        420+ Mitglieder, 3 Abteilungen, 4 Mannschaften. Es ist am 02.09.2026
+        entfernt worden, aus zwei Gruenden.
+
+        Erstens waren drei der vier Zahlen nicht belegt. Die Vereinsseite bei
+        FuPa fuehrt 100 Mitglieder, eine Mannschaft und die Abteilungen
+        Fussball, Gymnastik und Traumtaenzer. Welche Angabe stimmt, ist offen,
+        und eine angezeigte falsche Zahl kostet mehr als eine fehlende.
+
+        Zweitens stand die einzige gesicherte Zahl, das Gruendungsjahr, auf
+        demselben Bildschirm bereits dreimal: in der Kopfleiste, in der
+        Kleinueberschrift des Kopfbereichs und im Vereinsnamen.
+
+        Wer die echten Zahlen hat: nicht dieses Band wiederbeleben, sondern
+        ueberlegen, welche davon ein Besucher wirklich sucht. Vier gleich
+        grosse Kacheln haben keine Rangfolge, das Auge findet keinen Einstieg.
+      */}
 
       <section className="container-fisch py-20 sm:py-28">
         <div className="mb-10 flex flex-wrap items-end justify-between gap-4">

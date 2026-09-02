@@ -45,12 +45,15 @@ export const siteConfig = {
   // Platzhalter-Link, per ENV leicht austauschbar sobald ein echter Shop existiert
   fanshopUrl: process.env.NEXT_PUBLIC_FANSHOP_URL || "https://sv-fisch.fan12.de/",
 
-  numbers: {
-    founded: 1964,
-    members: 420,
-    departments: 3,
-    teams: 4,
-  },
+  /*
+     Hier stand ein Block "numbers" mit Mitgliederzahl, Abteilungen und
+     Mannschaften fuer das Zahlenband der Startseite. Er ist mit dem Band
+     zusammen entfernt worden, weil die Werte nicht belegt waren.
+
+     Bewusst NICHT als leerer Block stehen geblieben: Eine Einstellung, die
+     nirgends mehr gelesen wird, ist eine Falle. Wer die echten Zahlen
+     eintraegt, sieht sonst keine Wirkung und sucht den Fehler woanders.
+  */
 } as const;
 
 export type SiteConfig = typeof siteConfig;
