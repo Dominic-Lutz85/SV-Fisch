@@ -12,55 +12,63 @@
     "stufe": "Co-Sponsor",
     "logo": "/sponsoren/elektro-benzmueller.png",
     "breite": 282,
-    "hoehe": 60
+    "hoehe": 60,
+    "url": "https://www.benzmueller.de/"
   },
   {
-    "name": "Edelobst-Brennerei Roland Lutz",
+    "name": "Edelobstbrennerei Roland Lutz",
     "stufe": "Co-Sponsor",
     "logo": "/sponsoren/brennerei-roland-lutz.png",
     "breite": 304,
-    "hoehe": 125
+    "hoehe": 125,
+    "url": "https://www.viezvonlutz.de/"
   },
   {
     "name": "Fleischerei Klassen",
     "stufe": "Co-Sponsor",
     "logo": "/sponsoren/fleischerei-klassen.png",
     "breite": 250,
-    "hoehe": 78
+    "hoehe": 78,
+    "url": "https://fleischerei-klassen.de/"
   },
   {
     "name": "Brocker Holzbau",
     "stufe": "Co-Sponsor",
     "logo": "/sponsoren/brocker-holzbau.png",
     "breite": 288,
-    "hoehe": 167
+    "hoehe": 167,
+    "url": "https://www.brocker-holzbau.de/"
   },
   {
     "name": "Adam Rauls",
     "stufe": "Co-Sponsor",
     "logo": "/sponsoren/adam-rauls.png",
     "breite": 83,
-    "hoehe": 58
+    "hoehe": 58,
+    "url": "https://adamrauls.de/"
   },
   {
     "name": "Roth Munch Steuerberatungsgesellschaft",
     "stufe": "Co-Sponsor",
     "logo": "/sponsoren/roth-munch.png",
     "breite": 220,
-    "hoehe": 46
+    "hoehe": 46,
+    "url": "https://www.roth-munch.de/"
   },
   {
-    "name": "Höllen Design",
+    "name": "Hoellen Design",
     "stufe": "Co-Sponsor",
     "logo": "/sponsoren/hoellen-design.png",
     "breite": 314,
-    "hoehe": 219
+    "hoehe": 219,
+    "url": "https://hoellen.de/"
   },
   {
     "name": "Sparkasse Trier",
     "stufe": "Co-Sponsor",
     "logo": "/sponsoren/sparkasse-trier.png",
     "breite": 156,
-    "hoehe": 65
+    "hoehe": 65,
+    "url": "https://www.sparkasse-trier.de/de/home/toolbar/filialen/sparkasse-trier-filiale-saarburg-9913.html"
   }
 ]
