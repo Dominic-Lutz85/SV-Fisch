@@ -26,7 +26,7 @@ export default function SponsorWall({ sponsoren }: { sponsoren: Sponsor[] }) {
                   href={s.url && s.url !== "#" ? s.url : undefined}
                   target={s.url && s.url !== "#" ? "_blank" : undefined}
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center rounded-lg border border-fisch-line bg-white px-6 py-5 transition-shadow hover:shadow-md"
+                  className="flex items-center justify-center border border-fisch-line bg-white px-6 py-5 transition-shadow hover:shadow-md"
                 >
                   <Image
                     src={s.logo}

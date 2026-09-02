@@ -69,7 +69,7 @@ export default function Hero({ naechsterTermin }: { naechsterTermin?: Termin }) 
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="flex flex-col gap-3 rounded-2xl border border-white/15 bg-white/10 p-5 backdrop-blur-sm sm:flex-row sm:items-center sm:justify-between"
+            className="flex flex-col gap-3 border border-white/15 bg-white/10 p-5 backdrop-blur-sm sm:flex-row sm:items-center sm:justify-between"
           >
             <div className="flex items-start gap-3">
               <CalendarDays className="mt-0.5 h-5 w-5 shrink-0 text-fisch-yellow" aria-hidden="true" />

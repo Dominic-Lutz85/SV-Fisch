@@ -112,7 +112,7 @@ export default function Home() {
             </div>
           </div>
           <div className="flex flex-col gap-6">
-            <div className="rounded-2xl bg-white/5 p-2 sm:p-4">
+            <div className="bg-white/5 p-2 sm:p-4">
               <Fixtures spiele={kommendeSpiele} compact variant="dark" />
             </div>
             {tabelle.length > 0 && <TeamTableMini zeilen={tabelle} />}

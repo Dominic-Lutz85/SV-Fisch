@@ -3,7 +3,7 @@ import type { TabellenZeile } from "@/types/content";
 
 export default function TeamTable({ zeilen }: { zeilen: TabellenZeile[] }) {
   return (
-    <div className="overflow-x-auto rounded-xl border border-fisch-line">
+    <div className="overflow-x-auto border border-fisch-line">
       <table className="w-full min-w-[640px] border-collapse text-sm">
         <thead>
           <tr className="bg-fisch-black text-fisch-white">

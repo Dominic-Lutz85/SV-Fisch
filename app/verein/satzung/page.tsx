@@ -51,7 +51,7 @@ export default function SatzungPage() {
         description="Die Vereinssatzung regelt Zweck, Struktur und Organe des SV Fisch 1964 e.V."
       />
       <div className="container-fisch max-w-3xl py-16 sm:py-20">
-        <div className="mb-10 rounded-xl border border-fisch-yellow-dark bg-fisch-yellow/25 p-5 text-sm text-fisch-ink">
+        <div className="mb-10 border border-fisch-yellow-dark bg-fisch-yellow/25 p-5 text-sm text-fisch-ink">
           <strong>[BITTE PRÜFEN/ERGÄNZEN]</strong> – Dies ist ein
           Platzhalter-Gerüst auf Basis üblicher Vereinssatzungen. Es ersetzt
           keine Rechtsberatung. Die tatsächlich gültige, von der

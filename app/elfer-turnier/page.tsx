@@ -23,7 +23,7 @@ export default function ElferTurnierPage() {
       />
 
       <div className="container-fisch grid gap-14 py-16 sm:py-20 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
-        <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-fisch-black">
+        <div className="relative aspect-[4/3] w-full overflow-hidden bg-fisch-black">
           <Image
             src="/gallery/vereinsfeste/1.png"
             alt="Impression vom Elfer-Turnier [Platzhalter – Datei ersetzen]"
@@ -34,7 +34,7 @@ export default function ElferTurnierPage() {
 
         <div>
           {termin && (
-            <div className="mb-8 flex flex-col gap-3 rounded-2xl border border-fisch-line bg-white p-6">
+            <div className="mb-8 flex flex-col gap-3 border border-fisch-line bg-white p-6">
               <div className="flex items-center gap-3">
                 <CalendarDays className="h-5 w-5 text-fisch-gold" aria-hidden="true" />
                 <span className="font-semibold text-fisch-black">

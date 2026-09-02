@@ -1,7 +1,7 @@
 import type { InputHTMLAttributes, TextareaHTMLAttributes } from "react";
 
 const fieldClass =
-  "w-full rounded-md border border-fisch-line bg-white px-3.5 py-2.5 text-sm text-fisch-ink placeholder:text-fisch-muted/70 focus:border-fisch-black focus:outline-none";
+  "w-full  border border-fisch-line bg-white px-3.5 py-2.5 text-sm text-fisch-ink placeholder:text-fisch-muted/70 focus:border-fisch-black focus:outline-none";
 
 interface BaseProps {
   label: string;

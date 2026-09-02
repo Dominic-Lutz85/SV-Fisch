@@ -11,7 +11,7 @@ export default function PersonCard({ person }: { person: VorstandsMitglied }) {
     .toUpperCase();
 
   return (
-    <div className="flex flex-col items-center gap-3 rounded-2xl border border-fisch-line bg-white p-6 text-center">
+    <div className="flex flex-col items-center gap-3 border border-fisch-line bg-white p-6 text-center">
       <div className="flex h-16 w-16 items-center justify-center rounded-full bg-fisch-yellow font-display text-lg font-bold text-fisch-black">
         {initialen || "SV"}
       </div>

@@ -42,7 +42,7 @@ export default function DartsPage() {
           <h2 className="mt-10 font-display text-2xl font-bold text-fisch-black">
             Trainingszeiten
           </h2>
-          <div className="mt-4 overflow-hidden rounded-xl border border-fisch-line">
+          <div className="mt-4 overflow-hidden border border-fisch-line">
             <table className="w-full text-sm">
               <tbody>
                 {trainingszeiten.map((t) => (
@@ -73,7 +73,7 @@ export default function DartsPage() {
         </div>
 
         <div className="flex flex-col gap-6">
-          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-fisch-black">
+          <div className="relative aspect-[4/3] w-full overflow-hidden bg-fisch-black">
             <Image
               src="/darts/uebersicht.png"
               alt="Impression aus der Darts-Abteilung [Platzhalter – Datei ersetzen]"
@@ -82,7 +82,7 @@ export default function DartsPage() {
             />
           </div>
           {leitung && (
-            <div className="rounded-2xl border border-fisch-line bg-white p-6">
+            <div className="border border-fisch-line bg-white p-6">
               <p className="text-xs font-bold uppercase tracking-wide text-fisch-muted">
                 Abteilungsleitung
               </p>

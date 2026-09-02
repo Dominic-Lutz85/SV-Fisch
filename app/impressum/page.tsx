@@ -12,7 +12,7 @@ export default function ImpressumPage() {
     <>
       <PageHeader title="Impressum" />
       <div className="container-fisch max-w-2xl py-16 sm:py-20">
-        <div className="mb-10 rounded-xl border border-fisch-yellow-dark bg-fisch-yellow/25 p-5 text-sm text-fisch-ink">
+        <div className="mb-10 border border-fisch-yellow-dark bg-fisch-yellow/25 p-5 text-sm text-fisch-ink">
           <strong>[BITTE PRÜFEN/ERGÄNZEN]</strong> – Dieses Impressum ist ein
           rechtliches Platzhalter-Gerüst gemäß § 5 TMG / § 18 MStV. Es ersetzt
           keine Rechtsberatung. Bitte vor Veröffentlichung durch den Vorstand

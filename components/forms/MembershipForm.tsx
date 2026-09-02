@@ -34,7 +34,7 @@ export default function MembershipForm() {
           id="abteilung"
           name="abteilung"
           required
-          className="w-full rounded-md border border-fisch-line bg-white px-3.5 py-2.5 text-sm text-fisch-ink focus:border-fisch-black focus:outline-none"
+          className="w-full border border-fisch-line bg-white px-3.5 py-2.5 text-sm text-fisch-ink focus:border-fisch-black focus:outline-none"
         >
           <option value="">Bitte auswählen …</option>
           <option value="Fußball (aktiv)">Fußball (aktiv)</option>

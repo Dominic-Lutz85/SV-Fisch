@@ -33,7 +33,7 @@ export default function KontaktPage() {
             <ContactForm />
           </div>
 
-          <div className="mt-12 flex flex-col gap-3 rounded-2xl border border-fisch-line bg-white p-6">
+          <div className="mt-12 flex flex-col gap-3 border border-fisch-line bg-white p-6">
             <p className="flex items-center gap-3 text-sm text-fisch-ink">
               <MapPin className="h-5 w-5 shrink-0 text-fisch-gold" aria-hidden="true" />
               {siteConfig.contact.addressLines.join(", ")}
@@ -63,7 +63,7 @@ export default function KontaktPage() {
               Anfahrtsbeschreibung, Parkmöglichkeiten]. Die Karte lädt Inhalte
               von openstreetmap.org.
             </p>
-            <div className="overflow-hidden rounded-2xl border border-fisch-line">
+            <div className="overflow-hidden border border-fisch-line">
               <iframe
                 title="Karte: Anfahrt zum Sportplatz SV Fisch"
                 src={mapSrc}

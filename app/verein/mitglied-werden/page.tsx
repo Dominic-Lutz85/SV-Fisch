@@ -33,7 +33,7 @@ export default function MitgliedWerdenPage() {
         </div>
 
         <aside className="flex flex-col gap-6">
-          <div className="rounded-2xl border border-fisch-line bg-white p-6">
+          <div className="border border-fisch-line bg-white p-6">
             <h3 className="font-display text-lg font-bold text-fisch-black">
               Lieber klassisch auf Papier?
             </h3>
@@ -55,7 +55,7 @@ export default function MitgliedWerdenPage() {
             </p>
           </div>
 
-          <div className="rounded-2xl border border-fisch-line bg-white p-6">
+          <div className="border border-fisch-line bg-white p-6">
             <h3 className="font-display text-lg font-bold text-fisch-black">
               Mitgliedsbeiträge
             </h3>

@@ -59,7 +59,7 @@ export default function DatenschutzPage() {
     <>
       <PageHeader title="Datenschutzerklärung" />
       <div className="container-fisch max-w-2xl py-16 sm:py-20">
-        <div className="mb-10 rounded-xl border border-fisch-yellow-dark bg-fisch-yellow/25 p-5 text-sm text-fisch-ink">
+        <div className="mb-10 border border-fisch-yellow-dark bg-fisch-yellow/25 p-5 text-sm text-fisch-ink">
           <strong>[BITTE PRÜFEN/ERGÄNZEN]</strong> – Diese
           Datenschutzerklärung ist ein Platzhalter-Gerüst und ersetzt keine
           Rechtsberatung. Bitte vor Veröffentlichung durch eine sachkundige

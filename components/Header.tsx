@@ -85,7 +85,7 @@ export default function Header() {
                   key={item.label}
                   href={item.href!}
                   className={cn(
-                    "rounded-md px-3 py-2 text-sm font-semibold transition-colors hover:bg-fisch-black hover:text-fisch-white",
+                    " px-3 py-2 text-sm font-semibold transition-colors hover:bg-fisch-black hover:text-fisch-white",
                     isActive ? "text-fisch-black underline decoration-fisch-yellow decoration-4 underline-offset-8" : "text-fisch-ink"
                   )}
                 >
@@ -104,7 +104,7 @@ export default function Header() {
                 <button
                   type="button"
                   className={cn(
-                    "flex items-center gap-1 rounded-md px-3 py-2 text-sm font-semibold transition-colors hover:bg-fisch-black hover:text-fisch-white",
+                    "flex items-center gap-1  px-3 py-2 text-sm font-semibold transition-colors hover:bg-fisch-black hover:text-fisch-white",
                     isActive || open ? "text-fisch-black" : "text-fisch-ink"
                   )}
                   aria-expanded={open}
@@ -124,7 +124,7 @@ export default function Header() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -6 }}
                       transition={{ duration: 0.15 }}
-                      className="absolute left-0 top-full min-w-56 overflow-hidden rounded-lg border border-fisch-line bg-fisch-white py-2 shadow-xl"
+                      className="absolute left-0 top-full min-w-56 overflow-hidden border border-fisch-line bg-fisch-white py-2 shadow-xl"
                     >
                       {item.children.map((child) => (
                         <Link
@@ -160,7 +160,7 @@ export default function Header() {
 
         <button
           type="button"
-          className="flex items-center justify-center rounded-md p-2 text-fisch-black lg:hidden"
+          className="flex items-center justify-center p-2 text-fisch-black lg:hidden"
           aria-label={mobileOpen ? "Menü schließen" : "Menü öffnen"}
           aria-expanded={mobileOpen}
           onClick={() => setMobileOpen((v) => !v)}
@@ -188,7 +188,7 @@ export default function Header() {
                     <Link
                       key={item.label}
                       href={item.href!}
-                      className="rounded-md px-3 py-3 text-base font-semibold text-fisch-ink hover:bg-fisch-yellow/40"
+                      className="px-3 py-3 text-base font-semibold text-fisch-ink hover:bg-fisch-yellow/40"
                     >
                       {item.label}
                     </Link>
@@ -199,7 +199,7 @@ export default function Header() {
                   <div key={item.label}>
                     <button
                       type="button"
-                      className="flex w-full items-center justify-between rounded-md px-3 py-3 text-base font-semibold text-fisch-ink hover:bg-fisch-yellow/40"
+                      className="flex w-full items-center justify-between px-3 py-3 text-base font-semibold text-fisch-ink hover:bg-fisch-yellow/40"
                       aria-expanded={subOpen}
                       onClick={() =>
                         setMobileSubOpen(subOpen ? null : item.label)
@@ -223,7 +223,7 @@ export default function Header() {
                             <Link
                               key={child.href}
                               href={child.href}
-                              className="rounded-md px-3 py-2.5 text-sm font-medium text-fisch-muted hover:bg-fisch-yellow/40 hover:text-fisch-black"
+                              className="px-3 py-2.5 text-sm font-medium text-fisch-muted hover:bg-fisch-yellow/40 hover:text-fisch-black"
                             >
                               {child.label}
                             </Link>

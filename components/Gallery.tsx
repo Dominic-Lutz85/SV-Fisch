@@ -59,7 +59,7 @@ export default function Gallery({ alben }: { alben: GalerieAlbum[] }) {
                 key={bild.src}
                 type="button"
                 onClick={() => setOpen({ album: albumIndex, bild: bildIndex })}
-                className="group relative aspect-square overflow-hidden rounded-lg bg-fisch-black"
+                className="group relative aspect-square overflow-hidden bg-fisch-black"
               >
                 <Image
                   src={bild.src}

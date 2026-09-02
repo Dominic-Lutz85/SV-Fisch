@@ -13,7 +13,7 @@ export default function NewsCard({ artikel }: { artikel: NewsFrontmatter }) {
   return (
     <Link
       href={`/aktuelles/${artikel.slug}`}
-      className="group flex flex-col overflow-hidden rounded-xl border border-fisch-line bg-white transition-shadow hover:shadow-lg"
+      className="group flex flex-col overflow-hidden border border-fisch-line bg-white transition-shadow hover:shadow-lg"
     >
       <div className="relative aspect-[3/2] w-full overflow-hidden bg-fisch-black">
         {artikel.teaserbild && (

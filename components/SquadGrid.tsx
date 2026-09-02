@@ -23,7 +23,7 @@ export default function SquadGrid({ spieler }: { spieler: Spieler[] }) {
               {gruppe.map((spielerEintrag, i) => (
                 <div
                   key={`${spielerEintrag.name}-${i}`}
-                  className="flex items-center gap-3 rounded-xl border border-fisch-line bg-white p-4"
+                  className="flex items-center gap-3 border border-fisch-line bg-white p-4"
                 >
                   <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-fisch-black font-display text-sm font-bold text-fisch-yellow">
                     {spielerEintrag.nummer ?? "–"}
