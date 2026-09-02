@@ -14,7 +14,7 @@ export const siteConfig = {
   shortName: "SV Fisch",
   claim: "Zuhause auf dem Platz, zuhause im Verein.",
   founded: 1964,
-  url: "https://www.sv-fisch.de",
+  url: "https://sv-fisch.com",
   description:
     "SV Fisch 1964 e.V. – Fußball, Gymnastik und Darts mitten im Ort. Erste Mannschaft, Bambini, Gymnastik- und Darts-Abteilung und ein starkes Vereinsleben seit 1964.",
 

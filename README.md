@@ -161,9 +161,9 @@ API-Routes ändern sich dabei nicht.
 2. In [vercel.com](https://vercel.com) „New Project" → Repository
    auswählen. Next.js wird automatisch erkannt.
 3. Unter „Environment Variables" die oben genannten Variablen eintragen.
-4. Deployen. Danach in `lib/config.ts` `url: "https://www.sv-fisch.de"`
-   final auf die echte Domain prüfen (steuert u. a. Sitemap und
-   Open-Graph-Bilder).
+4. Deployen. Danach in `lib/config.ts` `url` final auf die echte Domain
+   prüfen (steuert u. a. Sitemap, Canonical-Tags und Open-Graph-Bilder).
+   Aktuell steht dort `https://sv-fisch.com`.
 
 ## Deployment auf Hostinger (Node.js App)
 
