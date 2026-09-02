@@ -49,7 +49,17 @@ import { useImBrowser } from "@/lib/useImBrowser";
 
 const WENIGER_BEWEGUNG = "(prefers-reduced-motion: reduce)";
 
-export default function MainMenu() {
+export default function MainMenu({
+  sponsor,
+}: {
+  /*
+   * Fertige Auszeichnung fuer den Hauptsponsor, erzeugt in Header.tsx. Sie
+   * kommt von aussen, weil dieser Baustein im Browser laeuft und der
+   * Sponsorblock beim Bauen Dateien liest. Fehlt sie, bleibt die Fussleiste
+   * des Menues so, wie sie vorher war.
+   */
+  sponsor?: React.ReactNode;
+}) {
   const pathname = usePathname();
   const [offen, setOffen] = useState(false);
   const [sichtbar, setSichtbar] = useState(false);
@@ -297,8 +307,9 @@ export default function MainMenu() {
 
           <div
             data-menue-fade
-            className="mt-auto flex flex-col gap-5 border-t border-linie pt-6"
+            className="mt-auto flex flex-col gap-6 border-t border-linie pt-6 lg:flex-row lg:items-end lg:justify-between"
           >
+            <div className="flex flex-col gap-5">
             <div className="flex items-center gap-4">
               <Image
                 src="/logo.svg"
@@ -324,6 +335,14 @@ export default function MainMenu() {
             <p className="text-sm text-text-leise">
               {siteConfig.contact.addressLines.join(" · ")}
             </p>
+            </div>
+            {/*
+              Der Hauptsponsor unten rechts. Die Ecke war leer, und ein
+              Hauptsponsor gehoert dorthin, wo der Blick nach dem Lesen der
+              Links ohnehin landet. Auf schmalen Bildschirmen steht er unter
+              der Anschrift, dort gibt es kein Rechts.
+            */}
+            {sponsor && <div className="shrink-0">{sponsor}</div>}
           </div>
         </div>
       </div>

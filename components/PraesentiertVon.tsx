@@ -46,14 +46,26 @@ function masse(pfad: string): { breite: number; hoehe: number } | null {
   return null;
 }
 
-export default function PraesentiertVon({ className }: { className?: string }) {
+export default function PraesentiertVon({
+  className,
+  groesse = "h-14 w-auto sm:h-20 lg:h-24",
+}: {
+  className?: string;
+  /*
+   * Die Hoehe als Klasse, weil dieselbe Marke an zwei sehr verschiedenen
+   * Stellen steht: gross neben einer Seitenueberschrift, kleiner in der
+   * Fussleiste des Menues. Beides sind bewusste Groessen und keine Zufaelle,
+   * deshalb steht der Wert beim Aufruf und nicht hier drin.
+   */
+  groesse?: string;
+}) {
   const haupt = getSponsoren().find((s) => s.stufe === "Hauptsponsor");
   if (!haupt) return null;
 
   const weiss = weisseFassung(haupt.logo);
   if (!weiss) return null;
 
-  const groesse = masse(weiss) ?? { breite: haupt.breite, hoehe: haupt.hoehe };
+  const bildmasse = masse(weiss) ?? { breite: haupt.breite, hoehe: haupt.hoehe };
 
   const inhalt = (
     <>
@@ -63,8 +75,8 @@ export default function PraesentiertVon({ className }: { className?: string }) {
       <Image
         src={weiss}
         alt={`Logo ${haupt.name}`}
-        width={groesse.breite}
-        height={groesse.hoehe}
+        width={bildmasse.breite}
+        height={bildmasse.hoehe}
         /*
           Groesse an der Referenz ausgerichtet statt geschaetzt: Bei BVB stehen
           die Logos der obersten Stufe mit 215 Pixel Breite, die Stufe darunter
@@ -73,7 +85,7 @@ export default function PraesentiertVon({ className }: { className?: string }) {
           kam auf 118 Breite und sah neben einer Ueberschrift in 48 Pixel aus
           wie eine Fussnote.
         */
-        className="h-14 w-auto sm:h-20 lg:h-24"
+        className={groesse}
       />
       <span className="sr-only">{haupt.name}, Hauptsponsor des SV Fisch</span>
     </>

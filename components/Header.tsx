@@ -3,6 +3,7 @@ import Image from "next/image";
 
 import { siteConfig } from "@/lib/config";
 import MainMenu from "@/components/MainMenu";
+import PraesentiertVon from "@/components/PraesentiertVon";
 
 /*
  * Kopfleiste.
@@ -89,7 +90,22 @@ export default function Header() {
         </div>
 
         <div className="flex justify-end">
-          <MainMenu />
+          {/*
+            Der Sponsorblock wird hier erzeugt und in das Menue hineingereicht.
+            MainMenu ist eine Client-Komponente, PraesentiertVon liest beim
+            Bauen Dateien vom Datentraeger, also kann das Menue ihn nicht selbst
+            einbinden. Andersherum geht es: eine Serverkomponente darf einer
+            Clientkomponente fertige Auszeichnung als Eigenschaft mitgeben.
+          */}
+          <MainMenu
+            sponsor={
+              <PraesentiertVon
+                key="sponsor"
+                groesse="h-12 w-auto sm:h-14"
+                className="sm:items-end"
+              />
+            }
+          />
         </div>
       </div>
     </header>
