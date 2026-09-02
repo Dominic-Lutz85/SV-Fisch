@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import PageHeader from "@/components/PageHeader";
 import SponsorWall from "@/components/SponsorWall";
+import Eyebrow from "@/components/Eyebrow";
 import SponsorForm from "@/components/forms/SponsorForm";
 import { getSponsoren } from "@/lib/content";
 
@@ -27,9 +28,7 @@ export default function SponsorenPage() {
       <div className="bg-fisch-white">
         <div className="container-fisch grid gap-10 border-t border-fisch-line py-16 sm:py-20 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
           <div>
-            <p className="text-sm font-bold uppercase tracking-wider text-fisch-yellow-dark">
-              Mitmachen
-            </p>
+            <Eyebrow className="mb-2">Mitmachen</Eyebrow>
             <h2 className="mt-1 font-display text-3xl font-bold text-fisch-black">
               Sponsor werden
             </h2>

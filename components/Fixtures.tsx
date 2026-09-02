@@ -1,6 +1,7 @@
 import { formatDatum } from "@/lib/utils";
 import type { Spiel } from "@/types/content";
 import { cn } from "@/lib/utils";
+import { heuteInDeutschland } from "@/lib/content";
 
 export default function Fixtures({
   spiele,
@@ -12,6 +13,7 @@ export default function Fixtures({
   variant?: "light" | "dark";
 }) {
   const dark = variant === "dark";
+  const heute = heuteInDeutschland();
 
   if (spiele.length === 0) {
     return (
@@ -76,7 +78,15 @@ export default function Fixtures({
               )}
             </div>
             <div className="shrink-0">
-              {spiel.gespielt ? (
+              {/*
+                Was rechts steht, richtet sich nach dem Datum und danach, ob ein
+                Ergebnis eingetragen ist. Das Feld `gespielt` entscheidet hier
+                bewusst nichts mehr, siehe lib/content.ts. Ein vergangenes Spiel
+                ohne Ergebnis wird als solches benannt statt so auszusehen, als
+                stünde es noch bevor: eine fehlende Angabe ist eine gültige
+                Auskunft, eine falsche nicht.
+              */}
+              {spiel.ergebnis ? (
                 <span
                   className={cn(
                     "inline-block rounded-full px-3 py-1.5 text-sm font-bold",
@@ -86,6 +96,17 @@ export default function Fixtures({
                   )}
                 >
                   {spiel.ergebnis}
+                </span>
+              ) : spiel.datum < heute ? (
+                <span
+                  className={cn(
+                    "inline-block rounded-full px-3 py-1.5 text-sm font-semibold",
+                    dark
+                      ? "bg-white/10 text-fisch-white/80"
+                      : "bg-fisch-line/60 text-fisch-muted"
+                  )}
+                >
+                  Ergebnis fehlt noch
                 </span>
               ) : (
                 <span className="inline-block rounded-full border border-fisch-yellow-dark bg-fisch-yellow/40 px-3 py-1.5 text-sm font-bold text-fisch-black">

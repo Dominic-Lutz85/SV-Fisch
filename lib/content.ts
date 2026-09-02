@@ -62,15 +62,58 @@ export function getSpielplanBambini(): Spiel[] {
   );
 }
 
-export function getKommendeSpiele(spiele: Spiel[], anzahl = 3): Spiel[] {
-  return spiele.filter((s) => !s.gespielt).slice(0, anzahl);
+/**
+ * Heutiges Datum als "JJJJ-MM-TT" in der Ortszeit des Vereins.
+ *
+ * Bewusst über Intl und nicht über new Date(): Der Server kann in UTC laufen,
+ * dann liegt Mitternacht zwei Stunden daneben und ein Sonntagsspiel wäre am
+ * Sonntagabend noch "kommend" oder am Samstagabend schon "vergangen". Das Format
+ * JJJJ-MM-TT lässt sich direkt mit dem Feld `datum` vergleichen, ohne Rechnerei.
+ */
+export function heuteInDeutschland(jetzt: Date = new Date()): string {
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Europe/Berlin",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(jetzt);
 }
 
-export function getLetzteErgebnisse(spiele: Spiel[], anzahl = 3): Spiel[] {
-  return [...spiele]
-    .filter((s) => s.gespielt)
-    .sort((a, b) => new Date(b.datum).getTime() - new Date(a.datum).getTime())
-    .slice(0, anzahl);
+/*
+ * WICHTIG für alle, die hier etwas ändern: Ob ein Spiel kommend oder vergangen
+ * ist, wird ausschließlich aus dem DATUM abgeleitet, nie aus dem Feld `gespielt`.
+ *
+ * Vorher stand hier `filter((s) => !s.gespielt)`. Damit hing die Startseite an
+ * einem Haken, den jemand nach jedem Spieltag von Hand umlegen musste. Am
+ * 02.09.2026 standen deshalb unter der Überschrift "Nächste Spiele" drei
+ * Partien vom 16., 23. und 30. August, alle längst gespielt. Niemand hatte
+ * etwas falsch eingetragen, es hatte nur niemand nachgepflegt. Ein Datum
+ * veraltet nicht, ein Haken schon.
+ */
+
+export function getKommendeSpiele(
+  spiele: Spiel[],
+  anzahl = 3,
+  heute: string = heuteInDeutschland()
+): Spiel[] {
+  // spiele kommt aus getSpielplan() bereits aufsteigend sortiert
+  return spiele.filter((s) => s.datum >= heute).slice(0, anzahl);
+}
+
+/** Vergangene Spiele, das jüngste zuerst. Auch die ohne eingetragenes Ergebnis. */
+export function getVergangeneSpiele(
+  spiele: Spiel[],
+  heute: string = heuteInDeutschland()
+): Spiel[] {
+  return spiele.filter((s) => s.datum < heute).reverse();
+}
+
+export function getLetzteErgebnisse(
+  spiele: Spiel[],
+  anzahl = 3,
+  heute: string = heuteInDeutschland()
+): Spiel[] {
+  return getVergangeneSpiele(spiele, heute).slice(0, anzahl);
 }
 
 export function getTermine(): Termin[] {
@@ -84,15 +127,59 @@ export function getNaechsterTermin(): Termin | undefined {
   return getTermine().find((t) => new Date(t.datum).getTime() >= jetzt);
 }
 
+const PUBLIC_DIR = path.join(process.cwd(), "public");
+
+/** Liegt die Datei wirklich unter /public? */
+function bildVorhanden(src: string): boolean {
+  if (!src.startsWith("/")) return true; // externe Adresse, können wir nicht prüfen
+  return fs.existsSync(path.join(PUBLIC_DIR, src.replace(/^\//, "")));
+}
+
+/*
+ * Galerie mit Existenzprüfung.
+ *
+ * Anlass: In galerie.json standen die Alben "Vereinsfeste" und "Bambini in
+ * Aktion" mit Bildpfaden, zu denen es keine Dateien gab. Auf der
+ * veröffentlichten Seite standen dadurch graue Kästen, in denen der Alt-Text
+ * zu lesen war, wörtlich "[Platzhalter – Datei ersetzen]".
+ *
+ * Ein fehlendes Bild wird deshalb hier ausgesiebt statt kaputt angezeigt, und
+ * beim Bauen einmal gemeldet, damit es nicht still verschwindet. Ein Album ohne
+ * ein einziges vorhandenes Bild fällt ganz weg: eine leere Überschrift ist
+ * ehrlicher als eine Reihe kaputter Kacheln, und besser als beides ist, dass
+ * derjenige, der die Bilder nachliefert, es in der Bau-Ausgabe sieht.
+ */
 export function getGalerie(): GalerieAlbum[] {
-  return (galerieData as GalerieAlbum[]).map((album) => ({
-    ...album,
-    cover: normalizeAssetPath(album.cover)!,
-    bilder: album.bilder.map((bild) => ({
-      ...bild,
-      src: normalizeAssetPath(bild.src)!,
-    })),
-  }));
+  const fehlend: string[] = [];
+
+  const alben = (galerieData as GalerieAlbum[])
+    .map((album) => {
+      const bilder = album.bilder
+        .map((bild) => ({ ...bild, src: normalizeAssetPath(bild.src)! }))
+        .filter((bild) => {
+          const da = bildVorhanden(bild.src);
+          if (!da) fehlend.push(bild.src);
+          return da;
+        });
+
+      const cover = normalizeAssetPath(album.cover)!;
+      return {
+        ...album,
+        cover: bildVorhanden(cover) ? cover : bilder[0]?.src,
+        bilder,
+      };
+    })
+    .filter((album) => album.bilder.length > 0) as GalerieAlbum[];
+
+  if (fehlend.length > 0) {
+    console.warn(
+      `[Galerie] ${fehlend.length} Bild(er) in content/galerie.json haben keine Datei unter /public und werden nicht angezeigt:` +
+        fehlend.map((f) => `
+  ${f}`).join("")
+    );
+  }
+
+  return alben;
 }
 
 export function getAllNews(): NewsArtikel[] {

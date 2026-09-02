@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import Hero from "@/components/Hero";
 import NewsCard from "@/components/NewsCard";
+import Eyebrow from "@/components/Eyebrow";
 import StatsRow from "@/components/StatsRow";
 import SponsorWall from "@/components/SponsorWall";
 import Fixtures from "@/components/Fixtures";
@@ -14,6 +15,13 @@ import {
   getNaechsterTermin,
   getTabelle,
 } from "@/lib/content";
+
+/*
+ * Die Startseite zeigt "Nächste Spiele" und den nächsten Termin, beides hängt
+ * vom heutigen Tag ab. Ohne revalidate friert Next die Seite beim Bauen ein.
+ * Siehe die Begründung in lib/content.ts.
+ */
+export const revalidate = 3600;
 
 export default function Home() {
   const news = getAllNews().slice(0, 3);
@@ -33,16 +41,14 @@ export default function Home() {
       <section className="container-fisch py-20 sm:py-28">
         <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="text-sm font-bold uppercase tracking-wider text-fisch-yellow-dark">
-              Aktuelles
-            </p>
+            <Eyebrow className="mb-2">Aktuelles</Eyebrow>
             <h2 className="font-display text-3xl font-bold text-fisch-black sm:text-4xl">
               Neues aus dem Verein
             </h2>
           </div>
           <Link
             href="/aktuelles"
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-fisch-black hover:text-fisch-yellow-dark"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-fisch-black hover:text-fisch-gold"
           >
             Alle Neuigkeiten <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>
@@ -68,9 +74,7 @@ export default function Home() {
       <section className="bg-fisch-black py-20 text-fisch-white sm:py-28">
         <div className="container-fisch grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-start">
           <div>
-            <p className="text-sm font-bold uppercase tracking-wider text-fisch-yellow">
-              1. Mannschaft
-            </p>
+            <Eyebrow on="dunkel">1. Mannschaft</Eyebrow>
             <h2 className="font-display text-3xl font-bold sm:text-4xl">
               Nächste Spiele
             </h2>
@@ -104,9 +108,7 @@ export default function Home() {
 
       {sponsoren.length > 0 && (
         <section className="container-fisch py-20 sm:py-28">
-          <p className="text-sm font-bold uppercase tracking-wider text-fisch-yellow-dark">
-            Danke an unsere Partner
-          </p>
+          <Eyebrow className="mb-2">Danke an unsere Partner</Eyebrow>
           <h2 className="mb-10 font-display text-3xl font-bold text-fisch-black sm:text-4xl">
             Sponsoren & Förderer
           </h2>

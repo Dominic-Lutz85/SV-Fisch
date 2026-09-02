@@ -23,7 +23,7 @@ export default function PersonCard({ person }: { person: VorstandsMitglied }) {
         {person.email && (
           <a
             href={`mailto:${person.email}`}
-            className="inline-flex items-center justify-center gap-1.5 text-fisch-black hover:text-fisch-yellow-dark"
+            className="inline-flex items-center justify-center gap-1.5 text-fisch-black hover:text-fisch-gold"
           >
             <Mail className="h-3.5 w-3.5" aria-hidden="true" />
             {person.email}
@@ -32,7 +32,7 @@ export default function PersonCard({ person }: { person: VorstandsMitglied }) {
         {person.telefon && (
           <a
             href={`tel:${person.telefon}`}
-            className="inline-flex items-center justify-center gap-1.5 text-fisch-black hover:text-fisch-yellow-dark"
+            className="inline-flex items-center justify-center gap-1.5 text-fisch-black hover:text-fisch-gold"
           >
             <Phone className="h-3.5 w-3.5" aria-hidden="true" />
             {person.telefon}

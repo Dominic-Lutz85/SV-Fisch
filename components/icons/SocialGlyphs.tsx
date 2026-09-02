@@ -19,8 +19,17 @@ export function InstagramIcon(props: SVGProps<SVGSVGElement>) {
 export function FacebookIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} {...props}>
+      {/*
+        Das "f" war als Linie gezeichnet statt als Fläche. Bei 16 Pixeln lief die
+        dünne Kontur mit dem Kreis zusammen, auf dem Bildschirm war eine Weltkugel
+        zu sehen und kein Facebook-Zeichen. Als gefüllte Form ist es eindeutig.
+      */}
       <circle cx="12" cy="12" r="9" />
-      <path d="M13.8 21V13h2.2l.4-2.8h-2.6V8.4c0-.8.3-1.4 1.5-1.4h1.2V4.5c-.6-.1-1.4-.2-2.2-.2-2.3 0-3.8 1.4-3.8 3.9v2h-2.5V13h2.5v8" />
+      <path
+        d="M13.8 21V13h2.2l.4-2.8h-2.6V8.4c0-.8.3-1.4 1.5-1.4h1.2V4.5c-.6-.1-1.4-.2-2.2-.2-2.3 0-3.8 1.4-3.8 3.9v2h-2.5V13h2.5v8"
+        fill="currentColor"
+        stroke="none"
+      />
     </svg>
   );
 }

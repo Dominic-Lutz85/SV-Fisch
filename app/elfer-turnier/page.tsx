@@ -36,14 +36,14 @@ export default function ElferTurnierPage() {
           {termin && (
             <div className="mb-8 flex flex-col gap-3 rounded-2xl border border-fisch-line bg-white p-6">
               <div className="flex items-center gap-3">
-                <CalendarDays className="h-5 w-5 text-fisch-yellow-dark" aria-hidden="true" />
+                <CalendarDays className="h-5 w-5 text-fisch-gold" aria-hidden="true" />
                 <span className="font-semibold text-fisch-black">
                   {formatDatumLang(termin.datum)}
                 </span>
               </div>
               {termin.ort && (
                 <div className="flex items-center gap-3">
-                  <MapPin className="h-5 w-5 text-fisch-yellow-dark" aria-hidden="true" />
+                  <MapPin className="h-5 w-5 text-fisch-gold" aria-hidden="true" />
                   <span className="text-fisch-muted">{termin.ort}</span>
                 </div>
               )}
@@ -55,13 +55,13 @@ export default function ElferTurnierPage() {
           </h2>
           <ul className="mt-4 flex flex-col gap-3 text-fisch-muted">
             <li className="flex gap-3">
-              <Trophy className="mt-0.5 h-5 w-5 shrink-0 text-fisch-yellow-dark" aria-hidden="true" />
+              <Trophy className="mt-0.5 h-5 w-5 shrink-0 text-fisch-gold" aria-hidden="true" />
               Teams aus Vereinen und Freizeitmannschaften treten im
               K.-o.-System gegeneinander an. [BITTE PRÜFEN/ERGÄNZEN – genauer
               Modus, Teamgröße]
             </li>
             <li className="flex gap-3">
-              <Trophy className="mt-0.5 h-5 w-5 shrink-0 text-fisch-yellow-dark" aria-hidden="true" />
+              <Trophy className="mt-0.5 h-5 w-5 shrink-0 text-fisch-gold" aria-hidden="true" />
               Im Anschluss an das Turnier gemütlicher Ausklang mit Musik und
               Grill auf dem Sportplatz.
             </li>

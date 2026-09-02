@@ -19,7 +19,7 @@ export function TextField({
     <div className="flex flex-col gap-1.5">
       <label htmlFor={name} className="text-sm font-semibold text-fisch-black">
         {label}
-        {rest.required && <span aria-hidden="true" className="text-fisch-yellow-dark"> *</span>}
+        {rest.required && <span aria-hidden="true" className="text-fisch-gold"> *</span>}
       </label>
       <input id={name} name={name} className={fieldClass} {...rest} />
       {hint && <span className="text-xs text-fisch-muted">{hint}</span>}
@@ -37,7 +37,7 @@ export function TextAreaField({
     <div className="flex flex-col gap-1.5">
       <label htmlFor={name} className="text-sm font-semibold text-fisch-black">
         {label}
-        {rest.required && <span aria-hidden="true" className="text-fisch-yellow-dark"> *</span>}
+        {rest.required && <span aria-hidden="true" className="text-fisch-gold"> *</span>}
       </label>
       <textarea id={name} name={name} rows={5} className={fieldClass} {...rest} />
       {hint && <span className="text-xs text-fisch-muted">{hint}</span>}

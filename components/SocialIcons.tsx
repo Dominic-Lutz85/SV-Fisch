@@ -30,7 +30,13 @@ export default function SocialIcons({ className }: SocialIconsProps) {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`${siteConfig.shortName} auf ${label}`}
-          className="flex h-9 w-9 items-center justify-center rounded-full border border-current/20 transition-colors hover:bg-fisch-yellow hover:text-fisch-black hover:border-fisch-yellow"
+          /*
+            Kein Rahmen mehr. Ein Rahmen ist ein Aufmerksamkeits-Signal und gehört
+            an das, was Aufmerksamkeit verdient. Im Vergleich rahmt Ajax seine
+            zwei wichtigsten Knöpfe ein (Fanshop, Tickets), hier waren die zwei
+            unwichtigsten Elemente der Leiste die einzigen mit Rahmen.
+          */
+          className="flex h-9 w-9 items-center justify-center rounded-full transition-colors hover:bg-fisch-yellow hover:text-fisch-black"
         >
           <Icon className="h-4 w-4" aria-hidden="true" />
         </a>

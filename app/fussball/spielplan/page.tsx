@@ -1,7 +1,16 @@
 import type { Metadata } from "next";
 import PageHeader from "@/components/PageHeader";
 import Fixtures from "@/components/Fixtures";
-import { getSpielplan } from "@/lib/content";
+import { getSpielplan, getKommendeSpiele, getVergangeneSpiele } from "@/lib/content";
+
+/*
+ * Diese Seite zeigt, welche Spiele noch kommen. Das hängt vom heutigen Tag ab.
+ * Ohne revalidate würde Next die Seite einmal beim Bauen erzeugen und dann
+ * einfrieren, und weil hier von Hand deployt wird, stünde derselbe Spieltag
+ * womöglich wochenlang da. Einmal pro Stunde neu bauen reicht für einen
+ * Spielplan völlig.
+ */
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Spielplan 1. Mannschaft",
@@ -10,8 +19,8 @@ export const metadata: Metadata = {
 
 export default function SpielplanPage() {
   const spiele = getSpielplan();
-  const kommende = spiele.filter((s) => !s.gespielt);
-  const vergangene = [...spiele].filter((s) => s.gespielt).reverse();
+  const kommende = getKommendeSpiele(spiele, Number.MAX_SAFE_INTEGER);
+  const vergangene = getVergangeneSpiele(spiele);
 
   return (
     <>
