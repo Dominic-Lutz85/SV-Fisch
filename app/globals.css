@@ -125,3 +125,53 @@ h6 {
     padding-inline: 2rem;
   }
 }
+
+/*
+ * Halbton-Raster, wie es im Zeitungsdruck entsteht.
+ *
+ * Anlass: Gewünscht war ein "Neon Dither" aus einer Komponentensammlung. Das
+ * Original ist ein WebGL-Shader, 417 KB entpackt, dauerhaft rechnend, und
+ * bedeutet für einen Dorfverein nichts. Ein Halbton-Raster bedeutet etwas: es
+ * ist das Punktraster aus Sportteil und Stadionheft, und es kostet nichts
+ * ausser diesen paar Zeilen.
+ *
+ * Aufbau: zwei versetzte Punktgitter ergeben ein dichteres Raster als eines
+ * allein. Die Maske blendet es zum oberen Rand hin aus, damit es nur dort
+ * liegt, wo ohnehin keine Schrift steht.
+ *
+ * Zu den Werten: Der erste Versuch stand bei 1,15px Punkten auf 5px Gitter und
+ * 14 Prozent Deckkraft. Im Browser nachgesehen war davon nichts zu erkennen,
+ * also genau die halbherzige Loesung, die nichts zeigt und trotzdem da ist.
+ * 1,5px auf 6px Gitter bei 30 Prozent ist sichtbar und bleibt leise.
+ *
+ * Wer die Punkte weiter vergroessert: ab etwa 8px Gitter wird daraus ein
+ * Muster statt einer Textur, und dann konkurriert es mit dem Wappen.
+ */
+.halbton {
+  --halbton-punkt: 1.5px;
+  --halbton-gitter: 6px;
+  background-image:
+    radial-gradient(
+      var(--halbton-punkt) var(--halbton-punkt) at 1px 1px,
+      var(--color-fisch-yellow) 99%,
+      transparent 100%
+    ),
+    radial-gradient(
+      var(--halbton-punkt) var(--halbton-punkt) at calc(var(--halbton-gitter) / 2 + 1px)
+        calc(var(--halbton-gitter) / 2 + 1px),
+      var(--color-fisch-yellow) 99%,
+      transparent 100%
+    );
+  background-size: var(--halbton-gitter) var(--halbton-gitter);
+  opacity: 0.3;
+  -webkit-mask-image: linear-gradient(to top, #000 0%, rgba(0, 0, 0, 0.35) 45%, transparent 80%);
+  mask-image: linear-gradient(to top, #000 0%, rgba(0, 0, 0, 0.35) 45%, transparent 80%);
+}
+
+/* Feiner auf kleinen Bildschirmen, sonst wird das Raster zum Muster. */
+@media (max-width: 640px) {
+  .halbton {
+    --halbton-gitter: 5px;
+    opacity: 0.24;
+  }
+}

@@ -73,6 +73,13 @@ export default function Hero({ naechsterTermin, naechstesSpiel }: HeroProps) {
       */}
       <div className="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-fisch-black via-fisch-black/90 to-transparent sm:h-2/5 sm:via-fisch-black/85" />
 
+      {/*
+        Halbton-Raster über dem Verlauf, siehe globals.css. Es liegt bewusst
+        ÜBER dem Verlauf und unter dem Text: so bekommt die dunkle Fläche unten
+        eine Textur, ohne dass die Schrift darauf schlechter lesbar wird.
+      */}
+      <div className="halbton pointer-events-none absolute inset-x-0 bottom-0 h-2/3" aria-hidden="true" />
+
       <div className="container-fisch relative flex min-h-[400px] flex-col justify-end gap-7 py-12 sm:min-h-[560px] sm:gap-8 sm:py-16">
         <div className="animate-fade-up">
           {/* Handy-Ersatz für das angeschnittene Wappen, siehe oben. */}
