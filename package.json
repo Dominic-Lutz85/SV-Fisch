@@ -12,7 +12,8 @@
     "start:hostinger": "NODE_ENV=production node server.js",
     "lint": "eslint",
     "pruefe:bilder": "node scripts/pruefe-bilder.mjs",
-    "prebuild": "node scripts/pruefe-bilder.mjs"
+    "prebuild": "node scripts/pruefe-bilder.mjs && node scripts/pruefe-sitemap.mjs",
+    "pruefe:sitemap": "node scripts/pruefe-sitemap.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",

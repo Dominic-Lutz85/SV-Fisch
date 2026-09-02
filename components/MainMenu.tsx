@@ -246,9 +246,18 @@ export default function MainMenu() {
           <nav aria-label="Hauptnavigation">
             <ul className="grid gap-x-12 gap-y-8 sm:grid-cols-2">
               {mainNav.map((eintrag) => (
+                /*
+                  Ueberschrift und Unterpunkte sind zwei getrennte Fragen und
+                  nicht mehr ein Entweder-oder. Vorher galt: hat der Eintrag
+                  eine Adresse, ist er ein Link, sonst ist er eine Gruppe.
+                  Damit konnte "Home" keinen Unterpunkt bekommen, ohne selbst
+                  seine Adresse zu verlieren. Jetzt wird die Ueberschrift als
+                  Link gezeichnet, wenn es eine Adresse gibt, und die Liste
+                  darunter, wenn es Kinder gibt. Beides zusammen geht auch.
+                */
                 <li key={eintrag.label}>
-                  {eintrag.href ? (
-                    <span className="block overflow-hidden py-1">
+                  <span className="block overflow-hidden py-1">
+                    {eintrag.href ? (
                       <Link
                         href={eintrag.href}
                         className="menue-link-innen group/link relative inline-block font-display text-3xl font-extrabold text-text sm:text-4xl"
@@ -261,27 +270,25 @@ export default function MainMenu() {
                           {eintrag.label}
                         </span>
                       </Link>
-                    </span>
-                  ) : (
-                    <>
-                      <span className="block overflow-hidden py-1">
-                        <span className="menue-link-innen block font-display text-3xl font-extrabold text-fisch-yellow sm:text-4xl">
-                          {eintrag.label}
-                        </span>
+                    ) : (
+                      <span className="menue-link-innen block font-display text-3xl font-extrabold text-fisch-yellow sm:text-4xl">
+                        {eintrag.label}
                       </span>
-                      <ul className="mt-3 flex flex-col gap-1.5">
-                        {eintrag.children!.map((kind) => (
-                          <li key={kind.href} data-menue-fade>
-                            <Link
-                              href={kind.href}
-                              className="inline-block py-0.5 text-base font-semibold text-text-leise underline-offset-4 transition-colors hover:text-fisch-yellow hover:underline"
-                            >
-                              {kind.label}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </>
+                    )}
+                  </span>
+                  {eintrag.children && (
+                    <ul className="mt-3 flex flex-col gap-1.5">
+                      {eintrag.children.map((kind) => (
+                        <li key={kind.href} data-menue-fade>
+                          <Link
+                            href={kind.href}
+                            className="inline-block py-0.5 text-base font-semibold text-text-leise underline-offset-4 transition-colors hover:text-fisch-yellow hover:underline"
+                          >
+                            {kind.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
                   )}
                 </li>
               ))}

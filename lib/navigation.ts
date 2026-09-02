@@ -10,7 +10,18 @@ export interface NavItem {
 }
 
 export const mainNav: NavItem[] = [
-  { label: "Home", href: "/" },
+  /*
+   * Ein Eintrag darf eine Adresse UND Unterpunkte haben. "Home" ist beides:
+   * die Ueberschrift fuehrt auf die Startseite, darunter steht der Liveticker.
+   * Der steht bewusst hier oben und nicht unter Fussball, weil er waehrend
+   * eines Spiels der meistgesuchte Punkt der ganzen Seite ist und niemand ihn
+   * dann in einer Liste von fuenf Mannschaftsseiten suchen soll.
+   */
+  {
+    label: "Home",
+    href: "/",
+    children: [{ label: "Liveticker", href: "/fussball/liveticker" }],
+  },
   {
     label: "Der Verein",
     children: [

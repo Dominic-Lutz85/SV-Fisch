@@ -2,6 +2,12 @@ import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/config";
 import { getAllNews } from "@/lib/content";
 
+/*
+ * Diese Liste wird von Hand gepflegt und lief deshalb schon einmal aus dem
+ * Tritt. scripts/pruefe-sitemap.mjs vergleicht sie vor jedem Bau mit den
+ * tatsaechlich vorhandenen Seiten unter app/ und bricht ab, wenn eine fehlt
+ * oder eine zu viel drinsteht.
+ */
 const staticRoutes = [
   "",
   "/verein/vorstand",
@@ -11,6 +17,7 @@ const staticRoutes = [
   "/fussball/kader",
   "/fussball/tabelle",
   "/fussball/spielplan",
+  "/fussball/liveticker",
   "/fussball/bambini",
   "/fussball/bambini/spielplan",
   "/darts",

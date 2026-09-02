@@ -34,10 +34,69 @@ interface FupaWidgetProps {
   containerId: string;
   /** Was hier steht, bevor jemand zustimmt, z. B. "Tabelle der Kreisliga B" */
   beschreibung: string;
+  /**
+   * Auf welchen Reiter des Widgets gesprungen werden soll, z. B. "Liveticker".
+   * Ohne Angabe bleibt der Reiter stehen, den FuPa selbst zuerst zeigt.
+   */
+  reiter?: string;
   className?: string;
 }
 
-function WidgetInhalt({ containerId }: { containerId: string }) {
+/*
+ * Sprung auf einen bestimmten Reiter.
+ *
+ * FuPa zeichnet oben im Widget eine Leiste mit Tabelle, Kader,
+ * Spielerstatistik, Spielplan und Liveticker. Diese Reiter sind divs mit der
+ * Klasse fp-widget-tab, ohne Adresse und ohne eigenen Zustand in der URL. Von
+ * aussen ansteuern kann man sie deshalb nur, indem man den richtigen anklickt,
+ * sobald er im Dokument steht.
+ *
+ * Nachgeprueft, nicht vermutet: Der Klick schaltet wirklich um, die Klasse
+ * fp-widget-tab-active wandert mit und der Inhalt wird ausgetauscht.
+ *
+ * Wenn FuPa die Beschriftung eines Tages umbenennt, findet der Beobachter
+ * nichts und gibt nach der Frist auf. Dann steht dort die gewoehnliche
+ * Ansicht des Widgets, also immer noch etwas Brauchbares, statt einer leeren
+ * Seite. Das ist der Grund fuer die Frist: ein Beobachter, der ewig lauscht,
+ * haengt sonst still an jeder Seite.
+ */
+const FRIST_MS = 15000;
+
+function reiterAnklicken(wurzel: HTMLElement, gesucht: string): () => void {
+  let erledigt = false;
+
+  const versuchen = () => {
+    if (erledigt) return;
+    const treffer = [...wurzel.querySelectorAll<HTMLElement>(".fp-widget-tab")].find(
+      (r) => r.textContent?.trim().toLowerCase() === gesucht.toLowerCase()
+    );
+    if (!treffer) return;
+    erledigt = true;
+    if (!treffer.className.includes("active")) treffer.click();
+    beobachter.disconnect();
+    clearTimeout(uhr);
+  };
+
+  const beobachter = new MutationObserver(versuchen);
+  const uhr = setTimeout(() => beobachter.disconnect(), FRIST_MS);
+
+  beobachter.observe(wurzel, { childList: true, subtree: true });
+  versuchen(); // falls das Widget schon steht
+
+  return () => {
+    erledigt = true;
+    beobachter.disconnect();
+    clearTimeout(uhr);
+  };
+}
+
+function WidgetInhalt({
+  containerId,
+  reiter,
+}: {
+  containerId: string;
+  reiter?: string;
+}) {
   const container = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -53,10 +112,15 @@ function WidgetInhalt({ containerId }: { containerId: string }) {
     skript.async = true;
     document.body.appendChild(skript);
 
+    const aufraeumen = reiter
+      ? reiterAnklicken(container.current, reiter)
+      : undefined;
+
     return () => {
       skript.remove();
+      aufraeumen?.();
     };
-  }, [containerId]);
+  }, [containerId, reiter]);
 
   return (
     <div ref={container} id={containerId}>
@@ -80,6 +144,7 @@ function WidgetInhalt({ containerId }: { containerId: string }) {
 export default function FupaWidget({
   containerId,
   beschreibung,
+  reiter,
   className,
 }: FupaWidgetProps) {
   return (
@@ -88,7 +153,7 @@ export default function FupaWidget({
       beschreibung={beschreibung}
       className={className}
     >
-      <WidgetInhalt containerId={containerId} />
+      <WidgetInhalt containerId={containerId} reiter={reiter} />
     </ExterneEinbettung>
   );
 }
