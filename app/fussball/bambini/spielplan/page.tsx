@@ -25,19 +25,23 @@ export default function BambiniSpielplanPage() {
   return (
     <>
       <PageHeader eyebrow="Fußball · Bambini" title="Spielplan" />
-      <div className="container-fisch grid gap-14 py-16 sm:py-20 lg:grid-cols-2 lg:gap-10">
+      {/* Gleicher Aufbau wie beim Spielplan der ersten Mannschaft, siehe dort. */}
+      <div className="container-fisch mx-auto max-w-3xl py-14 sm:py-20">
         <section>
-          <h2 className="mb-4 font-display text-xl font-bold text-fisch-black">
+          <h2 className="mb-2 font-display text-2xl font-extrabold text-fisch-black">
             Kommende Termine
           </h2>
-          <Fixtures spiele={kommende} />
+          <Fixtures spiele={kommende} gruppiert erstesHervorheben />
         </section>
-        <section>
-          <h2 className="mb-4 font-display text-xl font-bold text-fisch-black">
-            Bisherige Spieltage
-          </h2>
-          <Fixtures spiele={vergangene} />
-        </section>
+
+        {vergangene.length > 0 && (
+          <section className="mt-16 border-t border-fisch-line pt-12">
+            <h2 className="mb-2 font-display text-2xl font-extrabold text-fisch-black">
+              Bisherige Spieltage
+            </h2>
+            <Fixtures spiele={vergangene} gruppiert />
+          </section>
+        )}
       </div>
     </>
   );

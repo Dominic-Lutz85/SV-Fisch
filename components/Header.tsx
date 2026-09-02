@@ -18,7 +18,21 @@ import MainMenu from "@/components/MainMenu";
 
 export default function Header() {
   return (
-    <header className="sticky top-0 z-[60] border-b border-fisch-line bg-fisch-white/95 backdrop-blur supports-[backdrop-filter]:bg-fisch-white/80">
+    /*
+     * Kopfleiste in Vereinsgelb.
+     *
+     * So machen es alle Vorbilder: Man City himmelblau, Bayern rot, Ajax rot.
+     * Der BVB ist der interessante Fall, gleiche Farben wie hier, und er nimmt
+     * Schwarz mit Gelb als Akzent. Beides ist vertretbar, entschieden wurde
+     * Gelb.
+     *
+     * Kein backdrop-blur mehr: Bei einer deckenden Farbfläche bringt es nichts,
+     * und ein Element mit Hintergrundfilter wird zum Bezugsrahmen für
+     * position:fixed, was das vollflächige Menü in einen 80-Pixel-Streifen
+     * gesperrt hatte. Das Menü hängt zwar inzwischen per Portal am body, aber
+     * die Falle muss hier nicht wieder aufgestellt werden.
+     */
+    <header className="sticky top-0 z-[60] border-b-2 border-fisch-black bg-fisch-yellow">
       <div className="container-fisch flex h-20 items-center justify-between gap-4">
         <Link
           href="/"
@@ -37,7 +51,7 @@ export default function Header() {
             <span className="font-display text-lg font-bold tracking-tight text-fisch-black">
               {siteConfig.shortName}
             </span>
-            <span className="text-xs font-medium text-fisch-muted">
+            <span className="text-xs font-medium text-fisch-black/70">
               gegr. {siteConfig.founded}
             </span>
           </span>
@@ -48,7 +62,8 @@ export default function Header() {
             href={siteConfig.fanshopUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full bg-fisch-yellow px-5 py-2.5 text-sm font-bold text-fisch-black transition-colors hover:bg-fisch-yellow-dark"
+            /* Auf gelbem Grund muss der Knopf schwarz sein, sonst verschwindet er. */
+            className="rounded-full bg-fisch-black px-5 py-2.5 text-sm font-bold text-fisch-yellow transition-colors hover:bg-fisch-ink"
           >
             Fanshop
           </a>
