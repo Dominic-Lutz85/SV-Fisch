@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
+import { siteConfig } from "@/lib/config";
 import { sendMail } from "@/lib/mail";
 
 const schema = z.object({ email: z.string().email() });
@@ -26,6 +27,12 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true });
   } catch (error) {
     console.error("[api/newsletter]", error);
-    return NextResponse.json({ error: "Anmeldung fehlgeschlagen." }, { status: 502 });
+    return NextResponse.json(
+      {
+        // Weg für den Absender, statt ihn mit einer Störung stehen zu lassen.
+        error: `Die Anmeldung hat gerade nicht geklappt. Schreibt uns bitte direkt an ${siteConfig.contact.email}.`,
+      },
+      { status: 502 }
+    );
   }
 }

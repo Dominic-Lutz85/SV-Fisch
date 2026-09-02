@@ -10,8 +10,17 @@ import { siteConfig } from "@/lib/config";
  * - MAIL_FROM        Absenderadresse, muss in Resend verifiziert sein
  *                     (z. B. "SV Fisch Website <formular@sv-fisch.de>")
  *
- * Ohne RESEND_API_KEY wird im Server-Log protokolliert statt versendet,
- * damit lokale Entwicklung ohne Mail-Provider funktioniert.
+ * Ohne RESEND_API_KEY wird BEIM ENTWICKELN nur ins Server-Log geschrieben,
+ * damit man ohne Mail-Anbieter arbeiten kann.
+ *
+ * IM BETRIEB wird stattdessen ein Fehler geworfen. Vorher meldete das Formular
+ * dem Besucher Erfolg, obwohl niemand die Nachricht bekam: ein Vereinsmitglied
+ * schreibt, freut sich über die Bestätigung, und es antwortet nie jemand. Eine
+ * stille Falschmeldung ist schlimmer als eine sichtbare Störung, denn bei einer
+ * Störung sucht der Absender einen anderen Weg.
+ *
+ * Wer den Schlüssel nicht setzen will, muss die Formulare ausbauen und die
+ * Adressen direkt hinschreiben. Sie so stehen zu lassen ist keine Option.
  */
 
 interface SendMailInput {
@@ -27,8 +36,15 @@ export async function sendMail({ subject, replyTo, html, text }: SendMailInput) 
   const from = process.env.MAIL_FROM || "SV Fisch Website <kasse@sv-fisch.de>";
 
   if (!apiKey) {
+    if (process.env.NODE_ENV === "production") {
+      throw new Error(
+        "RESEND_API_KEY fehlt. Das Formular meldet deshalb einen Fehler, " +
+          "statt dem Absender einen Versand vorzutäuschen."
+      );
+    }
     console.warn(
-      "[mail] RESEND_API_KEY fehlt – E-Mail wird nur geloggt, nicht versendet.",
+      "[mail] RESEND_API_KEY fehlt, E-Mail wird nur geloggt. Beim Entwickeln " +
+        "ist das gewollt, im Betrieb wäre es eine stille Falschmeldung.",
       { to, subject, text }
     );
     return { simulated: true };

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
+import { siteConfig } from "@/lib/config";
 import { sendMail, escapeHtml } from "@/lib/mail";
 
 const schema = z.object({
@@ -46,7 +47,11 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error("[api/contact]", error);
     return NextResponse.json(
-      { error: "Mail konnte nicht versendet werden." },
+      {
+        // Dem Absender einen Weg lassen, statt ihn mit einer Störung stehen
+        // zu lassen. Die Adresse steht ohnehin im Impressum.
+        error: `Die Nachricht konnte gerade nicht gesendet werden. Schreibt uns bitte direkt an ${siteConfig.contact.email}.`,
+      },
       { status: 502 }
     );
   }
