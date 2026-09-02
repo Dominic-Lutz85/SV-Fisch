@@ -238,56 +238,109 @@ export default function Fixtures({
    * Kurzform für die Startseite. Dort steht die Liste auf schwarzem Grund neben
    * der Tabelle, da wären Karten mit Datumsleisten zu laut.
    */
+  /*
+   * Kurzform für die Startseite, dunkle Fassung derselben Formensprache wie die
+   * Karten auf der Spielplanseite: Datumszeile oben, Paarung mittig, farbige
+   * Kante links für Heim oder auswärts.
+   *
+   * Vorher standen hier linksbündige Zeilen mit einer gelben Pille rechts. Das
+   * war ein anderer Stil als der Spielplan, und zwei Stile für dieselbe Sache
+   * auf einer Seite sehen nach Zufall aus.
+   */
   if (compact) {
     return (
-      <ul className={cn("flex flex-col divide-y", dark ? "divide-white/10" : "divide-fisch-line")}>
-        {spiele.map((spiel) => (
-          <li
-            key={`${spiel.datum}-${spiel.heim}`}
-            className="flex flex-col gap-2 py-3 sm:flex-row sm:items-center sm:justify-between"
-          >
-            <div className="flex flex-col gap-0.5">
+      <ul className="flex flex-col gap-2.5">
+        {spiele.map((spiel) => {
+          const heimspiel = spiel.ort === "Heim";
+          return (
+            <li
+              key={`${spiel.datum}-${spiel.heim}`}
+              className={cn(
+                "relative px-4 py-3",
+                dark ? "bg-white/[0.06]" : "border border-fisch-line bg-white"
+              )}
+            >
               <span
+                aria-hidden="true"
                 className={cn(
-                  "text-xs font-semibold uppercase tracking-wide",
-                  dark ? "text-fisch-white/70" : "text-fisch-muted"
+                  "absolute inset-y-0 left-0 w-1",
+                  heimspiel
+                    ? "bg-fisch-yellow"
+                    : dark
+                      ? "bg-white/40"
+                      : "bg-fisch-black"
+                )}
+              />
+              <div
+                className={cn(
+                  "flex items-center justify-between text-[11px] font-bold uppercase tracking-wider",
+                  dark ? "text-fisch-white/60" : "text-fisch-muted"
                 )}
               >
-                {spiel.wettbewerb} · {formatDatum(spiel.datum)}
-              </span>
-              <span className={cn("font-semibold", dark ? "text-fisch-white" : "text-fisch-black")}>
-                <span className={istFisch(spiel.heim) ? "font-bold" : ""}>{spiel.heim}</span>{" "}
-                <span className={dark ? "text-fisch-yellow" : "text-fisch-black"}>-</span>{" "}
-                <span className={istFisch(spiel.auswaerts) ? "font-bold" : ""}>{spiel.auswaerts}</span>
-              </span>
-            </div>
-            <div className="shrink-0">
-              {spiel.ergebnis ? (
+                <span>{formatDatum(spiel.datum)}</span>
+                <span>{heimspiel ? "Heim" : "Auswärts"}</span>
+              </div>
+              <div className="mt-1 flex items-center justify-center gap-3">
                 <span
                   className={cn(
-                    "inline-block rounded-full px-3 py-1.5 text-sm font-bold",
-                    dark ? "bg-fisch-white text-fisch-black" : "bg-fisch-black text-fisch-white"
+                    "flex-1 truncate text-right text-sm",
+                    istFisch(spiel.heim)
+                      ? "font-extrabold"
+                      : "font-medium opacity-80",
+                    dark ? "text-fisch-white" : "text-fisch-black"
                   )}
                 >
-                  {spiel.ergebnis}
+                  {spiel.heim}
                 </span>
-              ) : spiel.datum < heute ? (
+                <span className="shrink-0">
+                  {spiel.ergebnis ? (
+                    <span
+                      className={cn(
+                        "px-2 py-0.5 font-display text-sm font-extrabold",
+                        dark
+                          ? "bg-fisch-white text-fisch-black"
+                          : "bg-fisch-black text-fisch-white"
+                      )}
+                    >
+                      {spiel.ergebnis}
+                    </span>
+                  ) : spiel.datum < heute ? (
+                    <span
+                      className={cn(
+                        "px-2 py-0.5 text-[11px] font-semibold",
+                        dark
+                          ? "bg-white/10 text-fisch-white/70"
+                          : "bg-fisch-line/60 text-fisch-muted"
+                      )}
+                    >
+                      offen
+                    </span>
+                  ) : (
+                    <span
+                      className={cn(
+                        "font-display text-sm font-extrabold",
+                        dark ? "text-fisch-yellow" : "text-fisch-black"
+                      )}
+                    >
+                      {spiel.uhrzeit}
+                    </span>
+                  )}
+                </span>
                 <span
                   className={cn(
-                    "inline-block rounded-full px-3 py-1.5 text-sm font-semibold",
-                    dark ? "bg-white/10 text-fisch-white/80" : "bg-fisch-line/60 text-fisch-muted"
+                    "flex-1 truncate text-left text-sm",
+                    istFisch(spiel.auswaerts)
+                      ? "font-extrabold"
+                      : "font-medium opacity-80",
+                    dark ? "text-fisch-white" : "text-fisch-black"
                   )}
                 >
-                  Ergebnis fehlt noch
+                  {spiel.auswaerts}
                 </span>
-              ) : (
-                <span className="inline-block rounded-full bg-fisch-yellow px-3 py-1.5 text-sm font-bold text-fisch-black">
-                  {spiel.ort === "Heim" ? "Heimspiel" : "Auswärts"}
-                </span>
-              )}
-            </div>
-          </li>
-        ))}
+              </div>
+            </li>
+          );
+        })}
       </ul>
     );
   }
