@@ -51,7 +51,7 @@ function MonatsUeberschrift({ datum }: { datum: string }) {
     year: "numeric",
   }).format(d);
   return (
-    <h3 className="mb-4 mt-10 font-display text-xl font-extrabold uppercase tracking-wide text-fisch-black first:mt-0">
+    <h3 className="mb-4 mt-10 font-display text-xl font-extrabold uppercase tracking-wide text-text first:mt-0">
       {text}
     </h3>
   );
@@ -67,10 +67,12 @@ function Ergebniskasten({ wert }: { wert: string }) {
   const [a, b] = wert.split(":");
   return (
     <span className="flex items-center gap-1" aria-label={`Ergebnis ${wert}`}>
-      <span className="min-w-8 bg-fisch-black px-2 py-1 text-center font-display text-lg font-extrabold text-fisch-white">
+      {/* Umgekehrt zur hellen Fassung: dort dunkle Kaesten auf heller Karte,
+          hier helle auf dunkler. 18,3 zu 1. */}
+      <span className="min-w-8 bg-fisch-white px-2 py-1 text-center font-display text-lg font-extrabold text-text">
         {a}
       </span>
-      <span className="min-w-8 bg-fisch-black px-2 py-1 text-center font-display text-lg font-extrabold text-fisch-white">
+      <span className="min-w-8 bg-fisch-white px-2 py-1 text-center font-display text-lg font-extrabold text-text">
         {b}
       </span>
     </span>
@@ -93,8 +95,8 @@ function AusgangsZeichen({ ausgang }: { ausgang: Ausgang }) {
       className={cn(
         "grid h-6 w-6 shrink-0 place-items-center rounded-full text-xs font-extrabold",
         ausgang === "sieg" && "bg-fisch-yellow text-fisch-black",
-        ausgang === "unentschieden" && "bg-fisch-line text-fisch-black",
-        ausgang === "niederlage" && "bg-fisch-black text-fisch-white"
+        ausgang === "unentschieden" && "bg-flaeche-hoch-2 text-text",
+        ausgang === "niederlage" && "border border-linie bg-flaeche text-text-leise"
       )}
     >
       <span aria-hidden="true">{beschriftung}</span>
@@ -130,7 +132,7 @@ function Zeile({
       )}
 
       {/* Datumsleiste über der Karte, nach dem Muster des FC Bayern. */}
-      <div className="flex items-center justify-between gap-3 bg-fisch-line/70 px-4 py-1.5 text-xs font-bold uppercase tracking-wide text-fisch-black">
+      <div className="flex items-center justify-between gap-3 bg-flaeche-hoch-2 px-4 py-1.5 text-xs font-bold uppercase tracking-wide text-text">
         <span>
           <Wochentag datum={spiel.datum} /> · {formatDatum(spiel.datum)}
         </span>
@@ -139,7 +141,7 @@ function Zeile({
 
       <div
         className={cn(
-          "relative flex items-center gap-4 border border-t-0 border-fisch-line bg-white px-4 py-4",
+          "relative flex items-center gap-4 border border-t-0 border-linie bg-flaeche-hoch px-4 py-4",
           hervorgehoben && "border-fisch-yellow ring-1 ring-fisch-yellow"
         )}
       >
@@ -149,14 +151,14 @@ function Zeile({
           aria-hidden="true"
           className={cn(
             "absolute inset-y-0 left-0 w-1.5",
-            heimspiel ? "bg-fisch-yellow" : "bg-fisch-black"
+            heimspiel ? "bg-fisch-yellow" : "bg-linie"
           )}
         />
 
         <AusgangsZeichen ausgang={ausgang} />
 
         <div className="min-w-0 flex-1">
-          <p className="text-center text-[11px] font-bold uppercase tracking-wider text-fisch-muted">
+          <p className="text-center text-[11px] font-bold uppercase tracking-wider text-text-leise">
             {spiel.wettbewerb}
           </p>
 
@@ -164,7 +166,7 @@ function Zeile({
             <span
               className={cn(
                 "flex-1 text-right text-sm sm:text-base",
-                istFisch(spiel.heim) ? "font-extrabold text-fisch-black" : "font-semibold text-fisch-ink"
+                istFisch(spiel.heim) ? "font-extrabold text-text" : "font-semibold text-text"
               )}
             >
               {spiel.heim}
@@ -174,11 +176,11 @@ function Zeile({
               {spiel.ergebnis ? (
                 <Ergebniskasten wert={spiel.ergebnis} />
               ) : vergangen ? (
-                <span className="whitespace-nowrap bg-fisch-line/70 px-2 py-1 text-xs font-semibold text-fisch-muted">
+                <span className="whitespace-nowrap bg-flaeche-hoch-2 px-2 py-1 text-xs font-semibold text-text-leise">
                   Ergebnis fehlt
                 </span>
               ) : (
-                <span className="font-display text-base font-extrabold text-fisch-black">
+                <span className="font-display text-base font-extrabold text-text">
                   {spiel.uhrzeit}
                 </span>
               )}
@@ -187,14 +189,14 @@ function Zeile({
             <span
               className={cn(
                 "flex-1 text-left text-sm sm:text-base",
-                istFisch(spiel.auswaerts) ? "font-extrabold text-fisch-black" : "font-semibold text-fisch-ink"
+                istFisch(spiel.auswaerts) ? "font-extrabold text-text" : "font-semibold text-text"
               )}
             >
               {spiel.auswaerts}
             </span>
           </div>
 
-          <p className="mt-1.5 flex items-center justify-center gap-1.5 text-xs text-fisch-muted">
+          <p className="mt-1.5 flex items-center justify-center gap-1.5 text-xs text-text-leise">
             <MapPin className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
             {heimspiel
               ? (spiel.spielstaette ?? "Sportplatz SV Fisch")
@@ -228,7 +230,7 @@ export default function Fixtures({
 
   if (spiele.length === 0) {
     return (
-      <p className={cn("text-sm", dark ? "text-fisch-white/70" : "text-fisch-muted")}>
+      <p className={cn("text-sm", dark ? "text-text-leise" : "text-text-leise")}>
         Aktuell sind keine Spiele hinterlegt.
       </p>
     );
@@ -257,7 +259,7 @@ export default function Fixtures({
               key={`${spiel.datum}-${spiel.heim}`}
               className={cn(
                 "relative px-4 py-3",
-                dark ? "bg-white/[0.06]" : "border border-fisch-line bg-white"
+                dark ? "bg-flaeche-hoch" : "border border-linie bg-flaeche-hoch"
               )}
             >
               <span
@@ -267,14 +269,14 @@ export default function Fixtures({
                   heimspiel
                     ? "bg-fisch-yellow"
                     : dark
-                      ? "bg-white/40"
-                      : "bg-fisch-black"
+                      ? "bg-flaeche-hoch"
+                      : "bg-linie"
                 )}
               />
               <div
                 className={cn(
                   "flex items-center justify-between text-[11px] font-bold uppercase tracking-wider",
-                  dark ? "text-fisch-white/60" : "text-fisch-muted"
+                  dark ? "text-text-leise" : "text-text-leise"
                 )}
               >
                 <span>{formatDatum(spiel.datum)}</span>
@@ -287,7 +289,7 @@ export default function Fixtures({
                     istFisch(spiel.heim)
                       ? "font-extrabold"
                       : "font-medium opacity-80",
-                    dark ? "text-fisch-white" : "text-fisch-black"
+                    dark ? "text-text" : "text-text"
                   )}
                 >
                   {spiel.heim}
@@ -298,8 +300,8 @@ export default function Fixtures({
                       className={cn(
                         "px-2 py-0.5 font-display text-sm font-extrabold",
                         dark
-                          ? "bg-fisch-white text-fisch-black"
-                          : "bg-fisch-black text-fisch-white"
+                          ? "bg-fisch-white text-text"
+                          : "bg-fisch-white text-text"
                       )}
                     >
                       {spiel.ergebnis}
@@ -309,8 +311,8 @@ export default function Fixtures({
                       className={cn(
                         "px-2 py-0.5 text-[11px] font-semibold",
                         dark
-                          ? "bg-white/10 text-fisch-white/70"
-                          : "bg-fisch-line/60 text-fisch-muted"
+                          ? "bg-flaeche-hoch text-text-leise"
+                          : "bg-flaeche-hoch-2 text-text-leise"
                       )}
                     >
                       offen
@@ -319,7 +321,7 @@ export default function Fixtures({
                     <span
                       className={cn(
                         "font-display text-sm font-extrabold",
-                        dark ? "text-fisch-yellow" : "text-fisch-black"
+                        dark ? "text-fisch-yellow" : "text-text"
                       )}
                     >
                       {spiel.uhrzeit}
@@ -332,7 +334,7 @@ export default function Fixtures({
                     istFisch(spiel.auswaerts)
                       ? "font-extrabold"
                       : "font-medium opacity-80",
-                    dark ? "text-fisch-white" : "text-fisch-black"
+                    dark ? "text-text" : "text-text"
                   )}
                 >
                   {spiel.auswaerts}

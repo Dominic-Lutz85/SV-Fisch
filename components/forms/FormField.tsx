@@ -1,7 +1,7 @@
 import type { InputHTMLAttributes, TextareaHTMLAttributes } from "react";
 
 const fieldClass =
-  "w-full  border border-fisch-line bg-white px-3.5 py-2.5 text-sm text-fisch-ink placeholder:text-fisch-muted/70 focus:border-fisch-black focus:outline-none";
+  "w-full  border border-linie bg-flaeche-hoch px-3.5 py-2.5 text-sm text-text placeholder:text-text-leise focus:border-text focus:outline-none";
 
 interface BaseProps {
   label: string;
@@ -17,12 +17,12 @@ export function TextField({
 }: BaseProps & InputHTMLAttributes<HTMLInputElement>) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label htmlFor={name} className="text-sm font-semibold text-fisch-black">
+      <label htmlFor={name} className="text-sm font-semibold text-text">
         {label}
-        {rest.required && <span aria-hidden="true" className="text-fisch-ink"> *</span>}
+        {rest.required && <span aria-hidden="true" className="text-text"> *</span>}
       </label>
       <input id={name} name={name} className={fieldClass} {...rest} />
-      {hint && <span className="text-xs text-fisch-muted">{hint}</span>}
+      {hint && <span className="text-xs text-text-leise">{hint}</span>}
     </div>
   );
 }
@@ -35,12 +35,12 @@ export function TextAreaField({
 }: BaseProps & TextareaHTMLAttributes<HTMLTextAreaElement>) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label htmlFor={name} className="text-sm font-semibold text-fisch-black">
+      <label htmlFor={name} className="text-sm font-semibold text-text">
         {label}
-        {rest.required && <span aria-hidden="true" className="text-fisch-ink"> *</span>}
+        {rest.required && <span aria-hidden="true" className="text-text"> *</span>}
       </label>
       <textarea id={name} name={name} rows={5} className={fieldClass} {...rest} />
-      {hint && <span className="text-xs text-fisch-muted">{hint}</span>}
+      {hint && <span className="text-xs text-text-leise">{hint}</span>}
     </div>
   );
 }

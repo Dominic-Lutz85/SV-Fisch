@@ -2,7 +2,7 @@ import { CheckCircle2, AlertCircle } from "lucide-react";
 
 export function SuccessAlert({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex items-start gap-3 border border-fisch-yellow-dark bg-fisch-yellow/30 p-4 text-sm text-fisch-black">
+    <div className="flex items-start gap-3 border border-fisch-yellow-dark bg-fisch-yellow/30 p-4 text-sm text-text">
       <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0" aria-hidden="true" />
       <p>{children}</p>
     </div>

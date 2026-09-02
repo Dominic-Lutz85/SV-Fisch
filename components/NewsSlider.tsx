@@ -82,7 +82,7 @@ export default function NewsSlider({
             onClick={() => schieben(-1)}
             disabled={!kannZurueck}
             aria-label="Vorherige Meldungen anzeigen"
-            className="grid h-11 w-11 place-items-center rounded-full border border-fisch-black text-fisch-black transition-colors hover:bg-fisch-black hover:text-fisch-yellow disabled:cursor-not-allowed disabled:border-fisch-line disabled:text-fisch-line disabled:hover:bg-transparent"
+            className="grid h-11 w-11 place-items-center rounded-full border border-text text-text transition-colors hover:bg-fisch-black hover:text-fisch-yellow disabled:cursor-not-allowed disabled:border-linie disabled:text-text-leise disabled:hover:bg-transparent"
           >
             <ArrowLeft className="h-5 w-5" aria-hidden="true" />
           </button>
@@ -91,7 +91,7 @@ export default function NewsSlider({
             onClick={() => schieben(1)}
             disabled={!kannVor}
             aria-label="Weitere Meldungen anzeigen"
-            className="grid h-11 w-11 place-items-center rounded-full border border-fisch-black text-fisch-black transition-colors hover:bg-fisch-black hover:text-fisch-yellow disabled:cursor-not-allowed disabled:border-fisch-line disabled:text-fisch-line disabled:hover:bg-transparent"
+            className="grid h-11 w-11 place-items-center rounded-full border border-text text-text transition-colors hover:bg-fisch-black hover:text-fisch-yellow disabled:cursor-not-allowed disabled:border-linie disabled:text-text-leise disabled:hover:bg-transparent"
           >
             <ArrowRight className="h-5 w-5" aria-hidden="true" />
           </button>

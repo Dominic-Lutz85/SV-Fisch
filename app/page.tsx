@@ -69,12 +69,12 @@ export default function Home() {
             kopf={
               <div>
                 <Eyebrow className="mb-2">Aktuelles</Eyebrow>
-                <h2 className="font-display text-4xl font-extrabold text-fisch-black sm:text-5xl">
+                <h2 className="font-display text-4xl font-extrabold text-text sm:text-5xl">
                   Neues aus dem Verein
                 </h2>
                 <Link
                   href="/aktuelles"
-                  className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-fisch-black underline underline-offset-4 hover:decoration-fisch-yellow"
+                  className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-text underline underline-offset-4 hover:decoration-fisch-yellow"
                 >
                   Alle Neuigkeiten{" "}
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -83,10 +83,10 @@ export default function Home() {
             }
           />
         ) : (
-          <p className="text-fisch-muted">
+          <p className="text-text-leise">
             Aktuell gibt es keine Meldungen. Neue Beiträge landen automatisch
             hier, sobald eine Datei in{" "}
-            <code className="rounded bg-fisch-line px-1.5 py-0.5 text-sm">
+            <code className="rounded bg-flaeche-hoch-2 px-1.5 py-0.5 text-sm">
               content/news
             </code>{" "}
             hinzugefügt wird.
@@ -104,7 +104,7 @@ export default function Home() {
         unterschiedlich hohem Inhalt nebeneinanderzustellen erzeugt das
         zuverlässig.
       */}
-      <section className="bg-fisch-black py-16 text-fisch-white sm:py-24">
+      <section className="bg-flaeche-hoch py-16 text-text sm:py-24">
         <div className="container-fisch">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
             <div>
@@ -112,7 +112,7 @@ export default function Home() {
               <h2 className="mt-1 font-display text-3xl font-extrabold sm:text-4xl">
                 Spiele und Tabelle
               </h2>
-              <p className="mt-3 max-w-lg text-fisch-white/70">
+              <p className="mt-3 max-w-lg text-text-leise">
                 Kreisliga B, Staffel 10 Trier-Saarburg. Der komplette Spielplan
                 und die vollständige Tabelle liegen im Fußball-Bereich.
               </p>
@@ -126,7 +126,7 @@ export default function Home() {
               </Link>
               <Link
                 href="/fussball/tabelle"
-                className="rounded-full border border-white/30 px-5 py-2.5 text-sm font-bold text-fisch-white hover:border-fisch-yellow hover:text-fisch-yellow"
+                className="rounded-full border border-linie px-5 py-2.5 text-sm font-bold text-text hover:border-fisch-yellow hover:text-fisch-yellow"
               >
                 Tabelle ansehen
               </Link>
@@ -135,7 +135,7 @@ export default function Home() {
 
           <div className="mt-10 grid gap-6 lg:grid-cols-2 lg:items-start">
             <div>
-              <h3 className="mb-3 font-display text-lg font-bold text-fisch-white">
+              <h3 className="mb-3 font-display text-lg font-bold text-text">
                 Nächste Spiele
               </h3>
               <Fixtures spiele={kommendeSpiele} compact variant="dark" />
@@ -148,7 +148,7 @@ export default function Home() {
       {sponsoren.length > 0 && (
         <section className="container-fisch py-20 sm:py-28">
           <Eyebrow className="mb-2">Danke an unsere Partner</Eyebrow>
-          <h2 className="mb-10 font-display text-3xl font-bold text-fisch-black sm:text-4xl">
+          <h2 className="mb-10 font-display text-3xl font-bold text-text sm:text-4xl">
             Sponsoren & Förderer
           </h2>
           <SponsorWall sponsoren={sponsoren} />

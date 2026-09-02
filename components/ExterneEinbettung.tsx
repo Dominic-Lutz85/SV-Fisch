@@ -47,13 +47,13 @@ export default function ExterneEinbettung({
   return (
     <div
       className={
-        "flex flex-col items-start justify-center gap-4 border border-fisch-line bg-white p-6 " +
+        "flex flex-col items-start justify-center gap-4 border border-linie bg-flaeche-hoch p-6 " +
         (className ?? "")
       }
     >
       <div>
-        <p className="font-semibold text-fisch-black">{beschreibung}</p>
-        <p className="mt-1 text-sm text-fisch-muted">
+        <p className="font-semibold text-text">{beschreibung}</p>
+        <p className="mt-1 text-sm text-text-leise">
           Dieser Inhalt wird von <strong>{anbieter}</strong> geladen. Dabei wird
           eure IP-Adresse an den Anbieter übertragen. Deshalb laden wir ihn erst,
           wenn ihr zustimmt.
@@ -72,13 +72,13 @@ export default function ExterneEinbettung({
         <button
           type="button"
           onClick={() => setConsent("all")}
-          className="rounded-full border border-fisch-black px-5 py-2.5 text-sm font-semibold text-fisch-black transition-colors hover:bg-fisch-black hover:text-fisch-white"
+          className="rounded-full border border-text px-5 py-2.5 text-sm font-semibold text-text transition-colors hover:bg-fisch-black hover:text-text"
         >
           Immer laden
         </button>
         <Link
           href="/datenschutz"
-          className="text-sm font-semibold text-fisch-black underline underline-offset-2 hover:decoration-fisch-yellow"
+          className="text-sm font-semibold text-text underline underline-offset-2 hover:decoration-fisch-yellow"
         >
           Datenschutz
         </Link>

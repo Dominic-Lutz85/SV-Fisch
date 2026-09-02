@@ -29,28 +29,28 @@ export default function KontaktPage() {
 
       <div className="container-fisch grid gap-14 py-16 sm:py-20 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
         <div>
-          <h2 className="font-display text-2xl font-bold text-fisch-black">Nachricht senden</h2>
+          <h2 className="font-display text-2xl font-bold text-text">Nachricht senden</h2>
           <div className="mt-6">
             <ContactForm />
           </div>
 
-          <div className="mt-12 flex flex-col gap-3 border border-fisch-line bg-white p-6">
-            <p className="flex items-center gap-3 text-sm text-fisch-ink">
-              <MapPin className="h-5 w-5 shrink-0 text-fisch-black" aria-hidden="true" />
+          <div className="mt-12 flex flex-col gap-3 border border-linie bg-flaeche-hoch p-6">
+            <p className="flex items-center gap-3 text-sm text-text">
+              <MapPin className="h-5 w-5 shrink-0 text-text" aria-hidden="true" />
               {siteConfig.contact.addressLines.join(", ")}
             </p>
             <a
               href={`mailto:${siteConfig.contact.email}`}
-              className="flex items-center gap-3 text-sm text-fisch-ink hover:text-fisch-black"
+              className="flex items-center gap-3 text-sm text-text hover:text-text"
             >
-              <Mail className="h-5 w-5 shrink-0 text-fisch-black" aria-hidden="true" />
+              <Mail className="h-5 w-5 shrink-0 text-text" aria-hidden="true" />
               {siteConfig.contact.email}
             </a>
             <a
               href={`tel:${siteConfig.contact.phone}`}
-              className="flex items-center gap-3 text-sm text-fisch-ink hover:text-fisch-black"
+              className="flex items-center gap-3 text-sm text-text hover:text-text"
             >
-              <Phone className="h-5 w-5 shrink-0 text-fisch-black" aria-hidden="true" />
+              <Phone className="h-5 w-5 shrink-0 text-text" aria-hidden="true" />
               {siteConfig.contact.phone}
             </a>
           </div>
@@ -58,8 +58,8 @@ export default function KontaktPage() {
 
         <div className="flex flex-col gap-8">
           <div>
-            <h2 className="mb-2 font-display text-2xl font-bold text-fisch-black">Anfahrt</h2>
-            <p className="mb-4 text-sm text-fisch-muted">
+            <h2 className="mb-2 font-display text-2xl font-bold text-text">Anfahrt</h2>
+            <p className="mb-4 text-sm text-text-leise">
               {siteConfig.contact.venueName}. [BITTE PRÜFEN/ERGÄNZEN – genaue
               Anfahrtsbeschreibung, Parkmöglichkeiten].
             </p>
@@ -74,7 +74,7 @@ export default function KontaktPage() {
               beschreibung="Karte mit dem Weg zum Sportplatz"
               className="min-h-80"
             >
-              <div className="overflow-hidden border border-fisch-line">
+              <div className="overflow-hidden border border-linie">
                 <iframe
                   title="Karte: Anfahrt zum Sportplatz SV Fisch"
                   src={mapSrc}
@@ -86,7 +86,7 @@ export default function KontaktPage() {
           </div>
 
           <div>
-            <h2 className="mb-4 font-display text-2xl font-bold text-fisch-black">
+            <h2 className="mb-4 font-display text-2xl font-bold text-text">
               Ansprechpartner
             </h2>
             <div className="grid gap-4 sm:grid-cols-2">

@@ -36,7 +36,7 @@ export default function NewsletterForm() {
 
   if (status === "success") {
     return (
-      <p className="mt-4 bg-fisch-white/10 px-3 py-2.5 text-sm text-fisch-yellow">
+      <p className="mt-4 bg-flaeche-hoch px-3 py-2.5 text-sm text-fisch-yellow">
         Danke! Bitte bestätige deine Anmeldung über den Link, den wir dir
         zuschicken.
       </p>
@@ -58,7 +58,7 @@ export default function NewsletterForm() {
       <label htmlFor="newsletter-email" className="sr-only">
         E-Mail-Adresse
       </label>
-      <div className="flex overflow-hidden border border-white/20 focus-within:border-fisch-yellow">
+      <div className="flex overflow-hidden border border-linie focus-within:border-fisch-yellow">
         <input
           id="newsletter-email"
           name="email"
@@ -67,7 +67,7 @@ export default function NewsletterForm() {
           placeholder="deine@email.de"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full bg-transparent px-3 py-2.5 text-sm text-fisch-white placeholder:text-fisch-white/40 focus:outline-none"
+          className="w-full bg-transparent px-3 py-2.5 text-sm text-text placeholder:text-text-leise focus:outline-none"
         />
         <button
           type="submit"

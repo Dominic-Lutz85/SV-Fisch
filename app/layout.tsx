@@ -68,7 +68,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="de"
       className={`${sora.variable} ${inter.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-fisch-white text-fisch-ink">
+      <body className="min-h-full flex flex-col bg-flaeche text-text">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

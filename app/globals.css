@@ -28,8 +28,42 @@
   --color-fisch-muted: #5c5c5c; /* Sekundärtext auf Weiß */
   --color-fisch-line: #e3e1d8; /* dezente Trennlinien auf Off-White */
 
-  --background: var(--color-fisch-white);
-  --foreground: var(--color-fisch-ink);
+  /*
+   * DUNKLE FASSUNG, gerechnet am 02.09.2026, nicht gewaehlt.
+   *
+   * Ausgangspunkt sind die beiden Vereinsfarben, die feststehen. Gesucht waren
+   * nur die Zwischentoene, und jeder wurde gegen ein Ziel geprueft:
+   *
+   *   Flaeche        #0a0a0a  Vereinsschwarz RAL 9005, unveraendert
+   *   Flaeche hoch   #1f1f1f  Kontrast 1,20 zum Grund. Darunter sieht man eine
+   *                           Karte nicht, darueber verliert der Grund seine Tiefe.
+   *   Flaeche hoch 2 #2c2c2c  Kontrast 1,18 zur Karte, fuer Leisten auf Karten
+   *   Linie          #414141  Kontrast 1,61 zur Karte, trennt ohne zu dominieren
+   *   Text           #e1e1e1  15,14 zum Grund. Bewusst nicht Reinweiss, das
+   *                           flimmert auf fast schwarzem Grund.
+   *   Text leise     #939393  6,44 zum Grund, 5,37 auf Karten, 4,55 auf der
+   *                           zweiten Stufe. Der dunkelste Ton, der auf ALLEN
+   *                           DREI Flaechen die 4,5 haelt.
+   *
+   *                           Erster Anlauf war #868686, gerechnet nur gegen
+   *                           Grund und Karte. Auf der zweiten Stufe kam er auf
+   *                           3,84, und Lighthouse hat es auf zwei Seiten
+   *                           gefunden. Wer eine vierte Flaeche ergaenzt, muss
+   *                           diesen Wert erneut gegen alle rechnen.
+   *
+   * Gelb bleibt, wie es ist: 13,99 auf dem Grund, 11,65 auf einer Karte. Auf
+   * Gelb gehoert weiterhin Vereinsschwarz (13,99). Heller Text auf Gelb kaeme
+   * auf 1,08 und ist deshalb an keiner Stelle erlaubt.
+   */
+  --color-flaeche: #0a0a0a;
+  --color-flaeche-hoch: #1f1f1f;
+  --color-flaeche-hoch-2: #2c2c2c;
+  --color-linie: #414141;
+  --color-text: #e1e1e1;
+  --color-text-leise: #939393;
+
+  --background: var(--color-flaeche);
+  --foreground: var(--color-text);
 }
 
 @theme inline {
@@ -40,6 +74,13 @@
   --color-fisch-ink: var(--color-fisch-ink);
   --color-fisch-muted: var(--color-fisch-muted);
   --color-fisch-line: var(--color-fisch-line);
+
+  --color-flaeche: var(--color-flaeche);
+  --color-flaeche-hoch: var(--color-flaeche-hoch);
+  --color-flaeche-hoch-2: var(--color-flaeche-hoch-2);
+  --color-linie: var(--color-linie);
+  --color-text: var(--color-text);
+  --color-text-leise: var(--color-text-leise);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -87,8 +128,8 @@ html {
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--color-flaeche);
+  color: var(--color-text);
   font-family: var(--font-body), system-ui, sans-serif;
 }
 

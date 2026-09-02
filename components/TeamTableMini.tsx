@@ -16,9 +16,9 @@ export default function TeamTableMini({ zeilen }: { zeilen: TabellenZeile[] }) {
       : topN;
 
   return (
-    <div className="bg-white/5 p-5 sm:p-6">
+    <div className="bg-flaeche-hoch p-5 sm:p-6">
       <div className="mb-4 flex items-center justify-between">
-        <h3 className="font-display text-lg font-bold text-fisch-white">Tabelle</h3>
+        <h3 className="font-display text-lg font-bold text-text">Tabelle</h3>
         <Link
           href="/fussball/tabelle"
           className="text-xs font-semibold text-fisch-yellow hover:underline"
@@ -36,7 +36,7 @@ export default function TeamTableMini({ zeilen }: { zeilen: TabellenZeile[] }) {
       */}
       <div
         aria-hidden="true"
-        className="mb-1.5 flex items-center gap-3 text-[11px] font-bold uppercase tracking-wider text-fisch-white/50"
+        className="mb-1.5 flex items-center gap-3 text-[11px] font-bold uppercase tracking-wider text-text-leise"
       >
         <span className="w-5 shrink-0" aria-hidden="true" />
         <span className="flex-1">Team</span>
@@ -44,7 +44,7 @@ export default function TeamTableMini({ zeilen }: { zeilen: TabellenZeile[] }) {
         <span className="w-8 shrink-0 text-right">Diff</span>
         <span className="w-7 shrink-0 text-right">Pkt</span>
       </div>
-      <ul className="flex flex-col divide-y divide-white/10">
+      <ul className="flex flex-col divide-y divide-linie">
         {zeigen.map((zeile) => (
           <li
             key={zeile.platz}
@@ -53,8 +53,8 @@ export default function TeamTableMini({ zeilen }: { zeilen: TabellenZeile[] }) {
               zeile.hervorgehoben && "font-bold text-fisch-yellow"
             )}
           >
-            <span className="w-5 shrink-0 text-white/50">{zeile.platz}.</span>
-            <span className="flex-1 truncate text-fisch-white/90">{zeile.team}</span>
+            <span className="w-5 shrink-0 text-text-leise">{zeile.platz}.</span>
+            <span className="flex-1 truncate text-text-leise">{zeile.team}</span>
             {/*
               Die Spaltenköpfe stehen zwar darüber, sind aber nur optisch
               zugeordnet. Diese Liste ist keine echte Tabelle, also verbindet
@@ -62,19 +62,19 @@ export default function TeamTableMini({ zeilen }: { zeilen: TabellenZeile[] }) {
               Deshalb trägt jede Zahl ihre eigene Beschriftung.
             */}
             <span
-              className="w-6 shrink-0 text-right text-fisch-white/70"
+              className="w-6 shrink-0 text-right text-text-leise"
               aria-label={`${zeile.spiele} Spiele`}
             >
               {zeile.spiele}
             </span>
             <span
-              className="w-8 shrink-0 text-right text-fisch-white/70"
+              className="w-8 shrink-0 text-right text-text-leise"
               aria-label={`Tordifferenz ${zeile.differenz}`}
             >
               {zeile.differenz > 0 ? `+${zeile.differenz}` : zeile.differenz}
             </span>
             <span
-              className="w-7 shrink-0 text-right font-bold text-fisch-white"
+              className="w-7 shrink-0 text-right font-bold text-text"
               aria-label={`${zeile.punkte} Punkte`}
             >
               {zeile.punkte}

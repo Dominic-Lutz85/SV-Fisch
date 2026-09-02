@@ -16,9 +16,9 @@ export default function KaderPage() {
       <PageHeader eyebrow="Fußball · 1. Mannschaft" title="Kader" />
       <div className="container-fisch py-16 sm:py-20">
         <SquadGrid spieler={kader} />
-        <p className="mt-10 text-sm text-fisch-muted">
+        <p className="mt-10 text-sm text-text-leise">
           [BITTE PRÜFEN/ERGÄNZEN] – Kader in{" "}
-          <code className="rounded bg-fisch-line px-1.5 py-0.5">
+          <code className="rounded bg-flaeche-hoch-2 px-1.5 py-0.5">
             content/kader.json
           </code>{" "}
           aktuell halten.

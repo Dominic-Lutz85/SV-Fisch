@@ -49,15 +49,15 @@ export default function SpielplanPage() {
 
       <div className="container-fisch mx-auto max-w-3xl py-14 sm:py-20">
         <section>
-          <h2 className="mb-2 font-display text-2xl font-extrabold text-fisch-black">
+          <h2 className="mb-2 font-display text-2xl font-extrabold text-text">
             Kommende Spiele
           </h2>
           <Fixtures spiele={kommende} gruppiert erstesHervorheben />
         </section>
 
         {vergangene.length > 0 && (
-          <section className="mt-16 border-t border-fisch-line pt-12">
-            <h2 className="mb-2 font-display text-2xl font-extrabold text-fisch-black">
+          <section className="mt-16 border-t border-linie pt-12">
+            <h2 className="mb-2 font-display text-2xl font-extrabold text-text">
               Ergebnisse
             </h2>
             <Fixtures spiele={vergangene} gruppiert />

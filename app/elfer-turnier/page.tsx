@@ -34,43 +34,43 @@ export default function ElferTurnierPage() {
 
         <div>
           {termin && (
-            <div className="mb-8 flex flex-col gap-3 border border-fisch-line bg-white p-6">
+            <div className="mb-8 flex flex-col gap-3 border border-linie bg-flaeche-hoch p-6">
               <div className="flex items-center gap-3">
-                <CalendarDays className="h-5 w-5 text-fisch-black" aria-hidden="true" />
-                <span className="font-semibold text-fisch-black">
+                <CalendarDays className="h-5 w-5 text-text" aria-hidden="true" />
+                <span className="font-semibold text-text">
                   {formatDatumLang(termin.datum)}
                 </span>
               </div>
               {termin.ort && (
                 <div className="flex items-center gap-3">
-                  <MapPin className="h-5 w-5 text-fisch-black" aria-hidden="true" />
-                  <span className="text-fisch-muted">{termin.ort}</span>
+                  <MapPin className="h-5 w-5 text-text" aria-hidden="true" />
+                  <span className="text-text-leise">{termin.ort}</span>
                 </div>
               )}
             </div>
           )}
 
-          <h2 className="font-display text-2xl font-bold text-fisch-black">
+          <h2 className="font-display text-2xl font-bold text-text">
             So läuft der Tag ab
           </h2>
-          <ul className="mt-4 flex flex-col gap-3 text-fisch-muted">
+          <ul className="mt-4 flex flex-col gap-3 text-text-leise">
             <li className="flex gap-3">
-              <Trophy className="mt-0.5 h-5 w-5 shrink-0 text-fisch-black" aria-hidden="true" />
+              <Trophy className="mt-0.5 h-5 w-5 shrink-0 text-text" aria-hidden="true" />
               Teams aus Vereinen und Freizeitmannschaften treten im
               K.-o.-System gegeneinander an. [BITTE PRÜFEN/ERGÄNZEN – genauer
               Modus, Teamgröße]
             </li>
             <li className="flex gap-3">
-              <Trophy className="mt-0.5 h-5 w-5 shrink-0 text-fisch-black" aria-hidden="true" />
+              <Trophy className="mt-0.5 h-5 w-5 shrink-0 text-text" aria-hidden="true" />
               Im Anschluss an das Turnier gemütlicher Ausklang mit Musik und
               Grill auf dem Sportplatz.
             </li>
           </ul>
 
-          <h2 className="mt-10 font-display text-2xl font-bold text-fisch-black">
+          <h2 className="mt-10 font-display text-2xl font-bold text-text">
             Team anmelden
           </h2>
-          <p className="mt-3 text-fisch-muted">
+          <p className="mt-3 text-text-leise">
             Meldet euer Team einfach per E-Mail an{" "}
             <a href={`mailto:${siteConfig.contact.email}`} className="font-semibold underline">
               {siteConfig.contact.email}
@@ -78,7 +78,7 @@ export default function ElferTurnierPage() {
             an – mit Teamnamen, Ansprechpartner/in und Kontaktdaten. Die
             Startgebühr sowie weitere Details erhaltet ihr nach Anmeldung.
           </p>
-          <p className="mt-4 text-xs text-fisch-muted">
+          <p className="mt-4 text-xs text-text-leise">
             [BITTE PRÜFEN/ERGÄNZEN] – Teilnahmebedingungen, Startgeld und
             Anmeldeschluss ergänzen.
           </p>

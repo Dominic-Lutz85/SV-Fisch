@@ -32,7 +32,7 @@ export default function Header() {
      * gesperrt hatte. Das Menü hängt zwar inzwischen per Portal am body, aber
      * die Falle muss hier nicht wieder aufgestellt werden.
      */
-    <header className="sticky top-0 z-[60] border-b-2 border-fisch-black bg-fisch-yellow">
+    <header className="sticky top-0 z-[60] border-b-2 border-text bg-fisch-yellow">
       {/*
         Drei Spalten statt links/rechts: 1fr auto 1fr sorgt dafür, dass der
         Fanshop-Knopf WIRKLICH mittig steht und nicht dorthin rutscht, wo die
@@ -55,6 +55,9 @@ export default function Header() {
             className="h-12 w-12 sm:h-14 sm:w-14"
           />
           <span className="hidden flex-col leading-none sm:flex">
+            {/* Schwarz, weil die Kopfleiste gelb ist. Das Gelb steht am header und
+                nicht in dieser Klassenliste, deshalb muss es hier ausdruecklich
+                stehen. */}
             <span className="font-display text-lg font-bold tracking-tight text-fisch-black">
               {siteConfig.shortName}
             </span>

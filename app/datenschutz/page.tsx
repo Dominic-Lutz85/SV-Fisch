@@ -59,7 +59,7 @@ export default function DatenschutzPage() {
     <>
       <PageHeader title="Datenschutzerklärung" />
       <div className="container-fisch max-w-2xl py-16 sm:py-20">
-        <div className="mb-10 border border-fisch-yellow-dark bg-fisch-yellow/25 p-5 text-sm text-fisch-ink">
+        <div className="mb-10 border border-fisch-yellow-dark bg-fisch-yellow/25 p-5 text-sm text-text">
           <strong>[BITTE PRÜFEN/ERGÄNZEN]</strong> – Diese
           Datenschutzerklärung ist ein Platzhalter-Gerüst und ersetzt keine
           Rechtsberatung. Bitte vor Veröffentlichung durch eine sachkundige
@@ -69,8 +69,8 @@ export default function DatenschutzPage() {
         <div className="flex flex-col gap-8">
           {abschnitte.map((a) => (
             <section key={a.titel}>
-              <h2 className="font-display text-xl font-bold text-fisch-black">{a.titel}</h2>
-              <p className="mt-2 leading-relaxed text-fisch-muted">{a.inhalt}</p>
+              <h2 className="font-display text-xl font-bold text-text">{a.titel}</h2>
+              <p className="mt-2 leading-relaxed text-text-leise">{a.inhalt}</p>
             </section>
           ))}
         </div>

@@ -34,10 +34,10 @@ export default function CookieBanner() {
           role="dialog"
           aria-modal="false"
           aria-label="Cookie-Einstellungen"
-          className="fixed inset-x-0 bottom-0 z-[70] border-t border-fisch-line bg-fisch-white/97 backdrop-blur px-4 py-5 shadow-[0_-4px_24px_rgba(0,0,0,0.12)] sm:px-6"
+          className="fixed inset-x-0 bottom-0 z-[70] border-t border-linie bg-flaeche-hoch backdrop-blur px-4 py-5 shadow-[0_-4px_24px_rgba(0,0,0,0.12)] sm:px-6"
         >
           <div className="container-fisch flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <p className="max-w-2xl text-sm text-fisch-ink">
+            <p className="max-w-2xl text-sm text-text">
               Wir verwenden Cookies, um diese Website nutzerfreundlich zu
               gestalten und Formulare sowie eingebettete Inhalte (z. B. Karte)
               bereitzustellen. Mehr dazu in unserer{" "}
@@ -53,7 +53,7 @@ export default function CookieBanner() {
               <button
                 type="button"
                 onClick={() => setConsent("essential")}
-                className="rounded-full border border-fisch-black px-4 py-2 text-sm font-semibold text-fisch-black hover:bg-fisch-black hover:text-fisch-white"
+                className="rounded-full border border-text px-4 py-2 text-sm font-semibold text-text hover:bg-fisch-black hover:text-text"
               >
                 Nur notwendige
               </button>

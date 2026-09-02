@@ -3,10 +3,10 @@ import type { TabellenZeile } from "@/types/content";
 
 export default function TeamTable({ zeilen }: { zeilen: TabellenZeile[] }) {
   return (
-    <div className="overflow-x-auto border border-fisch-line">
+    <div className="overflow-x-auto border border-linie">
       <table className="w-full min-w-[640px] border-collapse text-sm">
         <thead>
-          <tr className="bg-fisch-black text-fisch-white">
+          <tr className="bg-flaeche-hoch-2 text-text">
             <th className="px-3 py-3 text-left font-semibold">#</th>
             <th className="px-3 py-3 text-left font-semibold">Team</th>
             <th className="px-3 py-3 text-center font-semibold">Sp</th>
@@ -23,7 +23,7 @@ export default function TeamTable({ zeilen }: { zeilen: TabellenZeile[] }) {
             <tr
               key={row.platz}
               className={cn(
-                "border-t border-fisch-line",
+                "border-t border-linie",
                 row.hervorgehoben && "bg-fisch-yellow/30 font-semibold"
               )}
             >

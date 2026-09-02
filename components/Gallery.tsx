@@ -50,8 +50,8 @@ export default function Gallery({ alben }: { alben: GalerieAlbum[] }) {
       {alben.map((album, albumIndex) => (
         <section key={album.slug}>
           <div className="mb-5 flex items-baseline justify-between gap-4">
-            <h2 className="font-display text-2xl font-bold text-fisch-black">{album.titel}</h2>
-            <span className="text-sm text-fisch-muted">{formatDatum(album.datum)}</span>
+            <h2 className="font-display text-2xl font-bold text-text">{album.titel}</h2>
+            <span className="text-sm text-text-leise">{formatDatum(album.datum)}</span>
           </div>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
             {album.bilder.map((bild, bildIndex) => (
@@ -87,7 +87,7 @@ export default function Gallery({ alben }: { alben: GalerieAlbum[] }) {
             type="button"
             aria-label="Galerie schließen"
             onClick={() => setOpen(null)}
-            className="absolute right-4 top-4 rounded-full bg-white/10 p-2 text-white hover:bg-white/20"
+            className="absolute right-4 top-4 rounded-full bg-flaeche-hoch p-2 text-text hover:bg-flaeche-hoch"
           >
             <X className="h-6 w-6" />
           </button>
@@ -106,7 +106,7 @@ export default function Gallery({ alben }: { alben: GalerieAlbum[] }) {
                   : o
               );
             }}
-            className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white hover:bg-white/20 sm:left-4"
+            className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-flaeche-hoch p-2 text-text hover:bg-flaeche-hoch sm:left-4"
           >
             <ChevronLeft className="h-7 w-7" />
           </button>
@@ -124,7 +124,7 @@ export default function Gallery({ alben }: { alben: GalerieAlbum[] }) {
                 className="object-contain"
               />
             </div>
-            <p className="mt-3 text-center text-sm text-white/80">{aktuellesBild.alt}</p>
+            <p className="mt-3 text-center text-sm text-text-leise">{aktuellesBild.alt}</p>
           </div>
 
           <button
@@ -136,7 +136,7 @@ export default function Gallery({ alben }: { alben: GalerieAlbum[] }) {
                 o ? { album: o.album, bild: (o.bild + 1) % aktuellesAlbum.bilder.length } : o
               );
             }}
-            className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white hover:bg-white/20 sm:right-4"
+            className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-flaeche-hoch p-2 text-text hover:bg-flaeche-hoch sm:right-4"
           >
             <ChevronRight className="h-7 w-7" />
           </button>

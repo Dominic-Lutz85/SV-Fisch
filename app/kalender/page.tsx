@@ -22,7 +22,7 @@ const kategorien: (TerminKategorie | "Alle")[] = [
 const kategorieFarben: Record<TerminKategorie, string> = {
   Fußball: "bg-fisch-yellow text-fisch-black",
   Gymnastik: "bg-fisch-black text-fisch-yellow",
-  Verein: "bg-fisch-white text-fisch-black border border-fisch-black",
+  Verein: "bg-fisch-white text-fisch-black",
   Fest: "bg-fisch-yellow-dark text-fisch-black",
 };
 
@@ -52,8 +52,8 @@ export default async function KalenderPage({
                 className={cn(
                   "rounded-full border px-4 py-2 text-sm font-semibold transition-colors",
                   aktive === k
-                    ? "border-fisch-black bg-fisch-black text-fisch-white"
-                    : "border-fisch-line text-fisch-ink hover:border-fisch-black"
+                    ? "border-text bg-fisch-black text-text"
+                    : "border-linie text-text hover:border-text"
                 )}
               >
                 {k}
@@ -62,7 +62,7 @@ export default async function KalenderPage({
           </nav>
           <a
             href="/kalender/ical"
-            className="inline-flex items-center gap-2 rounded-full border border-fisch-black px-4 py-2 text-sm font-semibold text-fisch-black hover:bg-fisch-black hover:text-fisch-white"
+            className="inline-flex items-center gap-2 rounded-full border border-text px-4 py-2 text-sm font-semibold text-text hover:bg-fisch-black hover:text-text"
           >
             <Download className="h-4 w-4" aria-hidden="true" />
             Alle Termine (iCal)
@@ -70,11 +70,11 @@ export default async function KalenderPage({
         </div>
 
         {termine.length > 0 ? (
-          <ul className="flex flex-col divide-y divide-fisch-line">
+          <ul className="flex flex-col divide-y divide-linie">
             {termine.map((t) => (
               <li key={t.id} className="flex flex-col gap-2 py-5 sm:flex-row sm:items-start sm:gap-6">
-                <div className="flex shrink-0 items-center gap-2 text-sm font-semibold text-fisch-black sm:w-56">
-                  <CalendarDays className="h-4 w-4 text-fisch-muted" aria-hidden="true" />
+                <div className="flex shrink-0 items-center gap-2 text-sm font-semibold text-text sm:w-56">
+                  <CalendarDays className="h-4 w-4 text-text-leise" aria-hidden="true" />
                   {formatDatumLang(t.datum)}
                   {t.uhrzeit || t.datum.includes("T") ? `, ${formatUhrzeit(t.datum)} Uhr` : ""}
                 </div>
@@ -88,23 +88,23 @@ export default async function KalenderPage({
                     >
                       {t.kategorie}
                     </span>
-                    <p className="font-semibold text-fisch-black">{t.titel}</p>
+                    <p className="font-semibold text-text">{t.titel}</p>
                   </div>
                   {t.ort && (
-                    <p className="mt-1 flex items-center gap-1.5 text-sm text-fisch-muted">
+                    <p className="mt-1 flex items-center gap-1.5 text-sm text-text-leise">
                       <MapPin className="h-3.5 w-3.5" aria-hidden="true" />
                       {t.ort}
                     </p>
                   )}
                   {t.beschreibung && (
-                    <p className="mt-1 text-sm text-fisch-muted">{t.beschreibung}</p>
+                    <p className="mt-1 text-sm text-text-leise">{t.beschreibung}</p>
                   )}
                 </div>
               </li>
             ))}
           </ul>
         ) : (
-          <p className="text-fisch-muted">Für diese Kategorie sind aktuell keine Termine hinterlegt.</p>
+          <p className="text-text-leise">Für diese Kategorie sind aktuell keine Termine hinterlegt.</p>
         )}
       </div>
     </>

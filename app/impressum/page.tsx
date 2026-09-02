@@ -12,7 +12,7 @@ export default function ImpressumPage() {
     <>
       <PageHeader title="Impressum" />
       <div className="container-fisch max-w-2xl py-16 sm:py-20">
-        <div className="mb-10 border border-fisch-yellow-dark bg-fisch-yellow/25 p-5 text-sm text-fisch-ink">
+        <div className="mb-10 border border-fisch-yellow-dark bg-fisch-yellow/25 p-5 text-sm text-text">
           <strong>[BITTE PRÜFEN/ERGÄNZEN]</strong> – Dieses Impressum ist ein
           rechtliches Platzhalter-Gerüst gemäß § 5 TMG / § 18 MStV. Es ersetzt
           keine Rechtsberatung. Bitte vor Veröffentlichung durch den Vorstand
@@ -20,20 +20,20 @@ export default function ImpressumPage() {
         </div>
 
         <section className="mb-8">
-          <h2 className="font-display text-xl font-bold text-fisch-black">
+          <h2 className="font-display text-xl font-bold text-text">
             Angaben gemäß § 5 TMG
           </h2>
-          <p className="mt-3 leading-relaxed text-fisch-muted">
+          <p className="mt-3 leading-relaxed text-text-leise">
             {siteConfig.name}
             <br />
             [BITTE PRÜFEN/ERGÄNZEN – Straße, Hausnummer]
             <br />
             [BITTE PRÜFEN/ERGÄNZEN – PLZ, Ort]
           </p>
-          <p className="mt-3 leading-relaxed text-fisch-muted">
+          <p className="mt-3 leading-relaxed text-text-leise">
             Vertreten durch: [BITTE PRÜFEN/ERGÄNZEN – 1. Vorsitzende/r]
           </p>
-          <p className="mt-3 leading-relaxed text-fisch-muted">
+          <p className="mt-3 leading-relaxed text-text-leise">
             Registergericht: {siteConfig.register.court}
             <br />
             Registernummer: {siteConfig.register.number}
@@ -41,8 +41,8 @@ export default function ImpressumPage() {
         </section>
 
         <section className="mb-8">
-          <h2 className="font-display text-xl font-bold text-fisch-black">Kontakt</h2>
-          <p className="mt-3 leading-relaxed text-fisch-muted">
+          <h2 className="font-display text-xl font-bold text-text">Kontakt</h2>
+          <p className="mt-3 leading-relaxed text-text-leise">
             Telefon: {siteConfig.contact.phone}
             <br />
             E-Mail: {siteConfig.contact.email}
@@ -50,19 +50,19 @@ export default function ImpressumPage() {
         </section>
 
         <section className="mb-8">
-          <h2 className="font-display text-xl font-bold text-fisch-black">
+          <h2 className="font-display text-xl font-bold text-text">
             Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV
           </h2>
-          <p className="mt-3 leading-relaxed text-fisch-muted">
+          <p className="mt-3 leading-relaxed text-text-leise">
             [BITTE PRÜFEN/ERGÄNZEN – Name und Anschrift]
           </p>
         </section>
 
         <section className="mb-8">
-          <h2 className="font-display text-xl font-bold text-fisch-black">
+          <h2 className="font-display text-xl font-bold text-text">
             EU-Streitschlichtung
           </h2>
-          <p className="mt-3 leading-relaxed text-fisch-muted">
+          <p className="mt-3 leading-relaxed text-text-leise">
             Die Europäische Kommission stellt eine Plattform zur
             Online-Streitbeilegung (OS) bereit:{" "}
             <a
@@ -82,8 +82,8 @@ export default function ImpressumPage() {
         </section>
 
         <section>
-          <h2 className="font-display text-xl font-bold text-fisch-black">Haftungshinweis</h2>
-          <p className="mt-3 leading-relaxed text-fisch-muted">
+          <h2 className="font-display text-xl font-bold text-text">Haftungshinweis</h2>
+          <p className="mt-3 leading-relaxed text-text-leise">
             Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine
             Haftung für die Inhalte externer Links. Für den Inhalt der
             verlinkten Seiten sind ausschließlich deren Betreiber

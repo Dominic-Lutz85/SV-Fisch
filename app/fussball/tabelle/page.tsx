@@ -42,7 +42,7 @@ export default function TabellePage() {
           beschreibung="Aktuelle Tabelle der Kreisliga B, Staffel 10 Trier-Saarburg"
           className="min-h-96"
         />
-        <p className="mt-6 text-sm text-fisch-muted">
+        <p className="mt-6 text-sm text-text-leise">
           Die Tabelle wird von{" "}
           <a
             href="https://www.fupa.net/club/sv-fisch"

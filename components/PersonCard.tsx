@@ -11,19 +11,19 @@ export default function PersonCard({ person }: { person: VorstandsMitglied }) {
     .toUpperCase();
 
   return (
-    <div className="flex flex-col items-center gap-3 border border-fisch-line bg-white p-6 text-center">
+    <div className="flex flex-col items-center gap-3 border border-linie bg-flaeche-hoch p-6 text-center">
       <div className="flex h-16 w-16 items-center justify-center rounded-full bg-fisch-yellow font-display text-lg font-bold text-fisch-black">
         {initialen || "SV"}
       </div>
       <div>
-        <p className="font-display font-bold text-fisch-black">{person.name}</p>
-        <p className="text-sm text-fisch-muted">{person.rolle}</p>
+        <p className="font-display font-bold text-text">{person.name}</p>
+        <p className="text-sm text-text-leise">{person.rolle}</p>
       </div>
       <div className="flex flex-col gap-1 text-sm">
         {person.email && (
           <a
             href={`mailto:${person.email}`}
-            className="inline-flex items-center justify-center gap-1.5 text-fisch-black hover:decoration-fisch-yellow"
+            className="inline-flex items-center justify-center gap-1.5 text-text hover:decoration-fisch-yellow"
           >
             <Mail className="h-3.5 w-3.5" aria-hidden="true" />
             {person.email}
@@ -32,7 +32,7 @@ export default function PersonCard({ person }: { person: VorstandsMitglied }) {
         {person.telefon && (
           <a
             href={`tel:${person.telefon}`}
-            className="inline-flex items-center justify-center gap-1.5 text-fisch-black hover:decoration-fisch-yellow"
+            className="inline-flex items-center justify-center gap-1.5 text-text hover:decoration-fisch-yellow"
           >
             <Phone className="h-3.5 w-3.5" aria-hidden="true" />
             {person.telefon}

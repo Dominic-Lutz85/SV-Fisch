@@ -27,7 +27,7 @@ export default function VorstandPage() {
           if (mitglieder.length === 0) return null;
           return (
             <div key={bereich} className="mb-14 last:mb-0">
-              <h2 className="mb-6 font-display text-2xl font-bold text-fisch-black">
+              <h2 className="mb-6 font-display text-2xl font-bold text-text">
                 {bereich}
               </h2>
               <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -38,10 +38,10 @@ export default function VorstandPage() {
             </div>
           );
         })}
-        <p className="mt-4 text-sm text-fisch-muted">
+        <p className="mt-4 text-sm text-text-leise">
           [BITTE PRÜFEN/ERGÄNZEN] – Namen und Kontaktdaten des aktuellen
           Vorstands in{" "}
-          <code className="rounded bg-fisch-line px-1.5 py-0.5">
+          <code className="rounded bg-flaeche-hoch-2 px-1.5 py-0.5">
             content/vorstand.json
           </code>{" "}
           eintragen.

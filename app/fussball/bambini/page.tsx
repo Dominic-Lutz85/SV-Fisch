@@ -30,7 +30,7 @@ export default function BambiniPage() {
           </Link>
           <Link
             href="/verein/mitglied-werden"
-            className="rounded-full border border-fisch-black px-5 py-2.5 text-sm font-bold text-fisch-black hover:bg-fisch-black hover:text-fisch-white"
+            className="rounded-full border border-text px-5 py-2.5 text-sm font-bold text-text hover:bg-fisch-black hover:text-text"
           >
             Jetzt anmelden
           </Link>

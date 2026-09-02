@@ -238,7 +238,7 @@ export default function MainMenu() {
           <button
             type="button"
             onClick={schliessen}
-            className="absolute right-6 top-7 rounded-full border border-white/25 px-4 py-2 text-sm font-bold uppercase tracking-wider text-fisch-white transition-colors hover:bg-fisch-yellow hover:text-fisch-black sm:right-12"
+            className="absolute right-6 top-7 rounded-full border border-linie px-4 py-2 text-sm font-bold uppercase tracking-wider text-text transition-colors hover:bg-fisch-yellow hover:text-fisch-black sm:right-12"
           >
             Schließen
           </button>
@@ -251,13 +251,13 @@ export default function MainMenu() {
                     <span className="block overflow-hidden py-1">
                       <Link
                         href={eintrag.href}
-                        className="menue-link-innen group/link relative inline-block font-display text-3xl font-extrabold text-fisch-white sm:text-4xl"
+                        className="menue-link-innen group/link relative inline-block font-display text-3xl font-extrabold text-text sm:text-4xl"
                       >
                         <span
                           aria-hidden="true"
                           className="absolute -inset-x-2 -inset-y-1 origin-left scale-x-0 bg-fisch-yellow transition-transform duration-300 ease-out group-hover/link:scale-x-100"
                         />
-                        <span className="relative transition-colors duration-300 group-hover/link:text-fisch-black">
+                        <span className="relative transition-colors duration-300 group-hover/link:text-text">
                           {eintrag.label}
                         </span>
                       </Link>
@@ -274,7 +274,7 @@ export default function MainMenu() {
                           <li key={kind.href} data-menue-fade>
                             <Link
                               href={kind.href}
-                              className="inline-block py-0.5 text-base font-semibold text-fisch-white/85 underline-offset-4 transition-colors hover:text-fisch-yellow hover:underline"
+                              className="inline-block py-0.5 text-base font-semibold text-text-leise underline-offset-4 transition-colors hover:text-fisch-yellow hover:underline"
                             >
                               {kind.label}
                             </Link>
@@ -290,7 +290,7 @@ export default function MainMenu() {
 
           <div
             data-menue-fade
-            className="mt-auto flex flex-col gap-5 border-t border-white/15 pt-6"
+            className="mt-auto flex flex-col gap-5 border-t border-linie pt-6"
           >
             <div className="flex items-center gap-4">
               <Image
@@ -301,9 +301,9 @@ export default function MainMenu() {
                 aria-hidden="true"
                 className="h-12 w-12"
               />
-              <SocialIcons className="text-fisch-white" />
+              <SocialIcons className="text-text" />
             </div>
-            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-fisch-white/75">
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-text-leise">
               {footerLinks.map((l) => (
                 <Link
                   key={l.href}
@@ -314,7 +314,7 @@ export default function MainMenu() {
                 </Link>
               ))}
             </div>
-            <p className="text-sm text-fisch-white/70">
+            <p className="text-sm text-text-leise">
               {siteConfig.contact.addressLines.join(" · ")}
             </p>
           </div>
@@ -339,6 +339,7 @@ export default function MainMenu() {
           von 100 auf 95 gezogen.
         */
         aria-label={offen ? "Menü schließen" : "Menü öffnen"}
+        /* Schwarz: der Knopf sitzt auf der gelben Kopfleiste. */
         className="flex items-center gap-2.5 px-1 py-2 text-sm font-bold uppercase tracking-wider text-fisch-black"
       >
         <span aria-hidden="true" className="hidden sm:inline">

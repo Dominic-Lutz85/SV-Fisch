@@ -54,7 +54,7 @@ export default function SponsorForm() {
       >
         {status === "loading" ? "Wird gesendet …" : "Anfrage senden"}
       </button>
-      <p className="text-xs text-fisch-muted">
+      <p className="text-xs text-text-leise">
         Lieber direkt schreiben? Formular umgehen und eine Mail an{" "}
         <a href={`mailto:${siteConfig.contact.email}`} className="underline">
           {siteConfig.contact.email}

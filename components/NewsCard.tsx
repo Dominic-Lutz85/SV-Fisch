@@ -6,14 +6,14 @@ import type { NewsFrontmatter } from "@/types/content";
 const kategorieStyles: Record<string, string> = {
   Fußball: "bg-fisch-yellow text-fisch-black",
   Gymnastik: "bg-fisch-black text-fisch-yellow",
-  Verein: "bg-fisch-white text-fisch-black border border-fisch-black",
+  Verein: "bg-fisch-white text-fisch-black",
 };
 
 export default function NewsCard({ artikel }: { artikel: NewsFrontmatter }) {
   return (
     <Link
       href={`/aktuelles/${artikel.slug}`}
-      className="group flex flex-col overflow-hidden border border-fisch-line bg-white transition-shadow hover:shadow-lg"
+      className="group flex flex-col overflow-hidden border border-linie bg-flaeche-hoch transition-shadow hover:shadow-lg"
     >
       <div className="relative aspect-[3/2] w-full overflow-hidden bg-fisch-black">
         {artikel.teaserbild && (
@@ -36,14 +36,14 @@ export default function NewsCard({ artikel }: { artikel: NewsFrontmatter }) {
       <div className="flex flex-1 flex-col gap-2 p-5">
         <time
           dateTime={artikel.date}
-          className="text-xs font-semibold uppercase tracking-wide text-fisch-muted"
+          className="text-xs font-semibold uppercase tracking-wide text-text-leise"
         >
           {formatDatum(artikel.date)}
         </time>
-        <h3 className="font-display text-lg font-bold leading-snug text-fisch-black group-hover:underline decoration-fisch-yellow decoration-2 underline-offset-4">
+        <h3 className="font-display text-lg font-bold leading-snug text-text group-hover:underline decoration-fisch-yellow decoration-2 underline-offset-4">
           {artikel.title}
         </h3>
-        <p className="line-clamp-3 text-sm leading-relaxed text-fisch-muted">
+        <p className="line-clamp-3 text-sm leading-relaxed text-text-leise">
           {artikel.teaser}
         </p>
       </div>

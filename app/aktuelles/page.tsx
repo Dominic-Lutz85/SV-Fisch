@@ -35,8 +35,8 @@ export default async function AktuellesPage({
               className={cn(
                 "rounded-full border px-4 py-2 text-sm font-semibold transition-colors",
                 aktiveKategorie === k
-                  ? "border-fisch-black bg-fisch-black text-fisch-white"
-                  : "border-fisch-line text-fisch-ink hover:border-fisch-black"
+                  ? "border-text bg-fisch-black text-text"
+                  : "border-linie text-text hover:border-text"
               )}
             >
               {k}
@@ -51,7 +51,7 @@ export default async function AktuellesPage({
             ))}
           </div>
         ) : (
-          <p className="text-fisch-muted">
+          <p className="text-text-leise">
             Für diese Kategorie liegen aktuell keine Meldungen vor.
           </p>
         )}

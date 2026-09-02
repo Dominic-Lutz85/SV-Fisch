@@ -14,17 +14,17 @@ export default function Footer() {
   const fussballLinks = mainNav.find((i) => i.label === "Fußball")?.children ?? [];
 
   return (
-    <footer className="mt-24 bg-fisch-black text-fisch-white">
+    <footer className="mt-24 bg-flaeche-hoch text-text">
       <div className="container-fisch grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-4">
         <div>
           <div className="flex items-center gap-3">
             <Image src="/logo.svg" alt="" width={44} height={44} className="h-11 w-11" />
             <span className="font-display text-lg font-bold">{siteConfig.shortName}</span>
           </div>
-          <p className="mt-4 max-w-xs text-sm leading-relaxed text-fisch-white/70">
+          <p className="mt-4 max-w-xs text-sm leading-relaxed text-text-leise">
             {siteConfig.claim}
           </p>
-          <address className="mt-4 text-sm not-italic text-fisch-white/70">
+          <address className="mt-4 text-sm not-italic text-text-leise">
             {siteConfig.contact.addressLines.map((line) => (
               <span key={line} className="block">
                 {line}
@@ -35,13 +35,13 @@ export default function Footer() {
         </div>
 
         <div>
-          <h3 className="font-display text-sm font-bold uppercase tracking-wide text-fisch-yellow">
+          <h2 className="font-display text-sm font-bold uppercase tracking-wide text-fisch-yellow">
             Der Verein
-          </h3>
+          </h2>
           <ul className="mt-4 space-y-2.5 text-sm">
             {vereinLinks.map((l) => (
               <li key={l.href}>
-                <Link href={l.href} className="text-fisch-white/80 hover:text-fisch-white">
+                <Link href={l.href} className="text-text-leise hover:text-text">
                   {l.label}
                 </Link>
               </li>
@@ -50,29 +50,29 @@ export default function Footer() {
         </div>
 
         <div>
-          <h3 className="font-display text-sm font-bold uppercase tracking-wide text-fisch-yellow">
+          <h2 className="font-display text-sm font-bold uppercase tracking-wide text-fisch-yellow">
             Fußball & mehr
-          </h3>
+          </h2>
           <ul className="mt-4 space-y-2.5 text-sm">
             {fussballLinks.map((l) => (
               <li key={l.href}>
-                <Link href={l.href} className="text-fisch-white/80 hover:text-fisch-white">
+                <Link href={l.href} className="text-text-leise hover:text-text">
                   {l.label}
                 </Link>
               </li>
             ))}
             <li>
-              <Link href="/darts" className="text-fisch-white/80 hover:text-fisch-white">
+              <Link href="/darts" className="text-text-leise hover:text-text">
                 Darts
               </Link>
             </li>
             <li>
-              <Link href="/gymnastik" className="text-fisch-white/80 hover:text-fisch-white">
+              <Link href="/gymnastik" className="text-text-leise hover:text-text">
                 Gymnastik
               </Link>
             </li>
             <li>
-              <Link href="/galerie" className="text-fisch-white/80 hover:text-fisch-white">
+              <Link href="/galerie" className="text-text-leise hover:text-text">
                 Galerie
               </Link>
             </li>
@@ -80,10 +80,10 @@ export default function Footer() {
         </div>
 
         <div>
-          <h3 className="font-display text-sm font-bold uppercase tracking-wide text-fisch-yellow">
+          <h2 className="font-display text-sm font-bold uppercase tracking-wide text-fisch-yellow">
             Newsletter
-          </h3>
-          <p className="mt-4 text-sm text-fisch-white/70">
+          </h2>
+          <p className="mt-4 text-sm text-text-leise">
             Spielergebnisse, Termine und Vereinsneuigkeiten – direkt ins Postfach.
           </p>
           <NewsletterForm />
@@ -91,9 +91,9 @@ export default function Footer() {
       </div>
 
       {sponsoren.length > 0 && (
-        <div className="border-t border-white/10 py-10">
+        <div className="border-t border-linie py-10">
           <div className="container-fisch">
-            <p className="mb-6 text-center text-xs font-semibold uppercase tracking-wider text-fisch-white/50">
+            <p className="mb-6 text-center text-xs font-semibold uppercase tracking-wider text-text-leise">
               Unsere Sponsoren
             </p>
             <div className="flex flex-wrap items-center justify-center gap-6">
@@ -105,7 +105,7 @@ export default function Footer() {
                     alt={`Logo ${s.name}`}
                     width={100}
                     height={50}
-                    className="h-10 w-auto bg-fisch-white/5 object-contain"
+                    className="h-10 w-auto bg-flaeche-hoch object-contain"
                   />
                 );
 
@@ -145,20 +145,20 @@ export default function Footer() {
         </div>
       )}
 
-      <div className="border-t border-white/10">
-        <div className="container-fisch flex flex-col items-center justify-between gap-4 py-6 text-xs text-fisch-white/60 sm:flex-row">
+      <div className="border-t border-linie">
+        <div className="container-fisch flex flex-col items-center justify-between gap-4 py-6 text-xs text-text-leise sm:flex-row">
           <p>
             © {jahr} {siteConfig.name} · Alle Rechte vorbehalten · Design &amp;
             Umsetzung: Dominic Lutz
           </p>
           <nav aria-label="Rechtliches" className="flex flex-wrap items-center gap-x-5 gap-y-2">
-            <Link href="/impressum" className="hover:text-fisch-white">
+            <Link href="/impressum" className="hover:text-text">
               Impressum
             </Link>
-            <Link href="/datenschutz" className="hover:text-fisch-white">
+            <Link href="/datenschutz" className="hover:text-text">
               Datenschutz
             </Link>
-            <Link href="/verein/sponsoren" className="hover:text-fisch-white">
+            <Link href="/verein/sponsoren" className="hover:text-text">
               Links & Partner
             </Link>
             <a

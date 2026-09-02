@@ -16,7 +16,7 @@ export default function SponsorWall({ sponsoren }: { sponsoren: Sponsor[] }) {
         if (liste.length === 0) return null;
         return (
           <div key={stufe}>
-            <h3 className="mb-4 text-xs font-bold uppercase tracking-wider text-fisch-muted">
+            <h3 className="mb-4 text-xs font-bold uppercase tracking-wider text-text-leise">
               {stufe}
             </h3>
             <div className="flex flex-wrap gap-4">
@@ -35,7 +35,7 @@ export default function SponsorWall({ sponsoren }: { sponsoren: Sponsor[] }) {
                   </>
                 );
                 const klassen =
-                  "flex items-center justify-center border border-fisch-line bg-white px-6 py-5";
+                  "flex items-center justify-center border border-linie bg-flaeche-hoch px-6 py-5";
 
                 /*
                   Ohne Ziel wird hier ein div gerendert und kein a.

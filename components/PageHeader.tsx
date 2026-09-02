@@ -5,8 +5,13 @@ interface PageHeaderProps {
 }
 
 export default function PageHeader({ eyebrow, title, description }: PageHeaderProps) {
+  /*
+   * Auf dunklem Grund muss der Seitenkopf eine Stufe hoeher liegen als die
+   * Seite, sonst verschmilzt er mit dem Inhalt darunter. Auf der hellen
+   * Fassung war er der schwarze Kontrastblock.
+   */
   return (
-    <section className="border-b-4 border-fisch-yellow bg-fisch-black text-fisch-white">
+    <section className="border-b-4 border-fisch-yellow bg-flaeche-hoch text-text">
       <div className="container-fisch py-14 sm:py-20">
         {eyebrow && (
           <p className="text-sm font-bold uppercase tracking-wider text-fisch-yellow">
@@ -17,7 +22,7 @@ export default function PageHeader({ eyebrow, title, description }: PageHeaderPr
           {title}
         </h1>
         {description && (
-          <p className="mt-4 max-w-2xl text-fisch-white/75 sm:text-lg">
+          <p className="mt-4 max-w-2xl text-text-leise sm:text-lg">
             {description}
           </p>
         )}

@@ -69,7 +69,7 @@ function WidgetInhalt({ containerId }: { containerId: string }) {
         href="https://www.fupa.net/club/sv-fisch"
         target="_blank"
         rel="noopener"
-        className="text-sm font-semibold text-fisch-black underline underline-offset-2"
+        className="text-sm font-semibold text-text underline underline-offset-2"
       >
         SV Fisch auf FuPa
       </a>

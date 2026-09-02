@@ -27,14 +27,14 @@ export default function MembershipForm() {
         <TextField label="Telefon" name="telefon" type="tel" autoComplete="tel" />
       </div>
       <div className="flex flex-col gap-1.5">
-        <label htmlFor="abteilung" className="text-sm font-semibold text-fisch-black">
-          Interesse an <span className="text-fisch-ink">*</span>
+        <label htmlFor="abteilung" className="text-sm font-semibold text-text">
+          Interesse an <span className="text-text">*</span>
         </label>
         <select
           id="abteilung"
           name="abteilung"
           required
-          className="w-full border border-fisch-line bg-white px-3.5 py-2.5 text-sm text-fisch-ink focus:border-fisch-black focus:outline-none"
+          className="w-full border border-linie bg-flaeche-hoch px-3.5 py-2.5 text-sm text-text focus:border-text focus:outline-none"
         >
           <option value="">Bitte auswählen …</option>
           <option value="Fußball (aktiv)">Fußball (aktiv)</option>

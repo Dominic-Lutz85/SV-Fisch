@@ -46,7 +46,7 @@ export default function Hero({ naechsterTermin, naechstesSpiel }: HeroProps) {
     : undefined;
 
   return (
-    <section className="relative overflow-hidden bg-fisch-black text-fisch-white">
+    <section className="relative overflow-hidden bg-fisch-black text-text">
       <Image
         src="/logo.svg"
         alt=""
@@ -104,7 +104,7 @@ export default function Hero({ naechsterTermin, naechstesSpiel }: HeroProps) {
           <h1 className="mt-3 max-w-2xl font-display text-4xl font-extrabold leading-[1.05] sm:text-6xl">
             {siteConfig.name}
           </h1>
-          <p className="mt-5 max-w-lg text-lg text-fisch-white/80">
+          <p className="mt-5 max-w-lg text-lg text-text-leise">
             {siteConfig.claim} Fußball und Gymnastik, Bambini bis erste
             Mannschaft, mitten im Ort seit {siteConfig.founded}.
           </p>
@@ -129,7 +129,7 @@ export default function Hero({ naechsterTermin, naechstesSpiel }: HeroProps) {
                 {siteConfig.shortName}{" "}
                 <span className="text-fisch-yellow">-</span> {gegner}
               </p>
-              <p className="mt-1 text-sm text-fisch-white/70">
+              <p className="mt-1 text-sm text-text-leise">
                 {formatDatumLang(naechstesSpiel.datum)}, {naechstesSpiel.uhrzeit}{" "}
                 Uhr · {naechstesSpiel.ort === "Heim" ? "Heimspiel" : "Auswärts"}
                 {naechstesSpiel.ort === "Heim" && naechstesSpiel.spielstaette
