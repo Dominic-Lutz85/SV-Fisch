@@ -147,4 +147,15 @@ Adresse. Beim Ergänzen gilt:
 - **Ohne bekannte Adresse kein `url`.** Die Kachel wird dann ein `div` statt
   eines Ankers. Ein `a` ohne `href` ist kein Link, es sieht nur so aus.
 - **Fremde Logos nie umfärben.** Wer eine helle Fassung braucht, fragt beim
-  Sponsor nach; sonst kommt das Logo auf eine helle Platte.
+  Sponsor nach; sonst kommt das Logo auf eine helle Platte. Das gilt auch für
+  `grayscale`: entfärben ist umfärben. Nur eine Fassung, die der Sponsor selbst
+  so liefert, darf so gezeigt werden.
+- **`beschreibung` ist Pflicht und stammt von der Firma.** Ein Satz, was sie
+  macht, wörtlich sinngemäß von ihrer Internetseite. Nicht ausgedacht, nicht
+  vom Logo abgelesen. Der Sinn der Sponsorenwand ist, dass sie ein Verzeichnis
+  der Betriebe im Ort ist und nicht eine Reihe Aufkleber; das trägt nur, wenn
+  die Angaben stimmen.
+- **`rel="sponsored"` gehört an jeden Sponsorenlink**, denn es sind bezahlte
+  Platzierungen. Es gehört NICHT an den Fanshop, der dem Verein selbst gehört.
+  Bei einem Suchen-und-Ersetzen über `rel` jeden Treffer einzeln ansehen: das
+  Attribut ist eine Aussage über die Wirklichkeit, keine Formatierung.
