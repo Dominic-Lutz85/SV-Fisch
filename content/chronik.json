@@ -1,0 +1,100 @@
+{
+  "quelle": "https://www.fupa.net/team/sv-fisch-m1-2026-27/history",
+  "abgerufen": "2026-09-03",
+  "hinweis": "Die Stufen unten stehen als Uebergang auf der Startseite. Sie tragen je zwei kurze Zeilen, mehr passt in eine Treppenstufe nicht. Die vollstaendige Saisontabelle darunter ist der Beleg, woertlich aus der FuPa-Chronik. Wer eine Stufe aendert, prueft sie an dieser Tabelle.",
+  "stufen": [
+    {
+      "jahr": "1964",
+      "titel": "Gegründet"
+    },
+    {
+      "jahr": "bis 2023",
+      "titel": "Reserveklasse und Kreisliga C"
+    },
+    {
+      "jahr": "2023 – 2026",
+      "titel": "Kreisliga C, zweimal Platz 3"
+    },
+    {
+      "jahr": "seit 2026",
+      "titel": "Kreisliga B, erstmals"
+    }
+  ],
+  "saisons": [
+    {
+      "saison": "26/27",
+      "liga": "Kreisliga B Staffel 10 Trier-Saarburg",
+      "platz": 2
+    },
+    {
+      "saison": "25/26",
+      "liga": "Kreisliga C Staffel 16 Trier-Saarburg",
+      "platz": 3
+    },
+    {
+      "saison": "24/25",
+      "liga": "Kreisliga C Staffel 15",
+      "platz": 3
+    },
+    {
+      "saison": "23/24",
+      "liga": "Kreisliga C Staffel 15",
+      "platz": 9
+    },
+    {
+      "saison": "22/23",
+      "liga": "Reserveklasse II Trier-Saarburg",
+      "platz": 2
+    },
+    {
+      "saison": "21/22",
+      "liga": "Reserveklasse II Trier-Saarburg",
+      "platz": 11
+    },
+    {
+      "saison": "20/21",
+      "liga": "Reserveklasse II Trier-Saarburg",
+      "platz": 8
+    },
+    {
+      "saison": "19/20",
+      "liga": "Reserveklasse II Trier-Saarburg",
+      "platz": 12
+    },
+    {
+      "saison": "18/19",
+      "liga": "Kreisliga C Saar",
+      "platz": 12
+    },
+    {
+      "saison": "17/18",
+      "liga": "Kreisliga C Saar",
+      "platz": 10
+    },
+    {
+      "saison": "16/17",
+      "liga": "Reserveklasse II Trier-Saarburg",
+      "platz": 3
+    },
+    {
+      "saison": "15/16",
+      "liga": "Reserveklasse II Trier-Saarburg",
+      "platz": 3
+    },
+    {
+      "saison": "14/15",
+      "liga": "Reserveklasse II Trier-Saarburg",
+      "platz": 7
+    },
+    {
+      "saison": "13/14",
+      "liga": "Reserveklasse II Trier-Saarburg",
+      "platz": 6
+    },
+    {
+      "saison": "12/13",
+      "liga": "Reserveklasse II Trier-Saarburg",
+      "platz": 6
+    }
+  ]
+}

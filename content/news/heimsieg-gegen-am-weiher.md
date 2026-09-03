@@ -1,7 +1,7 @@
 ---
 title: "SV Fisch schreibt Geschichte"
 slug: "heimsieg"
-date: "2026-08-02"
+date: "2026-08-10"
 kategorie: "Fußball"
 teaser: "In seinem ersten Spiel in der Vereinsgeschichte, holt der SV Fisch die ersten 3 Punkte in der B-Klasse. Mit einem 2:1 setzte sich die erste Mannschaft am vergangenen Sonntag gegen den SV SerrigII durch."
 teaserbild: "/news/heimsieg-gegen-am-weiher.jpg"

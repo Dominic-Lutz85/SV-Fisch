@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import Hero from "@/components/Hero";
+import Erfolgstreppe from "@/components/Erfolgstreppe";
 import NewsSlider from "@/components/NewsSlider";
 import Eyebrow from "@/components/Eyebrow";
 import SponsorWall from "@/components/SponsorWall";
@@ -34,6 +35,14 @@ export default function Home() {
       <Hero naechsterTermin={naechsterTermin} naechstesSpiel={kommendeSpiele[0]} />
 
       {/*
+        Direkt unter dem gelben Terminband und ausserhalb von
+        container-fisch, damit die Treppe wie das Band ueber die volle
+        Breite laeuft. Sie gehoert zum Nachrichtenbereich und nicht zum
+        Hero, Begruendung in Erfolgstreppe.tsx.
+      */}
+      <Erfolgstreppe />
+
+      {/*
         Hier stand ein Band aus vier gleich grossen Zahlenkacheln: 1964,
         420+ Mitglieder, 3 Abteilungen, 4 Mannschaften. Es ist am 02.09.2026
         entfernt worden, aus zwei Gruenden.
@@ -62,7 +71,7 @@ export default function Home() {
         48. Viel Abstand über einer kleinen Überschrift lässt einen Abschnitt
         gleichzeitig leer und unwichtig wirken.
       */}
-      <section className="container-fisch py-12 sm:py-16">
+      <section className="container-fisch pb-12 pt-8 sm:pb-16 sm:pt-10">
         {news.length > 0 ? (
           <NewsSlider
             artikel={news}

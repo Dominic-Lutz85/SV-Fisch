@@ -26,6 +26,13 @@
  *   unsichtbar im Sinne von getComputedStyle. Zaehlt man ihn mit, meldet eine
  *   Sponsorenwand neun Verstoesse, die niemand je sieht, und ein echter Fund
  *   geht darin unter.
+ *
+ * Falle 3: Deckkraft 0 an einem VORFAHREN ist unsichtbar, nicht kontrastarm.
+ *   Der Cookie-Hinweis faehrt per Animation ein und steht davor bei Deckkraft
+ *   0. Die 0 sitzt am Hinweis, nicht an den Textknoten darin, deren eigene
+ *   Deckkraft ist 1. Wer nur die eigene prueft und die der Kette in die Farbe
+ *   einrechnet, meldet vier Verstoesse mit Kontrast 1,00 an einem Element, das
+ *   gerade gar nicht zu sehen ist. Details bei der Berechnung unten.
  */
 (() => {
   const ctx = document.createElement("canvas").getContext("2d", {
@@ -93,7 +100,26 @@
     if (!r.width || !r.height) return;
 
     const st = getComputedStyle(el);
-    if (st.visibility === "hidden" || st.opacity === "0") return;
+    if (st.visibility === "hidden") return;
+
+    /*
+     * Deckkraft der ganzen Kette, nicht nur des Elements.
+     *
+     * Falle 3, gefunden am 03.09.2026: Der Cookie-Hinweis faehrt per Animation
+     * ein und steht davor bei Deckkraft 0. Diese 0 sitzt am Hinweis selbst,
+     * also an einem VORFAHREN der Textknoten darin. Wer nur st.opacity des
+     * Textknotens prueft, sieht dort eine 1, rechnet die 0 des Vorfahren aber
+     * in die Farbe ein und meldet vier Verstoesse mit Kontrast 1,00. Der
+     * Hinweis ist zu dem Zeitpunkt schlicht unsichtbar.
+     *
+     * Unsichtbar ist nicht schlecht lesbar. Bei Deckkraft 0 wird uebersprungen,
+     * darunter wird die Farbe damit verrechnet.
+     */
+    let deckkraft = 1;
+    for (let n = el; n && n !== document.documentElement; n = n.parentElement) {
+      deckkraft *= parseFloat(getComputedStyle(n).opacity);
+    }
+    if (deckkraft === 0) return;
 
     if (nurFuerVorlesehilfe(r, st)) {
       uebersprungen++;
@@ -103,7 +129,10 @@
 
     const grundFarbe = hintergrundVon(el);
     const grund = aufgemalt(grundFarbe, "#0a0a0a");
-    const schrift = aufgemalt(st.color, grundFarbe);
+    const roh = aufgemalt(st.color, grundFarbe);
+    const schrift = roh.map((v, i) =>
+      Math.round(deckkraft * v + (1 - deckkraft) * grund[i])
+    );
     const k = kontrast(schrift, grund);
 
     const px = parseFloat(st.fontSize);
