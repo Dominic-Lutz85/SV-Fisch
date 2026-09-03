@@ -14,33 +14,150 @@ const stufenTitel: Record<Sponsor["stufe"], string> = {
 };
 
 /*
- * Warum die Logos auf einer hellen Platte stehen und nicht direkt auf dem
- * dunklen Grund:
+ * Sponsorenwand als Verzeichnis, nicht als Logowand.
  *
- * Von den neun echten Logos sind fünf schwarze oder dunkelgraue Schrift ohne
- * eigenen Hintergrund. Auf #1f1f1f wären sie so gut wie unsichtbar. Ein Logo
- * umzufärben kommt nicht in Frage, die Marke gehört dem Sponsor und nicht uns.
- * Also bekommt jedes eine helle Fläche, so wie es Vereine mit dunkler Seite
- * durchweg machen. Die hilft nebenbei auch den farbigen: das Sparkassen-Rot
- * und das Blau von Höllen stehen auf Hell ruhiger als auf Fast-Schwarz.
+ * Vorher standen hier neun helle Plättchen in einem Raster, alle gleich laut.
+ * Das war sauber gebaut und hat trotzdem niemandem etwas gegeben: Ein Logo
+ * ohne Zusammenhang ist ein Aufkleber. Jetzt steht unter jedem Logo, was die
+ * Firma macht und wo sie sitzt. Damit wird die Seite für jemanden aus dem Ort
+ * nützlich, und der Sponsor bekommt eine echte Gegenleistung.
  *
- * Die Kachel hat eine feste Größe und das Logo wird hineingerechnet. Ohne das
- * bestimmt das Seitenverhältnis die Breite, und ein flaches Logo wie
- * Roth Munch (220 zu 46) wird dreimal so breit wie ein hohes wie
- * Brocker Holzbau (288 zu 167). Die Reihe sieht dann aus wie hingeworfen.
+ * Zur Herkunft der Sätze: Jeder stammt von der Internetseite der jeweiligen
+ * Firma, keiner ist ausgedacht. Die Regel dazu steht bei `beschreibung` in
+ * types/content.ts, weil sie dort niemand übersieht, der einen Sponsor
+ * ergänzt.
+ *
+ * Warum die Logos weiterhin auf einer hellen Platte liegen: Fünf der neun sind
+ * schwarze oder dunkelgraue Schrift ohne eigenen Hintergrund und wären auf
+ * #1f1f1f so gut wie unsichtbar. Ein fremdes Logo umzufärben kommt nicht in
+ * Frage, die Marke gehört dem Sponsor. Vereine mit dunkler Seite lösen das
+ * durchweg genauso. Neu ist nur, dass die Platte jetzt der Kopf einer Karte
+ * ist und nicht die ganze Kachel.
+ *
+ * Die Platte hat eine feste Höhe und das Logo wird hineingerechnet. Mit fester
+ * Höhe plus automatischer Breite bestimmt sonst das Seitenverhältnis die
+ * Fläche, und ein flaches Logo wie Roth Munch (220 zu 46) wird dreimal so
+ * breit wie ein hohes wie Brocker Holzbau (288 zu 167).
  */
 
-/* Der Hauptsponsor bekommt mehr Platz, dafür ist er der Hauptsponsor. */
-const kachelGroesse: Record<Sponsor["stufe"], string> = {
-  Hauptsponsor: "h-28 w-52 sm:h-32 sm:w-64",
-  "Co-Sponsor": "h-20 w-36 sm:h-24 sm:w-44",
-};
+/* Der Hauptsponsor liegt quer über die ganze Breite, mit Logo links. */
+function HauptKarte({ sponsor }: { sponsor: Sponsor }) {
+  return (
+    <SponsorRahmen sponsor={sponsor} className="sm:col-span-2 lg:col-span-3">
+      <div className="flex flex-col sm:flex-row">
+        <div className="flex shrink-0 items-center justify-center bg-fisch-white p-6 sm:w-72 lg:w-80">
+          <Image
+            src={sponsor.logo}
+            alt={`Logo ${sponsor.name}`}
+            width={sponsor.breite}
+            height={sponsor.hoehe}
+            className="h-24 w-full object-contain sm:h-28"
+          />
+        </div>
+        <div className="flex flex-col justify-center gap-2 p-6 sm:p-7">
+          {/*
+            Hier stand noch einmal "Hauptsponsor". Die Ueberschrift ueber der
+            Karte sagt das bereits, zwei Zeilen weiter oben und in derselben
+            Blickachse. Doppelt gesagt wirkt es nicht wichtiger, sondern
+            unaufgeraeumt.
+          */}
+          <p className="font-display text-xl font-extrabold leading-tight text-text underline-offset-4 group-hover:underline group-hover:decoration-fisch-yellow group-hover:decoration-2 sm:text-2xl">
+            {sponsor.name}
+          </p>
+          <p className="max-w-prose text-sm leading-relaxed text-text-leise">
+            {sponsor.beschreibung}
+          </p>
+          {sponsor.ort && <Ortszeile ort={sponsor.ort} />}
+        </div>
+      </div>
+    </SponsorRahmen>
+  );
+}
+
+function MitKarte({ sponsor }: { sponsor: Sponsor }) {
+  return (
+    <SponsorRahmen sponsor={sponsor}>
+      <div className="flex h-full flex-col">
+        <div className="flex h-24 shrink-0 items-center justify-center bg-fisch-white p-4">
+          <Image
+            src={sponsor.logo}
+            alt={`Logo ${sponsor.name}`}
+            width={sponsor.breite}
+            height={sponsor.hoehe}
+            className="h-full w-full object-contain"
+          />
+        </div>
+        <div className="flex flex-1 flex-col gap-1.5 p-4">
+          <p className="font-display text-[15px] font-bold leading-snug text-text underline-offset-4 group-hover:underline group-hover:decoration-fisch-yellow group-hover:decoration-2">
+            {sponsor.name}
+          </p>
+          <p className="text-[13px] leading-relaxed text-text-leise">
+            {sponsor.beschreibung}
+          </p>
+          {sponsor.ort && <Ortszeile ort={sponsor.ort} className="mt-auto pt-1" />}
+        </div>
+      </div>
+    </SponsorRahmen>
+  );
+}
+
+function Ortszeile({ ort, className }: { ort: string; className?: string }) {
+  return (
+    <p
+      className={`text-[11px] font-semibold uppercase tracking-wider text-text-leise ${className ?? ""}`}
+    >
+      {ort}
+    </p>
+  );
+}
+
+/*
+ * Rahmen und Verlinkung an einer Stelle, damit die beiden Kartenformen sich
+ * nicht auseinanderentwickeln.
+ *
+ * Ohne hinterlegte Adresse wird ein div gerendert und kein a. Ein Anker ohne
+ * href ist für Suchmaschinen kein Link und für die Tastatur kein Ziel, er
+ * sieht nur so aus. Lighthouse hat genau das schon einmal bemängelt.
+ *
+ * rel="sponsored": Diese Plätze sind bezahlt, und genau dafür gibt es die
+ * Angabe. Sie ist ein Signal an Suchmaschinen und ersetzt keine sichtbare
+ * Kennzeichnung. Die steht hier ohnehin darüber: "Hauptsponsor" und
+ * "Co-Sponsoren" sagen einem Menschen unmissverständlich, was das ist.
+ */
+function SponsorRahmen({
+  sponsor,
+  className,
+  children,
+}: {
+  sponsor: Sponsor;
+  className?: string;
+  children: React.ReactNode;
+}) {
+  const ziel = sponsor.url && sponsor.url !== "#" ? sponsor.url : undefined;
+  const klassen = `group relative overflow-hidden border border-linie bg-flaeche ${className ?? ""}`;
+
+  if (!ziel) {
+    return <div className={klassen}>{children}</div>;
+  }
+
+  return (
+    <a
+      href={ziel}
+      target="_blank"
+      rel="sponsored noopener noreferrer"
+      className={`${klassen} transition-colors hover:border-fisch-yellow`}
+    >
+      {children}
+      <span className="sr-only">Zur Website von {sponsor.name}</span>
+    </a>
+  );
+}
 
 /*
  * Die Ebene der Stufenueberschrift ist eine Eigenschaft, aus demselben Grund
- * wie bei NewsCard: auf der Startseite steht darueber ein h2 ("Sponsoren &
- * Foerderer"), auf /verein/sponsoren nicht. Dort sprang die Gliederung von h1
- * direkt auf h3. Lighthouse hat das gemeldet, im Bild sieht man es nicht.
+ * wie bei NewsCard: auf der Startseite steht darueber ein h2 ("Sponsoren"),
+ * auf /verein/sponsoren nicht. Dort sprang die Gliederung von h1 direkt auf
+ * h3. Lighthouse hat das gemeldet, im Bild sieht man es nicht.
  */
 export default function SponsorWall({
   sponsoren,
@@ -60,61 +177,14 @@ export default function SponsorWall({
             <Stufentitel className="mb-4 text-xs font-bold uppercase tracking-wider text-text-leise">
               {stufenTitel[stufe]}
             </Stufentitel>
-            <div className="flex flex-wrap gap-4">
-              {liste.map((s) => {
-                const ziel = s.url && s.url !== "#" ? s.url : undefined;
-                const kachel = (
-                  <>
-                    <Image
-                      src={s.logo}
-                      alt={`Logo ${s.name}`}
-                      width={s.breite}
-                      height={s.hoehe}
-                      /*
-                        h-full w-full und nicht max-h-full w-auto. Mit max und
-                        auto rendert der Browser jedes Logo in seiner
-                        Dateigroesse und schneidet nur oben ab: eine kleine
-                        Datei bleibt klein, eine grosse wird gedeckelt. In der
-                        Reihe stand dann Sparkasse Trier (156 breit) neben
-                        Hoellen Design (314 breit) und sah halb so wichtig aus.
-                        object-contain rechnet jedes Logo in dieselbe Kachel,
-                        haelt das Seitenverhaeltnis und gibt allen dasselbe
-                        optische Gewicht.
-                      */
-                      className="h-full w-full object-contain"
-                    />
-                    <span className="sr-only">{s.name}</span>
-                  </>
-                );
-                const klassen = `flex items-center justify-center border border-linie bg-fisch-white p-4 ${kachelGroesse[stufe]}`;
-
-                /*
-                  Ohne Ziel wird hier ein div gerendert und kein a.
-                  Ein Anker ohne href ist für Suchmaschinen kein Link und für die
-                  Tastatur kein Ziel, er sieht nur so aus. Lighthouse hat genau das
-                  bemängelt ("Links are not crawlable"), weil Sponsoren ohne
-                  hinterlegte Adresse ein href={undefined} bekamen.
-                */
-                if (!ziel) {
-                  return (
-                    <div key={s.name} className={klassen}>
-                      {kachel}
-                    </div>
-                  );
-                }
-
-                return (
-                  <a
-                    key={s.name}
-                    href={ziel}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`${klassen} transition-shadow hover:shadow-[0_0_0_2px_var(--color-fisch-yellow)]`}
-                  >
-                    {kachel}
-                  </a>
-                );
-              })}
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {liste.map((s) =>
+                s.stufe === "Hauptsponsor" ? (
+                  <HauptKarte key={s.name} sponsor={s} />
+                ) : (
+                  <MitKarte key={s.name} sponsor={s} />
+                )
+              )}
             </div>
           </div>
         );

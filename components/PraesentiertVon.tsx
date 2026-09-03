@@ -112,7 +112,7 @@ export default function PraesentiertVon({
     <a
       href={haupt.url}
       target="_blank"
-      rel="noopener noreferrer"
+      rel="sponsored noopener noreferrer"
       className={`${klassen} transition-opacity hover:opacity-80`}
     >
       {inhalt}

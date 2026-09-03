@@ -19,6 +19,23 @@ export interface Sponsor {
    */
   breite: number;
   hoehe: number;
+  /*
+   * Was die Firma macht, in EINEM Satz und in IHREN Worten.
+   *
+   * Diese Zeile ist der ganze Sinn der Sponsorenwand in dieser Fassung: Sie
+   * macht aus einer Reihe Aufkleber ein Verzeichnis der Betriebe im Ort. Damit
+   * hat ein Besucher zum ersten Mal einen Grund, die Seite zu lesen, und der
+   * Sponsor bekommt eine Gegenleistung statt eines Logoplatzes.
+   *
+   * Deshalb gilt hier eine harte Regel: Der Satz wird von der Internetseite
+   * der Firma uebernommen, nicht ausgedacht und nicht aus dem Logo abgelesen.
+   * Eine falsche Angabe ueber ein fremdes Unternehmen auf der Vereinsseite ist
+   * ein echtes Problem und kein Schoenheitsfehler. Wer einen Sponsor ergaenzt,
+   * ruft dessen Seite auf und nimmt, was dort steht.
+   */
+  beschreibung: string;
+  /* Ort oder Anschrift, falls bekannt. Steht klein unter der Beschreibung. */
+  ort?: string;
   /* Nur setzen, wenn die Adresse bekannt ist. Kein Ziel heisst kein Link. */
   url?: string;
 }

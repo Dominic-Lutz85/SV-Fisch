@@ -153,8 +153,15 @@ export default function Footer() {
                     key={s.name}
                     href={ziel}
                     target="_blank"
-                    rel="noopener noreferrer"
-                    className="opacity-70 grayscale transition hover:opacity-100 hover:grayscale-0"
+                    rel="sponsored noopener noreferrer"
+                    /*
+                      Kein grayscale und keine Abdunklung mehr. Das ist ein
+                      verbreitetes Muster, aber es faerbt eine fremde Marke um,
+                      und die gehoert dem Sponsor. Es widerspricht ausserdem dem
+                      Sinn dieser Fassung: Wer bezahlt, wird gezeigt, nicht
+                      gedaempft und erst beim Darueberfahren freigegeben.
+                    */
+                    className="transition-opacity hover:opacity-80"
                     aria-label={s.name}
                   >
                     {logo}
@@ -194,6 +201,9 @@ export default function Footer() {
             <a
               href={siteConfig.fanshopUrl}
               target="_blank"
+              /* Kein rel="sponsored": Der Fanshop gehoert dem Verein selbst.
+                 Die Angabe wuerde Google sagen, der Verein habe diesen Link
+                 verkauft, und das stimmt nicht. */
               rel="noopener noreferrer"
               className="rounded-full bg-fisch-yellow px-4 py-1.5 font-bold text-fisch-black hover:bg-fisch-yellow-dark"
             >
