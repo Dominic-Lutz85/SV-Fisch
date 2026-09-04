@@ -171,52 +171,56 @@ export default function Hero({ naechsterTermin, naechstesSpiel }: HeroProps) {
           darüber.
         */
         /*
-          Der Termin sitzt als dunkler Block AUF dem Gelb, nicht mehr als
-          gelbes Band mit schwarzer Schrift.
+          Die Terminleiste ist dunkel, nicht gelb.
           
-          Anlass: Seit unter dem Band die Erfolgstreppe steht, die ebenfalls
-          gelb ist, waren Band und Treppe ein einziges durchgehendes gelbes
-          Feld. Darin standen zwei voellig verschiedene Botschaften auf zwei
-          Hoehen, ein Termin und die Vereinsgeschichte, und das las sich als
-          Versehen.
+          Anlass: Seit unter dem Band die Erfolgstreppe steht, die gelb ist,
+          waren Band und Treppe ein einziges durchgehendes gelbes Feld. Darin
+          standen zwei voellig verschiedene Botschaften auf zwei Hoehen, ein
+          Termin und die Vereinsgeschichte. Das las sich als Versehen.
           
           Die Ursache war nicht die fehlende Kante, sondern dass eine Farbe
-          zwei Dinge bedeutete. Jetzt gehoert das Gelb ab hier der Treppe und
-          heisst Aufstieg. Der Termin bekommt seinen eigenen Koerper.
+          zwei Dinge bedeutete. Auf der Seite kommt Gelb ab hier nur noch
+          einmal vor, in der Treppe, und markiert dort eindeutig den Aufstieg.
           
-          Nebeneffekt, der die Entscheidung leichter macht: Ein dunkler Block
-          auf Gelb faellt mehr auf als schwarze Schrift auf demselben Gelb.
+          WAS DAS GEKOSTET HAT, damit es niemand versehentlich zurueckdreht:
+          Das vollbreite gelbe Band unter der Kopfleiste war eine bewusste
+          Entscheidung nach dem Muster grosser Vereine, die den Platz genauso
+          nutzen. Die ist hier aufgegeben worden. Wer sie zurueckholt, holt
+          sich das Farbproblem mit zurueck, solange die Treppe darunter steht.
           
-          Farben: Gelb auf Vereinsschwarz sind 13,99 zu 1, der helle Datumstext
-          15,14. Der Knopf dreht sich mit um, gelbe Flaeche mit schwarzer
-          Schrift, ebenfalls 13,99.
+          DIE LINIEN SIND NICHT DEKORATION: Die Leiste liegt auf dem dunklen
+          Hero. #1f1f1f auf #0a0a0a sind 1,20 zu 1, das ist als Flaechenwechsel
+          gerade noch zu ahnen und als Kante gar nicht. Ohne die Linien oben
+          und unten schwaemme die Leiste im Hero. Die Linie kommt auf 2,66 zum
+          Hero und 2,21 zur Leiste.
+          
+          Farben: Gelb auf der Leiste 11,65 zu 1, der Titel 12,60, das Datum
+          8,31. Der Knopf bleibt gelb mit schwarzer Schrift, 13,99.
         */
-        <div className="relative bg-fisch-yellow py-3.5 sm:py-4">
-          <div className="container-fisch">
-            <div className="flex flex-col gap-3 bg-fisch-black px-5 py-3.5 text-text sm:flex-row sm:items-center sm:justify-between sm:px-6">
-              <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                <span className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-widest text-fisch-yellow">
-                  <CalendarDays className="h-4 w-4 shrink-0" aria-hidden="true" />
-                  Termin
-                </span>
-                <span className="font-display text-base font-extrabold text-fisch-yellow sm:text-lg">
-                  {naechsterTermin.titel}
-                </span>
-                <span className="text-sm font-semibold text-text">
-                  {formatDatumLang(naechsterTermin.datum)}
-                  {naechsterTermin.uhrzeit
-                    ? `, ${formatUhrzeit(naechsterTermin.datum)} Uhr`
-                    : ""}
-                  {naechsterTermin.ort ? ` · ${naechsterTermin.ort}` : ""}
-                </span>
-              </div>
-              <Link
-                href="/kalender"
-                className="inline-flex shrink-0 items-center gap-1.5 self-start rounded-full bg-fisch-yellow px-4 py-2 text-sm font-bold text-fisch-black transition-colors hover:bg-fisch-yellow-dark sm:self-auto"
-              >
-                Alle Termine <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </Link>
+        <div className="relative border-y border-linie bg-flaeche">
+          <div className="container-fisch flex flex-col gap-3 py-3.5 text-text sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+              <span className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-widest text-fisch-yellow">
+                <CalendarDays className="h-4 w-4 shrink-0" aria-hidden="true" />
+                Termin
+              </span>
+              <span className="font-display text-base font-extrabold text-text sm:text-lg">
+                {naechsterTermin.titel}
+              </span>
+              <span className="text-sm font-semibold text-text-leise">
+                {formatDatumLang(naechsterTermin.datum)}
+                {naechsterTermin.uhrzeit
+                  ? `, ${formatUhrzeit(naechsterTermin.datum)} Uhr`
+                  : ""}
+                {naechsterTermin.ort ? ` · ${naechsterTermin.ort}` : ""}
+              </span>
             </div>
+            <Link
+              href="/kalender"
+              className="inline-flex shrink-0 items-center gap-1.5 self-start rounded-full bg-fisch-yellow px-4 py-2 text-sm font-bold text-fisch-black transition-colors hover:bg-fisch-yellow-dark sm:self-auto"
+            >
+              Alle Termine <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
           </div>
         </div>
       )}
