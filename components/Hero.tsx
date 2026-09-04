@@ -188,16 +188,23 @@ export default function Hero({ naechsterTermin, naechstesSpiel }: HeroProps) {
           nutzen. Die ist hier aufgegeben worden. Wer sie zurueckholt, holt
           sich das Farbproblem mit zurueck, solange die Treppe darunter steht.
           
-          DIE LINIEN SIND NICHT DEKORATION: Die Leiste liegt auf dem dunklen
-          Hero. #1f1f1f auf #0a0a0a sind 1,20 zu 1, das ist als Flaechenwechsel
-          gerade noch zu ahnen und als Kante gar nicht. Ohne die Linien oben
-          und unten schwaemme die Leiste im Hero. Die Linie kommt auf 2,66 zum
-          Hero und 2,21 zur Leiste.
+          DIE FLAECHE IST flaeche-hoch UND NICHT flaeche: Im ersten Versuch
+          stand hier bg-flaeche. Das ist im Projekt aber der GRUND, also
+          #0a0a0a, und nicht das Grau. Die Leiste war damit schwarz auf
+          schwarz und wurde nur von ihren Linien gehalten. Aufgefallen ist es
+          dem Auftraggeber, nicht mir: In meiner Entwurfsdatei hiess das Grau
+          --flaeche, im Projekt heisst es flaeche-hoch, und ich habe den Namen
+          aus dem Entwurf uebernommen statt ihn zu uebersetzen.
+          
+          DIE LINIEN SIND TROTZDEM NICHT DEKORATION: #1f1f1f auf #0a0a0a sind
+          1,20 zu 1, das ist als Flaechenwechsel gerade noch zu ahnen und als
+          Kante gar nicht. Ohne die Linien oben und unten schwaemme die Leiste
+          im Hero. Die Linie kommt auf 2,66 zum Hero und 2,21 zur Leiste.
           
           Farben: Gelb auf der Leiste 11,65 zu 1, der Titel 12,60, das Datum
           8,31. Der Knopf bleibt gelb mit schwarzer Schrift, 13,99.
         */
-        <div className="relative border-y border-linie bg-flaeche">
+        <div className="relative border-y border-linie bg-flaeche-hoch">
           <div className="container-fisch flex flex-col gap-3 py-3.5 text-text sm:flex-row sm:items-center sm:justify-between">
             <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
               <span className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-widest text-fisch-yellow">
