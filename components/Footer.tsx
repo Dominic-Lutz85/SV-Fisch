@@ -175,9 +175,18 @@ export default function Footer() {
 
       <div className="border-t border-linie">
         <div className="container-fisch flex flex-col items-center justify-between gap-4 py-6 text-xs text-text-leise sm:flex-row">
+          {/* Signatur des Erbauers (04.09.2026, auf Dominics Wunsch):
+              Firmenname und Adresse auf jeder Seite, Adresse als mailto,
+              damit Interessenten mit einem Klick schreiben koennen. */}
           <p>
             © {jahr} {siteConfig.name} · Alle Rechte vorbehalten · Design &amp;
-            Umsetzung: Dominic Lutz
+            Umsetzung: Dominic Lutz Webdesign,{" "}
+            <a
+              href="mailto:dominicvonlutz@gmail.com"
+              className="underline underline-offset-2 hover:text-text"
+            >
+              dominicvonlutz@gmail.com
+            </a>
           </p>
           <nav aria-label="Rechtliches" className="flex flex-wrap items-center gap-x-5 gap-y-2">
             <Link href="/impressum" className="hover:text-text">
