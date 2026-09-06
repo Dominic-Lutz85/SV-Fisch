@@ -32,8 +32,13 @@ export default function Header() {
      * position:fixed, was das vollflächige Menü in einen 80-Pixel-Streifen
      * gesperrt hatte. Das Menü hängt zwar inzwischen per Portal am body, aber
      * die Falle muss hier nicht wieder aufgestellt werden.
+     *
+     * Rand: border-fisch-black, NICHT border-text. --color-text ist
+     * #e1e1e1, also die helle Schrift fuer dunkle Flaechen. Auf dem Gelb
+     * wurde daraus eine zarte weisse Kante ueber die ganze Breite. Auf
+     * Gelb gilt Schwarz, so wie unten bei der Schrift auch.
      */
-    <header className="sticky top-0 z-[60] border-b-2 border-text bg-fisch-yellow">
+    <header className="sticky top-0 z-[60] border-b-2 border-fisch-black bg-fisch-yellow">
       {/*
         Drei Spalten statt links/rechts: 1fr auto 1fr sorgt dafür, dass der
         Fanshop-Knopf WIRKLICH mittig steht und nicht dorthin rutscht, wo die
