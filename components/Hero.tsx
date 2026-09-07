@@ -54,16 +54,63 @@ export default function Hero({ naechsterTermin, naechstesSpiel }: HeroProps) {
         height={900}
         priority
         aria-hidden="true"
-        /*
-          Nur ab sm. Ein angeschnittenes Wappen braucht Breite: auf 390 Pixel
-          Bildschirmbreite lag es hinter Überschrift und Fließtext, beides war
-          nicht mehr zu lesen. Auch verkleinert blieb die Überlagerung. Auf dem
-          Handy steht deshalb weiter unten ein kleines Wappen ÜBER dem Text
-          statt eines großen dahinter.
-        */
         className="pointer-events-none absolute hidden sm:block sm:-right-40 sm:-top-32 sm:h-[620px] sm:w-[620px] lg:h-[760px] lg:w-[760px]"
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-fisch-black via-fisch-black/95 to-fisch-black sm:to-transparent" />
+
+      {/*
+        Das Wappen auf dem Handy, 08.09.2026.
+
+        Hier stand vorher, ein angeschnittenes Wappen brauche Breite und
+        liege auf 390 Pixeln hinter Überschrift und Fließtext, deshalb
+        stehe weiter unten ein kleines Wappen von 64 Pixeln ÜBER dem Text.
+
+        Die Beobachtung stimmte, die Schlussfolgerung nicht. Das Problem
+        war die Überlagerung, nicht die Größe. Und die Notlösung hatte
+        einen Preis, der beim Nachmessen herauskam: In der Kopfleiste
+        steht dasselbe Wappen mit 40 mal 40 bei y=20, das kleine im
+        Kopfbereich mit 64 mal 64 bei y=130. Zweimal dasselbe Zeichen auf
+        200 Pixeln, und das zweite zu klein, um als Motiv zu wirken. Es
+        füllte keine Fläche, es belegte nur Platz. Danach kamen vier
+        Textblöcke am Stück, ohne ein einziges Bild, zusammen 706 von
+        844 Pixeln Bildschirmhöhe.
+
+        Zum Vergleich am selben Tag aufgenommen: Union Berlin und der BVB
+        führen auf dem Handy beide mit einem randlosen Foto über etwa die
+        halbe Höhe. Das ist hier nicht nachbaubar, im Repo liegt genau ein
+        echtes Vereinsfoto, hochkant mit eingebrannter Ergebnisgrafik.
+
+        Also das groß machen, was da ist. Das Wappen liegt jetzt
+        angeschnitten oben rechts und der Text DARUNTER statt darauf.
+      */}
+      <Image
+        src="/logo.svg"
+        alt=""
+        width={600}
+        height={600}
+        priority
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-20 -top-24 h-[280px] w-[280px] sm:hidden"
+      />
+
+      {/*
+        Der Verlauf von links gilt nur ab sm. Er hält die Schrift aus den
+        gelben Flächen des Wappens heraus, und dort steht das Wappen
+        rechts NEBEN dem Text.
+      */}
+      <div className="absolute inset-0 hidden bg-gradient-to-r from-fisch-black via-fisch-black/95 to-transparent sm:block" />
+
+      {/*
+        Auf dem Handy läuft der Verlauf von oben nach unten, nicht von
+        links nach rechts.
+
+        Vorher stand hier derselbe Verlauf für beide Größen, unter sm aber
+        mit to-fisch-black statt to-transparent, also auf voller Fläche
+        deckend. Beim ersten Versuch mit dem großen Wappen war es im
+        Bildschirmfoto nur noch zu ahnen. Der Verlauf muss dort dunkeln,
+        wo Schrift steht, also unten, und oben das Motiv stehen lassen.
+      */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-fisch-black/75 to-fisch-black sm:hidden" />
+
       {/*
         Zweiter Verlauf, nur nach unten. Ohne ihn liegt der gelbe Knopf
         "Kompletter Spielplan" auf dem gelben Ring des Wappens und verliert
@@ -71,7 +118,7 @@ export default function Hero({ naechsterTermin, naechstesSpiel }: HeroProps) {
         deshalb einen ruhigen Untergrund, das obere Drittel des Wappens
         bleibt davon unberührt.
       */}
-      <div className="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-fisch-black via-fisch-black/90 to-transparent sm:h-2/5 sm:via-fisch-black/85" />
+      <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-fisch-black via-fisch-black/90 to-transparent sm:via-fisch-black/85" />
 
       {/*
         Halbton-Raster über dem Verlauf, siehe globals.css. Es liegt bewusst
@@ -86,16 +133,21 @@ export default function Hero({ naechsterTermin, naechstesSpiel }: HeroProps) {
       */}
       <div className="halbton pointer-events-none absolute inset-0" aria-hidden="true" />
 
-      <div className="container-fisch relative flex min-h-[400px] flex-col justify-end gap-7 py-12 sm:min-h-[560px] sm:gap-8 sm:py-16">
+      {/*
+        Der große Innenabstand oben gilt nur auf dem Handy und ist der
+        Platz, den das angeschnittene Wappen braucht.
+
+        13,5rem sind 216 Pixel und kein runder Wert, sondern nachgemessen:
+        Bei 160 Pixeln endete das Wappen bei y=266 und die Dachzeile begann
+        schon bei y=242. Die gelbe Dachzeile lag damit auf dem gelben Ring
+        des Wappens und war dort nicht mehr zu lesen. Jetzt beginnt sie
+        bei 298, also 32 Pixel darunter.
+
+        Wer den Wert ändert, misst beides nach: Unterkante des Wappens
+        gegen Oberkante der Dachzeile.
+      */}
+      <div className="container-fisch relative flex min-h-[400px] flex-col justify-end gap-7 pb-12 pt-[13.5rem] sm:min-h-[560px] sm:gap-8 sm:py-16">
         <div className="animate-fade-up">
-          {/* Handy-Ersatz für das angeschnittene Wappen, siehe oben. */}
-          <Image
-            src="/logo.svg"
-            alt={`Wappen ${siteConfig.name}`}
-            width={80}
-            height={80}
-            className="mb-5 h-16 w-16 sm:hidden"
-          />
           <p className="text-sm font-bold uppercase tracking-widest text-fisch-yellow">
             {/* Aus den Spieldaten, nicht fest eingetragen: sonst steht hier
                 nach einem Auf- oder Abstieg die falsche Liga. */}
@@ -150,87 +202,66 @@ export default function Hero({ naechsterTermin, naechstesSpiel }: HeroProps) {
             </Link>
           </div>
         )}
-      </div>
 
-      {/*
-        Der nächste Vereinstermin. Er stand vorher als Kasten im Kopfbereich und
-        wäre beim Umbau sonst ersatzlos von der Startseite verschwunden. Als
-        schmale Zeile am Fuß bleibt er sichtbar, ohne dem Spiel die Aufmerksamkeit
-        zu nehmen.
-      */}
-      {naechsterTermin && (
-        /*
-          Vollbreites Band in Vereinsgelb, nach dem Muster des BVB, der seine
-          Aktionen genauso unter die Kopfleiste setzt.
-          
-          Vorher war das ein dünner dunkler Streifen mit kleiner Schrift. Er sah
-          angeklebt aus, und auf einem breiten Bildschirm lagen Text und Link
-          fast tausend Pixel auseinander, weil ein ml-auto den Link an den Rand
-          drückte. Jetzt steht der Inhalt als Gruppe zusammen und das Band
-          schließt den Kopfbereich in Vereinsfarbe ab, passend zur Kopfleiste
-          darüber.
-        */
-        /*
-          Die Terminleiste ist dunkel, nicht gelb.
-          
-          Anlass: Seit unter dem Band die Erfolgstreppe steht, die gelb ist,
-          waren Band und Treppe ein einziges durchgehendes gelbes Feld. Darin
-          standen zwei voellig verschiedene Botschaften auf zwei Hoehen, ein
-          Termin und die Vereinsgeschichte. Das las sich als Versehen.
-          
-          Die Ursache war nicht die fehlende Kante, sondern dass eine Farbe
-          zwei Dinge bedeutete. Auf der Seite kommt Gelb ab hier nur noch
-          einmal vor, in der Treppe, und markiert dort eindeutig den Aufstieg.
-          
-          WAS DAS GEKOSTET HAT, damit es niemand versehentlich zurueckdreht:
-          Das vollbreite gelbe Band unter der Kopfleiste war eine bewusste
-          Entscheidung nach dem Muster grosser Vereine, die den Platz genauso
-          nutzen. Die ist hier aufgegeben worden. Wer sie zurueckholt, holt
-          sich das Farbproblem mit zurueck, solange die Treppe darunter steht.
-          
-          DIE FLAECHE IST flaeche-hoch UND NICHT flaeche: Im ersten Versuch
-          stand hier bg-flaeche. Das ist im Projekt aber der GRUND, also
-          #0a0a0a, und nicht das Grau. Die Leiste war damit schwarz auf
-          schwarz und wurde nur von ihren Linien gehalten. Aufgefallen ist es
-          dem Auftraggeber, nicht mir: In meiner Entwurfsdatei hiess das Grau
-          --flaeche, im Projekt heisst es flaeche-hoch, und ich habe den Namen
-          aus dem Entwurf uebernommen statt ihn zu uebersetzen.
-          
-          DIE LINIEN SIND TROTZDEM NICHT DEKORATION: #1f1f1f auf #0a0a0a sind
-          1,20 zu 1, das ist als Flaechenwechsel gerade noch zu ahnen und als
-          Kante gar nicht. Ohne die Linien oben und unten schwaemme die Leiste
-          im Hero. Die Linie kommt auf 2,66 zum Hero und 2,21 zur Leiste.
-          
-          Farben: Gelb auf der Leiste 11,65 zu 1, der Titel 12,60, das Datum
-          8,31. Der Knopf bleibt gelb mit schwarzer Schrift, 13,99.
-        */
-        <div className="relative border-y border-linie bg-flaeche-hoch">
-          <div className="container-fisch flex flex-col gap-3 py-3.5 text-text sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-              <span className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-widest text-fisch-yellow">
-                <CalendarDays className="h-4 w-4 shrink-0" aria-hidden="true" />
-                Termin
-              </span>
-              <span className="font-display text-base font-extrabold text-text sm:text-lg">
-                {naechsterTermin.titel}
-              </span>
-              <span className="text-sm font-semibold text-text-leise">
-                {formatDatumLang(naechsterTermin.datum)}
-                {naechsterTermin.uhrzeit
-                  ? `, ${formatUhrzeit(naechsterTermin.datum)} Uhr`
-                  : ""}
-                {naechsterTermin.ort ? ` · ${naechsterTermin.ort}` : ""}
-              </span>
-            </div>
+        {/*
+          Der nächste Vereinstermin, seit 08.09.2026 als leise Zeile im Fuß
+          des Kopfbereichs statt als eigenes Band darunter.
+
+          WAS HIER VORHER STAND UND WARUM ES WEG IST, ausführlich, weil an
+          dieser Stelle schon zweimal umgebaut wurde:
+
+          Erst war der Termin ein vollbreites Band in Vereinsgelb nach dem
+          Muster großer Vereine. Weil darunter die gelbe Chronik steht,
+          waren beide zusammen ein durchgehendes gelbes Feld mit zwei ganz
+          verschiedenen Botschaften darin. Deshalb wurde das Band dunkel
+          (flaeche-hoch, #1f1f1f) mit Linien oben und unten.
+
+          Damit war das Farbproblem gelöst und ein Rhythmusproblem
+          entstanden. Nachgemessen am 08.09.2026 auf der Live-Seite bei
+          1920 Pixeln: Zwischen dem Ende des Kopfbereichs und dem Beginn
+          der Nachrichten lagen 230 Pixel mit VIER Farbwechseln (schwarz,
+          #1f1f1f, Vereinsgelb, schwarz), fünf Unterkanten, acht
+          Textgrundlinien und vier verschiedenen linken Rasterkanten. Der
+          Auftraggeber hat das als "zu unruhig" beschrieben, bevor irgendeine
+          Zahl vorlag, und die Zahlen haben ihm recht gegeben.
+
+          Ein eigenes Band ist für einen einzelnen Termin schlicht zu viel
+          Gerüst. Als Zeile im Fuß spart es einen kompletten Farbwechsel und
+          70 Pixel Höhe, und der zweite gelbe Pillenknopf verschwindet: auf
+          dem Handy standen zwei davon mit 183 Pixeln untereinander, für
+          zwei verschiedene Sachen.
+
+          WER DAS ZURÜCKDREHT, holt sich beides zurück, das Farbproblem UND
+          den vierten Farbwechsel. Das Band gehört nur wieder her, wenn
+          unter dem Kopfbereich keine farbige Fläche mehr steht.
+
+          Der Termin behält Uhrzeit und Ort. Beide sind optional in den
+          Daten, und ein Termin ohne Ort ist für einen Verein normal.
+        */}
+        {naechsterTermin && (
+          <p className="animate-fade-up flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-text-leise">
+            <CalendarDays
+              className="h-4 w-4 shrink-0 text-fisch-yellow"
+              aria-hidden="true"
+            />
+            <span className="font-bold text-text">{naechsterTermin.titel}</span>
+            <span>
+              {formatDatumLang(naechsterTermin.datum)}
+              {naechsterTermin.uhrzeit
+                ? `, ${formatUhrzeit(naechsterTermin.datum)} Uhr`
+                : ""}
+              {naechsterTermin.ort ? ` · ${naechsterTermin.ort}` : ""}
+            </span>
             <Link
               href="/kalender"
-              className="inline-flex shrink-0 items-center gap-1.5 self-start rounded-full bg-fisch-yellow px-4 py-2 text-sm font-bold text-fisch-black transition-colors hover:bg-fisch-yellow-dark sm:self-auto"
+              className="font-bold text-fisch-yellow underline underline-offset-4 transition-colors hover:text-fisch-yellow-dark"
             >
-              Alle Termine <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              Alle Termine
             </Link>
-          </div>
-        </div>
-      )}
+          </p>
+        )}
+      </div>
+
     </section>
   );
 }

@@ -16,7 +16,33 @@ export default function TeamTableMini({ zeilen }: { zeilen: TabellenZeile[] }) {
       : topN;
 
   return (
-    <div className="border border-linie bg-flaeche-hoch p-5 sm:p-6">
+    /*
+      min-w-0 ist kein Schmuck, sondern behebt einen Querlauf.
+      
+      Nachgemessen am 08.09.2026 bei 390 Pixeln Bildschirmbreite: Dieser
+      Kasten steht als Feld in einem Raster, das 350 Pixel breit ist. Er
+      selbst war 405 breit und ragte bis x=425, die ganze Startseite liess
+      sich dadurch 35 Pixel zur Seite schieben.
+      
+      Der Grund ist eine Eigenheit von Raster- und Flex-Feldern: Sie haben
+      min-width: auto und schrumpfen deshalb NICHT unter die Breite ihres
+      Inhalts. Der Inhalt hier ist eine Tabellenzeile mit vier festen
+      Spalten (20, 24, 32, 28 Pixel), vier Abstaenden zu je 12 und dem
+      Vereinsnamen. Bei "SG Wincheringen / Merzkirchen" verlangte sie 363
+      Pixel, plus 2 mal 20 Innenabstand also 403.
+      
+      Der Name traegt bereits flex-1 und truncate, konnte aber nicht
+      kuerzen: Solange der Kasten selbst waechst, entsteht gar kein Druck
+      zu schrumpfen. Mit min-w-0 bleibt der Kasten bei 350 und truncate
+      greift.
+      
+      DER FRUEHERE BEFUND WAR FALSCH: In der Projektnotiz stand seit dem
+      07.09.2026, Ursache sei "das Nachrichten-Karussell mit fest 280 px
+      breiten li". Das war eine Vermutung nach Augenschein. Gefunden wurde
+      die echte Ursache, indem jedes Element der Reihe nach ausgeblendet
+      und nachgemessen wurde.
+    */
+    <div className="min-w-0 border border-linie bg-flaeche-hoch p-5 sm:p-6">
       <div className="mb-4 flex items-center justify-between">
         <h3 className="font-display text-lg font-bold text-text">Tabelle</h3>
         <Link

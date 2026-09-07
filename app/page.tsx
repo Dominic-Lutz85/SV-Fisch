@@ -35,10 +35,21 @@ export default function Home() {
       <Hero naechsterTermin={naechsterTermin} naechstesSpiel={kommendeSpiele[0]} />
 
       {/*
-        Direkt unter dem gelben Terminband und ausserhalb von
-        container-fisch, damit die Treppe wie das Band ueber die volle
-        Breite laeuft. Sie gehoert zum Nachrichtenbereich und nicht zum
-        Hero, Begruendung in Erfolgstreppe.tsx.
+        Die Chronik als gelbes Band, direkt unter dem Kopfbereich.
+
+        Hier stand bis zum 08.09.2026, sie liege "direkt unter dem gelben
+        Terminband und ausserhalb von container-fisch, damit die Treppe wie
+        das Band ueber die volle Breite laeuft". Beides stimmte nicht mehr:
+        Das Terminband war laengst dunkel und ist inzwischen ganz weg, und
+        der Container liegt seit dem 07.09. in der Komponente selbst.
+
+        Ein Kommentar, der einen aufgehobenen Zustand begruendet, ist
+        schlimmer als gar keiner, weil er beim naechsten Umbau als Vorgabe
+        gelesen wird. Genau das ist hier zweimal passiert. Die Begruendung
+        steht vollstaendig in Erfolgstreppe.tsx, gemessen und mit Datum.
+
+        Die Flaeche laeuft randlos ueber den Bildschirm, der Text darin
+        steht im Raster. Beides ist Absicht.
       */}
       <Erfolgstreppe />
 
@@ -75,35 +86,36 @@ export default function Home() {
         {news.length > 0 ? (
           <NewsSlider
             artikel={news}
-            /*
-              Die Schluessel an diesen drei Geschwistern sehen ueberfluessig aus,
-              sie sind es aber nicht. Der Kopf wird als Eigenschaft von einer
-              Serverkomponente an eine Clientkomponente gereicht und dabei ueber
-              die RSC-Grenze serialisiert. Was hier als fest verdrahtetes JSX
-              steht, kommt drueben als gewoehnliches Feld an, und React verlangt
-              fuer Felder Schluessel. Ohne sie warnt die Konsole bei jedem
-              Aufbau der Startseite.
-              Nachgewiesen, nicht vermutet: mit einem blossen Text als Kopf
-              verschwand die Warnung vollstaendig.
-            */
             kopf={
-              <div>
-                <Eyebrow key="augenbraue" className="mb-2">
+              /*
+                Der Schluessel gehoert an DIESES Element, nicht an seine
+                Kinder. Hier standen Schluessel an Eyebrow, h2 und Link,
+                mit einer ausfuehrlichen Begruendung zur RSC-Grenze, und
+                die Warnung blieb trotzdem bei jedem Aufbau der Startseite
+                stehen: "Each child in a list should have a unique key
+                prop. Check the render method of NewsSlider. It was passed
+                a child from Home."
+                
+                Der Satz sagt schon, wo es klemmt. Nicht die Kinder des
+                Kopfes landen in einer Liste, sondern der Kopf selbst,
+                naemlich in NewsSlider neben den beiden Pfeilknoepfen.
+                Ein Schluessel an den Kindern kann daran nichts aendern.
+              */
+              <div key="slider-kopf">
+                <Eyebrow className="mb-2">
                   Aktuelles
                 </Eyebrow>
                 <h2
-                  key="ueberschrift"
                   className="font-display text-4xl font-extrabold text-text sm:text-5xl"
                 >
                   Neues aus dem Verein
                 </h2>
                 <Link
-                  key="verweis"
                   href="/aktuelles"
                   className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-text underline underline-offset-4 hover:decoration-fisch-yellow"
                 >
-                  <span key="text">Alle Neuigkeiten</span>
-                  <ArrowRight key="pfeil" className="h-4 w-4" aria-hidden="true" />
+                  <span>Alle Neuigkeiten</span>
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
               </div>
             }
