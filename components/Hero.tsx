@@ -169,8 +169,52 @@ export default function Hero({ naechsterTermin, naechstesSpiel }: HeroProps) {
               geschoben, und das ist die konkreteste Angabe auf der ganzen
               Seite. Sie soll zuerst da sein, nicht als Letztes.
             */
-            className="animate-fade-up flex flex-col gap-4 border-t-2 border-fisch-yellow pt-5 sm:flex-row sm:items-end sm:justify-between"
+            className="animate-fade-up relative flex flex-col gap-4 border-t-2 border-fisch-yellow pt-5 sm:flex-row sm:flex-wrap sm:items-end sm:gap-6"
           >
+            {/*
+              DIE SCHUHE AN DER LINIE, seit 08.09.2026.
+
+              Der Auftraggeber fand die gelbe Linie zu lang, und nachgemessen
+              hatte er recht: Sie ist 1216 Pixel breit, die Überschrift
+              darüber 672 und der Absatz 512. Sie lief also über 700 Pixel
+              ins Leere.
+
+              Zwei Runden gezeichneter Motive (Anstoßkreis, Strafraum,
+              Stadiongrundriss und weitere) haben das Problem nicht gelöst.
+              Sein Urteil dazu war "erkennt ja aber keiner", und das stimmte:
+              Ein Symbol, das an eine 1216 Pixel lange Linie passen soll,
+              ist zwangsläufig klein.
+
+              Seine eigene Lösung ist besser als alle davon, und zwar aus
+              einem Grund, den man erst sieht, wenn es hängt: Die Linie muss
+              gar nicht kürzer werden. Sie braucht nur eine Aufgabe. Schuhe,
+              die über eine Leitung geworfen wurden, kennt jeder, und dafür
+              muss die Leitung lang sein.
+
+              Zur Datei: Die Zeichnung kam mit Alphakanal, also ohne den
+              weißen Kasten, der sonst das übliche Problem ist. Umgefärbt
+              wurde sie trotzdem, von rgb(248,224,0) auf das Vereinsgelb
+              rgb(243,218,11). Nebeneinander auf derselben Linie wäre der
+              Unterschied sichtbar gewesen.
+
+              Zur Lage: left-[62%] ist nachgemessen und kein runder Wert.
+              Weiter links stehen die Schuhe über der Paarung, weiter rechts
+              laufen sie bei 1440 Pixeln aus dem Container. -top-[7px] hebt
+              den Aufhängering so weit an, dass die Linie hindurchläuft
+              statt darüber zu enden.
+
+              NUR AB sm: Auf 390 Pixeln ist die Linie 350 breit und der Text
+              füllt sie ganz aus. Die Schuhe lägen dort auf der Paarung.
+            */}
+            <Image
+              src="/fussballschuhe.png"
+              alt=""
+              width={153}
+              height={320}
+              aria-hidden="true"
+              className="pointer-events-none absolute -top-[7px] left-[62%] hidden h-[160px] w-[77px] select-none sm:block"
+            />
+
             <div>
               <p className="text-xs font-bold uppercase tracking-widest text-fisch-yellow">
                 Nächstes Spiel
