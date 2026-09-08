@@ -147,10 +147,21 @@ export default function Home() {
         {/*
           Der Spieler als Grund des Abschnitts, seit 08.09.2026.
 
-          Angeliefert als Fischspieler.png, sauber freigestellt (90,6
+          Angeliefert als fussballer.png, sauber freigestellt (91,2
           Prozent transparent, 0 Prozent Schwarz), auf das Vereinsgelb
-          umgefaerbt und auf 1400 mal 743 gebracht. Original und
+          umgefaerbt und auf 1400 mal 638 gebracht. Original und
           Verarbeitungsschritte unter assets/quellen.
+
+          ZWEITE FASSUNG. Die erste zeigte den Spieler viel loser
+          aufgeloest, und als Grund war die Figur kaum als Spieler zu
+          erkennen, man sah vor allem Partikel. Die Datei in public
+          heisst absichtlich weiter fischspieler.png, damit nur ein Bild
+          ausgeliefert wird.
+
+          Das Seitenverhaeltnis ist dabei von 1,88 auf 2,19 gewechselt.
+          Wer das Bild noch einmal tauscht, prueft die height-Angabe am
+          Image: Sie muss zur Datei passen, sonst rechnet Next mit einem
+          falschen Kasten und das Bild springt beim Laden.
 
           ZUR DECKKRAFT, weil hier schon einmal etwas schiefging: Im
           Kopfbereich lag frueher das Wappen mit 8 Prozent hinter dem
@@ -185,9 +196,9 @@ export default function Home() {
           src="/fischspieler.png"
           alt=""
           width={1400}
-          height={743}
+          height={638}
           aria-hidden="true"
-          className="pointer-events-none absolute -left-40 bottom-0 hidden w-[1100px] max-w-none opacity-[0.26] sm:block"
+          className="pointer-events-none absolute inset-x-0 bottom-0 hidden w-full opacity-[0.26] sm:block"
         />
 
         {/* relative, damit der Inhalt ueber dem Motiv liegt. */}

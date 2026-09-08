@@ -47,7 +47,7 @@ export function SpielerGrund() {
       src="/fischspieler.png"
       alt=""
       width={1400}
-      height={743}
+      height={638}
       aria-hidden="true"
       className="pointer-events-none absolute -left-40 bottom-0 hidden w-[1100px] max-w-none opacity-[0.14] sm:block"
     />
@@ -83,7 +83,7 @@ export function SpielerRechtsUnten() {
       src="/fischspieler.png"
       alt=""
       width={1400}
-      height={743}
+      height={638}
       aria-hidden="true"
       className="pointer-events-none absolute -bottom-8 -right-16 hidden w-[300px] max-w-none opacity-90 sm:block"
     />
@@ -113,7 +113,7 @@ export function SpielerBand() {
         src="/fischspieler.png"
         alt=""
         width={1400}
-        height={743}
+        height={638}
         aria-hidden="true"
         className="absolute -bottom-24 left-1/2 w-[900px] max-w-none -translate-x-1/2 opacity-40"
       />
@@ -141,7 +141,7 @@ export function SpielerLuecke() {
       src="/fischspieler.png"
       alt=""
       width={1400}
-      height={743}
+      height={638}
       aria-hidden="true"
       className="pointer-events-none absolute -bottom-4 left-[352px] hidden w-[420px] max-w-none opacity-80 sm:block"
     />

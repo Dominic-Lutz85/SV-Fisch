@@ -64,6 +64,25 @@ import chronik from "@/content/chronik.json";
  */
 
 /*
+ * HÖHE DES BANDES, angepasst am 08.09.2026: Der Auftraggeber fand die
+ * gelbe Leiste "viel zu hoch also dick". Gemessen war sie 185 Pixel.
+ *
+ * Gekürzt wurde an drei Stellen, nicht an einer: der Innenabstand des
+ * Bandes von 32 auf 20 Pixel, der Abstand zur Kopfzeile von 28 auf 20,
+ * und der Platz über den Bällen von 44 auf 32. Zusammen rund 45 Pixel.
+ *
+ * Warum nicht einfach die Bälle kleiner: Sie tragen den Anstieg. Wird
+ * der kleinste unter 18 Pixel groß, verschwinden seine Nähte, und dann
+ * ist er wieder nur ein Fleck.
+ *
+ * Der Platz über den Bällen ist die Untergrenze und kein runder Wert:
+ * Der größte Ball hat 30 Pixel und sitzt 11 Pixel über der Grundlinie,
+ * reicht also von -9 bis 21. Bei 32 Pixeln Innenabstand bleiben 11
+ * Pixel Luft zur Jahreszeile. Wer weiter kürzt, schiebt den Ball in
+ * die Schrift.
+ */
+
+/*
  * Wie weit die vier Bälle über und unter der gedachten Grundlinie
  * sitzen, in Pixeln. Sie stehen hier und nicht in den Daten, weil sie
  * eine Gestaltungsentscheidung sind: gleichmäßig um 7 Pixel steigend,
@@ -89,6 +108,21 @@ const PUNKTE_Y = [10, 3, -4, -11];
  */
 const BALL_GROESSEN = [18, 22, 26, 30];
 
+/*
+ * Der Bezugspunkt, um den die Bälle steigen, in Pixeln von der Oberkante
+ * des Eintrags.
+ *
+ * 12 und nicht 17, und das ist nachgemessen: Beim Kürzen des Bandes am
+ * 08.09.2026 lag der ERSTE Ball plötzlich 4 Pixel auf der Jahreszeile.
+ * Mein Rechenfehler dabei war, den größten Ball zu prüfen. Der sitzt
+ * aber am höchsten. Der tiefste ist der kleinste, weil er 10 Pixel
+ * unter dem Bezugspunkt liegt.
+ *
+ * Wer hier etwas ändert, prüft den ERSTEN Ball gegen die Jahreszeile,
+ * nicht den letzten.
+ */
+const BALL_BEZUG = 12;
+
 export default function Erfolgstreppe() {
   const stufen = chronik.stufen;
 
@@ -98,7 +132,7 @@ export default function Erfolgstreppe() {
         Der Weg des SV Fisch
       </h2>
 
-      <div className="container-fisch py-8">
+      <div className="container-fisch py-5">
         <div className="flex items-baseline justify-between gap-4">
           <p className="text-[11px] font-extrabold uppercase tracking-[0.2em] opacity-70">
             Der Weg des SV Fisch
@@ -125,9 +159,9 @@ export default function Erfolgstreppe() {
           Pixeln Innenabstand begann die Jahreszahl darunter, der Punkt lag
           auf ihr.
         */}
-        <ol className="mt-5 grid grid-cols-2 gap-x-6 gap-y-5 sm:mt-7 sm:grid-cols-4 sm:gap-8">
+        <ol className="mt-4 grid grid-cols-2 gap-x-6 gap-y-4 sm:mt-5 sm:grid-cols-4 sm:gap-8">
           {stufen.map((stufe, i) => (
-            <li key={stufe.jahr} className="relative sm:pt-11">
+            <li key={stufe.jahr} className="relative sm:pt-8">
               {/*
                 KEINE LINIE MEHR. Hier lief bis zum 08.09.2026 eine
                 dünne schwarze Linie hinter den Markierungen durch.
@@ -157,7 +191,7 @@ export default function Erfolgstreppe() {
                 style={{
                   width: `${BALL_GROESSEN[i]}px`,
                   height: `${BALL_GROESSEN[i]}px`,
-                  top: `${17 + (PUNKTE_Y[i] ?? 0) - BALL_GROESSEN[i] / 2}px`,
+                  top: `${BALL_BEZUG + (PUNKTE_Y[i] ?? 0) - BALL_GROESSEN[i] / 2}px`,
                 }}
               />
               <p className="text-[11px] font-extrabold uppercase tracking-[0.18em] opacity-70">
