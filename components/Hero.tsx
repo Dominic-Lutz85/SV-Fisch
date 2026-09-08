@@ -169,8 +169,56 @@ export default function Hero({ naechsterTermin, naechstesSpiel }: HeroProps) {
               geschoben, und das ist die konkreteste Angabe auf der ganzen
               Seite. Sie soll zuerst da sein, nicht als Letztes.
             */
-            className="animate-fade-up relative flex flex-col gap-4 border-t-2 border-fisch-yellow pt-5 sm:flex-row sm:flex-wrap sm:items-end sm:gap-6"
+            className="animate-fade-up relative flex flex-col gap-4 border-t-2 border-fisch-yellow pt-5 sm:flex-row sm:flex-wrap sm:items-end sm:gap-6 sm:border-t-0"
           >
+            {/*
+              DIE LINIE VERBLASST NACH DEN SCHUHEN, seit 08.09.2026.
+
+              Vorher war sie eine durchgezogene Rahmenkante ueber die
+              volle Containerbreite und lief damit quer durch das
+              angeschnittene Wappen rechts. Der Auftraggeber wollte sie
+              "nach den Schnuersenkeln stark verblassen lassen, dass sie
+              fast nicht mehr im Logo stoert".
+
+              WARUM DER VERLAUF FRUEH BEGINNT, und das ist der Punkt, den
+              man ohne Messung falsch macht: Das Wappen faengt je nach
+              Fensterbreite an ganz verschiedenen Stellen an. Gemessen am
+              08.09.2026, jeweils in Prozent der Linienlaenge:
+
+                1920 px   Wappen ab 79,6 %
+                1600 px   Wappen ab 66,4 %
+                1440 px   Wappen ab 59,9 %
+                1280 px   Wappen ab 53,3 %
+                1024 px   Wappen ab 40,8 %
+
+              Die Schuhe haengen dagegen immer bei 62 bis 68 Prozent, das
+              ist ein fester Wert. Es gibt also keinen Punkt, der auf
+              jedem Bildschirm zugleich "nach den Schuhen" und "vor dem
+              Wappen" liegt: Ab 1440 abwaerts beginnt das Wappen VOR den
+              Schuhen.
+
+              Der Verlauf setzt deshalb direkt hinter den Schuhen bei
+              66 Prozent an und ist bei 82 Prozent praktisch weg. Damit
+              ist die Linie auf breiten Bildschirmen im ganzen Wappen
+              schwach, und auf schmalen wenigstens in dessen groesserem
+              Teil.
+
+              Die Endfarbe ist rgb(243 218 11 / 0) und nicht transparent:
+              transparent ist rgba(0,0,0,0), und manche Browser mischen
+              auf dem Weg dorthin sichtbar ueber Grau.
+
+              NUR AB sm. Darunter bleibt die Rahmenkante, denn dort ist
+              die Linie 350 Pixel breit, es haengen keine Schuhe daran
+              und das Wappen steht weit darueber.
+            */}
+            <span
+              aria-hidden="true"
+              className="absolute inset-x-0 top-0 hidden h-[2px] sm:block"
+              style={{
+                background:
+                  "linear-gradient(to right, rgb(243 218 11) 0%, rgb(243 218 11) 66%, rgb(243 218 11 / 0.14) 82%, rgb(243 218 11 / 0) 100%)",
+              }}
+            />
             {/*
               DIE SCHUHE AN DER LINIE, seit 08.09.2026.
 
