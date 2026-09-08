@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import Hero from "@/components/Hero";
@@ -152,76 +151,71 @@ export default function Home() {
         unterschiedlich hohem Inhalt nebeneinanderzustellen erzeugt das
         zuverlässig.
       */}
-      <section className="relative overflow-hidden border-y border-linie bg-flaeche py-16 text-text sm:py-24">
-        {/*
-          Der Spieler als Grund des Abschnitts, seit 08.09.2026.
+      {/*
+        DER ABSCHNITT TRENNT SICH DURCH SEINE FLAECHE, seit 08.09.2026.
 
-          Angeliefert als stadion.png, sauber freigestellt (74,0 Prozent
-          transparent, 0 Prozent Schwarz), auf das Vereinsgelb umgefaerbt
-          und auf 1600 mal 486 gebracht. Original und
-          Verarbeitungsschritte unter assets/quellen.
+        HIER LAG EIN MOTIV, zuletzt ein Stadion aus hunderten kleinen
+        Vereinszeichen mit 26 Prozent Deckkraft, davor zwei Spielerbilder.
+        Drei Versuche, drei Mal nicht gut. Der Auftraggeber wollte es weg,
+        und nachgemessen hatte er recht.
 
-          DRITTE FASSUNG an dieser Stelle. Davor standen hier zwei
-          Spielerbilder: das erste zu lose aufgeloest, um als Figur zu
-          lesen, das zweite besser, aber als Einzelfigur hinter einem
-          Zweispalter immer nur teilweise sichtbar. Ein Stadion loest
-          das, weil es von sich aus breit und symmetrisch ist und
-          deshalb keinen Bildmittelpunkt hat, der verdeckt werden kann.
+        WAS GEMESSEN WURDE, bei 1920 Pixeln in einem textfreien Streifen
+        links unten im Abschnitt, verglichen mit zwei Stellen, ueber die
+        sich nie jemand beschwert hat:
 
-          Die Datei in public heisst absichtlich weiter
-          fischspieler.png, damit nur ein Bild ausgeliefert wird und
-          kein totes zweites im Verzeichnis liegt.
+          Grund mit Stadion   Mittel 17,9  Streuung 15,99  hellster 61
+          Kopfbereich Halbton Mittel 17,5  Streuung 14,04  hellster 47
+          Nachrichten schwarz Mittel 10,2  Streuung  3,87
 
-          DAS SEITENVERHAELTNIS AENDERT SICH BEI JEDEM TAUSCH, hier von
-          2,19 auf 3,29. Wer das Bild noch einmal wechselt, passt width
-          und height am Image mit an. Sonst rechnet Next mit einem
-          falschen Kasten und das Bild springt beim Laden.
+        Das Stadion war also nicht unruhiger als das Halbtonraster im
+        Kopfbereich, aber heller und vor allem FIGUERLICH. Das Auge
+        versucht ein Bild zu lesen und bekommt bei 26 Prozent keines, also
+        versucht es weiter. Genau davor warnt der Kommentar in Hero.tsx
+        seit dem 07.09.: entweder deutlich zeigen oder weglassen, die Mitte
+        kostet nur. Das Motiv war diese Mitte.
 
-          UND DEN BILDCACHE LEEREN: Der Entwicklungsserver liefert sonst
-          weiter die alte Fassung, auch nach einem Neustart. Der Cache
-          liegt in dieser Next-Version unter .next/dev/cache/images und
-          nicht unter .next/cache/images.
+        WAS STATTDESSEN DA IST, und woher es kommt: Am 08.09.2026 wurden
+        vier Vereinsseiten Zeile fuer Zeile aus dem Bildschirmfoto
+        ausgelesen. Eintracht Frankfurt wechselt zwischen rgb(18,18,18) und
+        rgb(0,0,0), ohne EINE Trennlinie, und legt hervorgehobene Bloecke
+        auf rgb(42,42,42). Manchester City stellt eine weisse Flaeche ueber
+        3796 Pixel zwischen zwei dunkle. Mainz 05 nimmt die Vereinsfarbe.
+        BVB bleibt durchgehend schwarz. Keine dieser Seiten legt ein
+        grosses blasses Motiv hinter einen zweispaltigen Abschnitt.
 
-          ZUR DECKKRAFT, weil hier schon einmal etwas schiefging: Im
-          Kopfbereich lag frueher das Wappen mit 8 Prozent hinter dem
-          Text und wurde entfernt, mit der Begruendung "entweder
-          deutlich zeigen oder weglassen, die Mitte kostet nur". Das
-          Risiko ist hier dasselbe.
+        Uebernommen ist Eintracht. Unsere Stufe von #0a0a0a auf #1f1f1f
+        sind 21 Helligkeitsstufen, Eintracht arbeitet mit 18.
 
-          Deshalb ist der Wert gemessen und nicht gesetzt. Bei 18 Prozent
-          kam der hellste Punkt des Motivs auf rgb(52,48,9), das sind
-          6,71 zu 1 gegen die leise Schrift #b8b8b8. Deutlich mehr als
-          noetig, und die Figur war dabei kaum als Spieler zu erkennen,
-          also genau die Mitte, die der alte Kommentar verwirft.
+        DIE RAHMENLINIEN SIND WEG, und das ist kein Vergessen: Wo die
+        Flaeche wechselt, ist bereits eine Kante. Eine Linie obendrauf ist
+        dieselbe Aussage zweimal. Eintracht hat auf der ganzen Startseite
+        keine einzige.
 
-          Jetzt 26 Prozent. Gerechnet liegt der hellste Punkt damit bei
-          rgb(71,64,10), das sind 5,20 zu 1 gegen die leise Schrift.
-          Immer noch ueber den geforderten 4,5, und die Figur ist zu
-          sehen.
+        UND DIE KARTEN MUESSEN MITWANDERN. Fixtures und TeamTableMini
+        stehen selbst auf flaeche-hoch. Ohne die Neusetzung der Variable
+        haetten sie exakt die Farbe des Abschnitts und waeren nur noch an
+        ihrer Rahmenlinie zu erkennen.
 
-          Die Grenze liegt bei rund 30 Prozent, dort sind es 4,58 zu 1.
-          Wer hoeher geht, unterschreitet sie.
+        WARUM DIE FARBE DES ABSCHNITTS ALS STIL UND NICHT ALS KLASSE
+        KOMMT, das ist die Falle an dieser Stelle: Eine CSS-Variable gilt
+        AUCH fuer das Element, an dem sie gesetzt wird. Mit der Klasse
+        bg-flaeche-hoch und der Neusetzung am selben Element faerbt sich
+        der Abschnitt auf #2c2c2c mit, die Karten sind wieder genauso hell
+        wie er, und die Stufe ist weg. Unsichtbar, weil beides gleichzeitig
+        passiert.
 
-          NACHMESSEN, FALLS JEMAND DARAN DREHT: Der hellste Punkt des
-          MOTIVS, nicht der Mittelwert und nicht der hellste Punkt des
-          Bildes. Beim ersten Versuch kam 3,75 zu 1 heraus, gemessen war
-          aber die Rahmenlinie des Abschnitts (rgb(85,85,85) bei y=0),
-          auf der gar kein Text steht.
-
-          overflow-hidden am section ist noetig, sonst schiebt das
-          angeschnittene Motiv die Seite quer.
-        */}
-        <Image
-          src="/fischspieler.png"
-          alt=""
-          width={1600}
-          height={486}
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 bottom-0 hidden w-full opacity-[0.26] sm:block"
-        />
-
-        {/* relative, damit der Inhalt ueber dem Motiv liegt. */}
-        <div className="container-fisch relative">
+        overflow-hidden und das relative am Container sind ebenfalls weg.
+        Beide waren nur da, um ein angeschnittenes Motiv einzufangen und
+        den Text darueber zu legen. Ohne Motiv begruenden sie nichts mehr.
+      */}
+      <section
+        className="py-16 text-text sm:py-24"
+        style={{
+          backgroundColor: "#1f1f1f",
+          ["--color-flaeche-hoch" as string]: "#2c2c2c",
+        }}
+      >
+        <div className="container-fisch">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <Eyebrow on="dunkel">1. Mannschaft</Eyebrow>
