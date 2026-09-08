@@ -36,6 +36,8 @@ const BRAUCHT_KEINEN_VERWEIS = new Set([
    */
   "/vorschau/grund",
   "/vorschau/grund/buehne",
+  "/vorschau/material",
+  "/vorschau/material/buehne",
 ]);
 
 if (!existsSync(GEBAUT)) {

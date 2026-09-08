@@ -39,6 +39,8 @@ const ABSICHTLICH_DRAUSSEN = new Set([
    */
   "/vorschau/grund",
   "/vorschau/grund/buehne",
+  "/vorschau/material",
+  "/vorschau/material/buehne",
 ]);
 
 /** Alle Seitenadressen unter app/, ohne dynamische Abschnitte. */
