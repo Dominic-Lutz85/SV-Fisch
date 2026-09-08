@@ -1,3 +1,4 @@
+import Image from "next/image";
 import chronik from "@/content/chronik.json";
 
 /*
@@ -63,15 +64,30 @@ import chronik from "@/content/chronik.json";
  */
 
 /*
- * Wie weit die vier Punkte über und unter der Linie sitzen, in Pixeln.
- * Sie stehen hier und nicht in den Daten, weil sie eine
- * Gestaltungsentscheidung sind: gleichmäßig um 7 Pixel steigend, damit
- * die Reihe als Anstieg lesbar ist und nicht als Zufall.
+ * Wie weit die vier Bälle über und unter der gedachten Grundlinie
+ * sitzen, in Pixeln. Sie stehen hier und nicht in den Daten, weil sie
+ * eine Gestaltungsentscheidung sind: gleichmäßig um 7 Pixel steigend,
+ * damit die Reihe als Anstieg lesbar ist und nicht als Zufall.
  *
- * Der Bezug ist die Linie bei top-4, also 16 Pixel. Ein Punkt ist 12
- * Pixel hoch, seine Mitte liegt deshalb bei top + 6.
+ * 17 ist der Bezugspunkt: die frühere Linie lag bei top-4, also 16
+ * Pixel, plus ihre halbe Stärke.
  */
 const PUNKTE_Y = [10, 3, -4, -11];
+
+/*
+ * Die Größen der Bälle, von links nach rechts wachsend.
+ *
+ * 18 bis 30 und nicht 14 bis 26: Bei 14 Pixeln verschwinden die Nähte
+ * des Balls und übrig bleibt ein Fleck. Das war beim Vergleichen am
+ * 08.09.2026 deutlich zu sehen und ist derselbe Fehler, den der
+ * Auftraggeber vorher schon an zu kleinen Motiven angestrichen hatte.
+ *
+ * Der Aufstieg steckt damit zweimal im Bild, in der steigenden Reihe
+ * und in der wachsenden Größe. Das ist Absicht und der Unterschied zur
+ * alten Treppe, bei der Fläche und Text in verschiedene Richtungen
+ * zeigten.
+ */
+const BALL_GROESSEN = [18, 22, 26, 30];
 
 export default function Erfolgstreppe() {
   const stufen = chronik.stufen;
@@ -111,22 +127,38 @@ export default function Erfolgstreppe() {
         */}
         <ol className="mt-5 grid grid-cols-2 gap-x-6 gap-y-5 sm:mt-7 sm:grid-cols-4 sm:gap-8">
           {stufen.map((stufe, i) => (
-            <li key={stufe.jahr} className="relative sm:pt-10">
+            <li key={stufe.jahr} className="relative sm:pt-11">
               {/*
-                Die Linie läuft um den Spaltenabstand von 2rem in die
-                nächste Spalte hinein, damit sie durchgeht. Beim letzten
-                Eintrag nicht, sonst ragt sie aus dem Container heraus.
+                KEINE LINIE MEHR. Hier lief bis zum 08.09.2026 eine
+                dünne schwarze Linie hinter den Markierungen durch.
+                
+                Sie war das Traggerüst, solange dort vier gleich große
+                Punkte saßen: Erst sie machte aus vier Punkten eine
+                Reihe. Seit die Bälle von 18 auf 30 Pixel wachsen,
+                tragen sie den Anstieg selbst, und die Linie stand
+                daneben, ohne noch etwas beizusteuern. Sie lief
+                außerdem rechts über den letzten Ball hinaus ins Leere,
+                genau der Fehler, der im Kopfbereich schon einmal
+                angestrichen wurde.
+                
+                Der Preis ist echt und soll hier stehen: Ohne Linie ist
+                der Bezug zwischen den Bällen loser, auf einem breiten
+                Bildschirm liegen 304 Pixel dazwischen. Das Auge stellt
+                die Reihe selbst her, und dafür müssen die Bälle groß
+                genug bleiben.
               */}
-              <span
+              <Image
+                src="/fussball.png"
+                alt=""
+                width={96}
+                height={96}
                 aria-hidden="true"
-                className={`absolute left-0 top-4 hidden h-[3px] bg-fisch-black/20 sm:block ${
-                  i === stufen.length - 1 ? "w-full" : "w-[calc(100%+2rem)]"
-                }`}
-              />
-              <span
-                aria-hidden="true"
-                className="absolute left-0 hidden h-3 w-3 rounded-full bg-fisch-black sm:block"
-                style={{ top: `${11 + (PUNKTE_Y[i] ?? 0)}px` }}
+                className="absolute left-0 hidden sm:block"
+                style={{
+                  width: `${BALL_GROESSEN[i]}px`,
+                  height: `${BALL_GROESSEN[i]}px`,
+                  top: `${17 + (PUNKTE_Y[i] ?? 0) - BALL_GROESSEN[i] / 2}px`,
+                }}
               />
               <p className="text-[11px] font-extrabold uppercase tracking-[0.18em] opacity-70">
                 {stufe.jahr}

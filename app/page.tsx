@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import Hero from "@/components/Hero";
@@ -142,8 +143,55 @@ export default function Home() {
         unterschiedlich hohem Inhalt nebeneinanderzustellen erzeugt das
         zuverlässig.
       */}
-      <section className="border-y border-linie bg-flaeche py-16 text-text sm:py-24">
-        <div className="container-fisch">
+      <section className="relative overflow-hidden border-y border-linie bg-flaeche py-16 text-text sm:py-24">
+        {/*
+          Der Spieler als Grund des Abschnitts, seit 08.09.2026.
+
+          Angeliefert als Fischspieler.png, sauber freigestellt (90,6
+          Prozent transparent, 0 Prozent Schwarz), auf das Vereinsgelb
+          umgefaerbt und auf 1400 mal 743 gebracht. Original und
+          Verarbeitungsschritte unter assets/quellen.
+
+          ZUR DECKKRAFT, weil hier schon einmal etwas schiefging: Im
+          Kopfbereich lag frueher das Wappen mit 8 Prozent hinter dem
+          Text und wurde entfernt, mit der Begruendung "entweder
+          deutlich zeigen oder weglassen, die Mitte kostet nur". Das
+          Risiko ist hier dasselbe.
+
+          Deshalb ist der Wert gemessen und nicht gesetzt. Bei 18 Prozent
+          kam der hellste Punkt des Motivs auf rgb(52,48,9), das sind
+          6,71 zu 1 gegen die leise Schrift #b8b8b8. Deutlich mehr als
+          noetig, und die Figur war dabei kaum als Spieler zu erkennen,
+          also genau die Mitte, die der alte Kommentar verwirft.
+
+          Jetzt 26 Prozent. Gerechnet liegt der hellste Punkt damit bei
+          rgb(71,64,10), das sind 5,20 zu 1 gegen die leise Schrift.
+          Immer noch ueber den geforderten 4,5, und die Figur ist zu
+          sehen.
+
+          Die Grenze liegt bei rund 30 Prozent, dort sind es 4,58 zu 1.
+          Wer hoeher geht, unterschreitet sie.
+
+          NACHMESSEN, FALLS JEMAND DARAN DREHT: Der hellste Punkt des
+          MOTIVS, nicht der Mittelwert und nicht der hellste Punkt des
+          Bildes. Beim ersten Versuch kam 3,75 zu 1 heraus, gemessen war
+          aber die Rahmenlinie des Abschnitts (rgb(85,85,85) bei y=0),
+          auf der gar kein Text steht.
+
+          overflow-hidden am section ist noetig, sonst schiebt das
+          angeschnittene Motiv die Seite quer.
+        */}
+        <Image
+          src="/fischspieler.png"
+          alt=""
+          width={1400}
+          height={743}
+          aria-hidden="true"
+          className="pointer-events-none absolute -left-40 bottom-0 hidden w-[1100px] max-w-none opacity-[0.26] sm:block"
+        />
+
+        {/* relative, damit der Inhalt ueber dem Motiv liegt. */}
+        <div className="container-fisch relative">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <Eyebrow on="dunkel">1. Mannschaft</Eyebrow>
