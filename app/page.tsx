@@ -5,12 +5,10 @@ import Hero from "@/components/Hero";
 import Erfolgstreppe from "@/components/Erfolgstreppe";
 import NewsSlider from "@/components/NewsSlider";
 import Eyebrow from "@/components/Eyebrow";
-import SponsorWall from "@/components/SponsorWall";
 import Fixtures from "@/components/Fixtures";
 import TeamTableMini from "@/components/TeamTableMini";
 import {
   getAllNews,
-  getSponsoren,
   getSpielplan,
   getKommendeSpiele,
   getNaechsterTermin,
@@ -26,7 +24,6 @@ export const revalidate = 3600;
 
 export default function Home() {
   const news = getAllNews().slice(0, 9);
-  const sponsoren = getSponsoren();
   const kommendeSpiele = getKommendeSpiele(getSpielplan(), 3);
   const naechsterTermin = getNaechsterTermin();
   const tabelle = getTabelle();
@@ -252,15 +249,27 @@ export default function Home() {
         </div>
       </section>
 
-      {sponsoren.length > 0 && (
-        <section className="container-fisch py-20 sm:py-28">
-          <Eyebrow className="mb-2">Danke an unsere Sponsoren</Eyebrow>
-          <h2 className="mb-10 font-display text-3xl font-bold text-text sm:text-4xl">
-            Sponsoren
-          </h2>
-          <SponsorWall sponsoren={sponsoren} />
-        </section>
-      )}
+      {/*
+        HIER STAND DIE SPONSORENWAND, entfernt am 08.09.2026.
+
+        Sie zeigte alle neun Sponsoren ein drittes Mal. Nachgesehen,
+        bevor sie wegkam, denn Sponsoren zahlen fuer Sichtbarkeit und die
+        kappt man nicht nebenbei:
+
+          1. Die Fusszeile zeigt alle neun auf JEDER Seite der Website,
+             als feste Wand, nicht als Laufband.
+          2. Es gibt eine eigene Seite unter /verein/sponsoren.
+          3. Die ist im Hauptmenue unter Verein verlinkt, siehe
+             lib/navigation.ts.
+
+        Es geht also keine einzige Nennung verloren, nur eine Dopplung
+        auf derselben Seite, auf der die Fusszeile ohnehin schon alle
+        zeigt.
+
+        Wer sie zurueckholen will, braucht dafuer einen anderen Grund als
+        Sichtbarkeit. Etwa eine Auswahl der Hauptsponsoren statt aller
+        neun, das waere eine Rangfolge und keine Wiederholung.
+      */}
     </>
   );
 }
