@@ -203,8 +203,24 @@ export default function Hero({ naechsterTermin, naechstesSpiel }: HeroProps) {
               den Aufhängering so weit an, dass die Linie hindurchläuft
               statt darüber zu enden.
 
-              NUR AB sm: Auf 390 Pixeln ist die Linie 350 breit und der Text
-              füllt sie ganz aus. Die Schuhe lägen dort auf der Paarung.
+              NUR AB sm, und das ist nachgemessen und nicht bequem:
+
+              Auf 390 Pixeln ist die Linie 350 breit. Die Zeile mit der
+              Paarung endet bei x=365, es bleiben also 5 Pixel frei, die
+              Datumszeile endet bei 361. Für ein 56 Pixel breites Motiv
+              ist da kein Platz.
+
+              Der Versuch, ihn zu schaffen, ist am 08.09.2026 gemacht und
+              wieder zurückgebaut worden: Textblock mit pr-[72px], Schuhe
+              auf 118 mal 56 verkleinert und auf 74 Prozent gerückt.
+              Ergebnis: Die Schuhe lagen immer noch 19 Pixel auf der
+              Paarung, UND der Kopfbereich wuchs von 760 auf 808 Pixel.
+              Bei 844 Pixeln Bildschirmhöhe sind das 96 Prozent des ersten
+              Bildschirms für einen Kopfbereich, und der Zuwachs ginge
+              allein auf ein Schmuckelement.
+
+              Wer es doch will, braucht einen kürzeren Gegnernamen, und
+              der kommt aus echten Spieldaten. Also nicht.
             */}
             <Image
               src="/fussballschuhe.png"
