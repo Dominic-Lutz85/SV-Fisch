@@ -22,10 +22,29 @@ Daraus wurde `public/fussballschuhe.png` (153 x 320, 11 KB):
 dann umfärben. Beim Skalieren entstehen an den Kanten Mischpixel mit
 abweichender Farbe, die sonst als blasser Saum stehen bleiben.
 
-## fussballer-original.png
+## stadion-original.png
 
-Angeliefert am 08.09.2026, 1983 x 793 Pixel, mit Alphakanal, 91,2
-Prozent transparent, 8,8 Prozent gelb, 0 Prozent schwarz.
+Angeliefert am 08.09.2026, 2172 x 724 Pixel, mit Alphakanal, 74,0
+Prozent transparent, 0 Prozent schwarz.
+
+Daraus wird `public/fischspieler.png` (1600 x 486, 487 KB): beschnitten
+auf 2112 x 642, auf 1600 Pixel Breite verkleinert, einfarbig auf das
+Vereinsgelb gesetzt.
+
+**Dritte Fassung an dieser Stelle.** Davor lagen dort zwei
+Spielerbilder. Das erste war zu lose aufgelöst, um als Figur zu lesen.
+Das zweite war deutlich besser, aber eine Einzelfigur hinter einem
+Zweispalter ist immer nur teilweise sichtbar: Kopf und Ball
+verschwanden hinter den Karten. Ein Stadion löst das, weil es von sich
+aus breit und symmetrisch ist und keinen Bildmittelpunkt hat, der
+verdeckt werden könnte.
+
+## fussballer-original.png (entfernt)
+
+Wurde am selben Tag durch `stadion-original.png` ersetzt und ist
+deshalb nicht mehr hier abgelegt. Die Daten der Vollständigkeit halber:
+1983 x 793 Pixel, mit Alphakanal, 91,2 Prozent transparent, 8,8 Prozent
+gelb, 0 Prozent schwarz.
 
 Daraus wird `public/fischspieler.png` (1400 x 638, 251 KB): beschnitten
 auf 1740 x 793, auf 1400 Pixel Breite verkleinert, einfarbig auf das

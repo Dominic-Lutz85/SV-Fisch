@@ -147,21 +147,31 @@ export default function Home() {
         {/*
           Der Spieler als Grund des Abschnitts, seit 08.09.2026.
 
-          Angeliefert als fussballer.png, sauber freigestellt (91,2
-          Prozent transparent, 0 Prozent Schwarz), auf das Vereinsgelb
-          umgefaerbt und auf 1400 mal 638 gebracht. Original und
+          Angeliefert als stadion.png, sauber freigestellt (74,0 Prozent
+          transparent, 0 Prozent Schwarz), auf das Vereinsgelb umgefaerbt
+          und auf 1600 mal 486 gebracht. Original und
           Verarbeitungsschritte unter assets/quellen.
 
-          ZWEITE FASSUNG. Die erste zeigte den Spieler viel loser
-          aufgeloest, und als Grund war die Figur kaum als Spieler zu
-          erkennen, man sah vor allem Partikel. Die Datei in public
-          heisst absichtlich weiter fischspieler.png, damit nur ein Bild
-          ausgeliefert wird.
+          DRITTE FASSUNG an dieser Stelle. Davor standen hier zwei
+          Spielerbilder: das erste zu lose aufgeloest, um als Figur zu
+          lesen, das zweite besser, aber als Einzelfigur hinter einem
+          Zweispalter immer nur teilweise sichtbar. Ein Stadion loest
+          das, weil es von sich aus breit und symmetrisch ist und
+          deshalb keinen Bildmittelpunkt hat, der verdeckt werden kann.
 
-          Das Seitenverhaeltnis ist dabei von 1,88 auf 2,19 gewechselt.
-          Wer das Bild noch einmal tauscht, prueft die height-Angabe am
-          Image: Sie muss zur Datei passen, sonst rechnet Next mit einem
+          Die Datei in public heisst absichtlich weiter
+          fischspieler.png, damit nur ein Bild ausgeliefert wird und
+          kein totes zweites im Verzeichnis liegt.
+
+          DAS SEITENVERHAELTNIS AENDERT SICH BEI JEDEM TAUSCH, hier von
+          2,19 auf 3,29. Wer das Bild noch einmal wechselt, passt width
+          und height am Image mit an. Sonst rechnet Next mit einem
           falschen Kasten und das Bild springt beim Laden.
+
+          UND DEN BILDCACHE LEEREN: Der Entwicklungsserver liefert sonst
+          weiter die alte Fassung, auch nach einem Neustart. Der Cache
+          liegt in dieser Next-Version unter .next/dev/cache/images und
+          nicht unter .next/cache/images.
 
           ZUR DECKKRAFT, weil hier schon einmal etwas schiefging: Im
           Kopfbereich lag frueher das Wappen mit 8 Prozent hinter dem
@@ -195,8 +205,8 @@ export default function Home() {
         <Image
           src="/fischspieler.png"
           alt=""
-          width={1400}
-          height={638}
+          width={1600}
+          height={486}
           aria-hidden="true"
           className="pointer-events-none absolute inset-x-0 bottom-0 hidden w-full opacity-[0.26] sm:block"
         />
