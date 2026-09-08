@@ -24,13 +24,25 @@ export const revalidate = 3600;
 
 export default function Home() {
   const news = getAllNews().slice(0, 9);
-  const kommendeSpiele = getKommendeSpiele(getSpielplan(), 3);
+  /*
+    Der Kopfbereich bekommt den GANZEN Spielplan, nicht nur die kommenden
+    Spiele. Seit dem 08.09.2026 zeigt er ein Band aus den letzten drei und
+    den naechsten zwei Partien, und die Auswahl trifft saisonBand() in
+    lib/ergebnis.ts. Wer hier vorschneidet, nimmt dem Band die
+    Vergangenheit.
+  */
+  const spielplan = getSpielplan();
+  const kommendeSpiele = getKommendeSpiele(spielplan, 3);
   const naechsterTermin = getNaechsterTermin();
   const tabelle = getTabelle();
 
   return (
     <>
-      <Hero naechsterTermin={naechsterTermin} naechstesSpiel={kommendeSpiele[0]} />
+      <Hero
+        naechsterTermin={naechsterTermin}
+        naechstesSpiel={kommendeSpiele[0]}
+        spielplan={spielplan}
+      />
 
       {/*
         Die Chronik als gelbes Band, direkt unter dem Kopfbereich.

@@ -24,7 +24,21 @@ const APP = join(WURZEL, "app");
 
 /* Adressen, die es gibt, die aber bewusst nicht im Sitemap stehen. */
 const ABSICHTLICH_DRAUSSEN = new Set([
-  // Noch keine. Eintraege hier bitte immer mit einem Satz Begruendung.
+  /*
+   * Erkundungsseiten fuer Gestaltungsentscheidungen. Sie rufen in
+   * production notFound() auf, gehoeren also in kein Sitemap.
+   *
+   * WARUM SIE HIER STEHEN MUESSEN, und das ist teuer gelernt: Am
+   * 08.09.2026 lagen zwei solche Seiten im app-Ordner, ohne Eintrag hier
+   * und ohne Eintrag im Sitemap. Dieser Waechter hat den Build deshalb
+   * abgebrochen, jedes Mal, auch auf Vercel. Acht Commits blieben
+   * liegen, und der Verdacht fiel tagelang auf das Vercel-Kontingent.
+   *
+   * Wer eine neue Erkundungsseite anlegt, traegt sie SOFORT hier ein.
+   * Wer die Entscheidung getroffen hat, loescht Seite und Eintrag wieder.
+   */
+  "/vorschau/ergebnis",
+  "/vorschau/ergebnis/buehne",
 ]);
 
 /** Alle Seitenadressen unter app/, ohne dynamische Abschnitte. */

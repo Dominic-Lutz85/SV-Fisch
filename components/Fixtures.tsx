@@ -3,6 +3,13 @@ import { MapPin } from "lucide-react";
 import { formatDatum } from "@/lib/utils";
 import { cn } from "@/lib/utils";
 import { heuteInDeutschland } from "@/lib/content";
+import { ausgangVon, istFisch } from "@/lib/ergebnis";
+/*
+ * AusgangsZeichen liegt seit dem 08.09.2026 in einer eigenen Datei. Der
+ * Kopfbereich zeigt jetzt ebenfalls Ergebnisse und braucht dasselbe
+ * Zeichen. Zwei Fassungen davon waeren zwei Wahrheiten.
+ */
+import AusgangsZeichen from "@/components/AusgangsZeichen";
 import type { Spiel } from "@/types/content";
 
 /*
@@ -25,24 +32,12 @@ import type { Spiel } from "@/types/content";
  * keine, und Platzhalter wären schlechter als nichts.
  */
 
-type Ausgang = "sieg" | "unentschieden" | "niederlage" | null;
-
-function istFisch(team: string) {
-  return team.toLowerCase().includes("fisch");
-}
-
-/** Aus "2:1" und der Frage, ob Fisch zu Hause war, den Ausgang ableiten. */
-function ausgangVon(spiel: Spiel): Ausgang {
-  if (!spiel.ergebnis) return null;
-  const [a, b] = spiel.ergebnis.split(":").map((n) => parseInt(n.trim(), 10));
-  if (Number.isNaN(a) || Number.isNaN(b)) return null;
-  const heim = istFisch(spiel.heim);
-  const eigene = heim ? a : b;
-  const fremde = heim ? b : a;
-  if (eigene > fremde) return "sieg";
-  if (eigene < fremde) return "niederlage";
-  return "unentschieden";
-}
+/*
+ * istFisch und ausgangVon liegen seit dem 08.09.2026 in lib/ergebnis.ts.
+ * Grund: Der Kopfbereich soll ebenfalls einen Spielstand zeigen, und zwei
+ * Fassungen derselben Ableitung laufen frueher oder spaeter auseinander.
+ * Genau so steht irgendwann eine Niederlage als Sieg auf der Startseite.
+ */
 
 function MonatsUeberschrift({ datum }: { datum: string }) {
   const d = new Date(datum);
@@ -76,32 +71,6 @@ function Ergebniskasten({ wert }: { wert: string }) {
       <span className="min-w-8 bg-fisch-white px-2 py-1 text-center font-display text-lg font-extrabold text-fisch-black">
         {b}
       </span>
-    </span>
-  );
-}
-
-function AusgangsZeichen({ ausgang }: { ausgang: Ausgang }) {
-  if (!ausgang) return null;
-  const beschriftung =
-    ausgang === "sieg" ? "S" : ausgang === "unentschieden" ? "U" : "N";
-  const langtext =
-    ausgang === "sieg"
-      ? "Sieg"
-      : ausgang === "unentschieden"
-        ? "Unentschieden"
-        : "Niederlage";
-  return (
-    <span
-      title={langtext}
-      className={cn(
-        "grid h-6 w-6 shrink-0 place-items-center rounded-full text-xs font-extrabold",
-        ausgang === "sieg" && "bg-fisch-yellow text-fisch-black",
-        ausgang === "unentschieden" && "bg-flaeche-hoch-2 text-text",
-        ausgang === "niederlage" && "border border-linie bg-flaeche text-text-leise"
-      )}
-    >
-      <span aria-hidden="true">{beschriftung}</span>
-      <span className="sr-only">{langtext}</span>
     </span>
   );
 }

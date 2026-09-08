@@ -27,6 +27,15 @@ const GEBAUT = join(WURZEL, ".next", "server", "app");
 /* Adressen, die niemand verlinken muss. */
 const BRAUCHT_KEINEN_VERWEIS = new Set([
   "", // Startseite, das Wappen in der Kopfleiste fuehrt dorthin
+  /*
+   * Erkundungsseiten. Sie rufen in production notFound() auf und sollen
+   * ausdruecklich von nirgendwo verlinkt sein. Derselbe Eintrag steht in
+   * scripts/pruefe-sitemap.mjs, dort mit der langen Begruendung: Wer eine
+   * Erkundungsseite anlegt und beide Waechter vergisst, legt den Build
+   * still lahm, und der Verdacht faellt dann auf alles andere.
+   */
+  "/vorschau/ergebnis",
+  "/vorschau/ergebnis/buehne",
 ]);
 
 if (!existsSync(GEBAUT)) {

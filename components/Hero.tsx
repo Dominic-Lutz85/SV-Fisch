@@ -2,7 +2,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { CalendarDays, ArrowRight } from "lucide-react";
 import { siteConfig } from "@/lib/config";
-import { formatDatumLang, formatUhrzeit } from "@/lib/utils";
+import { cn, formatDatum, formatDatumLang, formatUhrzeit } from "@/lib/utils";
+import { heuteInDeutschland } from "@/lib/content";
+import {
+  ausgangVon,
+  gegnerVon,
+  letzterSpielstand,
+  saisonBand,
+  toreAusVereinssicht,
+} from "@/lib/ergebnis";
+import AusgangsZeichen from "@/components/AusgangsZeichen";
 import type { Spiel, Termin } from "@/types/content";
 
 /*
@@ -36,14 +45,18 @@ import type { Spiel, Termin } from "@/types/content";
 interface HeroProps {
   naechsterTermin?: Termin;
   naechstesSpiel?: Spiel;
+  /* Der ganze Spielplan. Das Band schneidet sich selbst zurecht. */
+  spielplan: Spiel[];
 }
 
-export default function Hero({ naechsterTermin, naechstesSpiel }: HeroProps) {
-  const gegner = naechstesSpiel
-    ? naechstesSpiel.heim.toLowerCase().includes("fisch")
-      ? naechstesSpiel.auswaerts
-      : naechstesSpiel.heim
-    : undefined;
+export default function Hero({
+  naechsterTermin,
+  naechstesSpiel,
+  spielplan,
+}: HeroProps) {
+  const heute = heuteInDeutschland();
+  const band = saisonBand(spielplan, heute);
+  const stand = letzterSpielstand(spielplan, heute);
 
   return (
     <section className="relative overflow-hidden bg-fisch-black text-text">
@@ -162,54 +175,58 @@ export default function Hero({ naechsterTermin, naechstesSpiel }: HeroProps) {
           </p>
         </div>
 
-        {naechstesSpiel && (
-          <div
-            /*
-              Ohne Verzoegerung. Die 150 ms haben den Spieltermin nach hinten
-              geschoben, und das ist die konkreteste Angabe auf der ganzen
-              Seite. Sie soll zuerst da sein, nicht als Letztes.
-            */
-            className="animate-fade-up relative flex flex-col gap-4 border-t-2 border-fisch-yellow pt-5 sm:flex-row sm:flex-wrap sm:items-end sm:gap-6 sm:border-t-0"
-          >
+        {/*
+          DAS SAISONBAND, seit 08.09.2026.
+
+          HIER STAND VORHER der Block "Naechstes Spiel": Dachzeile, Paarung
+          in grosser Schrift, Datumszeile, daneben der gelbe Knopf. Er ist
+          nicht kaputtgegangen, er ist ersetzt worden, und der Grund gehoert
+          hierhin, damit ihn niemand aus Versehen zurueckbaut.
+
+          Der Auftraggeber wollte das letzte Spielergebnis im Kopfbereich
+          sehen. Vier Richtungen lagen als laufende Vorschau unter
+          /vorschau/ergebnis, verglichen mit vier Vereinsseiten, die am
+          08.09.2026 selbst aufgerufen wurden. Der wichtigste Fund dabei:
+          KEINE davon stellt eine Ergebniskachel in den Kopfbereich.
+          Manchester City stellt "LAST RESULT" in eine Spalte UNTER dem
+          Kopfbereich, Union Berlin und Mainz 05 machen das Ergebnis zur
+          Schlagzeile ueber einem Foto, und Eintracht Frankfurt legt ein
+          waagerechtes Spielplanband quer ueber die Seite: Gespieltes mit
+          Ergebnis, Kommendes mit Anstosszeit, das naechste Spiel markiert.
+
+          Das Band ist die Uebernahme von Eintracht, und es kann etwas, das
+          eine Ergebniskachel nicht kann: Es zeigt Vergangenheit und Zukunft
+          in EINER Zeile. Das Ergebnis braucht keinen eigenen Platz mehr, es
+          ist einfach die Stelle, an der die Saison gerade steht.
+
+          WAS ES KOSTET, gemessen und nicht geschaetzt: Der Kopfbereich
+          waechst bei 1920 Pixeln von 560 auf 615 und bei 390 von 760 auf
+          835. Der naechste Gegner steht nicht mehr in 24 Pixel grosser
+          Schrift da, sondern als einer von fuenf Eintraegen. Deshalb traegt
+          genau dieser Eintrag eine gelbe Oberkante UND das Wort
+          "Naechstes Spiel". Nur die Kante allein, wie bei Eintracht, ist zu
+          leise fuer die wichtigste Angabe der Seite.
+
+          UND DIE SCHUHE MUSSTEN AB. Das ist der unangenehme Teil. Sie
+          haengen bei 62 Prozent der Linie, der fuenfte Eintrag des Bandes
+          liegt dort. Verschieben hilft nicht dauerhaft, weil beide Werte
+          verschieden mit der Fensterbreite wandern. Dahinter steckt aber
+          etwas, das man erst beim Bauen sieht: Die Schuhe waren die Antwort
+          auf eine LEERE Linie. Sobald die Linie ein Band traegt, hat sie
+          ihre Aufgabe, und das Motiv verliert seinen Grund. Die Datei
+          public/fussballschuhe.png bleibt liegen, samt Quelle unter
+          assets/quellen, falls das Band je wieder verschwindet.
+        */}
+        {band.length > 0 && (
+          <div className="animate-fade-up relative flex flex-col gap-4 border-t-2 border-fisch-yellow pt-5 sm:border-t-0">
             {/*
-              DIE LINIE VERBLASST NACH DEN SCHUHEN, seit 08.09.2026.
-
-              Vorher war sie eine durchgezogene Rahmenkante ueber die
-              volle Containerbreite und lief damit quer durch das
-              angeschnittene Wappen rechts. Der Auftraggeber wollte sie
-              "nach den Schnuersenkeln stark verblassen lassen, dass sie
-              fast nicht mehr im Logo stoert".
-
-              WARUM DER VERLAUF FRUEH BEGINNT, und das ist der Punkt, den
-              man ohne Messung falsch macht: Das Wappen faengt je nach
-              Fensterbreite an ganz verschiedenen Stellen an. Gemessen am
-              08.09.2026, jeweils in Prozent der Linienlaenge:
-
-                1920 px   Wappen ab 79,6 %
-                1600 px   Wappen ab 66,4 %
-                1440 px   Wappen ab 59,9 %
-                1280 px   Wappen ab 53,3 %
-                1024 px   Wappen ab 40,8 %
-
-              Die Schuhe haengen dagegen immer bei 62 bis 68 Prozent, das
-              ist ein fester Wert. Es gibt also keinen Punkt, der auf
-              jedem Bildschirm zugleich "nach den Schuhen" und "vor dem
-              Wappen" liegt: Ab 1440 abwaerts beginnt das Wappen VOR den
-              Schuhen.
-
-              Der Verlauf setzt deshalb direkt hinter den Schuhen bei
-              66 Prozent an und ist bei 82 Prozent praktisch weg. Damit
-              ist die Linie auf breiten Bildschirmen im ganzen Wappen
-              schwach, und auf schmalen wenigstens in dessen groesserem
-              Teil.
-
-              Die Endfarbe ist rgb(243 218 11 / 0) und nicht transparent:
-              transparent ist rgba(0,0,0,0), und manche Browser mischen
-              auf dem Weg dorthin sichtbar ueber Grau.
-
-              NUR AB sm. Darunter bleibt die Rahmenkante, denn dort ist
-              die Linie 350 Pixel breit, es haengen keine Schuhe daran
-              und das Wappen steht weit darueber.
+              Die verblassende Linie bleibt. Sie laeuft weiterhin quer durch
+              das angeschnittene Wappen, und die Messwerte dazu stehen
+              unveraendert: Das Wappen beginnt je nach Fensterbreite bei
+              79,6 Prozent (1920), 66,4 (1600), 59,9 (1440), 53,3 (1280)
+              oder 40,8 (1024). Die Endfarbe ist rgb(243 218 11 / 0) und
+              nicht transparent, sonst mischen manche Browser sichtbar ueber
+              Grau.
             */}
             <span
               aria-hidden="true"
@@ -219,95 +236,132 @@ export default function Hero({ naechsterTermin, naechstesSpiel }: HeroProps) {
                   "linear-gradient(to right, rgb(243 218 11) 0%, rgb(243 218 11) 66%, rgb(243 218 11 / 0.14) 82%, rgb(243 218 11 / 0) 100%)",
               }}
             />
+
             {/*
-              DIE SCHUHE AN DER LINIE, seit 08.09.2026.
-
-              Der Auftraggeber fand die gelbe Linie zu lang, und nachgemessen
-              hatte er recht: Sie ist 1216 Pixel breit, die Überschrift
-              darüber 672 und der Absatz 512. Sie lief also über 700 Pixel
-              ins Leere.
-
-              Zwei Runden gezeichneter Motive (Anstoßkreis, Strafraum,
-              Stadiongrundriss und weitere) haben das Problem nicht gelöst.
-              Sein Urteil dazu war "erkennt ja aber keiner", und das stimmte:
-              Ein Symbol, das an eine 1216 Pixel lange Linie passen soll,
-              ist zwangsläufig klein.
-
-              Seine eigene Lösung ist besser als alle davon, und zwar aus
-              einem Grund, den man erst sieht, wenn es hängt: Die Linie muss
-              gar nicht kürzer werden. Sie braucht nur eine Aufgabe. Schuhe,
-              die über eine Leitung geworfen wurden, kennt jeder, und dafür
-              muss die Leitung lang sein.
-
-              Zur Datei: Die Zeichnung kam mit Alphakanal, also ohne den
-              weißen Kasten, der sonst das übliche Problem ist. Umgefärbt
-              wurde sie trotzdem, von rgb(248,224,0) auf das Vereinsgelb
-              rgb(243,218,11). Nebeneinander auf derselben Linie wäre der
-              Unterschied sichtbar gewesen.
-
-              Zur Lage: left-[62%] ist nachgemessen und kein runder Wert.
-              Weiter links stehen die Schuhe über der Paarung, weiter rechts
-              laufen sie bei 1440 Pixeln aus dem Container. -top-[7px] hebt
-              den Aufhängering so weit an, dass die Linie hindurchläuft
-              statt darüber zu enden.
-
-              NUR AB sm, und das ist nachgemessen und nicht bequem:
-
-              Auf 390 Pixeln ist die Linie 350 breit. Die Zeile mit der
-              Paarung endet bei x=365, es bleiben also 5 Pixel frei, die
-              Datumszeile endet bei 361. Für ein 56 Pixel breites Motiv
-              ist da kein Platz.
-
-              Der Versuch, ihn zu schaffen, ist am 08.09.2026 gemacht und
-              wieder zurückgebaut worden: Textblock mit pr-[72px], Schuhe
-              auf 118 mal 56 verkleinert und auf 74 Prozent gerückt.
-              Ergebnis: Die Schuhe lagen immer noch 19 Pixel auf der
-              Paarung, UND der Kopfbereich wuchs von 760 auf 808 Pixel.
-              Bei 844 Pixeln Bildschirmhöhe sind das 96 Prozent des ersten
-              Bildschirms für einen Kopfbereich, und der Zuwachs ginge
-              allein auf ein Schmuckelement.
-
-              Wer es doch will, braucht einen kürzeren Gegnernamen, und
-              der kommt aus echten Spieldaten. Also nicht.
+              Kein justify-between. Sonst steht der Hinweis am rechten
+              Containerrand, also mitten im Wappen und dort unlesbar.
             */}
-            <Image
-              src="/fussballschuhe.png"
-              alt=""
-              width={153}
-              height={320}
-              aria-hidden="true"
-              className="pointer-events-none absolute -top-[7px] left-[62%] hidden h-[160px] w-[77px] select-none sm:block"
-            />
-
-            <div>
+            <div className="flex flex-wrap items-baseline gap-x-5 gap-y-1">
               <p className="text-xs font-bold uppercase tracking-widest text-fisch-yellow">
-                Nächstes Spiel
+                Die Saison bis hierher
               </p>
               {/*
-                Bindestrich statt des Wortes "gegen". Zwei Gründe: So schreibt
-                der Fußball eine Paarung, und das Wort stand auf white/40, also
-                bei 3,56 zu 1 gegen Vereinsschwarz, gefordert sind 4,5. Der
-                Trenner ist jetzt so hell wie die Namen und damit lesbar.
+                DER HINWEIS AUF EIN FEHLENDES ERGEBNIS ist kein Schmuck.
+                Am 08.09.2026 lag im Spielplan ein Spiel vom 06.09. ohne
+                Eintrag. Ohne diese Zeile zeigt die Startseite am Dienstag
+                das Ergebnis vom vorletzten Sonntag als das letzte, und
+                zwar genau denen, die beim Spiel dabei waren. Die
+                Ableitung steht in lib/ergebnis.ts.
               */}
-              <p className="mt-1 font-display text-xl font-bold sm:text-2xl">
-                {siteConfig.shortName}{" "}
-                <span className="text-fisch-yellow">-</span> {gegner}
-              </p>
-              <p className="mt-1 text-sm text-text-leise">
-                {formatDatumLang(naechstesSpiel.datum)}, {naechstesSpiel.uhrzeit}{" "}
-                Uhr · {naechstesSpiel.ort === "Heim" ? "Heimspiel" : "Auswärts"}
-                {naechstesSpiel.ort === "Heim" && naechstesSpiel.spielstaette
-                  ? ` · ${naechstesSpiel.spielstaette}`
-                  : ""}
-              </p>
+              {stand.offen && (
+                <span className="inline-flex items-center gap-2 text-xs text-text-leise">
+                  <span
+                    aria-hidden="true"
+                    className="h-1.5 w-1.5 shrink-0 rounded-full bg-fisch-yellow"
+                  />
+                  Ergebnis vom {formatDatum(stand.offen.datum)} folgt
+                </span>
+              )}
             </div>
-            <Link
-              href="/fussball/spielplan"
-              className="inline-flex shrink-0 items-center gap-2 self-start rounded-full bg-fisch-yellow px-5 py-2.5 text-sm font-bold text-fisch-black transition-colors hover:bg-fisch-yellow-dark sm:self-auto"
-            >
-              Kompletter Spielplan{" "}
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </Link>
+
+            <div className="relative">
+              {/*
+                -mx-5 px-5 und nicht -mx-4 px-4: container-fisch hat unter
+                sm genau 1,25rem Innenabstand. Mit 4 statt 5 beginnt der
+                erste Eintrag 4 Pixel links vom uebrigen Text, und das
+                sieht man.
+
+                scroll-px-5 gehoert dazu und ist nicht doppelt gemoppelt.
+                Ohne diesen Wert zieht snap-mandatory den ersten Eintrag
+                an die Kante des Scrollbereichs und setzt scrollLeft von
+                selbst auf 20. Der Innenabstand ist dann zwar gesetzt,
+                aber weggescrollt: Gemessen am 08.09.2026 begann der
+                erste Eintrag bei x=0 statt bei x=20, waehrend der Text
+                darueber bei 20 anfing.
+
+                Ein eingefasster Scroller ist etwas anderes als ein
+                Ueberlauf der Seite. Nachgemessen bei 390 Pixeln:
+                scrollWidth gleich innerWidth, die Seite selbst bekommt
+                keinen Querbalken.
+              */}
+              <ul className="-mx-5 flex snap-x snap-mandatory scroll-px-5 gap-3 overflow-x-auto px-5 pb-1 sm:mx-0 sm:flex-wrap sm:px-0 sm:scroll-px-0">
+                {band.map((s) => {
+                  const ausgang = ausgangVon(s);
+                  const tore = toreAusVereinssicht(s);
+                  const istNaechstes = s.datum === naechstesSpiel?.datum;
+                  const vergangen = s.datum < heute;
+                  return (
+                    <li
+                      key={`${s.datum}-${s.auswaerts}`}
+                      className={cn(
+                        "min-w-[168px] shrink-0 snap-start border-t-2 pt-3 sm:min-w-[176px]",
+                        istNaechstes ? "border-fisch-yellow" : "border-linie"
+                      )}
+                    >
+                      <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-text-leise">
+                        {istNaechstes ? (
+                          <span className="text-fisch-yellow">Nächstes Spiel</span>
+                        ) : (
+                          <>
+                            {formatDatum(s.datum)} ·{" "}
+                            {s.ort === "Heim" ? "Heim" : "Auswärts"}
+                          </>
+                        )}
+                      </p>
+                      <p className="mt-1.5 truncate text-sm font-bold text-text">
+                        {gegnerVon(s)}
+                      </p>
+                      <div className="mt-2 flex items-center gap-2">
+                        {tore ? (
+                          <>
+                            <AusgangsZeichen ausgang={ausgang} />
+                            <span className="font-display text-lg font-extrabold text-text">
+                              {tore[0]}:{tore[1]}
+                            </span>
+                          </>
+                        ) : vergangen ? (
+                          <span className="text-sm text-text-leise">noch offen</span>
+                        ) : (
+                          /*
+                            Das Datum steht hier NUR beim naechsten Spiel.
+                            Bei den uebrigen kommenden Partien steht es
+                            schon in der Zeile darueber, und am 08.09.2026
+                            stand im Bildschirmfoto zweimal "20.09.2026"
+                            untereinander im selben Eintrag. Der Eintrag
+                            "Naechstes Spiel" hat oben stattdessen sein
+                            Etikett und braucht das Datum deshalb hier.
+                          */
+                          <span className="font-display text-lg font-extrabold text-fisch-yellow">
+                            {istNaechstes ? `${formatDatum(s.datum)} · ` : ""}
+                            {s.uhrzeit}
+                          </span>
+                        )}
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
+              {/*
+                Verlauf am rechten Rand, nur auf dem Handy: Er zeigt, dass
+                das Band weitergeht. Ein abgeschnittener Eintrag allein
+                reicht als Hinweis nicht, wenn er zufaellig genau an einer
+                Kante endet.
+              */}
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-y-0 -right-5 w-12 bg-gradient-to-l from-fisch-black to-transparent sm:hidden"
+              />
+            </div>
+
+            <div>
+              <Link
+                href="/fussball/spielplan"
+                className="inline-flex shrink-0 items-center gap-2 self-start rounded-full bg-fisch-yellow px-5 py-2.5 text-sm font-bold text-fisch-black transition-colors hover:bg-fisch-yellow-dark"
+              >
+                Kompletter Spielplan{" "}
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+            </div>
           </div>
         )}
 
