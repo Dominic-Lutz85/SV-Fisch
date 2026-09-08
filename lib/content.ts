@@ -11,6 +11,7 @@ import spielplanData from "@/content/spielplan.json";
 import spielplanBambiniData from "@/content/spielplan-bambini.json";
 import termineData from "@/content/termine.json";
 import galerieData from "@/content/galerie.json";
+import meldungenData from "@/content/meldungen.json";
 
 import type {
   VorstandsMitglied,
@@ -22,6 +23,7 @@ import type {
   NewsArtikel,
   NewsFrontmatter,
   GalerieAlbum,
+  Meldung,
 } from "@/types/content";
 import { normalizeAssetPath } from "@/lib/utils";
 
@@ -114,6 +116,50 @@ export function getLetzteErgebnisse(
   heute: string = heuteInDeutschland()
 ): Spiel[] {
   return getVergangeneSpiele(spiele, heute).slice(0, anzahl);
+}
+
+/*
+ * Die Meldungen fuer den Aushang, gefiltert nach dem heutigen Tag.
+ *
+ * Die Pruefung der Form steht hier und nicht in einem eigenen Waechter:
+ * Eine kaputte Meldung soll den Build abbrechen und nicht still
+ * verschwinden. Auf einem Aushang steht die Absage eines Spiels, und die
+ * darf nicht wegen eines Tippfehlers im Datum unsichtbar sein.
+ *
+ * Sortiert wird Dringendes nach vorn, danach das, was zuerst ablaeuft.
+ * Mehr als zwei werden nicht gezeigt: Sind es mehr, stimmt die Auswahl
+ * nicht, und dann ist der Aushang ein zweiter Nachrichtenkanal geworden.
+ */
+export function getMeldungen(heute: string = heuteInDeutschland()): Meldung[] {
+  const alle = meldungenData as Meldung[];
+
+  for (const m of alle) {
+    const fehler: string[] = [];
+    if (!m.id) fehler.push("id fehlt");
+    if (m.stufe !== "dringend" && m.stufe !== "hinweis")
+      fehler.push(`stufe ist "${m.stufe}", erlaubt sind dringend und hinweis`);
+    if (!m.text?.trim()) fehler.push("text fehlt");
+    for (const feld of ["von", "bis"] as const) {
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(m[feld] ?? ""))
+        fehler.push(`${feld} ist kein Datum im Format JJJJ-MM-TT`);
+    }
+    if (m.von && m.bis && m.von > m.bis) fehler.push("von liegt nach bis");
+    if (fehler.length > 0) {
+      throw new Error(
+        `content/meldungen.json, Eintrag "${m.id ?? "ohne id"}": ` +
+          fehler.join("; ") +
+          ". Das Format steht in types/content.ts bei Meldung."
+      );
+    }
+  }
+
+  return alle
+    .filter((m) => m.von <= heute && m.bis >= heute)
+    .sort((a, b) => {
+      if (a.stufe !== b.stufe) return a.stufe === "dringend" ? -1 : 1;
+      return a.bis < b.bis ? -1 : 1;
+    })
+    .slice(0, 2);
 }
 
 export function getTermine(): Termin[] {

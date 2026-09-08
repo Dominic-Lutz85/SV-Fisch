@@ -112,3 +112,58 @@ export interface GalerieAlbum {
   cover: string;
   bilder: GalerieBild[];
 }
+
+/*
+ * EINE MELDUNG FUER DEN AUSHANG ueber dem Kopfbereich.
+ *
+ * Gedacht fuer das, was im Verein wirklich dringend ist und wofuer niemand
+ * einen Artikel schreibt: Absagen, Verlegungen, Aufrufe. Wer daraus einen
+ * zweiten Nachrichtenkanal macht, hat den Sinn verfehlt.
+ *
+ * SO TRAEGT MAN EINE MELDUNG EIN, in content/meldungen.json:
+ *
+ *   [
+ *     {
+ *       "id": "absage-13-09",
+ *       "stufe": "dringend",
+ *       "text": "Das Spiel am Sonntag faellt aus, der Platz ist gesperrt.",
+ *       "von": "2026-09-11",
+ *       "bis": "2026-09-14",
+ *       "link": { "text": "Zum Spielplan", "ziel": "/fussball/spielplan" }
+ *     }
+ *   ]
+ *
+ * Eine leere Liste ist der Normalfall. Dann erscheint gar nichts, und das
+ * ist richtig so: Ein Aushang, an dem immer etwas haengt, wird nicht mehr
+ * gelesen.
+ */
+export interface Meldung {
+  /* Eindeutig und stabil, dient nur als Schluessel in der Liste. */
+  id: string;
+  /*
+   * Zwei Stufen, und die Frage dahinter ist eindeutig zu beantworten:
+   *
+   *   dringend   Faehrt jemand umsonst zum Platz, wenn er das nicht liest?
+   *              Absagen, Verlegungen, gesperrter Platz.
+   *   hinweis    Alles andere. Einladungen, Helfersuche, Aufrufe.
+   *
+   * Eine dritte Stufe gibt es bewusst nicht. "Ist das mittelwichtig" kann
+   * niemand entscheiden, und eine Stufe, die niemand richtig waehlt, ist
+   * schlimmer als keine.
+   */
+  stufe: "dringend" | "hinweis";
+  /* Ein Satz. Wer zwei braucht, schreibt einen Beitrag unter content/news. */
+  text: string;
+  /* Ab wann sie erscheint, als "JJJJ-MM-TT". */
+  von: string;
+  /*
+   * Bis einschliesslich welchem Tag sie haengt.
+   *
+   * Das ist der wichtigste Teil des ganzen Aushangs: Er nimmt sich SELBST
+   * wieder ab. Ein Aushang, den jemand von Hand abhaengen muss, haengt im
+   * Maerz noch am Sportplatz. Dieselbe Lehre wie beim Spielplan in
+   * lib/content.ts: Ein Datum veraltet nicht, ein Haken schon.
+   */
+  bis: string;
+  link?: { text: string; ziel: string };
+}

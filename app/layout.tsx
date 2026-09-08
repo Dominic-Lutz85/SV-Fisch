@@ -3,7 +3,9 @@ import { Sora, Inter } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CookieBanner from "@/components/CookieBanner";
+import Meldungsleiste from "@/components/Meldungsleiste";
 import { siteConfig } from "@/lib/config";
+import { getMeldungen } from "@/lib/content";
 import "./globals.css";
 
 const sora = Sora({
@@ -90,6 +92,18 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           Zum Inhalt springen
         </a>
         <Header />
+        {/*
+          DER AUSHANG, seit 08.09.2026. Er steht ZWISCHEN Kopfleiste und
+          Inhalt und damit auf jeder Seite: Eine Spielabsage betrifft auch
+          den, der gerade den Kader liest.
+
+          Die Begruendung zu Stufen, Sortierung und Selbstabbau steht in
+          components/Meldungsleiste.tsx und bei Meldung in types/content.ts.
+          Ist die Liste leer, rendert die Komponente nichts, und das ist der
+          Normalfall: Ein Aushang, an dem immer etwas haengt, wird nicht mehr
+          gelesen.
+        */}
+        <Meldungsleiste meldungen={getMeldungen()} />
         <main id="main-content" className="flex-1">
           {children}
         </main>

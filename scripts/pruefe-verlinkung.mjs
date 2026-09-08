@@ -34,8 +34,6 @@ const BRAUCHT_KEINEN_VERWEIS = new Set([
    * Erkundungsseite anlegt und beide Waechter vergisst, legt den Build
    * still lahm, und der Verdacht faellt dann auf alles andere.
    */
-  "/vorschau/ergebnis",
-  "/vorschau/ergebnis/buehne",
 ]);
 
 if (!existsSync(GEBAUT)) {
