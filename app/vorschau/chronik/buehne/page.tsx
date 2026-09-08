@@ -6,6 +6,12 @@ import {
   ChronikWachsend,
   ChronikKlammer,
 } from "@/components/vorschau/ChronikVarianten";
+import {
+  FuehrungBleibt,
+  FuehrungWeg,
+  FuehrungUnterteilt,
+  FuehrungSpur,
+} from "@/components/vorschau/LinienFuehrung";
 
 /* ERKUNDUNG, KEIN PRODUKTIONSCODE. Nur das Chronikband, ohne Umgebung. */
 
@@ -19,6 +25,17 @@ export default async function ChronikBuehne({
   if (process.env.NODE_ENV === "production") notFound();
   const { v } = await searchParams;
 
+  const fassungen: Record<string, React.ReactNode> = {
+    baelle: <ChronikBaelle />,
+    letzter: <ChronikLetzterBall />,
+    wachsend: <ChronikWachsend />,
+    klammer: <ChronikKlammer />,
+    bleibt: <FuehrungBleibt />,
+    weg: <FuehrungWeg />,
+    unterteilt: <FuehrungUnterteilt />,
+    spur: <FuehrungSpur />,
+  };
+
   return (
     <>
       <style>{`
@@ -26,19 +43,9 @@ export default async function ChronikBuehne({
         body > header { display: none !important; }
         [role="dialog"] { display: none !important; }
       `}</style>
-      {/* Etwas dunkler Grund oben und unten, damit die Kanten sichtbar sind. */}
+      {/* Dunkler Grund oben und unten, damit die Kanten sichtbar sind. */}
       <div className="h-10 bg-fisch-black" />
-      {v === "baelle" ? (
-        <ChronikBaelle />
-      ) : v === "letzter" ? (
-        <ChronikLetzterBall />
-      ) : v === "wachsend" ? (
-        <ChronikWachsend />
-      ) : v === "klammer" ? (
-        <ChronikKlammer />
-      ) : (
-        <Erfolgstreppe />
-      )}
+      {fassungen[v ?? ""] ?? <Erfolgstreppe />}
       <div className="h-10 bg-fisch-black" />
     </>
   );
