@@ -30,7 +30,16 @@
  */
 
 const TEAM = "sv-fisch-m1";
-const ADRESSE = `https://api.fupa.net/v1/widget/teams/${TEAM}/standings`;
+const BASIS = `https://api.fupa.net/v1/widget/teams/${TEAM}`;
+
+/*
+ * limit=100 ist nicht schmueckend. Ohne den Parameter liefert die
+ * Schnittstelle 25 Eintraege und schneidet ab, siehe die lange Begruendung
+ * in lib/fupa.ts. Steht er hier nicht, prueft der Waechter etwas anderes
+ * als das, was die Seite anzeigt, und genau das waere wertlos.
+ */
+const ADRESSE = `${BASIS}/standings?limit=100`;
+const ADRESSE_SPIELE = `${BASIS}/matches?limit=100`;
 
 /* Kurz genug, dass ein Build nicht daran haengt. */
 const ZEITLIMIT_MS = 8000;
@@ -38,7 +47,7 @@ const ZEITLIMIT_MS = 8000;
 /* Auf stderr, damit es zwischen den Build-Ausgaben auffaellt. */
 const warne = (zeile) => console.error(zeile);
 
-async function holeTabelle() {
+async function holeJson(adresse) {
   /*
    * Eigener Controller statt AbortSignal.timeout(): Dessen Timer bleibt
    * offen, und zusammen mit process.exit() brach Node beim Aufraeumen mit
@@ -49,7 +58,7 @@ async function holeTabelle() {
   const abbruch = new AbortController();
   const uhr = setTimeout(() => abbruch.abort(), ZEITLIMIT_MS);
   try {
-    const roh = await fetch(ADRESSE, {
+    const roh = await fetch(adresse, {
       signal: abbruch.signal,
       headers: { "User-Agent": "sv-fisch.com build check" },
     });
@@ -63,7 +72,7 @@ async function holeTabelle() {
 function meldeAusfall(fehler) {
   warne("");
   warne("  FuPa-Schnittstelle nicht erreichbar.");
-  warne(`  ${ADRESSE}`);
+  warne(`  ${BASIS}`);
   warne(`  Grund: ${fehler.message}`);
   warne("");
   warne("  Die Seite laeuft weiter: lib/fupa.ts faellt auf");
@@ -125,12 +134,34 @@ function pruefeZeilen(zeilen) {
     });
   }
 
-  return { proben, durchgefallen: proben.filter((p) => !p.bestanden) };
+  return proben;
+}
+
+/**
+ * Die Spielzahl gegen die Groesse der Liga.
+ *
+ * In einer Liga mit N Mannschaften spielt jede (N-1) mal hin und (N-1) mal
+ * zurueck. Bei 14 Mannschaften sind das 26 Spiele. Diese Probe gibt es, weil
+ * am 09.09.2026 genau hier etwas durchgerutscht ist: Die Schnittstelle
+ * lieferte ohne limit=100 nur 21 Ligaspiele, die letzten vier Spieltage
+ * fehlten auf der Seite, und der Build meldete trotzdem alles gruen. Eine
+ * Pruefung, die nur die Tabelle ansieht, ist an dieser Stelle blind.
+ */
+function pruefeSpiele(spiele, mannschaften) {
+  const liga = spiele.filter((m) => m.category === "league");
+  const erwartet = (mannschaften - 1) * 2;
+  return {
+    name: `Ligaspiele vollstaendig (${erwartet} bei ${mannschaften} Mannschaften)`,
+    bestanden: liga.length === erwartet,
+    hinweis: `${liga.length} angekommen, letztes am ${
+      liga.length ? liga[liga.length - 1].kickoff.slice(0, 10) : "-"
+    }`,
+  };
 }
 
 let antwort;
 try {
-  antwort = await holeTabelle();
+  antwort = await holeJson(ADRESSE);
 } catch (fehler) {
   meldeAusfall(fehler);
   /*
@@ -143,7 +174,26 @@ try {
 
 if (antwort) {
   const zeilen = antwort.standings ?? [];
-  const { proben, durchgefallen } = pruefeZeilen(zeilen);
+  const proben = pruefeZeilen(zeilen);
+
+  /*
+   * Der Spielplan wird nur geprueft, wenn die Tabelle steht: Ohne die Zahl
+   * der Mannschaften gibt es keine Erwartung, gegen die man zaehlen koennte.
+   */
+  if (zeilen.length > 0) {
+    try {
+      const spielDaten = await holeJson(ADRESSE_SPIELE);
+      proben.push(pruefeSpiele(spielDaten?.matches ?? [], zeilen.length));
+    } catch (fehler) {
+      proben.push({
+        name: "Spielplan abrufbar",
+        bestanden: false,
+        hinweis: fehler.message,
+      });
+    }
+  }
+
+  const durchgefallen = proben.filter((p) => !p.bestanden);
 
   if (durchgefallen.length === 0) {
     const fisch = zeilen.find((z) =>

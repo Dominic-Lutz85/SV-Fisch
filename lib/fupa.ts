@@ -46,6 +46,24 @@ const TEAM_SLUG = "sv-fisch-m1";
 const BASIS = "https://api.fupa.net/v1/widget/teams";
 
 /*
+ * WARUM AN JEDER ADRESSE limit=100 HAENGT, und das ist teuer gelernt:
+ *
+ * Ohne den Parameter liefert die Schnittstelle 25 Eintraege und schneidet
+ * den Rest ab. Bei 14 Mannschaften hat die Saison aber 26 Spieltage, und
+ * weil FuPa die Testspiele mitzaehlt, kamen am 09.09.2026 nur 21 Ligaspiele
+ * an. Die letzten vier Spieltage fehlten auf /fussball/spielplan, bis zum
+ * 18.04.2027 statt bis zum 23.05.2027.
+ *
+ * Gefunden ist das erst NACH dem Ausliefern, beim Suchen nach einem Merkmal,
+ * an dem sich die neue Fassung live erkennen laesst. Der Vergleich mit der
+ * Datei im Repo hat den Fehler aufgedeckt, nicht eine Pruefung. Deshalb
+ * zaehlt scripts/pruefe-fupa.mjs die Spiele jetzt gegen die Zahl, die sich
+ * aus der Tabelle ergibt.
+ *
+ * Nebenbefund: Die Datei im Repo hatte selbst nur 25 der 26 Spiele.
+ */
+
+/*
  * Fuenf Minuten, weil FuPa in seiner eigenen Cache-Control-Kopfzeile
  * s-maxage=300 setzt. Kuerzer waere unhoeflich und brauchte kein Mensch: ein
  * Kreisliga-Ergebnis wird sonntags einmal eingetragen.
@@ -131,7 +149,7 @@ function vereinsSchreibweise(wettbewerb: string): string {
  */
 async function hole<T>(pfad: string): Promise<T | null> {
   try {
-    const antwort = await fetch(`${BASIS}/${TEAM_SLUG}/${pfad}`, {
+    const antwort = await fetch(`${BASIS}/${TEAM_SLUG}/${pfad}?limit=100`, {
       next: { revalidate: REVALIDATE },
       signal: AbortSignal.timeout(5000),
     });
