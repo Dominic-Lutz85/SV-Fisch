@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Ansehen: Inhalte pflegen &middot; SV Fisch</title>
+    <link href="/admin/vorfuehrung.yml" type="application/yaml" rel="cms-config-url" />
+    <!--
+      Sveltia CMS, die Redaktionsoberflaeche fuer die Vereinsseite.
+
+      WARUM DIESE DATEI EINE REINE HTML-DATEI IN public/ IST UND KEINE
+      NEXT-SEITE: Das CMS ist eine eigenstaendige Anwendung, die den Inhalt
+      des Repos liest und schreibt. Als Next-Route wuerde sie durch das
+      Layout des Vereins laufen, also Kopfleiste, Fusszeile und
+      Zustimmungsdialog mitbringen, und beim Bauen von den Waechtern geprueft
+      werden, die fuer Seiten der Vereinsseite gedacht sind. In public/ liegt
+      sie daneben statt darin.
+
+      WARUM DIE VERSION FESTGENAGELT IST: Ohne Versionsnummer laedt jeder
+      Aufruf die neueste Fassung. Ein Verein merkt eine Aenderung an dieser
+      Oberflaeche erst, wenn jemand einen Artikel schreiben will und etwas
+      nicht mehr da ist, wo es war. Eine feste Version aendert sich nur, wenn
+      jemand sie bewusst aendert und danach nachsieht.
+    -->
+    <script src="https://unpkg.com/@sveltia/cms@0.114.0/dist/sveltia-cms.js"></script>
+    <style>
+      /*
+        Nur das Noetigste: Die Oberflaeche bringt ihr eigenes Aussehen mit,
+        und daran herumzubauen waere die erste Stelle, die bei einem Update
+        bricht. Was hier steht, ist der Zustand VOR dem Laden des Skripts,
+        damit niemand vor einer weissen Seite sitzt.
+      */
+      :root { color-scheme: light dark; }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+        background: #141410;
+        color: #e6e4da;
+      }
+      #laedt {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        padding: 2rem;
+        text-align: center;
+      }
+      #laedt strong { font-size: 1.25rem; }
+      #laedt span { color: #9d9b91; max-width: 30rem; line-height: 1.6; }
+      /* Sobald das CMS geladen hat, haengt es sich davor. */
+    </style>
+  </head>
+  <body>
+    <div id="laedt">
+      <strong>Inhalte des SV Fisch</strong>
+      <span>
+        Einen Moment, die Bearbeitung wird geladen. Falls hier nichts
+        passiert: Diese Seite braucht einen aktuellen Browser
+        (Chrome, Edge oder Brave).
+      </span>
+    </div>
+  </body>
+</html>

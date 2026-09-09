@@ -1,0 +1,291 @@
+# NUR ZUM ANSEHEN, 09.09.2026. Nicht die richtige Konfiguration.
+# Test-Backend: laeuft ohne Anmeldung, speichert nichts, zeigt
+# dafuer die echten Felder und Hinweistexte. Fliegt nach der
+# Entscheidung raus.
+
+# Redaktionsoberflaeche des SV Fisch
+#
+# Diese Datei bestimmt, was unter /admin bearbeitet werden kann und wie die
+# Felder heissen. Sie ist bewusst in Vereinssprache geschrieben und nicht in
+# Entwicklersprache: "Kurzfassung fuer die Startseite" statt "teaser",
+# "Beitragsbild" statt "teaserbild".
+#
+# WAS HIER ABSICHTLICH FEHLT, und das ist die wichtigste Zeile der Datei:
+#
+# Spielplan, Tabelle und der Kader der ersten Mannschaft stehen NICHT drin.
+# Die kommen seit dem 09.09.2026 von FuPa und pflegen sich selbst (siehe
+# lib/fupa.ts). Die Dateien content/spielplan.json, content/tabelle.json und
+# content/kader.json liegen zwar noch im Projekt, sind aber nur der Rueckfall
+# fuer den Fall, dass FuPa nicht antwortet.
+#
+# Stuenden sie hier, wuerde frueher oder spaeter jemand dort ein Ergebnis
+# eintragen, speichern, und sich wundern, dass auf der Seite nichts passiert.
+# Das ist schlimmer als gar keine Bearbeitungsmoeglichkeit: Es sieht aus, als
+# waere die Seite kaputt.
+
+backend:
+  name: test-repo
+  # Was oben im Bearbeitungsfenster als Beschreibung des Speicherns steht.
+  commit_messages:
+    create: 'Neu angelegt: {{collection}} "{{slug}}"'
+    update: 'Geaendert: {{collection}} "{{slug}}"'
+    delete: 'Geloescht: {{collection}} "{{slug}}"'
+    uploadMedia: 'Bild hochgeladen: {{path}}'
+    deleteMedia: 'Bild geloescht: {{path}}'
+
+# Wohin hochgeladene Bilder wandern und wie sie danach in der Seite heissen.
+media_folder: public/news
+public_folder: /news
+
+locale: de
+
+# Deutsche Beschriftung der Oberflaeche selbst.
+i18n:
+  structure: single_file
+  locales: [de]
+  default_locale: de
+
+collections:
+  # ---------------------------------------------------------------------
+  # Das Wichtigste zuerst: Neuigkeiten. Alles andere aendert sich selten.
+  # ---------------------------------------------------------------------
+  - name: neuigkeiten
+    label: Neuigkeiten
+    label_singular: Neuigkeit
+    description: >-
+      Berichte, Ankuendigungen und Vereinsnachrichten. Was hier steht,
+      erscheint auf der Startseite und unter "Aktuelles". Der neueste
+      Beitrag steht immer oben.
+    folder: content/news
+    create: true
+    # Der Dateiname entsteht aus dem Titel. Niemand muss ihn eintippen.
+    slug: '{{slug}}'
+    extension: md
+    format: frontmatter
+    summary: '{{title}} ({{date}})'
+    sortable_fields: [date, title]
+    view_filters:
+      - label: Nur Fussball
+        field: kategorie
+        pattern: Fußball
+      - label: Nur Verein
+        field: kategorie
+        pattern: Verein
+    fields:
+      - label: Überschrift
+        name: title
+        widget: string
+        hint: >-
+          Kurz und sagend, so wie es jemand einem Nachbarn erzählen würde.
+          "Heimsieg gegen Tawern" ist besser als "Spielbericht 5. Spieltag".
+
+      - label: Datum
+        name: date
+        widget: datetime
+        date_format: 'DD.MM.YYYY'
+        time_format: false
+        picker_utc: false
+        hint: >-
+          Das Datum bestimmt die Reihenfolge. Der neueste Beitrag steht
+          oben auf der Startseite.
+
+      - label: Bereich
+        name: kategorie
+        widget: select
+        options: ['Fußball', 'Verein', 'Gymnastik', 'Darts', 'Jugend']
+        default: Verein
+        hint: >-
+          Wonach Besucher später filtern können. Im Zweifel "Verein".
+
+      - label: Kurzfassung für die Startseite
+        name: teaser
+        widget: text
+        hint: >-
+          Ein bis zwei Sätze. Genau das steht auf der Startseite in der
+          Vorschau, der ganze Text erscheint erst nach dem Klick. Also
+          hier schon verraten, worum es geht, und nicht nur anteasern.
+
+      - label: Beitragsbild
+        name: teaserbild
+        widget: image
+        required: false
+        # Ein Bild darf fehlen, aber ein Bild ohne Beschreibung nicht.
+        hint: >-
+          Ein Foto vom Spiel oder vom Verein. Darf leer bleiben, dann
+          zeichnet die Seite eine gestaltete Fläche. Bitte kein Foto von
+          fremden Seiten nehmen.
+
+      - label: Der Beitrag
+        name: body
+        widget: markdown
+        hint: >-
+          Der eigentliche Text. Fett und Überschriften über die Leiste
+          oben, Absätze durch eine Leerzeile.
+
+  # ---------------------------------------------------------------------
+  # Termine: eine feste Liste, kein Ordner. Es gibt nur eine davon.
+  # ---------------------------------------------------------------------
+  - name: listen
+    label: Feste Seiten und Listen
+    description: >-
+      Angaben, die sich selten ändern: Termine, Bilder, Sponsoren,
+      Vorstand und die Bambini.
+    files:
+      - name: termine
+        label: Termine
+        file: content/termine.json
+        description: Was im Vereinsjahr ansteht.
+        fields:
+          - label: Termine
+            name: eintraege
+            widget: list
+            label_singular: Termin
+            summary: '{{fields.titel}} am {{fields.datum}}'
+            fields:
+              - { label: Kennung, name: id, widget: string, hint: 'Ein kurzes Wort ohne Leerzeichen, z. B. sommerfest-2026. Wird nicht angezeigt.' }
+              - { label: Was, name: titel, widget: string }
+              - { label: Wann, name: datum, widget: datetime, date_format: 'DD.MM.YYYY', time_format: false, picker_utc: false }
+              - { label: Wo, name: ort, widget: string }
+              - label: Bereich
+                name: kategorie
+                widget: select
+                options: ['Verein', 'Fußball', 'Gymnastik', 'Darts', 'Jugend']
+              - { label: Beschreibung, name: beschreibung, widget: text, required: false }
+
+      - name: galerie
+        label: Bildergalerie
+        file: content/galerie.json
+        description: Fotoalben. Jedes Album hat ein Titelbild und beliebig viele Fotos.
+        fields:
+          - label: Alben
+            name: alben
+            widget: list
+            label_singular: Album
+            summary: '{{fields.titel}}'
+            fields:
+              - { label: Kennung, name: slug, widget: string, hint: 'Kurzes Wort ohne Leerzeichen, z. B. saison-2026-27. Steht später in der Adresse.' }
+              - { label: Titel, name: titel, widget: string }
+              - { label: Datum, name: datum, widget: datetime, date_format: 'DD.MM.YYYY', time_format: false, picker_utc: false }
+              - { label: Titelbild, name: cover, widget: image, media_folder: /public/gallery, public_folder: /gallery }
+              - label: Fotos
+                name: bilder
+                widget: list
+                label_singular: Foto
+                summary: '{{fields.alt}}'
+                fields:
+                  - { label: Foto, name: src, widget: image, media_folder: /public/gallery, public_folder: /gallery }
+                  - label: Bildbeschreibung
+                    name: alt
+                    widget: string
+                    hint: >-
+                      Was auf dem Bild zu sehen ist, in einem Satz. Das
+                      lesen blinde Besucher vor, und Google auch. Nicht
+                      "Bild1", sondern "Torjubel beim Heimspiel".
+
+      - name: sponsoren
+        label: Sponsoren
+        file: content/sponsoren.json
+        description: >-
+          Die Logos in der Fußzeile und auf der Sponsorenseite.
+        fields:
+          - label: Sponsoren
+            name: eintraege
+            widget: list
+            label_singular: Sponsor
+            summary: '{{fields.name}}'
+            fields:
+              - { label: Firma, name: name, widget: string }
+              - label: Stufe
+                name: stufe
+                widget: select
+                options: ['Hauptsponsor', 'Co-Sponsor']
+              - { label: Logo, name: logo, widget: image, media_folder: /public/sponsoren, public_folder: /sponsoren }
+              - label: Breite des Logos in Bildpunkten
+                name: breite
+                widget: number
+                value_type: int
+                hint: >-
+                  Die echte Breite der Bilddatei. Steht in den
+                  Dateieigenschaften. Stimmt sie nicht, wird das Logo
+                  verzerrt oder die Seite springt beim Laden.
+              - { label: Höhe des Logos in Bildpunkten, name: hoehe, widget: number, value_type: int }
+              - label: Was die Firma macht
+                name: beschreibung
+                widget: text
+                hint: >-
+                  EIN Satz, und zwar von der Internetseite der Firma
+                  abgeschrieben, nicht ausgedacht. Eine falsche Angabe
+                  über ein fremdes Unternehmen auf der Vereinsseite ist
+                  ein echtes Problem.
+              - { label: Ort, name: ort, widget: string, required: false }
+              - { label: Internetseite, name: url, widget: string, required: false, hint: 'Mit https:// davor. Leer lassen, wenn die Firma keine hat.' }
+
+      - name: vorstand
+        label: Vorstand
+        file: content/vorstand.json
+        fields:
+          - label: Vorstand
+            name: eintraege
+            widget: list
+            label_singular: Person
+            summary: '{{fields.name}} ({{fields.rolle}})'
+            fields:
+              - { label: Name, name: name, widget: string }
+              - { label: Amt, name: rolle, widget: string }
+              - label: Bereich
+                name: bereich
+                widget: select
+                options: ['Verein', 'Fußball', 'Gymnastik', 'Jugend', 'Darts']
+              - { label: E-Mail, name: email, widget: string, required: false }
+
+      - name: bambini_kader
+        label: 'Bambini: Mannschaft'
+        file: content/kader-bambini.json
+        description: >-
+          Die Bambini pflegt FuPa nicht, deshalb steht die Mannschaft hier
+          von Hand.
+        fields:
+          - label: Kinder
+            name: eintraege
+            widget: list
+            label_singular: Kind
+            summary: '{{fields.name}}'
+            fields:
+              - { label: Rückennummer, name: nummer, widget: number, value_type: int, required: false }
+              - { label: Name, name: name, widget: string }
+              - label: Position
+                name: position
+                widget: select
+                options: ['Torwart', 'Abwehr', 'Mittelfeld', 'Sturm', 'Trainer']
+
+      - name: bambini_spiele
+        label: 'Bambini: Spiele'
+        file: content/spielplan-bambini.json
+        description: >-
+          Termine und Ergebnisse der Bambini. Auch die pflegt FuPa nicht.
+        fields:
+          - label: Spiele
+            name: eintraege
+            widget: list
+            label_singular: Spiel
+            summary: '{{fields.heim}} gegen {{fields.auswaerts}} am {{fields.datum}}'
+            fields:
+              - { label: Datum, name: datum, widget: datetime, date_format: 'DD.MM.YYYY', time_format: false, picker_utc: false }
+              - { label: Anstoß, name: uhrzeit, widget: string, hint: 'Zum Beispiel 14:00' }
+              - { label: Runde oder Turnier, name: wettbewerb, widget: string }
+              - { label: Heimmannschaft, name: heim, widget: string }
+              - { label: Gastmannschaft, name: auswaerts, widget: string }
+              - label: Heim oder auswärts
+                name: ort
+                widget: select
+                options: ['Heim', 'Auswärts']
+                hint: 'Aus Sicht des SV Fisch.'
+              - { label: Spielstätte, name: spielstaette, widget: string, required: false }
+              - label: Schon gespielt
+                name: gespielt
+                widget: boolean
+                default: false
+                hint: >-
+                  Erst anhaken, wenn das Spiel vorbei ist und das Ergebnis
+                  darunter steht.
+              - { label: Ergebnis, name: ergebnis, widget: string, required: false, hint: 'Im Format 3:1, immer Heim zuerst.' }
