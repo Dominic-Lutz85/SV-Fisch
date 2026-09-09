@@ -1,4 +1,6 @@
 import type { Spiel, TabellenZeile } from "@/types/content";
+import { getSpielplan, getTabelle } from "@/lib/content";
+import { siteConfig } from "@/lib/config";
 
 /*
  * Spieldaten direkt von FuPa, serverseitig geholt.
@@ -53,6 +55,9 @@ const REVALIDATE = 300;
 /** Wie der Verein heisst, den FuPa hier meint. */
 const EIGENER_VEREIN = "SV Fisch";
 
+/* FuPa nennt keine Spielstaette, die steht in der Vereins-Konfiguration. */
+const HEIMSPIELSTAETTE = siteConfig.contact.addressLines[0];
+
 interface FupaTeam {
   name: { full: string; middle: string; short: string };
   /* 1 ist die erste Mannschaft, 2 die zweite. FuPa haengt kein "II" an. */
@@ -96,6 +101,24 @@ interface FupaMatch {
 function vollerName(team: FupaTeam): string {
   const roh = team.name.full.trim();
   return team.level > 1 ? `${roh} ${"I".repeat(team.level)}` : roh;
+}
+
+/**
+ * FuPas Schreibweise des Wettbewerbs auf die des Vereins bringen.
+ *
+ * FuPa liefert "Kreisliga B Staffel 10 Trier Saarburg", ohne Bindestrich.
+ * Der Landkreis heisst Trier-Saarburg, und an drei festen Stellen der Seite
+ * steht es auch so (Startseite, Tabellenseite, Erfolgstreppe). Ohne diese
+ * Zeile stuenden nach der Umstellung beide Schreibweisen im selben
+ * Bildschirm: oben im Kopfbereich ohne Strich, zwei Abschnitte tiefer mit.
+ *
+ * Am 09.09.2026 beim Ansehen der umgestellten Startseite gefunden, nicht
+ * beim Bauen. Bewusst eine einzelne, benannte Ersetzung und keine Liste:
+ * Wer hier weitere Namen einpflegt, baut sich eine Pflegestelle, die genau
+ * das Problem zurueckbringt, das der Umbau beseitigen sollte.
+ */
+function vereinsSchreibweise(wettbewerb: string): string {
+  return wettbewerb.replace("Trier Saarburg", "Trier-Saarburg");
 }
 
 /**
@@ -170,7 +193,7 @@ export async function holeSpielplan(
       const spiel: Spiel = {
         datum: m.kickoff.slice(0, 10),
         uhrzeit: m.kickoff.slice(11, 16),
-        wettbewerb: m.competition.name,
+        wettbewerb: vereinsSchreibweise(m.competition.name),
         heim,
         auswaerts,
         ort: zuhause ? "Heim" : "Auswärts",
@@ -183,4 +206,37 @@ export async function holeSpielplan(
     .sort((a, b) => (a.datum < b.datum ? -1 : 1));
 
   return spiele.length ? spiele : null;
+}
+
+/*
+ * Ab hier: was die Seiten wirklich aufrufen.
+ *
+ * WARUM DER RUECKFALL HIER STEHT UND NICHT IN DEN SEITEN:
+ *
+ * Zwei Seiten zeigen dieselben Zahlen, die Startseite und
+ * /fussball/spielplan. Stuende das "wenn null, dann die Datei" in beiden,
+ * gaebe es zwei Fassungen derselben Regel, und sie laufen irgendwann
+ * auseinander. Genau davor warnt der Kommentar oben in lib/ergebnis.ts, und
+ * genau dieser Fehler war am 09.09.2026 der Anlass fuer den ganzen Umbau:
+ * zwei Quellen fuer dieselbe Tabelle, eine davon veraltet.
+ */
+
+/**
+ * Der Spielplan, so aktuell wie zu bekommen.
+ *
+ * Antwortet FuPa nicht, kommt die Datei aus dem Repo. Sie ist dann alt, aber
+ * vollstaendig, und weil sie auch die kommenden Spiele enthaelt, schlaegt
+ * letzterSpielstand() in lib/ergebnis.ts nach zwei Tagen von selbst Alarm:
+ * Ein gespieltes Spiel ohne Ergebnis faellt auf der Seite auf. Der Rueckfall
+ * ist also nicht stumm, er meldet sich nur ueber den Umweg des Ergebnisses.
+ */
+export async function aktuellerSpielplan(): Promise<Spiel[]> {
+  const gemeldet = await holeSpielplan(HEIMSPIELSTAETTE);
+  return gemeldet ?? getSpielplan();
+}
+
+/** Die Tabelle, so aktuell wie zu bekommen. Sonst die Datei aus dem Repo. */
+export async function aktuelleTabelle(): Promise<TabellenZeile[]> {
+  const gemeldet = await holeTabelle();
+  return gemeldet ?? getTabelle();
 }

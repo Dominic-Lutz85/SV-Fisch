@@ -2,18 +2,20 @@ import type { Metadata } from "next";
 import PageHeader from "@/components/PageHeader";
 import PraesentiertVon from "@/components/PraesentiertVon";
 import Fixtures from "@/components/Fixtures";
-import {
-  getSpielplan,
-  getKommendeSpiele,
-  getVergangeneSpiele,
-} from "@/lib/content";
+import { getKommendeSpiele, getVergangeneSpiele } from "@/lib/content";
+import { aktuellerSpielplan } from "@/lib/fupa";
 
 /*
  * Diese Seite zeigt, welche Spiele noch kommen. Das hängt vom heutigen Tag ab,
  * ohne revalidate würde Next sie einmal beim Bauen erzeugen und einfrieren.
- * Einmal pro Stunde neu bauen reicht für einen Spielplan.
+ *
+ * 300 Sekunden, weil die Zahlen seit dem 09.09.2026 aus der FuPa-Schnittstelle
+ * kommen und die selbst s-maxage=300 vorgibt. Vorher stand hier eine Stunde,
+ * mit der Begründung "reicht für einen Spielplan". Das stimmte, solange ein
+ * Mensch die Datei pflegte: Zwischen Eintragen und Anzeigen lagen ohnehin
+ * Tage. Jetzt ist die Stunde der langsamste Teil der Kette.
  */
-export const revalidate = 3600;
+export const revalidate = 300;
 
 export const metadata: Metadata = {
   title: "Spielplan 1. Mannschaft",
@@ -35,8 +37,8 @@ export const metadata: Metadata = {
  * Deshalb hier untereinander über die volle Breite, jeweils nach Monat
  * gruppiert, das nächste Spiel markiert.
  */
-export default function SpielplanPage() {
-  const spiele = getSpielplan();
+export default async function SpielplanPage() {
+  const spiele = await aktuellerSpielplan();
   const kommende = getKommendeSpiele(spiele, Number.MAX_SAFE_INTEGER);
   const vergangene = getVergangeneSpiele(spiele);
 

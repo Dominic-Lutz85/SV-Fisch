@@ -8,20 +8,25 @@ import Fixtures from "@/components/Fixtures";
 import TeamTableMini from "@/components/TeamTableMini";
 import {
   getAllNews,
-  getSpielplan,
   getKommendeSpiele,
   getNaechsterTermin,
-  getTabelle,
 } from "@/lib/content";
+import { aktuellerSpielplan, aktuelleTabelle } from "@/lib/fupa";
 
 /*
  * Die Startseite zeigt "Nächste Spiele" und den nächsten Termin, beides hängt
  * vom heutigen Tag ab. Ohne revalidate friert Next die Seite beim Bauen ein.
  * Siehe die Begründung in lib/content.ts.
+ *
+ * Seit dem 09.09.2026 stehen hier 300 Sekunden statt einer Stunde, und zwar
+ * nicht gegriffen: Spielplan und Tabelle kommen aus der FuPa-Schnittstelle,
+ * und die gibt in ihrer eigenen Cache-Control-Kopfzeile s-maxage=300 vor.
+ * Eine Stunde Seitenalter ueber einem fuenf Minuten alten Abruf waere eine
+ * Zahl, die nichts mehr bedeutet.
  */
-export const revalidate = 3600;
+export const revalidate = 300;
 
-export default function Home() {
+export default async function Home() {
   const news = getAllNews().slice(0, 9);
   /*
     Der Kopfbereich bekommt den GANZEN Spielplan, nicht nur die kommenden
@@ -30,10 +35,12 @@ export default function Home() {
     lib/ergebnis.ts. Wer hier vorschneidet, nimmt dem Band die
     Vergangenheit.
   */
-  const spielplan = getSpielplan();
+  const [spielplan, tabelle] = await Promise.all([
+    aktuellerSpielplan(),
+    aktuelleTabelle(),
+  ]);
   const kommendeSpiele = getKommendeSpiele(spielplan, 3);
   const naechsterTermin = getNaechsterTermin();
-  const tabelle = getTabelle();
 
   return (
     <>
