@@ -37,6 +37,8 @@ const ABSICHTLICH_DRAUSSEN = new Set([
    * Wer eine neue Erkundungsseite anlegt, traegt sie SOFORT hier ein.
    * Wer die Entscheidung getroffen hat, loescht Seite und Eintrag wieder.
    */
+  "/vorschau/spieldaten",
+  "/vorschau/spieldaten/buehne",
 ]);
 
 /** Alle Seitenadressen unter app/, ohne dynamische Abschnitte. */
