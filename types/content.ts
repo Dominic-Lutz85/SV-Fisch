@@ -100,7 +100,12 @@ export type NewsKategorie = "Fußball" | "Gymnastik" | "Verein";
 
 export interface NewsFrontmatter {
   title: string;
-  slug: string;
+  /*
+   * Optional, weil getAllNews() ihn sonst aus dem Dateinamen ableitet. Wer
+   * in der Redaktionsoberflaeche einen Artikel anlegt, soll sich nicht mit
+   * Adressteilen befassen muessen.
+   */
+  slug?: string;
   date: string;
   kategorie: NewsKategorie;
   teaser: string;

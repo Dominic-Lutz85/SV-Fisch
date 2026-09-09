@@ -2,6 +2,20 @@ import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
 
+/*
+ * ZWEI FORMATE IM ORDNER content/, und das hat einen Grund:
+ *
+ * Die Dateien, die unter /admin bearbeitet werden (vorstand, sponsoren,
+ * termine, galerie und die beiden Bambini-Dateien), haben ihre Liste unter
+ * einem Schluessel: { "eintraege": [...] } bzw. { "alben": [...] }. Die
+ * Redaktionsoberflaeche kann keine Liste auf oberster Ebene schreiben, das
+ * ist bei Decap und Sveltia seit Jahren offen. Ohne den Schluessel haette
+ * das erste Speichern die Datei zerlegt.
+ *
+ * Die Dateien, die NUR der Rueckfall fuer FuPa sind (spielplan, tabelle,
+ * kader), bleiben eine Liste auf oberster Ebene. Sie werden nie von Hand
+ * bearbeitet, und ihre Form spiegelt das, was aus der Schnittstelle kommt.
+ */
 import vorstandData from "@/content/vorstand.json";
 import sponsorenData from "@/content/sponsoren.json";
 import kaderData from "@/content/kader.json";
@@ -30,11 +44,11 @@ import { normalizeAssetPath } from "@/lib/utils";
 const NEWS_DIR = path.join(process.cwd(), "content", "news");
 
 export function getVorstand(): VorstandsMitglied[] {
-  return vorstandData as VorstandsMitglied[];
+  return vorstandData.eintraege as VorstandsMitglied[];
 }
 
 export function getSponsoren(): Sponsor[] {
-  return (sponsorenData as Sponsor[]).map((s) => ({
+  return (sponsorenData.eintraege as Sponsor[]).map((s) => ({
     ...s,
     logo: normalizeAssetPath(s.logo)!,
   }));
@@ -45,7 +59,7 @@ export function getKader(): Spieler[] {
 }
 
 export function getKaderBambini(): Spieler[] {
-  return kaderBambiniData as Spieler[];
+  return kaderBambiniData.eintraege as Spieler[];
 }
 
 export function getTabelle(): TabellenZeile[] {
@@ -59,7 +73,7 @@ export function getSpielplan(): Spiel[] {
 }
 
 export function getSpielplanBambini(): Spiel[] {
-  return [...(spielplanBambiniData as Spiel[])].sort(
+  return [...(spielplanBambiniData.eintraege as Spiel[])].sort(
     (a, b) => new Date(a.datum).getTime() - new Date(b.datum).getTime()
   );
 }
@@ -163,7 +177,7 @@ export function getMeldungen(heute: string = heuteInDeutschland()): Meldung[] {
 }
 
 export function getTermine(): Termin[] {
-  return [...(termineData as Termin[])].sort(
+  return [...(termineData.eintraege as Termin[])].sort(
     (a, b) => new Date(a.datum).getTime() - new Date(b.datum).getTime()
   );
 }
@@ -198,7 +212,7 @@ export function bildVorhanden(src: string): boolean {
 export function getGalerie(): GalerieAlbum[] {
   const fehlend: string[] = [];
 
-  const alben = (galerieData as GalerieAlbum[])
+  const alben = (galerieData.alben as GalerieAlbum[])
     .map((album) => {
       const bilder = album.bilder
         .map((bild) => ({ ...bild, src: normalizeAssetPath(bild.src)! }))
@@ -237,8 +251,24 @@ export function getAllNews(): NewsArtikel[] {
     const rohtext = fs.readFileSync(path.join(NEWS_DIR, dateiname), "utf8");
     const { data, content } = matter(rohtext);
     const frontmatter = data as NewsFrontmatter;
+    /*
+     * Der Slug kommt aus dem Dateinamen, wenn im Kopf der Datei keiner
+     * steht.
+     *
+     * WARUM: Der Slug ist der Teil der Adresse hinter /aktuelles/. Er ist
+     * ein technisches Detail, und wer im Verein einen Artikel schreibt,
+     * soll ihn weder kennen noch eintippen muessen. Die Redaktions-
+     * oberflaeche unter /admin legt die Datei nach dem Titel an, damit
+     * stimmt der Dateiname immer.
+     *
+     * Ein Slug im Kopf der Datei schlaegt den Dateinamen trotzdem. Sonst
+     * waere jede Adresse eines bestehenden Artikels davon abhaengig, dass
+     * niemand die Datei umbenennt, und eine Adresse, die einmal geteilt
+     * wurde, darf nicht ins Leere laufen.
+     */
     return {
       ...frontmatter,
+      slug: frontmatter.slug || dateiname.replace(/\.md$/, ""),
       teaserbild: normalizeAssetPath(frontmatter.teaserbild),
       content,
     };

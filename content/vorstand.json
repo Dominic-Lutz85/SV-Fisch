@@ -1,50 +1,52 @@
-[
-  {
-    "name": "Benedict Britten",
-    "rolle": "1. Vorsitzender",
-    "bereich": "Verein",
-    "email": "vorstand@sv-fisch.de"
-  },
-  {
-    "name": "Robin Rauen",
-    "rolle": "2. Vorsitzender",
-    "bereich": "Verein",
-    "email": "vorstand@sv-fisch.de"
-  },
-  {
-    "name": "Alexander Roth",
-    "rolle": "Kassenwart",
-    "bereich": "Verein",
-    "email": "kasse@sv-fisch.de"
-  },
-  {
-    "name": "[Name eintragen]",
-    "rolle": "Schriftführer/in",
-    "bereich": "Verein",
-    "email": "info@sv-fisch.de"
-  },
-  {
-    "name": "Maximilian Witt",
-    "rolle": "Abteilungsleitung Fußball",
-    "bereich": "Fußball",
-    "email": "fussball@sv-fisch.de"
-  },
-  {
-    "name": "Andreas Esser",
-    "rolle": "Jugendwart/in",
-    "bereich": "Jugend",
-    "email": "jugend@sv-fisch.de"
-  },
-  {
-    "name": "Isabelle Marton",
-    "rolle": "Abteilungsleitung Gymnastik",
-    "bereich": "Gymnastik",
-    "email": "gymnastik@sv-fisch.de"
-  },
-  {
-    "name": "[Name eintragen]",
-    "rolle": "Abteilungsleitung Darts",
-    "bereich": "Darts",
-    "email": "darts@sv-fisch.de"
-  }
-]
+{
+  "eintraege": [
+    {
+      "name": "Benedict Britten",
+      "rolle": "1. Vorsitzender",
+      "bereich": "Verein",
+      "email": "vorstand@sv-fisch.de"
+    },
+    {
+      "name": "Robin Rauen",
+      "rolle": "2. Vorsitzender",
+      "bereich": "Verein",
+      "email": "vorstand@sv-fisch.de"
+    },
+    {
+      "name": "Alexander Roth",
+      "rolle": "Kassenwart",
+      "bereich": "Verein",
+      "email": "kasse@sv-fisch.de"
+    },
+    {
+      "name": "[Name eintragen]",
+      "rolle": "Schriftführer/in",
+      "bereich": "Verein",
+      "email": "info@sv-fisch.de"
+    },
+    {
+      "name": "Maximilian Witt",
+      "rolle": "Abteilungsleitung Fußball",
+      "bereich": "Fußball",
+      "email": "fussball@sv-fisch.de"
+    },
+    {
+      "name": "Andreas Esser",
+      "rolle": "Jugendwart/in",
+      "bereich": "Jugend",
+      "email": "jugend@sv-fisch.de"
+    },
+    {
+      "name": "Isabelle Marton",
+      "rolle": "Abteilungsleitung Gymnastik",
+      "bereich": "Gymnastik",
+      "email": "gymnastik@sv-fisch.de"
+    },
+    {
+      "name": "[Name eintragen]",
+      "rolle": "Abteilungsleitung Darts",
+      "bereich": "Darts",
+      "email": "darts@sv-fisch.de"
+    }
+  ]
+}

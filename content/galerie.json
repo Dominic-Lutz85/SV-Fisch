@@ -1,26 +1,28 @@
-[
-  {
-    "slug": "saison-2025-26",
-    "titel": "Saison 2025/26",
-    "datum": "2026-05-01",
-    "cover": "/gallery/saison-2025-26/1.png",
-    "bilder": [
-      {
-        "src": "/gallery/saison-2025-26/1.png",
-        "alt": "Mannschaftsfoto der 1. Mannschaft vor Saisonstart"
-      },
-      {
-        "src": "/gallery/saison-2025-26/2.png",
-        "alt": "Torjubel beim Heimspiel"
-      },
-      {
-        "src": "/gallery/saison-2025-26/3.png",
-        "alt": "Anstoß auf dem Sportplatz SV Fisch"
-      },
-      {
-        "src": "/gallery/saison-2025-26/4.png",
-        "alt": "Fans auf der Tribüne"
-      }
-    ]
-  }
-]
+{
+  "alben": [
+    {
+      "slug": "saison-2025-26",
+      "titel": "Saison 2025/26",
+      "datum": "2026-05-01",
+      "cover": "/gallery/saison-2025-26/1.png",
+      "bilder": [
+        {
+          "src": "/gallery/saison-2025-26/1.png",
+          "alt": "Mannschaftsfoto der 1. Mannschaft vor Saisonstart"
+        },
+        {
+          "src": "/gallery/saison-2025-26/2.png",
+          "alt": "Torjubel beim Heimspiel"
+        },
+        {
+          "src": "/gallery/saison-2025-26/3.png",
+          "alt": "Anstoß auf dem Sportplatz SV Fisch"
+        },
+        {
+          "src": "/gallery/saison-2025-26/4.png",
+          "alt": "Fans auf der Tribüne"
+        }
+      ]
+    }
+  ]
+}
