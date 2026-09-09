@@ -22,6 +22,11 @@ backend:
   name: github
   repo: Dominic-Lutz85/SV-Fisch
   branch: main
+  # Die Anmeldung laeuft ueber die Seite selbst, nicht ueber einen fremden
+  # Dienst. Der Code dazu liegt in app/api/cms-auth/, die Begruendung steht
+  # dort im Kopf der Datei.
+  base_url: https://sv-fisch.com
+  auth_endpoint: api/cms-auth
   # Was oben im Bearbeitungsfenster als Beschreibung des Speicherns steht.
   commit_messages:
     create: 'Neu angelegt: {{collection}} "{{slug}}"'

@@ -29,8 +29,12 @@ const abschnitte = [
   },
   {
     titel: "5. Newsletter",
-    inhalt:
-      "Bei Anmeldung zum Newsletter wird deine E-Mail-Adresse zum Zweck des Versands von Vereinsneuigkeiten verwendet. [BITTE PRÜFEN/ERGÄNZEN – Double-Opt-in-Verfahren, eingesetzten Newsletter-Dienst und Widerrufsmöglichkeit ergänzen].",
+    inhalt: [
+      "Für den Versand unseres Newsletters nutzen wir den Dienst Brevo der Sendinblue GmbH bzw. Brevo SA, 106 boulevard Haussmann, 75008 Paris, Frankreich. Die Verarbeitung findet auf Servern innerhalb der Europäischen Union statt, mit Brevo besteht ein Vertrag zur Auftragsverarbeitung nach Art. 28 DSGVO.",
+      "Die Anmeldung erfolgt im Double-Opt-in-Verfahren: Nach Eingabe der E-Mail-Adresse senden wir eine Bestätigungsmail. Erst mit dem Klick auf den darin enthaltenen Link wird die Adresse in den Verteiler aufgenommen. Zum Nachweis der Einwilligung speichern wir Zeitpunkt der Anmeldung und der Bestätigung.",
+      "Rechtsgrundlage ist die Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO. Diese Einwilligung kann jederzeit für die Zukunft widerrufen werden, ohne Angabe von Gründen: über den Abmeldelink am Ende jeder Nachricht oder formlos an " + siteConfig.contact.email + ". Nach dem Widerruf wird die Adresse aus dem Verteiler gelöscht.",
+      "[BITTE PRÜFEN/ERGÄNZEN – Diesen Abschnitt vor dem ersten Versand durch den Vorstand rechtlich prüfen lassen. Der Auftragsverarbeitungsvertrag muss im Brevo-Konto abgeschlossen und abgelegt sein.]",
+    ],
   },
   {
     titel: "6. Eingebundene Karte (OpenStreetMap)",
@@ -70,7 +74,22 @@ export default function DatenschutzPage() {
           {abschnitte.map((a) => (
             <section key={a.titel}>
               <h2 className="font-display text-xl font-bold text-text">{a.titel}</h2>
-              <p className="mt-2 leading-relaxed text-text-leise">{a.inhalt}</p>
+              {/*
+                Ein Abschnitt darf mehrere Absaetze haben.
+                Vorher war "inhalt" immer eine einzige Zeichenkette. Beim
+                Newsletter reicht das nicht: Dienstleister, Verfahren,
+                Rechtsgrundlage und Widerruf sind vier Gedanken, und die in
+                einen Block zu pressen macht einen Rechtstext unlesbar. Wer
+                seine Rechte nicht findet, hat sie praktisch nicht.
+              */}
+              {(Array.isArray(a.inhalt) ? a.inhalt : [a.inhalt]).map((absatz) => (
+                <p
+                  key={absatz.slice(0, 40)}
+                  className="mt-2 leading-relaxed text-text-leise"
+                >
+                  {absatz}
+                </p>
+              ))}
             </section>
           ))}
         </div>

@@ -7,6 +7,8 @@ type Status = "idle" | "loading" | "success" | "error";
 export default function NewsletterForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [email, setEmail] = useState("");
+  /* Was der Server dazu sagt. Null heisst: eigener Ersatztext. */
+  const [meldung, setMeldung] = useState<string | null>(null);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -26,10 +28,29 @@ export default function NewsletterForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: data.get("email") }),
       });
-      if (!res.ok) throw new Error("Anfrage fehlgeschlagen");
+      /*
+       * Die Meldung kommt vom Server, nicht von hier.
+       *
+       * Vorher stand im Fehlerfall immer "Bitte später erneut versuchen".
+       * Das ist der schlechteste Satz, den man jemandem geben kann, der
+       * gerade etwas wollte: Er sagt nicht, was los ist, und bietet keinen
+       * Weg. Die Route kennt den Grund und nennt die Mailadresse des
+       * Vereins, also wird genau das gezeigt.
+       */
+      const daten = (await res.json().catch(() => ({}))) as {
+        error?: string;
+        hinweis?: string;
+      };
+      if (!res.ok) {
+        setMeldung(daten.error ?? null);
+        setStatus("error");
+        return;
+      }
+      setMeldung(daten.hinweis ?? null);
       setStatus("success");
       setEmail("");
     } catch {
+      setMeldung(null);
       setStatus("error");
     }
   }
@@ -37,8 +58,8 @@ export default function NewsletterForm() {
   if (status === "success") {
     return (
       <p className="mt-4 bg-flaeche-hoch px-3 py-2.5 text-sm text-fisch-yellow">
-        Danke! Bitte bestätige deine Anmeldung über den Link, den wir dir
-        zuschicken.
+        {meldung ??
+          "Danke! Bitte bestätigt die Anmeldung über den Link, den wir euch zuschicken."}
       </p>
     );
   }
@@ -79,9 +100,25 @@ export default function NewsletterForm() {
       </div>
       {status === "error" && (
         <p className="text-xs text-red-400">
-          Das hat leider nicht geklappt. Bitte später erneut versuchen.
+          {meldung ?? "Das hat leider nicht geklappt. Bitte später erneut versuchen."}
         </p>
       )}
+      {/*
+        Der Hinweis steht am Formular und nicht im Kleingedruckten, weil er
+        genau hier gebraucht wird: Wer seine Adresse eintippt, soll vorher
+        sehen koennen, was damit passiert.
+      */}
+      <p className="text-xs text-text-leise">
+        Wir schicken euch eine Bestätigungsmail. Abmelden geht jederzeit über
+        den Link am Ende jeder Nachricht. Mehr dazu in der{" "}
+        <a
+          href="/datenschutz"
+          className="underline underline-offset-2 hover:text-fisch-yellow"
+        >
+          Datenschutzerklärung
+        </a>
+        .
+      </p>
     </form>
   );
 }

@@ -37,6 +37,13 @@ const ABSICHTLICH_DRAUSSEN = new Set([
    * Wer eine neue Erkundungsseite anlegt, traegt sie SOFORT hier ein.
    * Wer die Entscheidung getroffen hat, loescht Seite und Eintrag wieder.
    */
+/*
+   * Die Landeseite nach dem Klick in der Bestaetigungsmail. Sie steht
+   * bewusst in keinem Sitemap und in keinem Menue: Dorthin kommt man nur
+   * ueber den Link in der Mail, und in den Suchergebnissen hat sie nichts
+   * zu suchen.
+   */
+  "/newsletter/bestaetigt",
 ]);
 
 /** Alle Seitenadressen unter app/, ohne dynamische Abschnitte. */

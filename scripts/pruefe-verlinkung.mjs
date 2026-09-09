@@ -34,6 +34,13 @@ const BRAUCHT_KEINEN_VERWEIS = new Set([
    * Erkundungsseite anlegt und beide Waechter vergisst, legt den Build
    * still lahm, und der Verdacht faellt dann auf alles andere.
    */
+/*
+   * Die Landeseite nach dem Klick in der Bestaetigungsmail. Sie steht
+   * bewusst in keinem Sitemap und in keinem Menue: Dorthin kommt man nur
+   * ueber den Link in der Mail, und in den Suchergebnissen hat sie nichts
+   * zu suchen.
+   */
+  "/newsletter/bestaetigt",
 ]);
 
 if (!existsSync(GEBAUT)) {
