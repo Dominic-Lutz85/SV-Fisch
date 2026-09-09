@@ -44,6 +44,17 @@ export interface Spieler {
   nummer: number | null;
   name: string;
   position: "Torwart" | "Abwehr" | "Mittelfeld" | "Sturm" | "Trainer";
+  /*
+   * Die genaue Rolle im Trainerteam, also "Torwart-Trainer", "Betreuer",
+   * "Teammanager", "sportlicher Leiter".
+   *
+   * Sie steht hier, weil `position` nur fuenf Werte kennt und alles, was
+   * kein Spieler ist, auf "Trainer" faellt. Ohne dieses Feld waeren die
+   * sieben Leute im Betreuerstab des SV Fisch alle "Trainer", und der
+   * Torwart-Trainer hiesse dasselbe wie der Teammanager. Das ist auf einer
+   * Vereinsseite keine Kleinigkeit: Diese Leute stehen mit Namen da.
+   */
+  rolle?: string;
   foto?: string;
 }
 

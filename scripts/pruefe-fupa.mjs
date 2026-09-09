@@ -40,6 +40,7 @@ const BASIS = `https://api.fupa.net/v1/widget/teams/${TEAM}`;
  */
 const ADRESSE = `${BASIS}/standings?limit=100`;
 const ADRESSE_SPIELE = `${BASIS}/matches?limit=100`;
+const ADRESSE_KADER = `${BASIS}/squad?limit=100`;
 
 /* Kurz genug, dass ein Build nicht daran haengt. */
 const ZEITLIMIT_MS = 8000;
@@ -191,6 +192,33 @@ if (antwort) {
         hinweis: fehler.message,
       });
     }
+  }
+
+  /*
+   * Der Kader wird nur auf Vollstaendigkeit im Groben geprueft. Eine feste
+   * Zahl waere falsch: Ein Verein meldet im Winter Spieler an und ab, und
+   * ein Waechter, der bei 28 statt 29 Spielern anschlaegt, wird nach dem
+   * zweiten Fehlalarm nicht mehr gelesen. Elf ist die Zahl, unter der eine
+   * Mannschaft nicht mehr auflaufen koennte, und damit ein Wert, der nur
+   * bei einem echten Fehler unterschritten wird.
+   */
+  try {
+    const kaderDaten = await holeJson(ADRESSE_KADER);
+    const spieler = (kaderDaten?.squad ?? []).reduce(
+      (summe, gruppe) => summe + (gruppe.players?.length ?? 0),
+      0
+    );
+    proben.push({
+      name: "Kader mindestens elf Spieler",
+      bestanden: spieler >= 11,
+      hinweis: `${spieler} angekommen`,
+    });
+  } catch (fehler) {
+    proben.push({
+      name: "Kader abrufbar",
+      bestanden: false,
+      hinweis: fehler.message,
+    });
   }
 
   const durchgefallen = proben.filter((p) => !p.bestanden);

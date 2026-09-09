@@ -1,5 +1,5 @@
-import type { Spiel, TabellenZeile } from "@/types/content";
-import { getSpielplan, getTabelle } from "@/lib/content";
+import type { Spiel, Spieler, TabellenZeile } from "@/types/content";
+import { getKader, getSpielplan, getTabelle } from "@/lib/content";
 import { siteConfig } from "@/lib/config";
 
 /*
@@ -257,4 +257,78 @@ export async function aktuellerSpielplan(): Promise<Spiel[]> {
 export async function aktuelleTabelle(): Promise<TabellenZeile[]> {
   const gemeldet = await holeTabelle();
   return gemeldet ?? getTabelle();
+}
+
+/* ---------------------------------------------------------------------- */
+
+interface FupaPerson {
+  firstName: string;
+  lastName: string;
+  jerseyNumber?: number | null;
+  position?: string;
+}
+
+interface FupaSquad {
+  coaches: FupaPerson[];
+  squad: { position: string; players: FupaPerson[] }[];
+}
+
+/*
+ * FuPa nennt die Angreifer "Angriff", der Typ Spieler kennt "Sturm".
+ * Bewusst eine Zuordnung mit Rueckfall und keine stille Umbenennung: Taucht
+ * eines Tages eine Position auf, die hier nicht steht, landet sie im
+ * Mittelfeld statt zu verschwinden. Ein Spieler, der auf der Seite fehlt,
+ * faellt niemandem auf, ein Spieler an der falschen Stelle schon.
+ */
+const POSITIONEN: Record<string, Spieler["position"]> = {
+  Torwart: "Torwart",
+  Abwehr: "Abwehr",
+  Mittelfeld: "Mittelfeld",
+  Angriff: "Sturm",
+  Sturm: "Sturm",
+};
+
+function vollerSpielername(p: FupaPerson): string {
+  return `${p.firstName} ${p.lastName}`.trim();
+}
+
+/**
+ * Kader und Betreuerstab der ersten Mannschaft.
+ *
+ * WARUM DAS HIER UEBERHAUPT STEHT: In content/kader.json standen am
+ * 09.09.2026 sechzehn Eintraege, und in allen sechzehn stand als Name
+ * "[Name eintragen]". Auf einer Seite, die als Arbeitsprobe dient, ist das
+ * laut CLAUDE.md ein Ausschlusskriterium und kein Schoenheitsfehler. FuPa
+ * kennt 29 Spieler und 7 Betreuer, alle mit echten Namen.
+ *
+ * Die Fotos von FuPa bleiben ABSICHTLICH draussen. Sie liegen auf
+ * image.fupa.net, und ein Bild von dort zu laden wuerde die IP-Adresse jedes
+ * Besuchers an FuPa schicken. Genau das vermeidet der ganze Umbau.
+ */
+export async function holeKader(): Promise<Spieler[] | null> {
+  const daten = await hole<FupaSquad>("squad");
+  if (!daten?.squad?.length) return null;
+
+  const trainer: Spieler[] = (daten.coaches ?? []).map((c) => ({
+    nummer: null,
+    name: vollerSpielername(c),
+    position: "Trainer",
+    rolle: c.position,
+  }));
+
+  const spieler: Spieler[] = daten.squad.flatMap((gruppe) =>
+    gruppe.players.map((p) => ({
+      nummer: p.jerseyNumber ?? null,
+      name: vollerSpielername(p),
+      position: POSITIONEN[gruppe.position] ?? "Mittelfeld",
+    }))
+  );
+
+  return [...trainer, ...spieler];
+}
+
+/** Der Kader, so aktuell wie zu bekommen. Sonst die Datei aus dem Repo. */
+export async function aktuellerKader(): Promise<Spieler[]> {
+  const gemeldet = await holeKader();
+  return gemeldet ?? getKader();
 }

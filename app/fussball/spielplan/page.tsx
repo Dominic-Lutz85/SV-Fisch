@@ -67,6 +67,25 @@ export default async function SpielplanPage() {
             <Fixtures spiele={vergangene} gruppiert />
           </section>
         )}
+
+        {/*
+          Derselbe Quellenhinweis wie auf /fussball/tabelle und
+          /fussball/kader. Er steht hier nicht aus Hoeflichkeit gegenueber
+          FuPa, sondern weil ein Besucher wissen soll, warum diese Seite
+          stimmt, ohne dass jemand sie pflegt.
+        */}
+        <p className="mt-12 border-t border-linie pt-6 text-sm text-text-leise">
+          Termine und Ergebnisse werden von{" "}
+          <a
+            href="https://www.fupa.net/team/sv-fisch-m1-2026-27"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold underline underline-offset-2 hover:decoration-fisch-yellow"
+          >
+            FuPa
+          </a>{" "}
+          gepflegt und aktualisieren sich selbst.
+        </p>
       </div>
     </>
   );

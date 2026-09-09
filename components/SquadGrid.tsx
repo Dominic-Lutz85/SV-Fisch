@@ -28,8 +28,23 @@ export default function SquadGrid({ spieler }: { spieler: Spieler[] }) {
                   <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-fisch-black font-display text-sm font-bold text-fisch-yellow">
                     {spielerEintrag.nummer ?? "–"}
                   </span>
-                  <span className="text-sm font-semibold text-text">
-                    {spielerEintrag.name}
+                  {/*
+                    Name und darunter die Rolle, falls es eine gibt. Ohne
+                    diese Zeile hiessen Torwart-Trainer, Betreuer und
+                    Teammanager alle gleich "Trainerteam", und das sind
+                    sieben verschiedene Leute mit sieben verschiedenen
+                    Aufgaben. min-w-0 am Kasten, damit lange Namen kuerzen
+                    koennen statt das Raster zu sprengen.
+                  */}
+                  <span className="flex min-w-0 flex-col">
+                    <span className="text-sm font-semibold text-text">
+                      {spielerEintrag.name}
+                    </span>
+                    {spielerEintrag.rolle && (
+                      <span className="text-xs text-text-leise">
+                        {spielerEintrag.rolle}
+                      </span>
+                    )}
                   </span>
                 </div>
               ))}
