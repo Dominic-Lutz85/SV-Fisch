@@ -21,7 +21,40 @@ export default async function KaderPage() {
     <>
       <PageHeader eyebrow="Fußball · 1. Mannschaft" title="Kader" />
       <div className="container-fisch py-16 sm:py-20">
-        <SquadGrid spieler={kader} />
+        {/*
+          Kein Kader von FuPa: ein ehrlicher Hinweis statt einer Mannschaft
+          aus Platzhaltern. Die Begruendung steht bei aktuellerKader() in
+          lib/fupa.ts; kurz: Bis zum 23.09.2026 haette die Seite hier im
+          Ausfall sechzehn Spieler namens "[Name eintragen]" gezeigt.
+
+          Der Verweis auf FuPa steht IM Hinweis und nicht nur unten: Wer den
+          Kader sucht und ihn hier nicht findet, soll ihn mit einem Klick
+          woanders finden, statt die Seite als kaputt abzuhaken.
+        */}
+        {kader ? (
+          <SquadGrid spieler={kader} />
+        ) : (
+          <div className="rounded-lg border border-linie bg-flaeche-hoch p-6">
+            <p className="font-display text-lg font-bold text-text">
+              Der Kader ist gerade nicht abrufbar
+            </p>
+            <p className="mt-2 text-sm text-text-leise">
+              Die Mannschaftsliste wird bei FuPa gepflegt und von dort
+              geladen. Im Moment antwortet FuPa nicht. Das legt sich
+              erfahrungsgemäß von selbst; bis dahin steht der vollständige
+              Kader{" "}
+              <a
+                href="https://www.fupa.net/team/sv-fisch-m1-2026-27"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold underline underline-offset-2 hover:decoration-fisch-yellow"
+              >
+                direkt bei FuPa
+              </a>
+              .
+            </p>
+          </div>
+        )}
         {/*
           Hier stand bis zum 09.09.2026 "[BITTE PRÜFEN/ERGÄNZEN] – Kader in
           content/kader.json aktuell halten". Der Satz war nach der

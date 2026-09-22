@@ -1,5 +1,5 @@
 import type { Spiel, Spieler, TabellenZeile } from "@/types/content";
-import { getKader, getSpielplan, getTabelle } from "@/lib/content";
+import { getSpielplan, getTabelle } from "@/lib/content";
 import { siteConfig } from "@/lib/config";
 
 /*
@@ -327,8 +327,27 @@ export async function holeKader(): Promise<Spieler[] | null> {
   return [...trainer, ...spieler];
 }
 
-/** Der Kader, so aktuell wie zu bekommen. Sonst die Datei aus dem Repo. */
-export async function aktuellerKader(): Promise<Spieler[]> {
-  const gemeldet = await holeKader();
-  return gemeldet ?? getKader();
+/**
+ * Der Kader, so aktuell wie zu bekommen. Antwortet FuPa nicht: null.
+ *
+ * NULL UND NICHT MEHR DIE DATEI AUS DEM REPO, seit dem 23.09.2026.
+ *
+ * Bis dahin fiel diese Funktion auf content/kader.json zurueck. In der Datei
+ * standen sechzehn Eintraege, und in allen sechzehn stand als Name
+ * "[Name eintragen]". Der Rueckfall haette im Ernstfall also sechzehn
+ * Spieler mit sichtbaren Platzhaltern angezeigt, auf einer Seite, die als
+ * Arbeitsprobe dient. Das ist schlimmer als gar kein Rueckfall, und es waere
+ * niemandem aufgefallen: Der Fall tritt nur ein, wenn FuPa schweigt, und
+ * dann sieht ihn keiner von uns.
+ *
+ * Aufgefallen ist es erst, als der Auftraggeber fragte, ob der Verein trotz
+ * FuPa-Anbindung noch eine Spielerliste liefern muss. Die Antwort ist nein,
+ * und beim Nachsehen kam das hier heraus.
+ *
+ * Die Seite zeigt jetzt bei null einen Hinweis mit Verweis auf FuPa. Ein
+ * ehrliches "gerade nicht abrufbar" ist besser als eine Mannschaft aus
+ * sechzehn Platzhaltern.
+ */
+export async function aktuellerKader(): Promise<Spieler[] | null> {
+  return await holeKader();
 }

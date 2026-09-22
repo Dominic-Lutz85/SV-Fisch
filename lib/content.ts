@@ -18,7 +18,6 @@ import matter from "gray-matter";
  */
 import vorstandData from "@/content/vorstand.json";
 import sponsorenData from "@/content/sponsoren.json";
-import kaderData from "@/content/kader.json";
 import tabelleData from "@/content/tabelle.json";
 import spielplanData from "@/content/spielplan.json";
 import termineData from "@/content/termine.json";
@@ -50,10 +49,6 @@ export function getSponsoren(): Sponsor[] {
     ...s,
     logo: normalizeAssetPath(s.logo)!,
   }));
-}
-
-export function getKader(): Spieler[] {
-  return kaderData as Spieler[];
 }
 
 export function getTabelle(): TabellenZeile[] {
