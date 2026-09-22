@@ -86,6 +86,21 @@ export default function Footer() {
                 Galerie
               </Link>
             </li>
+            {/*
+              WARUM DER KALENDER HIER STEHT UND NICHT NUR IM KOPFBEREICH:
+              Der Verweis auf /kalender hing bis zum 22.09.2026 allein am
+              Terminblock der Startseite, und der erscheint nur, wenn es
+              einen kuenftigen Termin gibt. Am 22.09.2026 lag der juengste
+              Eintrag in content/termine.json drei Tage zurueck. Damit war
+              die Seite fuer Suchmaschinen unsichtbar, und der Waechter
+              pruefe-verlinkung hat den Build angehalten. Ein fester Verweis
+              gehoert nicht in einen Block, der von Inhalten abhaengt.
+            */}
+            <li>
+              <Link href="/kalender" className="text-text-leise hover:text-text">
+                Termine
+              </Link>
+            </li>
           </ul>
         </div>
 

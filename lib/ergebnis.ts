@@ -132,3 +132,44 @@ export function saisonBand(
   const kommend = spiele.filter((s) => s.datum >= heute).slice(0, voraus);
   return [...vergangen, ...kommend];
 }
+
+/**
+ * Die Spielzeit, zu der eine Reihe von Spielen gehoert, als "2026/27".
+ *
+ * WARUM ABGELEITET UND NICHT EINGETIPPT: Im Kopfbereich stand bis zum
+ * 22.09.2026 "Die Saison bis hierher". Der Satz war schief, denn unter ihm
+ * stehen drei gespielte Partien UND die naechsten zwei, also auch Zukunft.
+ * Die neue Zeile nennt stattdessen die Spielzeit. Eine fest eingetippte
+ * Jahreszahl waere aber genau die Sorte Angabe, die im naechsten Juli
+ * unbemerkt falsch wird, und dieses Projekt hatte diesen Fehler schon
+ * einmal: eine von Hand gepflegte Tabelle, die der Unterseite widersprach.
+ *
+ * Abgeleitet wird aus den Spielen selbst, nicht aus dem heutigen Datum. Damit
+ * passt die Zeile immer zu dem, was unter ihr steht, auch im Rueckfall aus
+ * dem Repo, wenn FuPa schweigt.
+ *
+ * Die Grenze liegt zwischen Juni und Juli: Ein Spiel ab Juli gehoert zur
+ * Spielzeit Jahr/Jahr+1, eines bis Juni zur Spielzeit Jahr-1/Jahr. Das deckt
+ * sich mit FuPa, deren teamSeason den Slug "sv-fisch-m1-2026-27" traegt,
+ * waehrend das frueheste Spiel am 05.07.2026 liegt.
+ *
+ * Bei Spielen aus zwei Spielzeiten gewinnt die haeufigere. Das kommt im Band
+ * nur in der Woche des Saisonwechsels vor, und dann soll die Ueberschrift der
+ * Mehrheit der Eintraege folgen.
+ */
+export function saisonVon(spiele: Spiel[]): string | null {
+  const zaehler = new Map<number, number>();
+
+  for (const spiel of spiele) {
+    const jahr = Number(spiel.datum.slice(0, 4));
+    const monat = Number(spiel.datum.slice(5, 7));
+    if (!jahr || !monat) continue;
+    const start = monat >= 7 ? jahr : jahr - 1;
+    zaehler.set(start, (zaehler.get(start) ?? 0) + 1);
+  }
+
+  if (zaehler.size === 0) return null;
+
+  const [start] = [...zaehler.entries()].sort((a, b) => b[1] - a[1])[0];
+  return `${start}/${String((start + 1) % 100).padStart(2, "0")}`;
+}

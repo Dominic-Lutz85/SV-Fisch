@@ -9,6 +9,7 @@ import {
   gegnerVon,
   letzterSpielstand,
   saisonBand,
+  saisonVon,
   toreAusVereinssicht,
 } from "@/lib/ergebnis";
 import AusgangsZeichen from "@/components/AusgangsZeichen";
@@ -57,6 +58,7 @@ export default function Hero({
   const heute = heuteInDeutschland();
   const band = saisonBand(spielplan, heute);
   const stand = letzterSpielstand(spielplan, heute);
+  const saison = saisonVon(band);
 
   return (
     <section className="relative overflow-hidden bg-fisch-black text-text">
@@ -242,8 +244,17 @@ export default function Hero({
               Containerrand, also mitten im Wappen und dort unlesbar.
             */}
             <div className="flex flex-wrap items-baseline gap-x-5 gap-y-1">
+              {/*
+                "Die Saison bis hierher" stand hier bis zum 22.09.2026 und
+                war schief: Unter der Zeile liegen drei gespielte Partien UND
+                die naechsten zwei. "Bis hierher" behauptet reine
+                Vergangenheit. Die Spielzeit dagegen sagt etwas, das sonst
+                nirgends im Kopfbereich steht, und wiederholt nicht die gelbe
+                Kante mit "Naechstes Spiel". Sie kommt aus den Spielen selbst,
+                siehe saisonVon() in lib/ergebnis.ts.
+              */}
               <p className="text-xs font-bold uppercase tracking-widest text-fisch-yellow">
-                Die Saison bis hierher
+                {saison ? `Saison ${saison}` : "Die Spiele der Saison"}
               </p>
               {/*
                 DER HINWEIS AUF EIN FEHLENDES ERGEBNIS ist kein Schmuck.

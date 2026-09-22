@@ -70,17 +70,55 @@ export default function TeamTableMini({ zeilen }: { zeilen: TabellenZeile[] }) {
         <span className="w-8 shrink-0 text-right">Diff</span>
         <span className="w-7 shrink-0 text-right">Pkt</span>
       </div>
+      {/*
+        DIE EIGENE ZEILE WAR NICHT ZU ERKENNEN, und der Grund stand im Code,
+        nicht im Auge: Die Zeile trug "font-bold text-fisch-yellow", darunter
+        setzte aber JEDE Spalte ihre eigene Farbe (text-text-leise, bei den
+        Punkten text-text). Die spezifischere Klasse am Kind gewinnt, also
+        blieb von der Hervorhebung nichts uebrig ausser dem Fettdruck, und den
+        trugen die Punkte ohnehin schon. Live nachgesehen am 22.09.2026: SV
+        Fisch auf Platz 2 sah aus wie jede andere Zeile.
+
+        VOLLE FLAECHE, KEIN DURCHSCHEINENDES GELB. Der erste Versuch nahm
+        bg-fisch-yellow/20, und heraus kam derselbe Olivton, den das Projekt
+        am 02.09.2026 schon einmal verworfen hat (siehe die Notiz bei
+        --color-fisch-yellow-dark in globals.css): Gelb mit Deckkraft unter
+        eins mischt sich mit dem dunklen Grund zu einer Farbe, die weder
+        auffaellt noch nach dem Verein aussieht. Die Regel dort lautet:
+        Vereinsgelb gehoert in die Flaeche oder in eine Linie, und die Schrift
+        darauf ist schwarz. Genau das steht hier.
+
+        Der Gegenvorschlag, eine neutral hellere Flaeche mit gelber Kante,
+        ist gebaut und verglichen worden. Er ist ruhiger, aber in einer Liste
+        aus fuenf ohnehin unterschiedlich hellen Zeilen zu leise fuer die
+        Angabe, um die es geht.
+      */}
       <ul className="flex flex-col divide-y divide-linie">
         {zeigen.map((zeile) => (
           <li
             key={zeile.platz}
             className={cn(
               "flex items-center gap-3 py-2.5 text-sm",
-              zeile.hervorgehoben && "font-bold text-fisch-yellow"
+              zeile.hervorgehoben &&
+                "-mx-5 bg-fisch-yellow px-5 py-2.5 font-bold sm:-mx-6 sm:px-6"
             )}
           >
-            <span className="w-5 shrink-0 text-text-leise">{zeile.platz}.</span>
-            <span className="flex-1 truncate text-text-leise">{zeile.team}</span>
+            <span
+              className={cn(
+                "w-5 shrink-0",
+                zeile.hervorgehoben ? "text-fisch-black" : "text-text-leise"
+              )}
+            >
+              {zeile.platz}.
+            </span>
+            <span
+              className={cn(
+                "flex-1 truncate",
+                zeile.hervorgehoben ? "text-fisch-black" : "text-text-leise"
+              )}
+            >
+              {zeile.team}
+            </span>
             {/*
               Die Spaltenköpfe stehen zwar darüber, sind aber nur optisch
               zugeordnet. Diese Liste ist keine echte Tabelle, also verbindet
@@ -88,19 +126,28 @@ export default function TeamTableMini({ zeilen }: { zeilen: TabellenZeile[] }) {
               Deshalb trägt jede Zahl ihre eigene Beschriftung.
             */}
             <span
-              className="w-6 shrink-0 text-right text-text-leise"
+              className={cn(
+                "w-6 shrink-0 text-right",
+                zeile.hervorgehoben ? "text-fisch-black" : "text-text-leise"
+              )}
               aria-label={`${zeile.spiele} Spiele`}
             >
               {zeile.spiele}
             </span>
             <span
-              className="w-8 shrink-0 text-right text-text-leise"
+              className={cn(
+                "w-8 shrink-0 text-right",
+                zeile.hervorgehoben ? "text-fisch-black" : "text-text-leise"
+              )}
               aria-label={`Tordifferenz ${zeile.differenz}`}
             >
               {zeile.differenz > 0 ? `+${zeile.differenz}` : zeile.differenz}
             </span>
             <span
-              className="w-7 shrink-0 text-right font-bold text-text"
+              className={cn(
+                "w-7 shrink-0 text-right font-bold",
+                zeile.hervorgehoben ? "text-fisch-black" : "text-text"
+              )}
               aria-label={`${zeile.punkte} Punkte`}
             >
               {zeile.punkte}
