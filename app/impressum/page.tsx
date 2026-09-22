@@ -30,8 +30,21 @@ export default function ImpressumPage() {
             <br />
             [BITTE PRÜFEN/ERGÄNZEN – PLZ, Ort]
           </p>
+          {/*
+            Die Vertretungsregel ist belegt: § 8 der Satzung vom 25.11.2022,
+            "Je 2 Mitglieder gemeinsam sind vertretungsberechtigt". Wer genau
+            dem geschaeftsfuehrenden Vorstand angehoert, sagt die Satzung
+            nicht, das steht im Registerauszug. Deshalb hier die Regel und die
+            Aemter aus content/vorstand.json, nicht mehr.
+          */}
           <p className="mt-3 leading-relaxed text-text-leise">
-            Vertreten durch: [BITTE PRÜFEN/ERGÄNZEN – 1. Vorsitzende/r]
+            Vertreten durch den geschäftsführenden Vorstand. Je zwei Mitglieder
+            gemeinsam sind vertretungsberechtigt (§ 8 der{" "}
+            <a href="/verein/satzung#p8" className="underline">
+              Vereinssatzung
+            </a>
+            ). [BITTE PRÜFEN/ERGÄNZEN – Namen der im Vereinsregister
+            eingetragenen Vorstandsmitglieder]
           </p>
           <p className="mt-3 leading-relaxed text-text-leise">
             Registergericht: {siteConfig.register.court}

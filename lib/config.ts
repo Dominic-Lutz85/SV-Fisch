@@ -31,7 +31,13 @@ export const siteConfig = {
   },
 
   register: {
-    court: "[Registergericht eintragen]",
+    /*
+     * Das Gericht steht in § 1 der Satzung vom 25.11.2022, siehe
+     * content/satzung.ts. Die Registernummer steht dort NICHT, und geraten
+     * wird sie nicht: eine falsche Nummer im Impressum ist schlimmer als
+     * eine sichtbar fehlende. Sie steht im Registerauszug des Vereins.
+     */
+    court: "Amtsgericht Wittlich",
     number: "[Vereinsregisternummer eintragen]",
   },
 

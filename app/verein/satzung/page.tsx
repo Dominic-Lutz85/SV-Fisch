@@ -1,46 +1,23 @@
 import type { Metadata } from "next";
+import { Download } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
-import { siteConfig } from "@/lib/config";
+import { satzung, SATZUNG_STAND, SATZUNG_PDF } from "@/content/satzung";
 
 export const metadata: Metadata = {
   title: "Satzung",
-  description: "Satzung des SV Fisch 1964 e.V.",
+  description:
+    "Die Satzung des Sportvereins Fisch 1964 e.V. im Wortlaut, Stand 25.11.2022, dazu als PDF zum Herunterladen.",
 };
 
-const paragraphen = [
-  {
-    titel: "§ 1 Name, Sitz, Geschäftsjahr",
-    text: `Der Verein führt den Namen "SV Fisch 1964 e.V.". Er hat seinen Sitz in [Ort eintragen] und ist im Vereinsregister des ${siteConfig.register.court} unter der Nummer ${siteConfig.register.number} eingetragen. Das Geschäftsjahr ist das Kalenderjahr.`,
-  },
-  {
-    titel: "§ 2 Zweck des Vereins",
-    text: "Der Verein fördert den Sport, insbesondere Fußball und Gymnastik, auf gemeinnütziger Grundlage. Der Satzungszweck wird verwirklicht durch die Organisation von Trainings- und Übungsbetrieb, die Teilnahme an Wettkämpfen sowie die Ausrichtung von Vereinsveranstaltungen. [BITTE PRÜFEN/ERGÄNZEN]",
-  },
-  {
-    titel: "§ 3 Mitgliedschaft",
-    text: "Mitglied kann werden, wer den Zweck des Vereins unterstützt. Die Mitgliedschaft wird durch schriftlichen Antrag beim Vorstand erworben. [BITTE PRÜFEN/ERGÄNZEN – Details zu Aufnahme, Austritt, Ausschluss]",
-  },
-  {
-    titel: "§ 4 Beiträge",
-    text: "Die Höhe der Mitgliedsbeiträge wird von der Mitgliederversammlung festgelegt. [BITTE PRÜFEN/ERGÄNZEN]",
-  },
-  {
-    titel: "§ 5 Organe des Vereins",
-    text: "Organe des Vereins sind die Mitgliederversammlung und der Vorstand. [BITTE PRÜFEN/ERGÄNZEN – Zusammensetzung, Wahlperioden, Zuständigkeiten]",
-  },
-  {
-    titel: "§ 6 Mitgliederversammlung",
-    text: "Die ordentliche Mitgliederversammlung (Jahreshauptversammlung) findet einmal jährlich statt. [BITTE PRÜFEN/ERGÄNZEN – Einberufung, Fristen, Beschlussfähigkeit]",
-  },
-  {
-    titel: "§ 7 Vorstand",
-    text: "Der Vorstand im Sinne des § 26 BGB besteht aus [BITTE PRÜFEN/ERGÄNZEN – Anzahl und Ämter]. Er wird von der Mitgliederversammlung für die Dauer von [BITTE PRÜFEN/ERGÄNZEN] Jahren gewählt.",
-  },
-  {
-    titel: "§ 8 Auflösung des Vereins",
-    text: "Über die Auflösung des Vereins entscheidet die Mitgliederversammlung mit einer Mehrheit von [BITTE PRÜFEN/ERGÄNZEN]. Bei Auflösung fällt das Vereinsvermögen an [BITTE PRÜFEN/ERGÄNZEN – gemeinnützigen Zweck benennen].",
-  },
-];
+/**
+ * Die Nummer aus "§ 7 – Mitgliederversammlung" wird zur Sprungmarke. Ueber
+ * den Titel als Ganzes zu gehen brauchte eine Umschrift von Paragraphenzeichen
+ * und Umlauten, und heraus kaeme eine Adresse, die niemand tippt. "#p7" ist
+ * kurz genug, um sie jemandem am Telefon zu nennen.
+ */
+function marke(titel: string) {
+  return `p${titel.match(/\d+/)?.[0] ?? titel}`;
+}
 
 export default function SatzungPage() {
   return (
@@ -48,27 +25,73 @@ export default function SatzungPage() {
       <PageHeader
         eyebrow="Der Verein"
         title="Satzung"
-        description="Die Vereinssatzung regelt Zweck, Struktur und Organe des SV Fisch 1964 e.V."
+        description="Die Satzung regelt Zweck, Mitgliedschaft und Organe des Sportvereins Fisch 1964 e.V. Hier steht sie im beschlossenen Wortlaut."
       />
       <div className="container-fisch max-w-3xl py-16 sm:py-20">
-        <div className="mb-10 border border-fisch-yellow-dark bg-fisch-yellow/25 p-5 text-sm text-text">
-          <strong>[BITTE PRÜFEN/ERGÄNZEN]</strong> – Dies ist ein
-          Platzhalter-Gerüst auf Basis üblicher Vereinssatzungen. Es ersetzt
-          keine Rechtsberatung. Die tatsächlich gültige, von der
-          Mitgliederversammlung beschlossene Satzung muss vor Veröffentlichung
-          vom Vorstand eingesetzt und bei Bedarf von einer sachkundigen Stelle
-          geprüft werden.
+        <div className="mb-12 flex flex-col gap-4 border border-linie bg-flaeche-hoch p-5 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-sm text-text-leise">
+            Beschlossene Fassung, Stand{" "}
+            <strong className="font-semibold text-text">{SATZUNG_STAND}</strong>
+          </p>
+          <a
+            href={SATZUNG_PDF}
+            className="inline-flex shrink-0 items-center gap-2 bg-fisch-yellow px-4 py-2.5 text-sm font-bold text-fisch-black hover:bg-fisch-yellow-dark"
+          >
+            <Download className="h-4 w-4" aria-hidden="true" />
+            Satzung als PDF
+          </a>
         </div>
-        <div className="flex flex-col gap-8">
-          {paragraphen.map((p) => (
-            <section key={p.titel}>
+
+        <nav aria-label="Die Paragraphen der Satzung" className="mb-12">
+          <ol className="flex flex-col gap-1.5 border-l-2 border-fisch-yellow pl-5">
+            {satzung.map((p) => (
+              <li key={p.titel}>
+                <a
+                  href={`#${marke(p.titel)}`}
+                  className="text-sm text-text-leise hover:text-text"
+                >
+                  {p.titel}
+                </a>
+              </li>
+            ))}
+          </ol>
+        </nav>
+
+        <div className="flex flex-col gap-10">
+          {satzung.map((p) => (
+            <section key={p.titel} id={marke(p.titel)} className="scroll-mt-28">
               <h2 className="font-display text-xl font-bold text-text">
                 {p.titel}
               </h2>
-              <p className="mt-2 leading-relaxed text-text-leise">{p.text}</p>
+              <div className="mt-3 flex flex-col gap-3">
+                {p.absaetze.map((absatz, i) =>
+                  typeof absatz === "string" ? (
+                    <p key={i} className="leading-relaxed text-text-leise">
+                      {absatz}
+                    </p>
+                  ) : (
+                    <ol
+                      key={i}
+                      className="ml-5 flex list-decimal flex-col gap-1.5 leading-relaxed text-text-leise marker:text-text"
+                    >
+                      {absatz.liste.map((punkt) => (
+                        <li key={punkt} className="pl-1">
+                          {punkt}
+                        </li>
+                      ))}
+                    </ol>
+                  )
+                )}
+              </div>
             </section>
           ))}
         </div>
+
+        <p className="mt-12 border-t border-linie pt-6 text-sm text-text-leise">
+          Fisch, den {SATZUNG_STAND}. Maßgeblich ist die von der
+          Mitgliederversammlung beschlossene Fassung, die hier wortgleich
+          wiedergegeben ist.
+        </p>
       </div>
     </>
   );
