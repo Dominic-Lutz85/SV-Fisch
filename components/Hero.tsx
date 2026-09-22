@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { CalendarDays, ArrowRight } from "lucide-react";
 import { siteConfig } from "@/lib/config";
@@ -28,8 +29,13 @@ import type { Spiel, Termin } from "@/types/content";
  *
  * Unten steht das nächste Spiel. Der Grund steht im Kompendium unter
  * "Der erste Bildschirm muss zeigen, nicht versprechen": BVB, Ajax und
- * Man City führen alle mit etwas Konkretem statt mit einem Anspruch. Wir
- * haben keine Fotos, aber wir haben echte, gegen FuPa geprüfte Spieldaten.
+ * Man City führen alle mit etwas Konkretem statt mit einem Anspruch.
+ *
+ * Hier stand bis zum 22.09.2026 der Satz "Wir haben keine Fotos, aber wir
+ * haben echte, gegen FuPa geprüfte Spieldaten". Die erste Hälfte stimmt
+ * nicht mehr: Rechts steht seit dem 22.09. ein Bildfenster mit einem echten
+ * Vereinsfoto, auf dem Handy randlos über die volle Breite. Die zweite
+ * Hälfte gilt unverändert, beides steht jetzt nebeneinander.
  *
  * Der Verlauf über dem Wappen ist nötig, nicht dekorativ: ohne ihn läuft die
  * Schrift links in die gelben Flächen des Wappens.
@@ -88,37 +94,50 @@ export default function Hero({
   return (
     <section className="relative overflow-hidden bg-fisch-black text-text">
       {/*
-        DAS WAPPEN ALS MOTIV IST RAUS, seit dem 22.09.2026, und das ist die
-        groesste Aenderung hier seit dem Umbau am 08.09.
+        DAS WAPPEN BLEIBT IM HINTERGRUND, und das ist eine Korrektur.
 
-        Es lag angeschnitten oben rechts, 620 bis 760 Pixel gross, und war
-        das einzige Motiv des Kopfbereichs. Der Kommentar, der hier stand,
-        nannte auch den Grund dafuer: "Das ist hier nicht nachbaubar, im Repo
-        liegt genau ein echtes Vereinsfoto." Union Berlin und der BVB fuehren
-        beide mit einem randlosen Foto, gemessen am 08.09.2026, und das ging
-        mangels Material nicht.
+        Beim Einbau des Bildfensters am 22.09.2026 hatte ich es entfernt, mit
+        der Begruendung, ein Wappen sei eine Marke und kein Bild und stehe in
+        der Kopfleiste ohnehin schon. Dominics Rueckfrage war: "warum machst
+        du das SV Fisch Logo so wie es vorher war nicht einfach in den
+        Hintergrund?" Nebeneinandergestellt ist der Fall eindeutig: Ohne
+        Wappen war rechts neben dem Fenster einfach schwarze Flaeche, rund
+        350 Pixel bei 1920. Mit Wappen liegt das Foto darauf wie eine Karte
+        auf einem Grund, und die Flaeche ist gefuellt statt leer.
 
-        Jetzt gibt es Material. Rechts steht ein Bildfenster, auf dem Handy
-        laeuft dasselbe Bild randlos ueber die volle Breite. Ein Wappen ist
-        eine Marke und kein Bild, und es steht in der Kopfleiste auf jeder
-        Seite ohnehin noch einmal.
+        Der Fehler dahinter war ein gedanklicher: Ich hatte "Wappen ODER
+        Foto" gerechnet, weil beide an derselben Stelle sassen. Sie liegen
+        aber in verschiedenen Ebenen, und das Fenster ist klein genug, dass
+        daneben Platz bleibt.
 
-        MIT DEM WAPPEN FALLEN DREI VERLAEUFE WEG, und das ist kein Versehen:
-        Sie haben alle nur ein Problem geloest, das es ohne Wappen nicht mehr
-        gibt. Der Verlauf von links hielt die Schrift aus den gelben Flaechen
-        heraus. Der von oben nach unten dunkelte auf dem Handy den Bereich,
-        in dem Schrift auf dem Wappen lag. Der dritte gab dem gelben Knopf
-        eine Kante gegen den gelben Ring. Das Bildfenster liegt NEBEN dem
-        Text statt darunter, also liegt nichts mehr uebereinander.
+        NUR AB lg. Darunter laeuft das Foto randlos ueber die volle Breite
+        und deckt das Wappen vollstaendig ab, gemessen bei 390 und 768
+        Pixeln. Es dort zu laden hiesse, eine Datei zu holen, die niemand zu
+        sehen bekommt.
 
-        Der Verlauf am unteren Bildrand auf dem Handy bleibt und sitzt jetzt
-        in VereinsFenster.tsx, wo das Bild randlos in den Text laeuft.
+        Der Verlauf von links gehoert dazu und ist nicht dekorativ: Ohne ihn
+        laeuft die Schrift in die gelben Flaechen des Wappens. Die beiden
+        anderen Verlaeufe von frueher sind weg und bleiben weg. Der eine
+        dunkelte auf dem Handy die Stelle, an der Schrift auf dem Wappen lag,
+        dort liegt jetzt das Foto. Der andere gab dem gelben Knopf eine Kante
+        gegen den gelben Ring, und der Knopf steht jetzt links, das Wappen
+        rechts.
+      */}
+      <Image
+        src="/logo.svg"
+        alt=""
+        width={900}
+        height={900}
+        priority
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-40 -top-32 hidden h-[760px] w-[760px] lg:block"
+      />
+      <div className="absolute inset-0 hidden bg-gradient-to-r from-fisch-black via-fisch-black/95 to-transparent lg:block" />
 
-        Das Halbton-Raster bleibt ebenfalls: Es gibt der schwarzen Flaeche
-        eine Textur, und das ist unabhaengig davon, was darauf liegt.
-
-        WER DAS WAPPEN ZURUECKHOLT, braucht die Verlaeufe wieder mit. Sie
-        stehen in der Versionsgeschichte, Commit davor.
+      {/*
+        Halbton-Raster ueber dem Verlauf und unter dem Text, siehe
+        globals.css. Es gibt der schwarzen Flaeche eine Textur, ohne die
+        Schrift schlechter lesbar zu machen.
       */}
       <div className="halbton pointer-events-none absolute inset-0" aria-hidden="true" />
 
