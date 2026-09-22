@@ -4,18 +4,63 @@ import Image from "next/image";
 import { siteConfig } from "@/lib/config";
 import MainMenu from "@/components/MainMenu";
 import PraesentiertVon from "@/components/PraesentiertVon";
+import SocialIcons from "@/components/SocialIcons";
 
 /*
  * Kopfleiste.
  *
- * Sie trägt seit dem 02.09.2026 nur noch drei Dinge: Wappen mit Vereinsnamen,
- * den Menü-Knopf und den Fanshop. Die frühere Leiste mit sieben Punkten und
- * vier Ausklappmenüs ist in das vollflächige Menü gewandert, siehe MainMenu.tsx.
+ * Seit dem 02.09.2026 trug sie nur drei Dinge: Wappen mit Vereinsnamen, den
+ * Fanshop und den Menüknopf. Die frühere Leiste mit sieben Punkten und vier
+ * Ausklappmenüs war in das vollflächige Menü gewandert, siehe MainMenu.tsx.
  *
- * Diese Datei ist dadurch wieder eine Server-Komponente: sie enthält keinen
- * Zustand mehr, nur noch Auszeichnung. Der interaktive Teil steckt allein in
- * MainMenu.
+ * AM 22.09.2026 KOMMT EIN TEIL DAVON ZURÜCK, und das ist kein Rückschritt,
+ * sondern die Antwort auf zwei Befunde.
+ *
+ * Erstens der Auftraggeber: "mir gefällt die Kopfleiste nicht, ich hätte sie
+ * gerne moderner und die Social Medias mit angezeigt." Nachgemessen an sechs
+ * Vereinsseiten (Eintracht, Union, St. Pauli, Werder, Mainz 05, Freiburg):
+ * Fünf von sechs zeigen ihre wichtigsten Ziele als TEXT in der Leiste, nicht
+ * hinter einem Knopf. Hier stand dort nur der Fanshop, zwei Drittel der
+ * Fläche waren leer.
+ *
+ * Zweitens, und das wiegt schwerer als Optik: MainMenu hängt per Portal am
+ * body und entsteht erst im Browser. Im ausgelieferten HTML steht es NICHT.
+ * Eine Seite, die nur dort verlinkt ist, existiert für Suchmaschinen und für
+ * jeden ohne JavaScript nicht; genau so waren /kontakt und /elfer-turnier
+ * monatelang unsichtbar. Die fünf Punkte hier stehen im HTML und verlinken
+ * damit zum ersten Mal serverseitig auf Spielplan, Tabelle, Kalender, Darts
+ * und Gymnastik.
+ *
+ * ZU DEN SOZIALEN KANÄLEN: Keine der sechs nachgesehenen Vereinsseiten hat
+ * sie in der Kopfleiste, alle sechs erst in der Fußzeile. Hier ist es trotzdem
+ * richtig, und der Grund ist das Größenverhältnis: Bei einem Profiverein ist
+ * die Website der Hauptkanal und Instagram das Beiwerk. Beim SV Fisch hat das
+ * Konto 772 Follower und 317 Beiträge, die Website ist Wochen alt. Wer den
+ * Verein sucht, kennt Instagram und nicht sv-fisch.com.
+ *
+ * Diese Datei bleibt eine Server-Komponente: kein Zustand, nur Auszeichnung.
+ * Der interaktive Teil steckt allein in MainMenu.
  */
+
+/*
+ * Fünf Ziele, und die Auswahl ist nicht nach Gefühl getroffen.
+ *
+ * Gesucht wird auf einer Vereinsseite dreierlei: wann das nächste Spiel ist,
+ * wo die Mannschaft steht, und was sonst los ist. Dazu kommen die beiden
+ * anderen Abteilungen, denn ohne sie liest sich die Leiste wie die eines
+ * reinen Fußballvereins.
+ *
+ * "Fußball" als Sammelpunkt wäre falsch: Es gibt keine Seite /fussball, nur
+ * die Unterseiten. Ein Punkt, der auf eine seiner eigenen Unterseiten zeigt,
+ * verspricht eine Übersicht, die es nicht gibt.
+ */
+const LEISTE = [
+  { label: "Spielplan", href: "/fussball/spielplan" },
+  { label: "Tabelle", href: "/fussball/tabelle" },
+  { label: "Termine", href: "/kalender" },
+  { label: "Darts", href: "/darts" },
+  { label: "Gymnastik", href: "/gymnastik" },
+] as const;
 
 export default function Header() {
   return (
@@ -40,13 +85,20 @@ export default function Header() {
      */
     <header className="sticky top-0 z-[60] border-b-2 border-fisch-black bg-fisch-yellow">
       {/*
-        Drei Spalten statt links/rechts: 1fr auto 1fr sorgt dafür, dass der
-        Fanshop-Knopf WIRKLICH mittig steht und nicht dorthin rutscht, wo die
-        beiden Seiten ihn gerade hinlassen. Wäre es ein einfaches
-        justify-between mit drei Kindern, verschöbe sich die Mitte mit jeder
-        Änderung an Wappen oder Menü-Beschriftung.
+        Hier stand ein Raster aus drei Spalten (1fr auto 1fr), damit der
+        Fanshop-Knopf wirklich mittig sass und nicht dorthin rutschte, wo die
+        beiden Seiten ihn gerade hinliessen.
+
+        Seit dem 22.09.2026 ist die Mitte keine leere Flaeche mehr, sondern
+        traegt die Navigation. Eine erzwungene Mitte waere jetzt das falsche
+        Werkzeug: Die Punkte sollen links an der Marke anschliessen und der
+        Rest nach rechts, nicht um einen gedachten Mittelpunkt schweben.
+        Deshalb eine Reihe mit ml-auto am rechten Block.
+
+        Die Hoehe bleibt bei 80 Pixeln. Das war die Bedingung: Die Leiste soll
+        mehr zeigen, ohne mehr vom ersten Bildschirm zu nehmen.
       */}
-      <div className="container-fisch grid h-20 grid-cols-[1fr_auto_1fr] items-center gap-3">
+      <div className="container-fisch flex h-20 items-center gap-4 lg:gap-6">
         <Link
           href="/"
           className="flex shrink-0 items-center gap-3"
@@ -60,11 +112,19 @@ export default function Header() {
             priority
             className="h-12 w-12 sm:h-14 sm:w-14"
           />
-          <span className="hidden flex-col leading-none sm:flex">
+          {/*
+            Der Name stand bis zum 22.09.2026 erst ab sm. Auf dem Handy blieb
+            die Leiste dadurch zu zwei Dritteln leer: Wappen links, dann nichts,
+            dann Fanshop und Menue. Nachgerechnet bei 390 Pixeln: Wappen 48,
+            Name rund 90, Fanshop 110, Menue 40, Abstaende 3 mal 12 ergibt 324
+            von 350 verfuegbaren. Es passt, und die Leiste traegt damit auch
+            dort den Vereinsnamen.
+          */}
+          <span className="flex flex-col leading-none">
             {/* Schwarz, weil die Kopfleiste gelb ist. Das Gelb steht am header und
                 nicht in dieser Klassenliste, deshalb muss es hier ausdruecklich
                 stehen. */}
-            <span className="font-display text-xl font-extrabold uppercase tracking-tight text-fisch-black">
+            <span className="font-display text-base font-extrabold uppercase tracking-tight text-fisch-black sm:text-xl">
               {siteConfig.shortName}
             </span>
             {/*
@@ -76,13 +136,45 @@ export default function Header() {
               gleich viel Gewicht und der Block franst aus.
               Schwarz auf Gelb bei 80 Prozent Deckung ergibt 8,89 zu 1.
             */}
-            <span className="mt-1.5 font-display text-[11px] font-extrabold tracking-[0.35em] text-fisch-black">
+            <span className="mt-1 font-display text-[9px] font-extrabold tracking-[0.3em] text-fisch-black sm:mt-1.5 sm:text-[11px] sm:tracking-[0.35em]">
               {siteConfig.founded}
             </span>
           </span>
         </Link>
 
-        <div className="flex justify-center">
+        {/*
+          Die Navigation erscheint ab lg. Darunter fehlt der Platz: Bei 1024
+          Pixeln stehen neben den fuenf Punkten noch Wappen, Vereinsname, zwei
+          Social-Zeichen, der Fanshop und der Menueknopf in derselben Zeile.
+          Wer sie frueher einblendet, bekommt einen Umbruch statt einer Leiste.
+
+          Sie steht im ausgelieferten HTML und ist damit der erste feste
+          Verweis auf diese fuenf Seiten, siehe Begruendung oben.
+        */}
+        <nav aria-label="Schnellzugriff" className="hidden lg:block">
+          <ul className="flex items-center gap-6">
+            {LEISTE.map((punkt) => (
+              <li key={punkt.href}>
+                <Link
+                  href={punkt.href}
+                  className="text-sm font-bold uppercase tracking-wide text-fisch-black underline-offset-4 hover:underline"
+                >
+                  {punkt.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className="ml-auto flex items-center gap-2 sm:gap-3">
+          {/*
+            Ab sm, nicht darunter: Auf einem Handy mit 390 Pixeln stehen Wappen,
+            Fanshop und Menueknopf schon so eng, dass zwei weitere Zeichen die
+            Zeile sprengen. Dort fuehrt das Bildfenster im Kopfbereich zu
+            Instagram, und die Fusszeile hat beide Kanaele.
+          */}
+          <SocialIcons grund="gelb" className="hidden sm:flex" />
+
           <a
             href={siteConfig.fanshopUrl}
             target="_blank"
@@ -92,9 +184,7 @@ export default function Header() {
           >
             Fanshop
           </a>
-        </div>
 
-        <div className="flex justify-end">
           {/*
             Der Sponsorblock wird hier erzeugt und in das Menue hineingereicht.
             MainMenu ist eine Client-Komponente, PraesentiertVon liest beim

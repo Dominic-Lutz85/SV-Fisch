@@ -9,9 +9,24 @@ import {
 
 interface SocialIconsProps {
   className?: string;
+  /*
+   * Auf welchem Grund die Zeichen stehen.
+   *
+   * "dunkel" ist der bisherige Fall, Fusszeile und Menue: helle Zeichen, beim
+   * Darueberfahren eine gelbe Flaeche mit schwarzem Zeichen.
+   *
+   * "gelb" ist seit dem 22.09.2026 die Kopfleiste. Dort waere dieselbe
+   * Behandlung falsch: Eine gelbe Flaeche auf gelbem Grund ist keine, und die
+   * Zeichen selbst muessen schwarz sein, weil auf Vereinsgelb Schwarz gilt.
+   * Die Regel steht bei --color-fisch-yellow-dark in globals.css.
+   */
+  grund?: "dunkel" | "gelb";
 }
 
-export default function SocialIcons({ className }: SocialIconsProps) {
+export default function SocialIcons({
+  className,
+  grund = "dunkel",
+}: SocialIconsProps) {
   const links = [
     { href: siteConfig.social.instagram, label: "Instagram", Icon: InstagramIcon },
     { href: siteConfig.social.facebook, label: "Facebook", Icon: FacebookIcon },
@@ -36,7 +51,12 @@ export default function SocialIcons({ className }: SocialIconsProps) {
             zwei wichtigsten Knöpfe ein (Fanshop, Tickets), hier waren die zwei
             unwichtigsten Elemente der Leiste die einzigen mit Rahmen.
           */
-          className="flex h-9 w-9 items-center justify-center rounded-full transition-colors hover:bg-fisch-yellow hover:text-fisch-black"
+          className={cn(
+            "flex h-9 w-9 items-center justify-center rounded-full transition-colors",
+            grund === "gelb"
+              ? "text-fisch-black hover:bg-fisch-black/10"
+              : "hover:bg-fisch-yellow hover:text-fisch-black"
+          )}
         >
           <Icon className="h-4 w-4" aria-hidden="true" />
         </a>
