@@ -175,14 +175,34 @@ export default function Header() {
           */}
           <SocialIcons grund="gelb" className="hidden sm:flex" />
 
+          {/*
+            DER GLANZ, seit dem 22.09.2026. Begruendung und Zeiten stehen bei
+            --animate-knopf-glanz in globals.css.
+
+            relative und overflow-hidden sind noetig, damit der Streifen am
+            Knopf haengt und an seiner Rundung abgeschnitten wird. Ohne
+            overflow-hidden laeuft er quer ueber die Kopfleiste.
+
+            Der Streifen liegt in einem eigenen span mit aria-hidden und
+            pointer-events-none: Er ist reine Optik und darf weder vorgelesen
+            werden noch Klicks abfangen.
+          */}
           <a
             href={siteConfig.fanshopUrl}
             target="_blank"
             rel="noopener noreferrer"
             /* Auf gelbem Grund muss der Knopf schwarz sein, sonst verschwindet er. */
-            className="whitespace-nowrap rounded-full bg-fisch-black px-5 py-2.5 text-sm font-bold text-fisch-yellow transition-colors hover:bg-fisch-ink sm:px-7"
+            className="relative overflow-hidden whitespace-nowrap rounded-full bg-fisch-black px-5 py-2.5 text-sm font-bold text-fisch-yellow transition-colors hover:bg-fisch-ink sm:px-7"
           >
             Fanshop
+            <span
+              aria-hidden="true"
+              className="animate-knopf-glanz pointer-events-none absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(105deg, transparent 38%, rgb(243 218 11 / 0.55) 50%, transparent 62%)",
+              }}
+            />
           </a>
 
           {/*

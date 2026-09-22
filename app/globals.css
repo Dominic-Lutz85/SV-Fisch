@@ -177,6 +177,42 @@
   --animate-wappen-rollt: wappen-rollt 1.4s cubic-bezier(0.16, 0.84, 0.3, 1)
     both;
 
+  /*
+   * DER GLANZ AUF DEM FANSHOP-KNOPF, seit dem 22.09.2026.
+   *
+   * Der Auftraggeber wollte den Knopf auffaelliger. Fuenf Fassungen liefen
+   * zur Wahl (Glanz, Ring, Blitz, Wackeln, nur beim Zeigen), gewaehlt ist
+   * der Glanz.
+   *
+   * WARUM FUENF SEKUNDEN PAUSE UND NICHT DURCHLAUFEND: Der Knopf sitzt in
+   * der Kopfleiste und ist damit auf JEDER Seite sichtbar, die ganze Zeit.
+   * Was beim ersten Mal auffaellt, nervt beim zehnten. Der Streifen laeuft
+   * deshalb in 0,8 Sekunden durch und ruht dann 4,2.
+   *
+   * WARUM KEIN FARBWECHSEL: Ein blinkender Knopf springt im Kontrast, und
+   * das ist genau das, was Leute an blinkender Werbung stoert. Der Glanz
+   * laesst Form und Farbe unangetastet und legt nur Licht darueber.
+   *
+   * Schneller als dreimal pro Sekunde darf nichts blinken, das kann bei
+   * empfindlichen Menschen Anfaelle ausloesen (WCAG 2.3.1). Hier ist es
+   * einmal alle fuenf Sekunden, also weit darunter.
+   *
+   * Die Regel fuer "Bewegung reduzieren" weiter unten in dieser Datei setzt
+   * die Animation auf 0,01 ms. Der Knopf sieht dann aus wie immer.
+   */
+  --animate-knopf-glanz: knopf-glanz 5s ease-in-out infinite;
+
+  @keyframes knopf-glanz {
+    0%,
+    72% {
+      transform: translateX(-130%);
+    }
+    88%,
+    100% {
+      transform: translateX(130%);
+    }
+  }
+
   @keyframes wappen-rollt {
     from {
       /*

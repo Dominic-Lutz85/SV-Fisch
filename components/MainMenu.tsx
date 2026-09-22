@@ -372,22 +372,66 @@ export default function MainMenu({
           von 100 auf 95 gezogen.
         */
         aria-label={offen ? "Menü schließen" : "Menü öffnen"}
-        /* Schwarz: der Knopf sitzt auf der gelben Kopfleiste. */
-        className="flex items-center gap-2.5 px-1 py-2 text-sm font-bold uppercase tracking-wider text-fisch-black"
+        /*
+          ALS PILLE, SEIT DEM 22.09.2026, vom Auftraggeber aus vier Fassungen
+          gewaehlt. Vorher: das Wort "Menü" und daneben ein schwarzer Kreis
+          mit einem Plus, das sich beim Oeffnen zum Kreuz drehte.
+          Der Wechsel loest zwei Dinge.
+
+          Erstens die FORM: Die Pille ist dieselbe wie beim Fanshop daneben.
+          Die Leiste hat damit zwei gleich gebaute Knoepfe statt zweier
+          verschiedener Bauarten nebeneinander.
+
+          Zweitens das ZEICHEN: Ein Plus steht fuer "hinzufuegen", nicht fuer
+          "Menü". Drei Striche erkennt jeder ohne Beschriftung, und das
+          zaehlt genau dort, wo das Wort ausgeblendet ist.
+
+          DER FANSHOP MUSS LAUTER BLEIBEN, und das ist der Grund fuer den
+          Umriss: Zwei gefuellte schwarze Pillen nebeneinander konkurrieren,
+          und der Fanshop ist der wichtigere Knopf. Diese hier ist deshalb
+          nur umrandet und faerbt sich erst beim Darueberfahren.
+        */
+        className={`flex items-center gap-2.5 rounded-full border-2 border-fisch-black px-4 py-2 text-sm font-bold uppercase tracking-wider transition-colors sm:px-5 ${
+          offen
+            ? "bg-fisch-black text-fisch-yellow"
+            : "text-fisch-black hover:bg-fisch-black hover:text-fisch-yellow"
+        }`}
       >
         <span aria-hidden="true" className="hidden sm:inline">
           Menü
         </span>
+        {/*
+          Drei Striche, die sich beim Oeffnen zum Kreuz legen: der obere
+          dreht sich in die Mitte, der mittlere verschwindet, der untere
+          kommt von unten dazu. Die Drehung des alten Plus war dieselbe
+          Geste, nur an einem Zeichen, das kein Menü meint.
+
+          Feste Hoehe am Rahmen, damit die Pille beim Umschalten nicht
+          springt: Die Striche sind absolut gesetzt und tragen deshalb
+          selbst keine Hoehe.
+        */}
         <span
           aria-hidden="true"
-          className={`grid h-9 w-9 place-items-center rounded-full bg-fisch-black text-fisch-yellow transition-transform duration-500 ${
-            offen ? "rotate-[315deg]" : ""
-          }`}
+          className="relative block h-3.5 w-5 shrink-0"
         >
-          <svg viewBox="0 0 16 16" className="h-4 w-4" fill="currentColor">
-            <path d="M7.33 16V0h1.34v16z" />
-            <path d="M16 8.67H0V7.33h16z" />
-          </svg>
+          {[0, 1, 2].map((i) => (
+            <span
+              key={i}
+              className={`absolute left-0 block h-0.5 w-full rounded-full bg-current transition-all duration-300 ${
+                i === 0
+                  ? offen
+                    ? "top-1.5 rotate-45"
+                    : "top-0"
+                  : i === 1
+                    ? offen
+                      ? "top-1.5 opacity-0"
+                      : "top-1.5"
+                    : offen
+                      ? "top-1.5 -rotate-45"
+                      : "top-3"
+              }`}
+            />
+          ))}
         </span>
       </button>
 
