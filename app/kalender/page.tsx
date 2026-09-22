@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { CalendarDays, Download, MapPin } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
-import { getTermine } from "@/lib/content";
+import { alleTermine } from "@/lib/termine";
 import { formatDatumLang, formatUhrzeit, cn } from "@/lib/utils";
 import type { TerminKategorie } from "@/types/content";
 
@@ -36,8 +36,37 @@ export default async function KalenderPage({
     ? (kategorie as (typeof kategorien)[number])
     : "Alle";
 
-  const alle = getTermine();
-  const termine = alle.filter((t) => aktive === "Alle" || t.kategorie === aktive);
+  /*
+    Vereinstermine UND Spiele, siehe lib/termine.ts. Bis zum 22.09.2026 las
+    diese Seite nur content/termine.json, also die Handarbeit. Ein Kalender
+    ohne die Spiele ist bei einem Fussballverein die halbe Miete verschenkt,
+    und weil die sechs Handeintraege alle abgelaufen waren, stand er komplett
+    leer da.
+  */
+  const alle = await alleTermine();
+
+  /*
+    NUR WAS BEVORSTEHT, und das war vorher anders.
+
+    Der Kalender zeigte alles in Datumsreihenfolge, also am 22.09.2026 als
+    erstes das Elfer-Turnier vom 20. Juli. Ein Kalender, der mit Vergangenem
+    anfaengt, zwingt jeden erst einmal zum Scrollen, bis er findet, wonach er
+    gesucht hat: was als Naechstes ansteht.
+
+    Gemessen wird gegen MITTERNACHT des heutigen Tages und nicht gegen die
+    aktuelle Uhrzeit: Ein Heimspiel um 14 Uhr soll am selben Abend noch im
+    Kalender stehen, nicht um 14:01 verschwinden. Wer am Sonntagabend
+    nachsieht, wo gespielt wurde, findet es sonst nicht mehr.
+
+    Vergangenes ist damit nicht verloren: Die Spiele stehen mit Ergebnis
+    unter /fussball/spielplan, und zum Turnier gibt es die Galerie.
+  */
+  const heute = new Date();
+  heute.setHours(0, 0, 0, 0);
+
+  const termine = alle
+    .filter((t) => new Date(t.endDatum ?? t.datum) >= heute)
+    .filter((t) => aktive === "Alle" || t.kategorie === aktive);
 
   return (
     <>
@@ -104,7 +133,27 @@ export default async function KalenderPage({
             ))}
           </ul>
         ) : (
-          <p className="text-text-leise">Für diese Kategorie sind aktuell keine Termine hinterlegt.</p>
+          /*
+            Der Satz sagt jetzt, WARUM nichts dasteht, und was man stattdessen
+            tun kann. Vorher stand hier "Für diese Kategorie sind aktuell keine
+            Termine hinterlegt", und das liest sich, als sei die Seite kaputt.
+            Seit der Kalender auch nach vorn filtert, ist der haeufigste Grund
+            ein anderer: Es steht schlicht nichts mehr an.
+          */
+          <div className="text-text-leise">
+            <p>
+              {aktive === "Alle"
+                ? "Aktuell steht nichts an. Sobald der nächste Termin feststeht, erscheint er hier."
+                : `In der Kategorie ${aktive} steht aktuell nichts an.`}
+            </p>
+            {aktive !== "Alle" && (
+              <p className="mt-2">
+                <Link href="/kalender" className="underline underline-offset-4">
+                  Alle Kategorien ansehen
+                </Link>
+              </p>
+            )}
+          </div>
         )}
       </div>
     </>

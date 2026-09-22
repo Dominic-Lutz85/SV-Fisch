@@ -9,13 +9,6 @@
       "beschreibung": "Alle Mitglieder sind herzlich eingeladen. Tagesordnung hängt im Vereinsheim aus und wird per Newsletter verschickt."
     },
     {
-      "id": "heimspiel-sv-konz-ii",
-      "titel": "Heimspiel gegen SV Konz II",
-      "datum": "2026-08-23T14:00:00",
-      "ort": "Sportplatz SV Fisch",
-      "kategorie": "Fußball"
-    },
-    {
       "id": "gymnastik-schnuppertag",
       "titel": "Schnuppertag Gymnastikabteilung",
       "datum": "2026-08-27T18:00:00",
@@ -26,18 +19,11 @@
     {
       "id": "elfer-turnier-2026",
       "titel": "Elfer-Turnier 2026",
-      "datum": "2026-09-05T13:00:00",
-      "endDatum": "2026-09-05T20:00:00",
+      "datum": "2026-07-20T13:00:00",
+      "endDatum": "2026-07-20T23:00:00",
       "ort": "Sportplatz SV Fisch",
       "kategorie": "Fest",
-      "beschreibung": "Das traditionelle Elfmeterturnier für Vereine aus der Region, anschließend Feier auf dem Sportplatz."
-    },
-    {
-      "id": "kreispokal-waldstadt",
-      "titel": "Kreispokal gegen FC Waldstadt",
-      "datum": "2026-08-23T15:30:00",
-      "ort": "Sportplatz SV Fisch",
-      "kategorie": "Fußball"
+      "beschreibung": "Das traditionelle Elfmeterturnier für Vereine aus der Region, anschließend Feier auf dem Sportplatz. Bilder davon stehen in der Galerie."
     },
     {
       "id": "vereinsfest-2026",
