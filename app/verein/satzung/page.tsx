@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Download } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
+import { getVorstand } from "@/lib/content";
 import { satzung, SATZUNG_STAND, SATZUNG_PDF } from "@/content/satzung";
 
 export const metadata: Metadata = {
@@ -20,6 +21,17 @@ function marke(titel: string) {
 }
 
 export default function SatzungPage() {
+  /*
+   * Wer Fragen zur Satzung hat, soll nicht raten muessen, an wen. Der
+   * Zustaendige steht in content/vorstand.json und wird ueber seine Rolle
+   * gefunden, damit diese Seite keine zweite Namensliste fuehrt: Wechselt das
+   * Amt, wechselt es an einer Stelle. Faellt der Eintrag weg, verschwindet der
+   * Hinweis, statt auf jemanden zu zeigen, den es nicht mehr gibt.
+   */
+  const ansprechpartner = getVorstand().find(
+    (m) => m.rolle.includes("Satzung") && m.name.trim() !== ""
+  );
+
   return (
     <>
       <PageHeader
@@ -87,11 +99,33 @@ export default function SatzungPage() {
           ))}
         </div>
 
-        <p className="mt-12 border-t border-linie pt-6 text-sm text-text-leise">
-          Fisch, den {SATZUNG_STAND}. Maßgeblich ist die von der
-          Mitgliederversammlung beschlossene Fassung, die hier wortgleich
-          wiedergegeben ist.
-        </p>
+        <div className="mt-12 border-t border-linie pt-6 text-sm text-text-leise">
+          <p>
+            Fisch, den {SATZUNG_STAND}. Maßgeblich ist die von der
+            Mitgliederversammlung beschlossene Fassung, die hier wortgleich
+            wiedergegeben ist.
+          </p>
+          {ansprechpartner && (
+            <p className="mt-3">
+              Fragen zur Satzung beantwortet{" "}
+              <strong className="font-semibold text-text">
+                {ansprechpartner.name}
+              </strong>
+              {ansprechpartner.email && (
+                <>
+                  ,{" "}
+                  <a
+                    href={`mailto:${ansprechpartner.email}`}
+                    className="underline"
+                  >
+                    {ansprechpartner.email}
+                  </a>
+                </>
+              )}
+              .
+            </p>
+          )}
+        </div>
       </div>
     </>
   );

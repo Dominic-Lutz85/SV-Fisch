@@ -86,7 +86,15 @@ export default function DartsPage() {
               <p className="text-xs font-bold uppercase tracking-wide text-text-leise">
                 Abteilungsleitung
               </p>
-              <p className="mt-1 font-display font-bold text-text">{leitung.name}</p>
+              {/*
+                Solange niemand benannt ist, steht hier der Hinweis statt
+                eines leeren Fettdrucks. Der Grund steht in PersonCard.tsx:
+                ein offener Posten ist kein Platzhalter, aber eine leere
+                Zeile sieht nach Fehler aus.
+              */}
+              <p className="mt-1 font-display font-bold text-text">
+                {leitung.name.trim() || "Noch nicht benannt"}
+              </p>
               {leitung.email && (
                 <a
                   href={`mailto:${leitung.email}`}

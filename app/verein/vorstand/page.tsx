@@ -37,13 +37,17 @@ export default function VorstandPage() {
             </div>
           );
         })}
+        {/*
+          Hier stand eine Arbeitsanweisung an mich selbst: "Namen und
+          Kontaktdaten in content/vorstand.json eintragen", samt Dateipfad, in
+          grauer Schrift unter dem Vorstand. Sie war oeffentlich sichtbar, auf
+          einer Seite, die als Arbeitsprobe dient. Die Namen stehen jetzt
+          drin, also ist die Anweisung erledigt und die Zeile weg.
+        */}
         <p className="mt-4 text-sm text-text-leise">
-          [BITTE PRÜFEN/ERGÄNZEN] – Namen und Kontaktdaten des aktuellen
-          Vorstands in{" "}
-          <code className="rounded bg-flaeche-hoch-2 px-1.5 py-0.5">
-            content/vorstand.json
-          </code>{" "}
-          eintragen.
+          Stand: Vorstand nach der Mitgliederversammlung. Wer sich engagieren
+          moechte oder eine Frage an ein bestimmtes Amt hat, schreibt am besten
+          direkt an die Adresse auf der Karte.
         </p>
       </div>
     </>
