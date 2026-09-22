@@ -1,26 +1,266 @@
 {
   "alben": [
     {
-      "slug": "saison-2025-26",
-      "titel": "Saison 2025/26",
-      "datum": "2026-05-01",
-      "cover": "/gallery/saison-2025-26/1.png",
+      "slug": "elferturnier-2026",
+      "titel": "Elferturnier 2026",
+      "datum": "2026-07-20",
+      "cover": "/gallery/elferturnier-2026/turnier-004.webp",
       "bilder": [
         {
-          "src": "/gallery/saison-2025-26/1.png",
-          "alt": "Mannschaftsfoto der 1. Mannschaft vor Saisonstart"
+          "src": "/gallery/elferturnier-2026/turnier-001.webp",
+          "alt": "Ein Spieler liegt lachend im Gras und streckt den Siegerpokal in die Höhe"
         },
         {
-          "src": "/gallery/saison-2025-26/2.png",
-          "alt": "Torjubel beim Heimspiel"
+          "src": "/gallery/elferturnier-2026/turnier-002.webp",
+          "alt": "Zwei Spieler sitzen im Gras, einer hält den Pokal"
         },
         {
-          "src": "/gallery/saison-2025-26/3.png",
-          "alt": "Anstoß auf dem Sportplatz SV Fisch"
+          "src": "/gallery/elferturnier-2026/turnier-003.webp",
+          "alt": "Eine Mannschaft jubelt mit erhobenen Armen in die Kamera"
         },
         {
-          "src": "/gallery/saison-2025-26/4.png",
-          "alt": "Fans auf der Tribüne"
+          "src": "/gallery/elferturnier-2026/turnier-004.webp",
+          "alt": "Ein Team feiert mit dem Pokal, Arme in der Luft"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-005.webp",
+          "alt": "Zwei Spieler klatschen sich nach dem Spiel ab"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-006.webp",
+          "alt": "Zwei Spieler stehen nebeneinander, einer mit Strohhut"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-007.webp",
+          "alt": "Zwei Spieler stoßen mit Bechern an und lachen"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-008.webp",
+          "alt": "Spieler und Zuschauer stehen dicht gedrängt am Spielfeldrand"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-009.webp",
+          "alt": "Eine Mannschaft in Rot jubelt nach dem Spiel"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-010.webp",
+          "alt": "Eine große Gruppe feiert gemeinsam auf dem Platz"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-011.webp",
+          "alt": "Ein Torwart mit der Nummer 24 steht im Tor, dahinter Zuschauer"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-012.webp",
+          "alt": "Ein Torwart hechtet nach dem Ball, das Tor bleibt leer"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-013.webp",
+          "alt": "Vier Spieler in orangefarbenen Trikots stehen zusammen"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-014.webp",
+          "alt": "Ein Team in weißen SV-Fisch-Trikots steht beieinander"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-015.webp",
+          "alt": "Zuschauer verfolgen das Spiel am Rand, der Ball liegt bereit"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-016.webp",
+          "alt": "Zwei Spieler in schwarzen Trikots, den Arm um die Schulter gelegt"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-017.webp",
+          "alt": "Zwei junge Männer stehen vor dem Tor und schauen in die Kamera"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-018.webp",
+          "alt": "Zwei Zuschauerinnen umarmen sich lachend"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-019.webp",
+          "alt": "Ein Torwart mit der Nummer 10 fliegt nach dem Ball"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-020.webp",
+          "alt": "Ein Spieler schießt, die Mitspieler schauen zu"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-021.webp",
+          "alt": "Der Torwart von FC Knallgas hechtet, der Ball liegt links neben ihm"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-022.webp",
+          "alt": "Ein Schütze trifft den Ball, der Torwart steht noch"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-023.webp",
+          "alt": "Ein Torwart im gelben Trikot fliegt durch den Strafraum"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-024.webp",
+          "alt": "Ein Spieler führt den Ball über den Platz"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-025.webp",
+          "alt": "Ein Team in Gelb und Weiß jubelt"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-026.webp",
+          "alt": "Ein Spieler holt zum Schuss aus, Zuschauer im Hintergrund"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-027.webp",
+          "alt": "Eine große Gruppe in gelben Trikots am Spielfeldrand"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-028.webp",
+          "alt": "Spieler und Zuschauer stehen in Gruppen beisammen"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-029.webp",
+          "alt": "Ein Team in Weiß und Blau jubelt nach dem Spiel"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-030.webp",
+          "alt": "Ein Team in weißen Trikots stellt sich zum Bild auf"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-031.webp",
+          "alt": "Zwei Männer stehen nebeneinander, einer mit Kappe"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-032.webp",
+          "alt": "Ein Team in dunkelblauen Trikots vor der Turnierwand"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-033.webp",
+          "alt": "Ein Team posiert vor der Fotowand des Elferturniers"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-034.webp",
+          "alt": "Ein Spieler zieht ab, der Ball ist noch am Fuß"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-035.webp",
+          "alt": "Ein Zuschauer mit Kappe jubelt mit erhobenen Armen"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-036.webp",
+          "alt": "Spieler in dunklen Trikots mit den Nummern 9 und 25"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-037.webp",
+          "alt": "Ein Torwart in Blau hechtet in die Ecke"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-038.webp",
+          "alt": "Ein Spieler in Weiß beim Anlauf zum Schuss"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-039.webp",
+          "alt": "Ein Zuschauer mit Kappe hält beide Hände hoch"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-040.webp",
+          "alt": "Ein Torwart in dunklem Trikot macht sich bereit"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-041.webp",
+          "alt": "Zwei Spieler stehen zusammen, einer in Rosa, einer in Weiß"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-042.webp",
+          "alt": "Eine Gruppe steht beisammen, der Torwart in Gelb dazwischen"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-043.webp",
+          "alt": "Ein Team feiert im Gras vor dem Tor"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-044.webp",
+          "alt": "Ein Spieler in orangefarbenem Trikot hebt seinen Becher"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-045.webp",
+          "alt": "Drei Männer in weißen Trikots stehen nebeneinander"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-046.webp",
+          "alt": "Ein Torwart streckt sich waagerecht nach dem Ball"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-047.webp",
+          "alt": "Ein Team in lila Trikots stellt sich auf"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-048.webp",
+          "alt": "Ein Team in blauen Trikots steht auf dem Platz"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-049.webp",
+          "alt": "Eine Gruppe in blauen Trikots vor dem Tor"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-050.webp",
+          "alt": "Ein Team in Weiß stellt sich vor dem Tor auf"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-051.webp",
+          "alt": "Eine Gruppe sitzt und steht im Gras beisammen"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-052.webp",
+          "alt": "Ein Team in grünen Trikots stellt sich zum Bild"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-053.webp",
+          "alt": "Zwei Teilnehmer mit bedruckten Trikots vor der Fotowand"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-054.webp",
+          "alt": "Ein Team in Weiß und Hellblau vor der Turnierwand"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-055.webp",
+          "alt": "Ein Team in weißen Trikots auf dem Spielfeld"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-056.webp",
+          "alt": "Zwei Teilnehmer in blauen und lila Trikots"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-057.webp",
+          "alt": "Ein Team in Schwarz und Weiß stellt sich auf"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-058.webp",
+          "alt": "Drei Männer in schwarzen Trikots stehen zusammen"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-059.webp",
+          "alt": "Ein Team in weißen Trikots auf dem Platz"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-060.webp",
+          "alt": "Ein Team in roten Trikots stellt sich vor dem Tor auf"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-061.webp",
+          "alt": "Zwei Spieler in orangefarbenen Trikots"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-062.webp",
+          "alt": "Ein Torwart in Blau vor der roten Bande"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-063.webp",
+          "alt": "Eine Szene am Spielfeldrand während einer Pause"
+        },
+        {
+          "src": "/gallery/elferturnier-2026/turnier-064.webp",
+          "alt": "Drei Spieler in weißen und roten Trikots nach dem Spiel"
         }
       ]
     }
