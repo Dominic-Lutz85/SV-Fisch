@@ -1,25 +1,7 @@
 {
   "quelle": "https://www.fupa.net/team/sv-fisch-m1-2026-27/history",
   "abgerufen": "2026-09-03",
-  "hinweis": "Die Stufen unten stehen als Uebergang auf der Startseite. Sie tragen je zwei kurze Zeilen, mehr passt in eine Treppenstufe nicht. Die vollstaendige Saisontabelle darunter ist der Beleg, woertlich aus der FuPa-Chronik. Wer eine Stufe aendert, prueft sie an dieser Tabelle.",
-  "stufen": [
-    {
-      "jahr": "1964",
-      "titel": "Gegründet"
-    },
-    {
-      "jahr": "bis 2023",
-      "titel": "Reserveklasse und Kreisliga C"
-    },
-    {
-      "jahr": "2023 – 2026",
-      "titel": "Kreisliga C, zweimal Platz 3"
-    },
-    {
-      "jahr": "seit 2026",
-      "titel": "Kreisliga B, erstmals"
-    }
-  ],
+  "hinweis": "Die Saisonliste ist die einzige Quelle fuer die Kurve auf der Startseite (components/Ligaverlauf.tsx). Die Hoehe eines Punktes leitet sich aus dem Feld liga ab, deshalb muss die Schreibweise mit Reserveklasse, Kreisliga C oder Kreisliga B beginnen; eine unbekannte Klasse bricht den Bau ab, statt stillschweigend einen Absturz zu zeichnen. Hier standen bis zum 22.09.2026 zusaetzlich vier von Hand gepflegte Stufen (1964, bis 2023, 2023 bis 2026, seit 2026). Sie sind weg, weil sie den Weg glaetteten: Der Rueckfall in die Reserveklasse nach 18/19 kam darin nicht vor. Die Kurve zeigt ihn. Wer sie zurueckholt, holt auch das Problem zurueck.",
   "saisons": [
     {
       "saison": "26/27",

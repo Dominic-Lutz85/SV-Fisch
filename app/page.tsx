@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import Hero from "@/components/Hero";
-import Erfolgstreppe from "@/components/Erfolgstreppe";
+import Ligaverlauf from "@/components/Ligaverlauf";
 import NewsSlider from "@/components/NewsSlider";
 import Eyebrow from "@/components/Eyebrow";
 import Fixtures from "@/components/Fixtures";
@@ -93,23 +93,20 @@ export default async function Home() {
       />
 
       {/*
-        Die Chronik als gelbes Band, direkt unter dem Kopfbereich.
+        Der Ligaverlauf als Kurve, direkt unter dem Kopfbereich.
 
-        Hier stand bis zum 08.09.2026, sie liege "direkt unter dem gelben
-        Terminband und ausserhalb von container-fisch, damit die Treppe wie
-        das Band ueber die volle Breite laeuft". Beides stimmte nicht mehr:
-        Das Terminband war laengst dunkel und ist inzwischen ganz weg, und
-        der Container liegt seit dem 07.09. in der Komponente selbst.
+        Hier stand bis zum 22.09.2026 ein gelbes Band ueber die volle
+        Breite (components/Erfolgstreppe.tsx). Der Auftraggeber mochte es
+        nicht, und beim Nachsehen in den Daten kam dazu, dass seine vier
+        Stufen den Weg glaetteten. Beides ist in Ligaverlauf.tsx
+        ausfuehrlich begruendet, gemessen und mit Datum.
 
-        Ein Kommentar, der einen aufgehobenen Zustand begruendet, ist
-        schlimmer als gar keiner, weil er beim naechsten Umbau als Vorgabe
-        gelesen wird. Genau das ist hier zweimal passiert. Die Begruendung
-        steht vollstaendig in Erfolgstreppe.tsx, gemessen und mit Datum.
-
-        Die Flaeche laeuft randlos ueber den Bildschirm, der Text darin
-        steht im Raster. Beides ist Absicht.
+        Die Kurve hat KEINE eigene Hintergrundfarbe: Sie steht auf
+        demselben Schwarz wie alles darum, abgegrenzt nur durch eine
+        Oberkante. Genau das war der Sinn des Umbaus, also bitte nicht
+        wieder eine Flaeche darunterlegen.
       */}
-      <Erfolgstreppe />
+      <Ligaverlauf />
 
       {/*
         Hier stand ein Band aus vier gleich grossen Zahlenkacheln: 1964,
