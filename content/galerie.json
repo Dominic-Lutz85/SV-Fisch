@@ -1,6 +1,187 @@
 {
   "alben": [
     {
+      "slug": "spieltage-2026-27",
+      "titel": "Spieltage 2026/27",
+      "datum": "2026-09-06",
+      "zeitraum": "Saison 2026/27",
+      "cover": "/gallery/spieltage-2026-27/spieltag-010.webp",
+      "bilder": [
+        {
+          "src": "/gallery/spieltage-2026-27/spieltag-001.webp",
+          "alt": "Drei Spieler kämpfen um den Ball, zwei im weißen Trikot des Gegners, einer in Grau-Gelb"
+        },
+        {
+          "src": "/gallery/spieltage-2026-27/spieltag-002.webp",
+          "alt": "Ein Fischer Spieler zieht im Sprint am Gegenspieler vorbei, im Hintergrund die Werbebanden"
+        },
+        {
+          "src": "/gallery/spieltage-2026-27/spieltag-003.webp",
+          "alt": "Zwei Spieler laufen Schulter an Schulter dem Ball hinterher"
+        },
+        {
+          "src": "/gallery/spieltage-2026-27/spieltag-004.webp",
+          "alt": "Die Mannschaft feiert nach dem Spiel vor der Anzeigetafel, einige liegen im Gras"
+        },
+        {
+          "src": "/gallery/spieltage-2026-27/spieltag-005.webp",
+          "alt": "Zweikampf um den Ball, der Gegenspieler kommt von hinten"
+        },
+        {
+          "src": "/gallery/spieltage-2026-27/spieltag-006.webp",
+          "alt": "Ein Spieler zieht mit dem Ball an einem Verteidiger vorbei"
+        },
+        {
+          "src": "/gallery/spieltage-2026-27/spieltag-007.webp",
+          "alt": "Ein Torwart im roten Trikot steht vor dem Tor, der Ball liegt im Gras"
+        },
+        {
+          "src": "/gallery/spieltage-2026-27/spieltag-008.webp",
+          "alt": "Ein Spieler hebt die Hand und fordert den Ball"
+        },
+        {
+          "src": "/gallery/spieltage-2026-27/spieltag-009.webp",
+          "alt": "Der Gegenspieler dreht sich weg, der Fischer Spieler bleibt am Ball"
+        },
+        {
+          "src": "/gallery/spieltage-2026-27/spieltag-010.webp",
+          "alt": "Mehrere Spieler laufen nach einem Treffer zur Jubeltraube zusammen"
+        },
+        {
+          "src": "/gallery/spieltage-2026-27/spieltag-011.webp",
+          "alt": "Ein Spieler holt zum Schuss aufs Tor aus"
+        },
+        {
+          "src": "/gallery/spieltage-2026-27/spieltag-012.webp",
+          "alt": "Ein Spieler grätscht in den Ball, der Gegenspieler kommt zu Fall"
+        },
+        {
+          "src": "/gallery/spieltage-2026-27/spieltag-013.webp",
+          "alt": "Ein Spieler springt hoch und nimmt den Ball mit dem Kopf"
+        },
+        {
+          "src": "/gallery/spieltage-2026-27/spieltag-014.webp",
+          "alt": "Die Mannschaft steht vor dem Anpfiff im Kreis, die Arme auf den Schultern der Nebenleute"
+        },
+        {
+          "src": "/gallery/spieltage-2026-27/spieltag-015.webp",
+          "alt": "Der Schiedsrichter steht zwischen zwei Spielern am Spielfeldrand"
+        }
+      ]
+    },
+    {
+      "slug": "vfl-trier-2026-08-30",
+      "titel": "Auswärts bei VfL Trier",
+      "datum": "2026-08-30",
+      "cover": "/gallery/vfl-trier-2026-08-30/vfl-005.webp",
+      "bilder": [
+        {
+          "src": "/gallery/vfl-trier-2026-08-30/vfl-001.webp",
+          "alt": "Zwei Spieler sprinten dem Ball hinterher, von hinten aufgenommen"
+        },
+        {
+          "src": "/gallery/vfl-trier-2026-08-30/vfl-002.webp",
+          "alt": "Zweikampf auf dem Kunstrasen, der Gegner trägt Blau-Weiß"
+        },
+        {
+          "src": "/gallery/vfl-trier-2026-08-30/vfl-003.webp",
+          "alt": "Ein Spieler führt den Ball durch mehrere Gegenspieler"
+        },
+        {
+          "src": "/gallery/vfl-trier-2026-08-30/vfl-004.webp",
+          "alt": "Zwei Spieler laufen mit dem Ball nebeneinander her"
+        },
+        {
+          "src": "/gallery/vfl-trier-2026-08-30/vfl-005.webp",
+          "alt": "Ein Spieler sprintet allein auf den Ball zu"
+        },
+        {
+          "src": "/gallery/vfl-trier-2026-08-30/vfl-006.webp",
+          "alt": "Zweikampf um den Ball vor der Seitenlinie"
+        },
+        {
+          "src": "/gallery/vfl-trier-2026-08-30/vfl-007.webp",
+          "alt": "Drei Spieler laufen dem Ball entgegen"
+        },
+        {
+          "src": "/gallery/vfl-trier-2026-08-30/vfl-008.webp",
+          "alt": "Ein Spieler zieht mit dem Ball an der Bande vorbei, dahinter sitzen Zuschauer"
+        },
+        {
+          "src": "/gallery/vfl-trier-2026-08-30/vfl-009.webp",
+          "alt": "Zwei Spieler klatschen sich über dem Kopf ab"
+        },
+        {
+          "src": "/gallery/vfl-trier-2026-08-30/vfl-010.webp",
+          "alt": "Mehrere Spieler beglückwünschen sich nach einem Treffer"
+        },
+        {
+          "src": "/gallery/vfl-trier-2026-08-30/vfl-011.webp",
+          "alt": "Ein Spieler läuft mit dem Ball am Fuß"
+        },
+        {
+          "src": "/gallery/vfl-trier-2026-08-30/vfl-012.webp",
+          "alt": "Die Mannschaft steht vor dem Anpfiff im Kreis"
+        }
+      ]
+    },
+    {
+      "slug": "tawern-2026-07-17",
+      "titel": "Testspiel gegen SV Tawern",
+      "datum": "2026-07-17",
+      "cover": "/gallery/tawern-2026-07-17/tawern-003.webp",
+      "bilder": [
+        {
+          "src": "/gallery/tawern-2026-07-17/tawern-001.webp",
+          "alt": "Der Torwart breitet im Strafraum die Arme aus, ein Angreifer läuft auf ihn zu"
+        },
+        {
+          "src": "/gallery/tawern-2026-07-17/tawern-002.webp",
+          "alt": "Ein Spieler führt den Ball, hinter ihm das Festzelt am Sportplatz"
+        },
+        {
+          "src": "/gallery/tawern-2026-07-17/tawern-003.webp",
+          "alt": "Zweikampf um den Ball, im Hintergrund die Anzeigetafel"
+        },
+        {
+          "src": "/gallery/tawern-2026-07-17/tawern-004.webp",
+          "alt": "Der Torwart streckt sich nach dem Ball, der über ihm in der Luft steht"
+        },
+        {
+          "src": "/gallery/tawern-2026-07-17/tawern-005.webp",
+          "alt": "Zwei Spieler laufen eng nebeneinander dem Ball nach"
+        },
+        {
+          "src": "/gallery/tawern-2026-07-17/tawern-006.webp",
+          "alt": "Ein Fischer Spieler zwischen zwei Tawernern, einer davon mit der Nummer 15"
+        },
+        {
+          "src": "/gallery/tawern-2026-07-17/tawern-007.webp",
+          "alt": "Laufduell an der Seitenlinie, dahinter stehen Zuschauer"
+        },
+        {
+          "src": "/gallery/tawern-2026-07-17/tawern-008.webp",
+          "alt": "Ein Spieler in Grau-Gelb setzt sich gegen einen Gegner in Weiß durch"
+        },
+        {
+          "src": "/gallery/tawern-2026-07-17/tawern-009.webp",
+          "alt": "Mehrere Spieler stehen dicht beieinander und warten auf den Ball"
+        },
+        {
+          "src": "/gallery/tawern-2026-07-17/tawern-010.webp",
+          "alt": "Spieler klatschen sich an der Seitenlinie ab"
+        },
+        {
+          "src": "/gallery/tawern-2026-07-17/tawern-011.webp",
+          "alt": "Aufwärmen vor dem Anpfiff, mehrere Bälle liegen auf dem Rasen"
+        },
+        {
+          "src": "/gallery/tawern-2026-07-17/tawern-012.webp",
+          "alt": "Zwei Spieler laufen nebeneinander über den Platz, einer lacht"
+        }
+      ]
+    },
+    {
       "slug": "elferturnier-2026",
       "titel": "Elferturnier 2026",
       "datum": "2026-07-20",

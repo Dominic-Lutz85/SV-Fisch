@@ -142,7 +142,24 @@ export interface GalerieBild {
 export interface GalerieAlbum {
   slug: string;
   titel: string;
+  /*
+   * Das Datum sortiert die Alben und wird normalerweise auch angezeigt.
+   */
   datum: string;
+  /*
+   * Angezeigt STATT des Datums, wenn gesetzt.
+   *
+   * Es gibt Alben, die kein einzelnes Datum haben: Der Fotograf des
+   * Vereins fuehrt einen laufenden Ordner mit Bildern aus mehreren
+   * Spieltagen. Ein Datum daran waere fuer die meisten Bilder darin
+   * schlicht falsch, und eine Bildunterschrift, die etwas Falsches
+   * behauptet, ist schlimmer als keine.
+   *
+   * Das Feld datum bleibt trotzdem Pflicht, denn sortiert werden muss
+   * auch so ein Album. Es traegt dann das juengste belegte Spiel aus dem
+   * Ordner und steht nur in der Reihenfolge, nicht auf dem Bildschirm.
+   */
+  zeitraum?: string;
   cover: string;
   bilder: GalerieBild[];
 }

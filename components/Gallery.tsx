@@ -51,7 +51,14 @@ export default function Gallery({ alben }: { alben: GalerieAlbum[] }) {
         <section key={album.slug}>
           <div className="mb-5 flex items-baseline justify-between gap-4">
             <h2 className="font-display text-2xl font-bold text-text">{album.titel}</h2>
-            <span className="text-sm text-text-leise">{formatDatum(album.datum)}</span>
+            {/*
+              zeitraum schlaegt das Datum, siehe die Begruendung am Typ
+              GalerieAlbum. Ein Album aus mehreren Spieltagen bekommt
+              sonst das Datum eines einzigen davon untergeschoben.
+            */}
+            <span className="text-sm text-text-leise">
+              {album.zeitraum ?? formatDatum(album.datum)}
+            </span>
           </div>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
             {album.bilder.map((bild, bildIndex) => (
