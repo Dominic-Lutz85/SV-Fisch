@@ -4,32 +4,34 @@ import { ALTE_ADRESSEN } from "./lib/alte-adressen";
 
 const nextConfig: NextConfig = {
   /**
-   * Die Seite ist unter zwei Adressen erreichbar (sv-fisch.com und
-   * www.sv-fisch.com). Ohne Weiterleitung wertet Google das als zwei
-   * getrennte Seiten mit dem gleichen Inhalt und sucht sich selbst eine
-   * aus. Deshalb ist sv-fisch.com die eine gueltige Adresse, www wird
-   * dauerhaft (308, von Google wie 301 behandelt) dorthin geschickt.
+   * DIE EINE GUELTIGE ADRESSE DER SEITE.
    *
-   * Muss beim Umzug auf eine andere Domain hier UND in lib/config.ts
-   * angepasst werden.
+   * Sie steht hier als Konstante und nicht mehrfach in den Regeln darunter.
+   * Der Grund ist ein Fehler, der beim Vorbereiten des Domainumzugs am
+   * 23.09.2026 fast eingebaut worden waere: Die Datei trug zwei
+   * www-Weiterleitungen, eine fuer die laufende Domain und eine fuer die
+   * geplante. Ein Suchen-und-Ersetzen haette daraus zwei gleiche Regeln
+   * gemacht.
+   *
+   * Beim Umzug wird nur diese eine Zeile angefasst, und das erledigt
+   * scripts/domain-umstellen.mjs zusammen mit den vier anderen Stellen im
+   * Projekt, die die Domain kennen.
    */
   async redirects() {
+    const HAUPTDOMAIN = "sv-fisch.com";
+
     return [
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "www.sv-fisch.com" }],
-        destination: "https://sv-fisch.com/:path*",
-        permanent: true,
-      },
       /*
-       * Dieselbe Regel fuer www.sv-fisch.de, vorbereitet fuer den geplanten
-       * Umzug auf diese Domain. Sie greift erst, wenn die Domain auf diese
-       * Seite zeigt, und stoert bis dahin nicht.
+       * Ohne diese Weiterleitung ist die Seite unter zwei Adressen
+       * erreichbar (mit und ohne www). Google wertet das als zwei getrennte
+       * Seiten mit gleichem Inhalt und sucht sich selbst eine aus. Deshalb
+       * geht www dauerhaft auf die Adresse ohne www; 308 wird von Google
+       * wie 301 behandelt.
        */
       {
         source: "/:path*",
-        has: [{ type: "host", value: "www.sv-fisch.de" }],
-        destination: "https://sv-fisch.de/:path*",
+        has: [{ type: "host", value: `www.${HAUPTDOMAIN}` }],
+        destination: `https://${HAUPTDOMAIN}/:path*`,
         permanent: true,
       },
       /*
