@@ -198,6 +198,24 @@ html {
 }
 
 /*
+ * Gegen ein seitliches Verschieben der Seite um wenige Pixel.
+ *
+ * Steht hier und nicht als Tailwind-Klasse im Layout: `overflow-x-clip`
+ * erzeugt in dieser Tailwind-Fassung keine Regel, die Klasse stand im HTML
+ * und `overflow-x` blieb trotzdem `visible`. Gemessen, nicht vermutet.
+ *
+ * Die ausfuehrliche Begruendung steht in app/layout.tsx an der Stelle, wo
+ * die Klasse gesetzt wird. Kurz: Es ist eine Absicherung gegen
+ * aufsummierte Nachkommastellen und keine Ursachenbehebung.
+ *
+ * clip und nicht hidden, denn hidden macht aus dem Element einen
+ * Scroll-Container und bricht damit position: sticky in den Kindern.
+ */
+.seite-ohne-querlauf {
+  overflow-x: clip;
+}
+
+/*
  * Wer im Betriebssystem "Bewegung reduzieren" eingestellt hat, bekommt keine.
  * Das ist nicht nur Rücksicht: Ohne diese Regel bleibt jede Einblendung
  * Pflicht, und Elemente, die bei 0 Deckkraft starten, hängen davon ab, dass

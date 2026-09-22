@@ -150,7 +150,7 @@ function Zeile({
             */}
             <span
               className={cn(
-                "min-w-0 flex-1 text-right text-sm sm:text-base",
+                "min-w-0 flex-1 [overflow-wrap:anywhere] text-right text-sm sm:text-base",
                 istFisch(spiel.heim) ? "font-extrabold text-text" : "font-semibold text-text"
               )}
             >
@@ -182,7 +182,7 @@ function Zeile({
 
             <span
               className={cn(
-                "min-w-0 flex-1 text-left text-sm sm:text-base",
+                "min-w-0 flex-1 [overflow-wrap:anywhere] text-left text-sm sm:text-base",
                 istFisch(spiel.auswaerts) ? "font-extrabold text-text" : "font-semibold text-text"
               )}
             >

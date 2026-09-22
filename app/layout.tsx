@@ -104,7 +104,40 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           gelesen.
         */}
         <Meldungsleiste meldungen={getMeldungen()} />
-        <main id="main-content" className="flex-1">
+        {/*
+          overflow-x: clip gegen ein seitliches Verschieben der Seite um
+          wenige Pixel.
+
+          BEFUND, 22.09.2026: Bei 390 Pixeln liess sich die Startseite 3 Pixel
+          zur Seite schieben, /fussball/spielplan 2 Pixel, /impressum und
+          /galerie waren sauber. Beim Spielplan war die Ursache echt und ist
+          behoben: "SV Wasserliesch/Oberbillig" ist ein Wort ohne
+          Umbruchstelle, es brauchte overflow-wrap in Fixtures.tsx.
+
+          Auf der Startseite bleiben 3 Pixel, und dafuer habe ich KEINE
+          einzelne Ursache gefunden. Gesucht wurde mit drei Verfahren:
+          Elemente, deren Inhalt breiter ist als sie selbst; die
+          Ausblende-Methode ueber jedes Element; und der Vergleich von
+          scrollWidth auf jeder Ebene. Alle Treffer sind gewollte randlose
+          Elemente mit negativem Aussenabstand (Bildfenster, Mini-Tabelle,
+          Nachrichten-Karussell), und keines ragt sichtbar heraus. Es bleibt
+          die Summe von Nachkommastellen, also je unter einem Pixel pro
+          Element.
+
+          DESHALB EINE ABSICHERUNG UND KEINE URSACHENBEHEBUNG, und das steht
+          hier, damit es niemand fuer Letzteres haelt.
+
+          clip und nicht hidden: hidden macht aus dem Element einen
+          Scroll-Container, und das bricht position: sticky in den Kindern
+          sowie scrollIntoView. clip tut beides nicht. Nachgemessen: Der
+          Kopfleiste klebt weiterhin bei y=0, und beide waagerechten Scroller
+          (Spielband und Nachrichten-Karussell) lassen sich unveraendert
+          wischen.
+
+          An main und nicht an html oder body: So bleibt alles ausserhalb des
+          Inhaltsbereichs unberuehrt.
+        */}
+        <main id="main-content" className="flex-1 seite-ohne-querlauf">
           {children}
         </main>
         <Footer />
