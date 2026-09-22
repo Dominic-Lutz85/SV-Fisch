@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { CalendarDays, ArrowRight } from "lucide-react";
 import { siteConfig } from "@/lib/config";
@@ -13,6 +12,7 @@ import {
   toreAusVereinssicht,
 } from "@/lib/ergebnis";
 import AusgangsZeichen from "@/components/AusgangsZeichen";
+import VereinsFenster, { type FensterBild } from "@/components/VereinsFenster";
 import type { Spiel, Termin } from "@/types/content";
 
 /*
@@ -48,120 +48,116 @@ interface HeroProps {
   naechstesSpiel?: Spiel;
   /* Der ganze Spielplan. Das Band schneidet sich selbst zurecht. */
   spielplan: Spiel[];
+  /*
+   * Was im Bildfenster rechts steht. Kommt von der Seite und nicht von hier,
+   * weil der Abruf bei Meta dorthin gehoert, wo auch der Spielplan geholt
+   * wird. Sonst haette der Kopfbereich eine eigene Datenquelle, und bei
+   * einem Ausfall waere nicht mehr zu sehen, wer wen fragt.
+   */
+  fensterBild: FensterBild;
 }
 
 export default function Hero({
+  fensterBild,
   naechsterTermin,
   naechstesSpiel,
   spielplan,
 }: HeroProps) {
   const heute = heuteInDeutschland();
-  const band = saisonBand(spielplan, heute);
+  /*
+   * VIER EINTRAEGE, NICHT FUENF, seit dem 22.09.2026.
+   *
+   * Die Standardwerte von saisonBand sind drei zurueck und zwei voraus. Sie
+   * stammen vom 08.09., als der Kopfbereich noch die ganze Breite hatte: Bei
+   * 1920 Pixeln passten fuenf Eintraege in eine Zeile (fuenf mal 176 plus
+   * vier mal 12 ergibt 928, die Zeile hatte 1216).
+   *
+   * Seit rechts das Bildfenster sitzt, hat die Zeile noch 776 Pixel. Der
+   * fuenfte Eintrag brach um und stand allein in einer zweiten Zeile, mit
+   * eigener Oberkante. Das sah nach Fehler aus.
+   *
+   * Weggefallen ist das UEBERNAECHSTE Spiel, nicht ein Ergebnis: Drei
+   * Ergebnisse zeigen eine Form, ein einzelnes nur ein Ereignis, und das
+   * naechste Spiel ist die wichtigste Angabe der Seite. Das uebernaechste
+   * steht zwei Bildschirme tiefer unter "Naechste Spiele".
+   */
+  const band = saisonBand(spielplan, heute, 3, 1);
   const stand = letzterSpielstand(spielplan, heute);
   const saison = saisonVon(band);
 
   return (
     <section className="relative overflow-hidden bg-fisch-black text-text">
-      <Image
-        src="/logo.svg"
-        alt=""
-        width={900}
-        height={900}
-        priority
-        aria-hidden="true"
-        className="pointer-events-none absolute hidden sm:block sm:-right-40 sm:-top-32 sm:h-[620px] sm:w-[620px] lg:h-[760px] lg:w-[760px]"
-      />
-
       {/*
-        Das Wappen auf dem Handy, 08.09.2026.
+        DAS WAPPEN ALS MOTIV IST RAUS, seit dem 22.09.2026, und das ist die
+        groesste Aenderung hier seit dem Umbau am 08.09.
 
-        Hier stand vorher, ein angeschnittenes Wappen brauche Breite und
-        liege auf 390 Pixeln hinter Überschrift und Fließtext, deshalb
-        stehe weiter unten ein kleines Wappen von 64 Pixeln ÜBER dem Text.
+        Es lag angeschnitten oben rechts, 620 bis 760 Pixel gross, und war
+        das einzige Motiv des Kopfbereichs. Der Kommentar, der hier stand,
+        nannte auch den Grund dafuer: "Das ist hier nicht nachbaubar, im Repo
+        liegt genau ein echtes Vereinsfoto." Union Berlin und der BVB fuehren
+        beide mit einem randlosen Foto, gemessen am 08.09.2026, und das ging
+        mangels Material nicht.
 
-        Die Beobachtung stimmte, die Schlussfolgerung nicht. Das Problem
-        war die Überlagerung, nicht die Größe. Und die Notlösung hatte
-        einen Preis, der beim Nachmessen herauskam: In der Kopfleiste
-        steht dasselbe Wappen mit 40 mal 40 bei y=20, das kleine im
-        Kopfbereich mit 64 mal 64 bei y=130. Zweimal dasselbe Zeichen auf
-        200 Pixeln, und das zweite zu klein, um als Motiv zu wirken. Es
-        füllte keine Fläche, es belegte nur Platz. Danach kamen vier
-        Textblöcke am Stück, ohne ein einziges Bild, zusammen 706 von
-        844 Pixeln Bildschirmhöhe.
+        Jetzt gibt es Material. Rechts steht ein Bildfenster, auf dem Handy
+        laeuft dasselbe Bild randlos ueber die volle Breite. Ein Wappen ist
+        eine Marke und kein Bild, und es steht in der Kopfleiste auf jeder
+        Seite ohnehin noch einmal.
 
-        Zum Vergleich am selben Tag aufgenommen: Union Berlin und der BVB
-        führen auf dem Handy beide mit einem randlosen Foto über etwa die
-        halbe Höhe. Das ist hier nicht nachbaubar, im Repo liegt genau ein
-        echtes Vereinsfoto, hochkant mit eingebrannter Ergebnisgrafik.
+        MIT DEM WAPPEN FALLEN DREI VERLAEUFE WEG, und das ist kein Versehen:
+        Sie haben alle nur ein Problem geloest, das es ohne Wappen nicht mehr
+        gibt. Der Verlauf von links hielt die Schrift aus den gelben Flaechen
+        heraus. Der von oben nach unten dunkelte auf dem Handy den Bereich,
+        in dem Schrift auf dem Wappen lag. Der dritte gab dem gelben Knopf
+        eine Kante gegen den gelben Ring. Das Bildfenster liegt NEBEN dem
+        Text statt darunter, also liegt nichts mehr uebereinander.
 
-        Also das groß machen, was da ist. Das Wappen liegt jetzt
-        angeschnitten oben rechts und der Text DARUNTER statt darauf.
-      */}
-      <Image
-        src="/logo.svg"
-        alt=""
-        width={600}
-        height={600}
-        priority
-        aria-hidden="true"
-        className="pointer-events-none absolute -right-20 -top-24 h-[280px] w-[280px] sm:hidden"
-      />
+        Der Verlauf am unteren Bildrand auf dem Handy bleibt und sitzt jetzt
+        in VereinsFenster.tsx, wo das Bild randlos in den Text laeuft.
 
-      {/*
-        Der Verlauf von links gilt nur ab sm. Er hält die Schrift aus den
-        gelben Flächen des Wappens heraus, und dort steht das Wappen
-        rechts NEBEN dem Text.
-      */}
-      <div className="absolute inset-0 hidden bg-gradient-to-r from-fisch-black via-fisch-black/95 to-transparent sm:block" />
+        Das Halbton-Raster bleibt ebenfalls: Es gibt der schwarzen Flaeche
+        eine Textur, und das ist unabhaengig davon, was darauf liegt.
 
-      {/*
-        Auf dem Handy läuft der Verlauf von oben nach unten, nicht von
-        links nach rechts.
-
-        Vorher stand hier derselbe Verlauf für beide Größen, unter sm aber
-        mit to-fisch-black statt to-transparent, also auf voller Fläche
-        deckend. Beim ersten Versuch mit dem großen Wappen war es im
-        Bildschirmfoto nur noch zu ahnen. Der Verlauf muss dort dunkeln,
-        wo Schrift steht, also unten, und oben das Motiv stehen lassen.
-      */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-fisch-black/75 to-fisch-black sm:hidden" />
-
-      {/*
-        Zweiter Verlauf, nur nach unten. Ohne ihn liegt der gelbe Knopf
-        "Kompletter Spielplan" auf dem gelben Ring des Wappens und verliert
-        dort seine Kante. Die Zeile am Fuß trägt Information und braucht
-        deshalb einen ruhigen Untergrund, das obere Drittel des Wappens
-        bleibt davon unberührt.
-      */}
-      <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-fisch-black via-fisch-black/90 to-transparent sm:via-fisch-black/85" />
-
-      {/*
-        Halbton-Raster über dem Verlauf, siehe globals.css. Es liegt bewusst
-        ÜBER dem Verlauf und unter dem Text: so bekommt die dunkle Fläche unten
-        eine Textur, ohne dass die Schrift darauf schlechter lesbar wird.
-      */}
-      {/*
-        Volle Fläche, nicht mehr h-2/3 am unteren Rand. Vorher entstand dort, wo
-        das Element anfing, eine harte waagerechte Kante quer durch den
-        Kopfbereich, weil der Verlauf inzwischen von links nach rechts läuft und
-        oben nichts mehr ausblendet.
+        WER DAS WAPPEN ZURUECKHOLT, braucht die Verlaeufe wieder mit. Sie
+        stehen in der Versionsgeschichte, Commit davor.
       */}
       <div className="halbton pointer-events-none absolute inset-0" aria-hidden="true" />
 
       {/*
-        Der große Innenabstand oben gilt nur auf dem Handy und ist der
-        Platz, den das angeschnittene Wappen braucht.
+        ZWEISPALTIG AB lg, darunter untereinander mit dem Bild zuerst.
 
-        13,5rem sind 216 Pixel und kein runder Wert, sondern nachgemessen:
-        Bei 160 Pixeln endete das Wappen bei y=266 und die Dachzeile begann
-        schon bei y=242. Die gelbe Dachzeile lag damit auf dem gelben Ring
-        des Wappens und war dort nicht mehr zu lesen. Jetzt beginnt sie
-        bei 298, also 32 Pixel darunter.
+        Die 24rem fuer das Fenster sind nicht geraten: Bei 1920 Pixeln ist
+        der Inhaltsbereich 1216 breit, davon nimmt das Fenster 384 und laesst
+        dem Spielband 776. Das Band braucht fuer fuenf Eintraege 928 Pixel
+        (fuenf mal 176 plus vier mal 12), passt also nicht mehr in eine Zeile
+        und bricht auf vier plus einen um. Das ist beabsichtigt: Lieber ein
+        Umbruch im Band als ein Bild, das zu klein ist, um ein Bild zu sein.
 
-        Wer den Wert ändert, misst beides nach: Unterkante des Wappens
-        gegen Oberkante der Dachzeile.
+        items-center und nicht items-end: Das Fenster ist niedriger als die
+        Textspalte, und unten buendig saehe es aus, als haenge es am Rand.
       */}
-      <div className="container-fisch relative flex min-h-[400px] flex-col justify-end gap-7 pb-12 pt-[13.5rem] sm:min-h-[560px] sm:gap-8 sm:py-16">
+      <div className="container-fisch relative grid gap-8 py-10 sm:py-12 lg:grid-cols-[1fr_minmax(0,24rem)] lg:items-center lg:gap-14 lg:py-16">
+        {/*
+          Auf dem Handy steht das Bild ZUERST, ab lg rechts. Das ist die
+          Reihenfolge der Referenzen: Union Berlin und der BVB fuehren auf
+          dem Handy mit dem Foto, nicht mit dem Vereinsnamen.
+
+          min-w-0 AN BEIDEN FELDERN, und das ist kein Schmuck. Ohne es war
+          das Bildfeld bei 390 Pixeln Bildschirmbreite 978 Pixel breit,
+          gemessen am 22.09.2026. Der Grund ist derselbe wie am 08.09. bei
+          TeamTableMini: Raster- und Flexfelder haben min-width: auto und
+          schrumpfen nicht unter die Breite ihres Inhalts. Der Inhalt ist
+          hier das Spielband, das fuer fuenf Eintraege 928 Pixel verlangt.
+          Es zog die ganze Spalte auf, und das Foto zeigte statt des Motivs
+          einen Ausschnitt aus der Bildmitte, naemlich Hosenbeine.
+
+          Die Lehre steht seit dem 08.09. im Projekt. Sie noch einmal zu
+          lernen hat eine halbe Stunde gekostet.
+        */}
+        <div className="animate-fade-up min-w-0 lg:order-2">
+          <VereinsFenster bild={fensterBild} />
+        </div>
+
+        <div className="flex min-w-0 flex-col gap-7 sm:gap-8 lg:order-1">
         <div className="animate-fade-up">
           <p className="text-sm font-bold uppercase tracking-widest text-fisch-yellow">
             {/* Aus den Spieldaten, nicht fest eingetragen: sonst steht hier
@@ -295,7 +291,26 @@ export default function Hero({
                 scrollWidth gleich innerWidth, die Seite selbst bekommt
                 keinen Querbalken.
               */}
-              <ul className="-mx-5 flex snap-x snap-mandatory scroll-px-5 gap-3 overflow-x-auto px-5 pb-1 sm:mx-0 sm:flex-wrap sm:px-0 sm:scroll-px-0">
+              {/*
+                AB sm EIN RASTER STATT flex-wrap, seit dem 22.09.2026.
+
+                Mit flex-wrap und fester Mindestbreite passten die fuenf
+                Eintraege in eine Zeile, solange der Kopfbereich die ganze
+                Breite hatte. Seit rechts das Bildfenster sitzt, sind es bei
+                1920 Pixeln noch 776 statt 1216. Fuenf Eintraege brauchen 928,
+                also brach der fuenfte um und stand allein in einer zweiten
+                Zeile, mit eigener Oberkante. Das sah nach Fehler aus.
+
+                auto-fit mit minmax loest das an jeder Breite und nicht nur
+                bei 1920: Der Browser nimmt so viele Spalten, wie bei 9,5rem
+                Mindestbreite hineinpassen, und die Eintraege fuellen die
+                Zeile immer ganz aus. Ob das vier oder fuenf sind, entscheidet
+                der Platz und nicht eine Zahl im Code.
+
+                Unter sm bleibt es ein Scroller mit Einrastpunkten. Dort ist
+                Wischen richtig, Umbrechen wuerde vier Zeilen ergeben.
+              */}
+              <ul className="-mx-5 flex snap-x snap-mandatory scroll-px-5 gap-3 overflow-x-auto px-5 pb-1 sm:mx-0 sm:grid sm:grid-cols-[repeat(auto-fit,minmax(9.5rem,1fr))] sm:overflow-visible sm:px-0 sm:scroll-px-0">
                 {band.map((s) => {
                   const ausgang = ausgangVon(s);
                   const tore = toreAusVereinssicht(s);
@@ -305,7 +320,13 @@ export default function Hero({
                     <li
                       key={`${s.datum}-${s.auswaerts}`}
                       className={cn(
-                        "min-w-[168px] shrink-0 snap-start border-t-2 pt-3 sm:min-w-[176px]",
+                        /*
+                          sm:min-w-0 hebt die Mindestbreite im Raster wieder
+                          auf. Sonst gewinnt sie gegen die Spaltenbreite, und
+                          auto-fit kann nicht mehr verteilen. Unter sm bleibt
+                          sie, dort traegt sie den Scroller.
+                        */
+                        "min-w-[168px] shrink-0 snap-start border-t-2 pt-3 sm:min-w-0",
                         istNaechstes ? "border-fisch-yellow" : "border-linie"
                       )}
                     >
@@ -433,8 +454,8 @@ export default function Hero({
             </Link>
           </p>
         )}
+        </div>
       </div>
-
     </section>
   );
 }

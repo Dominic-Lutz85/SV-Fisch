@@ -12,6 +12,8 @@ import {
   getNaechsterTermin,
 } from "@/lib/content";
 import { aktuellerSpielplan, aktuelleTabelle } from "@/lib/fupa";
+import { neuesterBeitrag } from "@/lib/instagram";
+import { ausBeitrag, type FensterBild } from "@/components/VereinsFenster";
 
 /*
  * Die Startseite zeigt "Nächste Spiele" und den nächsten Termin, beides hängt
@@ -35,12 +37,37 @@ export default async function Home() {
     lib/ergebnis.ts. Wer hier vorschneidet, nimmt dem Band die
     Vergangenheit.
   */
-  const [spielplan, tabelle] = await Promise.all([
+  const [spielplan, tabelle, beitrag] = await Promise.all([
     aktuellerSpielplan(),
     aktuelleTabelle(),
+    neuesterBeitrag(),
   ]);
   const kommendeSpiele = getKommendeSpiele(spielplan, 3);
   const naechsterTermin = getNaechsterTermin();
+
+  /*
+    DAS FESTE BILD IST DER NORMALFALL, nicht der Notnagel.
+
+    Ohne hinterlegten Instagram-Zugang gibt neuesterBeitrag() null zurueck,
+    und genau das ist der Stand seit dem 22.09.2026: Der Verein hat noch
+    keine Zugangsdaten. Der Kopfbereich sieht deshalb heute so aus, wie er
+    auch aussehen wird, wenn Meta spaeter einmal schweigt. Ein Rueckfall,
+    den man nie sieht, ist ein Rueckfall, von dem niemand weiss, ob er
+    funktioniert.
+
+    Das Foto stammt vom Elferturnier im Juli 2026, verkleinert auf 1400
+    Pixel und 210 KB. Bildbeschreibung und Text sind von Hand geschrieben,
+    weil ein Foto ohne ehrliche Beschreibung fuer jeden mit Vorleseprogramm
+    nicht existiert.
+  */
+  const fensterBild: FensterBild = beitrag
+    ? ausBeitrag(beitrag)
+    : {
+        src: "/verein/elferturnier-pokal.webp",
+        alt: "Ein Spieler des SV Fisch liegt lachend im Gras und streckt den Siegerpokal des Elferturniers in die Höhe",
+        dachzeile: "Aus dem Vereinsleben",
+        text: "Elferturnier 2026 auf dem Sportplatz",
+      };
 
   return (
     <>
@@ -48,6 +75,7 @@ export default async function Home() {
         naechsterTermin={naechsterTermin}
         naechstesSpiel={kommendeSpiele[0]}
         spielplan={spielplan}
+        fensterBild={fensterBild}
       />
 
       {/*

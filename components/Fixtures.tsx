@@ -133,9 +133,24 @@ function Zeile({
           </p>
 
           <div className="mt-1 flex items-center justify-center gap-3 sm:gap-5">
+            {/*
+              min-w-0 an beiden Namen, sonst schiebt ein langer Vereinsname
+              die ganze Seite zur Seite.
+
+              Gemessen am 22.09.2026 bei 390 Pixeln: Die Startseite liess sich
+              3 Pixel seitlich schieben, gefunden mit der Ausblende-Methode.
+              Ursache ist dieselbe wie am 08.09. bei TeamTableMini und beim
+              Bildfenster im Kopfbereich: Ein Flexfeld hat min-width: auto und
+              schrumpft nicht unter die Breite seines Inhalts. "SG
+              Wincheringen / Merzkirchen" verlangt mehr, als die Spalte hat.
+
+              Bewusst KEIN truncate: Ein abgeschnittener Gegnername in einer
+              Paarung ist schlechter als einer, der umbricht. Mit min-w-0
+              bricht er um, und die Karte waechst um eine Zeile.
+            */}
             <span
               className={cn(
-                "flex-1 text-right text-sm sm:text-base",
+                "min-w-0 flex-1 text-right text-sm sm:text-base",
                 istFisch(spiel.heim) ? "font-extrabold text-text" : "font-semibold text-text"
               )}
             >
@@ -167,7 +182,7 @@ function Zeile({
 
             <span
               className={cn(
-                "flex-1 text-left text-sm sm:text-base",
+                "min-w-0 flex-1 text-left text-sm sm:text-base",
                 istFisch(spiel.auswaerts) ? "font-extrabold text-text" : "font-semibold text-text"
               )}
             >
