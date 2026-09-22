@@ -12,7 +12,7 @@
     "start:hostinger": "NODE_ENV=production node server.js",
     "lint": "eslint",
     "pruefe:bilder": "node scripts/pruefe-bilder.mjs",
-    "prebuild": "node scripts/pruefe-bilder.mjs && node scripts/pruefe-sitemap.mjs && node scripts/pruefe-bereiche.mjs && node scripts/pruefe-termine.mjs && node scripts/pruefe-fupa.mjs && node scripts/pruefe-instagram.mjs",
+    "prebuild": "node scripts/pruefe-bilder.mjs && node scripts/pruefe-sitemap.mjs && node scripts/pruefe-bereiche.mjs && node scripts/pruefe-termine.mjs && node scripts/pruefe-fupa.mjs && node scripts/pruefe-instagram.mjs && node scripts/pruefe-weiterleitungen.mjs",
     "pruefe:sitemap": "node scripts/pruefe-sitemap.mjs",
     "pruefe:verlinkung": "node scripts/pruefe-verlinkung.mjs",
     "postbuild": "node scripts/pruefe-verlinkung.mjs && node scripts/pruefe-platzhalter.mjs",
@@ -20,6 +20,7 @@
     "pruefe:platzhalter": "node scripts/pruefe-platzhalter.mjs",
     "pruefe:bereiche": "node scripts/pruefe-bereiche.mjs",
     "pruefe:instagram": "node scripts/pruefe-instagram.mjs",
+    "pruefe:weiterleitungen": "node scripts/pruefe-weiterleitungen.mjs",
     "instagram:token": "node scripts/instagram-token.mjs",
     "pruefe:termine": "node scripts/pruefe-termine.mjs"
   },

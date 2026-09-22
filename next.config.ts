@@ -1,5 +1,7 @@
 import type { NextConfig } from "next";
 
+import { ALTE_ADRESSEN } from "./lib/alte-adressen";
+
 const nextConfig: NextConfig = {
   /**
    * Die Seite ist unter zwei Adressen erreichbar (sv-fisch.com und
@@ -17,6 +19,17 @@ const nextConfig: NextConfig = {
         source: "/:path*",
         has: [{ type: "host", value: "www.sv-fisch.com" }],
         destination: "https://sv-fisch.com/:path*",
+        permanent: true,
+      },
+      /*
+       * Dieselbe Regel fuer www.sv-fisch.de, vorbereitet fuer den geplanten
+       * Umzug auf diese Domain. Sie greift erst, wenn die Domain auf diese
+       * Seite zeigt, und stoert bis dahin nicht.
+       */
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.sv-fisch.de" }],
+        destination: "https://sv-fisch.de/:path*",
         permanent: true,
       },
       /*
@@ -45,6 +58,27 @@ const nextConfig: NextConfig = {
         destination: "/fussball/jugend",
         permanent: true,
       },
+      /*
+       * DIE 32 ADRESSEN DER BISHERIGEN SEITE sv-fisch.de.
+       *
+       * Vorbereitet am 23.09.2026, weil die neue Seite spaeter auf diese
+       * Domain umziehen soll. Ohne diese Regeln ergaebe an dem Tag jeder
+       * Link auf die alte Seite einen 404, und die stehen an Stellen, die
+       * niemand mehr einsammeln kann: in Suchmaschinen, alten Mails,
+       * Lesezeichen, auf FuPa und auf Sponsorenseiten.
+       *
+       * Welche Adresse wohin zeigt und warum, steht in lib/alte-adressen.ts.
+       * Diese Schleife macht daraus nur Regeln.
+       *
+       * Sie stehen ZULETZT, damit keine von ihnen eine der Regeln oben
+       * verdeckt. Alle enden auf .html und koennen mit den Pfaden dieser
+       * Seite ohnehin nicht kollidieren.
+       */
+      ...ALTE_ADRESSEN.map(({ alt, neu }) => ({
+        source: `/${alt}`,
+        destination: neu,
+        permanent: true,
+      })),
     ];
   },
 };
