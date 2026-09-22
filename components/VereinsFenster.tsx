@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
+import { InstagramIcon } from "@/components/icons/SocialGlyphs";
 import type { InstagramBeitrag } from "@/lib/instagram";
 import { formatDatum } from "@/lib/utils";
 
@@ -104,12 +105,24 @@ export default function VereinsFenster({ bild }: { bild: FensterBild }) {
             )}
           </p>
         </div>
-        {bild.href && (
-          <ArrowUpRight
-            className="mt-3 h-4 w-4 shrink-0 text-fisch-yellow"
-            aria-hidden="true"
-          />
-        )}
+        {/*
+          Das Instagram-Zeichen, wenn der Verweis dorthin geht, sonst ein
+          Pfeil. Ein blosser Pfeil sagt "das fuehrt woandershin", aber nicht
+          wohin, und bei einem Bild aus dem Vereinsleben ist genau das die
+          Frage. Wer das Zeichen kennt, weiss ohne ein Wort Bescheid.
+        */}
+        {bild.href &&
+          (bild.href.includes("instagram.com") ? (
+            <InstagramIcon
+              className="mt-3 h-4 w-4 shrink-0 text-fisch-yellow"
+              aria-hidden="true"
+            />
+          ) : (
+            <ArrowUpRight
+              className="mt-3 h-4 w-4 shrink-0 text-fisch-yellow"
+              aria-hidden="true"
+            />
+          ))}
       </figcaption>
     </>
   );

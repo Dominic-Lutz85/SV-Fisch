@@ -12,6 +12,7 @@ import {
   getNaechsterTermin,
 } from "@/lib/content";
 import { aktuellerSpielplan, aktuelleTabelle } from "@/lib/fupa";
+import { siteConfig } from "@/lib/config";
 import { neuesterBeitrag } from "@/lib/instagram";
 import { ausBeitrag, type FensterBild } from "@/components/VereinsFenster";
 
@@ -67,6 +68,19 @@ export default async function Home() {
         alt: "Ein Spieler des SV Fisch liegt lachend im Gras und streckt den Siegerpokal des Elferturniers in die Höhe",
         dachzeile: "Aus dem Vereinsleben",
         text: "Elferturnier 2026 auf dem Sportplatz",
+        /*
+          AUCH DER RUECKFALL FUEHRT ZU INSTAGRAM, und das war ein echter
+          Fehler: Das Fenster ist anklickbar gebaut, aber nur dann, wenn ein
+          Beitrag da ist. Ohne Zugangsdaten fehlte der Verweis, und damit war
+          das Bild seit dem Einbau tot. Dominic hat es sofort gemerkt: "warum
+          kann man den instafeed im hero nicht anclicken."
+
+          Das Ziel ist das Profil und nicht ein einzelner Beitrag: Solange
+          hier ein festes Bild steht, gibt es keinen Beitrag, auf den es
+          zeigen koennte, und das Profil ist die ehrliche Antwort auf die
+          Frage "wo gibt es mehr davon".
+        */
+        href: siteConfig.social.instagram,
       };
 
   return (
