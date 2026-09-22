@@ -9,8 +9,9 @@ Next.js (App Router), TypeScript, Tailwind CSS und Framer Motion.
 - [Inhalte pflegen (ohne Programmierkenntnisse)](#inhalte-pflegen-ohne-programmierkenntnisse)
 - [Bilder & Logos austauschen](#bilder--logos-austauschen)
 - [ENV-Variablen & Mailversand](#env-variablen--mailversand)
-- [Deployment auf Vercel](#deployment-auf-vercel)
-- [Deployment auf Hostinger](#deployment-auf-hostinger-nodejs-app)
+- [Deployment auf Vercel](#deployment-auf-vercel) (in Betrieb)
+- [Deployment auf Hostinger](#deployment-auf-hostinger-nodejs-app) (nicht in Betrieb)
+- [Instagram einrichten](docs/instagram-einrichten.md)
 - [Vor dem Go-Live prüfen](#vor-dem-go-live-prüfen-wichtig)
 - [Projektstruktur](#projektstruktur)
 
@@ -157,6 +158,16 @@ API-Routes ändern sich dabei nicht.
 
 ## Deployment auf Vercel
 
+**Das ist der Weg, der tatsächlich benutzt wird.** Nachgeprüft am
+22.09.2026: sv-fisch.com antwortet mit `Server: Vercel`. Vercel baut bei
+jedem Push nach `main` von selbst, ein Deploy war rund 45 Sekunden nach
+dem Push draußen. Es ist also nichts von Hand anzustoßen.
+
+Der Abschnitt zu Hostinger weiter unten beschreibt eine **Alternative,
+die nicht in Betrieb ist**. Er stand hier gleichberechtigt neben diesem
+und hat schon einmal dazu geführt, dass jemand vergeblich im hPanel nach
+einem Knopf gesucht hat.
+
 1. Repository zu GitHub/GitLab pushen (falls noch nicht geschehen).
 2. In [vercel.com](https://vercel.com) „New Project" → Repository
    auswählen. Next.js wird automatisch erkannt.
@@ -166,6 +177,11 @@ API-Routes ändern sich dabei nicht.
    Aktuell steht dort `https://sv-fisch.com`.
 
 ## Deployment auf Hostinger (Node.js App)
+
+> **NICHT IN BETRIEB.** Live läuft die Seite auf Vercel, siehe oben.
+> Dieser Abschnitt ist für den Fall aufgehoben, dass später doch zu
+> Hostinger gewechselt wird. Wer hier nach dem Live-Schalten sucht, sucht
+> an der falschen Stelle.
 
 Alternative zu Vercel, z. B. wenn die Domain (`sv-fisch.com`) bereits bei
 Hostinger liegt und dort auch gehostet werden soll. Voraussetzung: ein

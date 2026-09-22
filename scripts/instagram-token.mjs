@@ -49,9 +49,13 @@ if (!alter) {
   process.stderr.write(
     "\nKein INSTAGRAM_TOKEN gefunden, weder in der Umgebung noch in .env.local.\n" +
       "\nBeim allerersten Mal gibt es noch keinen zu erneuernden Schluessel.\n" +
-      "Der erste kommt aus dem Meta-Dashboard:\n" +
+      "Der erste kommt aus dem Meta-Dashboard. Die ganze Anleitung steht in\n" +
+      "docs/instagram-einrichten.md, in Kurzform:\n" +
       "  developers.facebook.com, App oeffnen, links Instagram,\n" +
-      "  API-Einrichtung mit Instagram-Login, Abschnitt 2, Token generieren.\n\n"
+      "  API-Einrichtung mit Instagram-Login, Abschnitt 2, Token generieren.\n\n" +
+      "Die haeufigste Stolperstelle steht dort als eigener Schritt: Das\n" +
+      "Instagram-Konto muss die Einladung der App ANNEHMEN, sonst bleibt der\n" +
+      "Knopf zum Erzeugen grau.\n\n"
   );
   process.exit(1);
 }
