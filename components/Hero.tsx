@@ -123,6 +123,26 @@ export default function Hero({
         gegen den gelben Ring, und der Knopf steht jetzt links, das Wappen
         rechts.
       */}
+      {/*
+        DIE ROLLBEWEGUNG, seit dem 22.09.2026, Idee vom Auftraggeber: Das
+        Wappen kommt klein von links herein, wird beim Rollen groesser und
+        kommt oben rechts zur Ruhe.
+
+        Sie laeuft ueber CSS und nicht ueber gsap, obwohl das Paket im Projekt
+        liegt. Der Grund steht oben im Kommentar zur Einblendung: Frueher
+        startete der ganze Kopfbereich bei Deckkraft 0 und wurde erst durch
+        JavaScript sichtbar. Lief das Skript nicht, war der erste Bildschirm
+        leer. Eine CSS-Animation braucht kein JavaScript, und die Regel fuer
+        "Bewegung reduzieren" in globals.css setzt sie sofort auf den
+        Endzustand.
+
+        WAS SIE NICHT KOSTET: transform verschiebt nichts im Layout, also gibt
+        es keinen Versatz beim Laden. Die Deckkraft bleibt durchgehend bei 1,
+        das Wappen ist also auch waehrend der Bewegung da und haengt nicht
+        davon ab, dass sie laeuft.
+
+        Die Rechnung zur Drehzahl steht bei --animate-wappen-rollt.
+      */}
       <Image
         src="/logo.svg"
         alt=""
@@ -130,7 +150,7 @@ export default function Hero({
         height={900}
         priority
         aria-hidden="true"
-        className="pointer-events-none absolute -right-40 -top-32 hidden h-[760px] w-[760px] lg:block"
+        className="animate-wappen-rollt pointer-events-none absolute -right-40 -top-32 hidden h-[760px] w-[760px] lg:block"
       />
       <div className="absolute inset-0 hidden bg-gradient-to-r from-fisch-black via-fisch-black/95 to-transparent lg:block" />
 

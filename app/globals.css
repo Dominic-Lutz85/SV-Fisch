@@ -151,6 +151,46 @@
       transform: translateY(0);
     }
   }
+
+  /*
+   * DAS WAPPEN ROLLT HEREIN, seit dem 22.09.2026.
+   *
+   * Es kommt klein von links, wird beim Rollen groesser und kommt an seiner
+   * Position oben rechts zur Ruhe. Der Gedanke stammt vom Auftraggeber.
+   *
+   * WARUM DIE DREHUNG NICHT GERATEN IST: Ein Rad, das eine Strecke rollt,
+   * dreht sich genau um Strecke geteilt durch Umfang. Das Wappen ist am Ende
+   * 760 Pixel breit, sein Umfang also 760 mal Pi, rund 2388. Es legt etwa
+   * 1900 Pixel zurueck (von weit links bis zur Endlage), das sind 0,8
+   * Umdrehungen oder 286 Grad. Aufgerundet auf 300 Grad, weil es unterwegs
+   * kleiner ist und ein kleineres Rad fuer dieselbe Strecke oefter dreht.
+   *
+   * Eine falsche Drehzahl sieht man sofort: Das Rad rutscht dann sichtbar
+   * ueber den Boden, statt zu rollen.
+   *
+   * cubic-bezier mit langem Auslauf statt ease-out: Ein rollendes Rad wird
+   * langsamer, weil Reibung es bremst, nicht weil es gleichmaessig ausklingt.
+   *
+   * both haelt den Endzustand, sonst springt das Wappen nach der Animation
+   * auf seine Ausgangslage zurueck.
+   */
+  --animate-wappen-rollt: wappen-rollt 1.4s cubic-bezier(0.16, 0.84, 0.3, 1)
+    both;
+
+  @keyframes wappen-rollt {
+    from {
+      /*
+       * Links ausserhalb des Bildes und auf ein Drittel geschrumpft. Der
+       * Ursprung der Skalierung liegt in der Mitte, deshalb reicht eine
+       * Verschiebung nach links; nach unten muss es nicht, es rollt auf
+       * seiner Hoehe.
+       */
+      transform: translateX(-1900px) scale(0.32) rotate(-300deg);
+    }
+    to {
+      transform: translateX(0) scale(1) rotate(0deg);
+    }
+  }
 }
 
 html {
