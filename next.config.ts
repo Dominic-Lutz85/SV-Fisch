@@ -19,6 +19,32 @@ const nextConfig: NextConfig = {
         destination: "https://sv-fisch.com/:path*",
         permanent: true,
       },
+      /*
+       * Die beiden Bambini-Seiten sind am 22.09.2026 weggefallen, ihre
+       * Inhalte stehen jetzt als Ansprechpartner unter /fussball/jugend.
+       * Begruendung in app/fussball/jugend/page.tsx.
+       *
+       * WARUM UMLEITEN UND NICHT EINFACH LOESCHEN: Beide Adressen standen
+       * seit Monaten im Menue und im Sitemap, Google kennt sie also. Eine
+       * geloeschte Seite ohne Weiterleitung ergibt einen 404, und der
+       * taucht in der Search Console als Fehler auf, solange jemand den
+       * alten Link noch irgendwo stehen hat.
+       *
+       * Die laengere Adresse steht ZUERST. Next nimmt die erste passende
+       * Regel, und "/fussball/bambini" wuerde sonst auch
+       * "/fussball/bambini/spielplan" schlucken, bevor die zweite Regel
+       * ueberhaupt geprueft wird.
+       */
+      {
+        source: "/fussball/bambini/spielplan",
+        destination: "/fussball/jugend",
+        permanent: true,
+      },
+      {
+        source: "/fussball/bambini",
+        destination: "/fussball/jugend",
+        permanent: true,
+      },
     ];
   },
 };

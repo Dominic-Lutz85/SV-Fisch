@@ -6,7 +6,7 @@ import matter from "gray-matter";
  * ZWEI FORMATE IM ORDNER content/, und das hat einen Grund:
  *
  * Die Dateien, die unter /admin bearbeitet werden (vorstand, sponsoren,
- * termine, galerie und die beiden Bambini-Dateien), haben ihre Liste unter
+ * termine und galerie), haben ihre Liste unter
  * einem Schluessel: { "eintraege": [...] } bzw. { "alben": [...] }. Die
  * Redaktionsoberflaeche kann keine Liste auf oberster Ebene schreiben, das
  * ist bei Decap und Sveltia seit Jahren offen. Ohne den Schluessel haette
@@ -19,10 +19,8 @@ import matter from "gray-matter";
 import vorstandData from "@/content/vorstand.json";
 import sponsorenData from "@/content/sponsoren.json";
 import kaderData from "@/content/kader.json";
-import kaderBambiniData from "@/content/kader-bambini.json";
 import tabelleData from "@/content/tabelle.json";
 import spielplanData from "@/content/spielplan.json";
-import spielplanBambiniData from "@/content/spielplan-bambini.json";
 import termineData from "@/content/termine.json";
 import galerieData from "@/content/galerie.json";
 import meldungenData from "@/content/meldungen.json";
@@ -58,22 +56,12 @@ export function getKader(): Spieler[] {
   return kaderData as Spieler[];
 }
 
-export function getKaderBambini(): Spieler[] {
-  return kaderBambiniData.eintraege as Spieler[];
-}
-
 export function getTabelle(): TabellenZeile[] {
   return [...(tabelleData as TabellenZeile[])].sort((a, b) => a.platz - b.platz);
 }
 
 export function getSpielplan(): Spiel[] {
   return [...(spielplanData as Spiel[])].sort(
-    (a, b) => new Date(a.datum).getTime() - new Date(b.datum).getTime()
-  );
-}
-
-export function getSpielplanBambini(): Spiel[] {
-  return [...(spielplanBambiniData.eintraege as Spiel[])].sort(
     (a, b) => new Date(a.datum).getTime() - new Date(b.datum).getTime()
   );
 }

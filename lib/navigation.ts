@@ -37,8 +37,7 @@ export const mainNav: NavItem[] = [
       { label: "1. Mannschaft: Kader", href: "/fussball/kader" },
       { label: "1. Mannschaft: Tabelle", href: "/fussball/tabelle" },
       { label: "1. Mannschaft: Spielplan", href: "/fussball/spielplan" },
-      { label: "Bambini: Mannschaft", href: "/fussball/bambini" },
-      { label: "Bambini: Spielplan", href: "/fussball/bambini/spielplan" },
+      { label: "Jugend und Bambini", href: "/fussball/jugend" },
     ],
   },
   {
