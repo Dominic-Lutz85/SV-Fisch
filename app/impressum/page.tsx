@@ -26,9 +26,21 @@ export default function ImpressumPage() {
           <p className="mt-3 leading-relaxed text-text-leise">
             {siteConfig.name}
             <br />
-            [BITTE PRÜFEN/ERGÄNZEN – Straße, Hausnummer]
+            {/*
+              Aus der Konfiguration und nicht hier eingetippt, obwohl die
+              Anschrift sich nie aendert. Sie stand am 22.09.2026 bereits in
+              siteConfig.contact.addressLines und wurde trotzdem an dieser
+              Stelle als "[BITTE PRÜFEN/ERGÄNZEN]" gefuehrt: Der Platzhalter
+              wartete auf eine Angabe, die drei Dateien weiter schon lag.
+
+              Die Aufteilung [1] Strasse, [2] PLZ und Ort ist dieselbe, die
+              app/layout.tsx fuer die strukturierten Daten verwendet. Index 0
+              ist der Name der Spielstaette und gehoert hier nicht hin, weil
+              der Vereinsname bereits darueber steht.
+            */}
+            {siteConfig.contact.addressLines[1]}
             <br />
-            [BITTE PRÜFEN/ERGÄNZEN – PLZ, Ort]
+            {siteConfig.contact.addressLines[2]}
           </p>
           {/*
             Die Vertretungsregel ist belegt: § 8 der Satzung vom 25.11.2022,

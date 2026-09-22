@@ -38,7 +38,7 @@ const GEBAUT = join(process.cwd(), ".next", "server", "app");
  * und dann mit einem Wort in der Commit-Nachricht, welche Stelle gefuellt
  * wurde.
  */
-const OBERGRENZE = 37;
+const OBERGRENZE = 35;
 
 /*
  * Die Muster. Absichtlich mehr als eines: Genau daran ist die Pruefung am

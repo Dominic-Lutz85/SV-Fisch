@@ -33,12 +33,21 @@ export const siteConfig = {
   register: {
     /*
      * Das Gericht steht in § 1 der Satzung vom 25.11.2022, siehe
-     * content/satzung.ts. Die Registernummer steht dort NICHT, und geraten
-     * wird sie nicht: eine falsche Nummer im Impressum ist schlimmer als
-     * eine sichtbar fehlende. Sie steht im Registerauszug des Vereins.
+     * content/satzung.ts.
+     *
+     * DIE NUMMER STAND BIS ZUM 22.09.2026 AUF PLATZHALTER, mit dem Vermerk,
+     * sie werde nicht geraten. Sie ist jetzt belegt, aber nicht geraten,
+     * sondern abgelesen: Das Impressum der bisherigen Vereinsseite
+     * sv-fisch.de fuehrt "Eintrag im Vereinsregister: 41139". Das ist eine
+     * Angabe des Vereins ueber sich selbst, und damit die beste Quelle, die
+     * ohne Registerauszug zu haben ist.
+     *
+     * Der Auftraggeber hat die Uebernahme am 22.09.2026 ausdruecklich
+     * bestaetigt. Wer einen Registerauszug in die Hand bekommt, gleicht
+     * beides trotzdem einmal ab.
      */
     court: "Amtsgericht Wittlich",
-    number: "[Vereinsregisternummer eintragen]",
+    number: "VR 41139",
   },
 
   social: {
