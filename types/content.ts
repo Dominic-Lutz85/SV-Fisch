@@ -1,7 +1,25 @@
+/**
+ * Die Bereiche des Vorstands stehen hier EINMAL, in der Reihenfolge, in der
+ * /verein/vorstand sie zeigt. Vorher trug die Seite eine eigene Liste, und
+ * Darts fehlte darin: der Eintrag stand in content/vorstand.json, wurde aber
+ * nie angezeigt. Wer einen Bereich ergaenzt, aendert diese Zeile und die
+ * Auswahlliste in public/admin/config.yml, die kann nicht importieren.
+ * scripts/pruefe-bereiche.mjs haelt beide zusammen.
+ */
+export const BEREICHE = [
+  "Verein",
+  "Fußball",
+  "Jugend",
+  "Gymnastik",
+  "Darts",
+] as const;
+
+export type Bereich = (typeof BEREICHE)[number];
+
 export interface VorstandsMitglied {
   name: string;
   rolle: string;
-  bereich: "Verein" | "Fußball" | "Gymnastik" | "Jugend" | "Darts";
+  bereich: Bereich;
   email?: string;
   telefon?: string;
   foto?: string;

@@ -12,12 +12,13 @@
     "start:hostinger": "NODE_ENV=production node server.js",
     "lint": "eslint",
     "pruefe:bilder": "node scripts/pruefe-bilder.mjs",
-    "prebuild": "node scripts/pruefe-bilder.mjs && node scripts/pruefe-sitemap.mjs && node scripts/pruefe-fupa.mjs",
+    "prebuild": "node scripts/pruefe-bilder.mjs && node scripts/pruefe-sitemap.mjs && node scripts/pruefe-bereiche.mjs && node scripts/pruefe-fupa.mjs",
     "pruefe:sitemap": "node scripts/pruefe-sitemap.mjs",
     "pruefe:verlinkung": "node scripts/pruefe-verlinkung.mjs",
     "postbuild": "node scripts/pruefe-verlinkung.mjs && node scripts/pruefe-platzhalter.mjs",
     "pruefe:fupa": "node scripts/pruefe-fupa.mjs",
-    "pruefe:platzhalter": "node scripts/pruefe-platzhalter.mjs"
+    "pruefe:platzhalter": "node scripts/pruefe-platzhalter.mjs",
+    "pruefe:bereiche": "node scripts/pruefe-bereiche.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",
