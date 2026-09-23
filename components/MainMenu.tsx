@@ -219,6 +219,42 @@ export default function MainMenu({
         aria-hidden="true"
       />
 
+      {/*
+        DIE DREI FLÄCHEN STEHEN AUSSERHALB DES SCROLLENDEN FELDES, seit dem
+        23.09.2026. Vorher lagen sie darin, und das war ein Fehler mit zwei
+        Wirkungen auf einmal.
+
+        Gemeldet hat ihn der Auftraggeber: "auf der handyversion wird das
+        menüfenster beim scrollen transparent". Nachgemessen bei 375 Pixeln:
+        Das scrollende Feld ist 812 Pixel hoch, sein Inhalt 1469. Die Flächen
+        hatten inset-0 und waren damit so hoch wie das FELD, nicht wie sein
+        Inhalt. Ab 812 Pixeln gab es also gar keinen Hintergrund mehr, und
+        durch die Lücke sah man den Kopfbereich der Seite: das Elferturnier-
+        Foto und die Überschrift lagen mitten zwischen den Menüpunkten.
+
+        Der zweite Teil ist grundsätzlicher: Ein Hintergrund soll nicht
+        mitscrollen. Selbst wenn die Flächen hoch genug gewesen wären, hätten
+        sie sich mit dem Inhalt bewegt. Richtig ist, dass sie stehen bleiben
+        und der Inhalt darüber läuft, so wie bei jedem Vorhang.
+
+        Deshalb liegen sie jetzt in einem eigenen Kasten, der nicht scrollt.
+        Er hat dieselbe Breite wie das Feld daneben (w-full max-w-3xl), sonst
+        stünde der Hintergrund woanders als der Text darauf.
+
+        pointer-events-none, weil der Kasten sonst über dem Schleier liegt
+        und die Klicks abfängt, mit denen man das Menü schließt.
+      */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-y-0 right-0 w-full max-w-3xl overflow-hidden"
+      >
+        {/* Drei Flächen, zeitversetzt. Die ersten beiden sind reine Bewegung,
+            die dritte ist der eigentliche Grund. */}
+        <div className="menue-flaeche absolute inset-0 bg-fisch-yellow" />
+        <div className="menue-flaeche absolute inset-0 bg-fisch-black/70" />
+        <div className="menue-flaeche absolute inset-0 bg-fisch-black" />
+      </div>
+
       <div
         ref={dialog}
         id={menueId}
@@ -227,11 +263,6 @@ export default function MainMenu({
         aria-label="Hauptmenü"
         className="absolute inset-y-0 right-0 w-full max-w-3xl overflow-y-auto overflow-x-hidden"
       >
-        {/* Drei Flächen, zeitversetzt. Die ersten beiden sind reine Bewegung,
-            die dritte trägt den Inhalt. */}
-        <div className="menue-flaeche absolute inset-0 bg-fisch-yellow" />
-        <div className="menue-flaeche absolute inset-0 bg-fisch-black/70" />
-        <div className="menue-flaeche absolute inset-0 bg-fisch-black" />
 
         {/*
           Hier lag zuerst ein großes Wappen als Hintergrundmotiv, wie im
