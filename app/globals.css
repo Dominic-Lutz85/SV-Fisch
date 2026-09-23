@@ -220,8 +220,14 @@
        * Ursprung der Skalierung liegt in der Mitte, deshalb reicht eine
        * Verschiebung nach links; nach unten muss es nicht, es rollt auf
        * seiner Hoehe.
+       *
+       * STRECKE UND DREHUNG STEHEN IN VARIABLEN, seit dem 23.09.2026: Auf
+       * dem Handy rollt ein kleineres Wappen eine kuerzere Strecke, und
+       * dann stimmt die Drehzahl nicht mehr. Die Werte setzt .wappen-rad
+       * weiter unten, je nach Bildschirmbreite.
        */
-      transform: translateX(-1900px) scale(0.32) rotate(-300deg);
+      transform: translateX(var(--rollweg)) scale(0.32)
+        rotate(var(--rolldrehung));
     }
     to {
       transform: translateX(0) scale(1) rotate(0deg);
@@ -366,5 +372,109 @@ h6 {
   .halbton {
     --halbton-gitter: 5px;
     opacity: 0.15;
+  }
+}
+
+/*
+ * DAS ROLLENDE WAPPEN, Masse und Drehung.
+ *
+ * Bis zum 23.09.2026 lief die Rollbewegung nur ab 1024 Pixeln; auf dem Handy
+ * war das Wappen ganz ausgeblendet. Der Auftraggeber wollte sie auch dort,
+ * und das geht nicht mit denselben Werten: Ein Rad, das eine Strecke rollt,
+ * dreht sich um Strecke geteilt durch Umfang. Nimmt man die Desktopwerte auf
+ * einem schmalen Bildschirm, rutscht das Rad sichtbar ueber den Boden.
+ *
+ * Gerechnet wie beim ersten Mal, mit der Endgroesse und aufgerundet, weil das
+ * Wappen unterwegs kleiner ist und ein kleineres Rad oefter dreht:
+ *
+ *   Handy    360 px Wappen, Umfang 1131, Strecke  800 px -> 255 Grad -> 260
+ *   ab lg    760 px Wappen, Umfang 2388, Strecke 1900 px -> 286 Grad -> 300
+ *
+ * Die Klasse setzt nur die beiden Variablen. Die Bewegung selbst steht als
+ * @keyframes wappen-rollt weiter oben und ist fuer beide dieselbe.
+ */
+.wappen-rad {
+  --rollweg: -800px;
+  --rolldrehung: -260deg;
+}
+
+/*
+ * DER AUFTRITT AUF DEM HANDY, seit dem 23.09.2026.
+ *
+ * Auf dem Handy bleibt das Wappen NICHT stehen, sondern rollt herein, haelt
+ * kurz und geht wieder. Die Idee stammt vom Auftraggeber, und sie ist besser
+ * als die erste Fassung: Ein Wappen, das dauerhaft liegen bleibt, muss sich
+ * den Platz mit dem Foto teilen, eines das wieder geht, nicht.
+ *
+ * DER ZEITPLAN, in Anteilen von 2,4 Sekunden:
+ *   0 bis 55 %   (1,32 s)  rollt von links herein und wird groesser
+ *   55 bis 75 %  (0,48 s)  steht still, damit man es als Wappen erkennt
+ *   75 bis 100 % (0,60 s)  waechst noch etwas und verblasst
+ *
+ * Die Standzeit ist der Teil, den man leicht weglaesst und dann vermisst:
+ * Ohne sie huscht etwas Rundes vorbei und niemand erkennt, was es war.
+ *
+ * WICHTIG, UND DESHALB KEIN LADEBILDSCHIRM: Das Foto darunter ist von der
+ * ersten Sekunde an da und vollstaendig geladen. Das Wappen liegt nur
+ * darueber und nimmt es nie ganz weg (Deckkraft 0,92 im Stand). Laeuft die
+ * Animation nicht, etwa bei "Bewegung reduzieren", sieht man sofort das
+ * Foto und nichts fehlt.
+ *
+ * forwards haelt den Endzustand fest, sonst taucht das Wappen nach der
+ * Animation wieder auf.
+ */
+@keyframes wappen-auftritt {
+  /*
+   * DIE ZENTRIERUNG STECKT IN DER ANIMATION, nicht in einer Klasse daneben.
+   *
+   * Das Wappen sitzt mit left:50% top:50% und muss um seine halbe Groesse
+   * zurueckgeschoben werden. Steht das als eigene Klasse (-translate-x-1/2),
+   * ueberschreibt die Animation es, denn beides ist dieselbe Eigenschaft
+   * transform. Das Wappen liefe dann um 180 Pixel versetzt.
+   *
+   * Dieselbe Falle wie bei PraesentiertVon am 22.09.2026: zwei Klassen
+   * derselben CSS-Eigenschaft, und es entscheidet nicht die Reihenfolge im
+   * Attribut, sondern die im Stylesheet.
+   */
+  0% {
+    transform: translate(calc(-50% + var(--rollweg)), -50%) scale(0.32)
+      rotate(var(--rolldrehung));
+    opacity: 0.92;
+  }
+  55% {
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    opacity: 0.92;
+  }
+  75% {
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    opacity: 0.92;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.18) rotate(0deg);
+    opacity: 0;
+  }
+}
+
+.wappen-auftritt {
+  animation: wappen-auftritt 2.4s cubic-bezier(0.16, 0.84, 0.3, 1) forwards;
+}
+
+/*
+ * Ohne Bewegung gibt es keinen Auftritt, und zwar wirklich keinen: Die
+ * allgemeine Regel fuer "Bewegung reduzieren" weiter oben setzt Animationen
+ * auf 0,01 Sekunden. Beim Auftritt hiesse das, dass das Wappen fuer einen
+ * Wimpernschlag aufblitzt und verschwindet, und genau solche Zuckungen sind
+ * der Grund, warum jemand die Einstellung gesetzt hat.
+ */
+@media (prefers-reduced-motion: reduce) {
+  .wappen-auftritt {
+    display: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .wappen-rad {
+    --rollweg: -1900px;
+    --rolldrehung: -300deg;
   }
 }

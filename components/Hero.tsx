@@ -150,7 +150,7 @@ export default function Hero({
         height={900}
         priority
         aria-hidden="true"
-        className="animate-wappen-rollt pointer-events-none absolute -right-40 -top-32 hidden h-[760px] w-[760px] lg:block"
+        className="wappen-rad animate-wappen-rollt pointer-events-none absolute -right-40 -top-32 hidden h-[760px] w-[760px] lg:block"
       />
       <div className="absolute inset-0 hidden bg-gradient-to-r from-fisch-black via-fisch-black/95 to-transparent lg:block" />
 
@@ -192,8 +192,58 @@ export default function Hero({
           Die Lehre steht seit dem 08.09. im Projekt. Sie noch einmal zu
           lernen hat eine halbe Stunde gekostet.
         */}
-        <div className="animate-fade-up min-w-0 lg:order-2">
+        <div className="animate-fade-up relative min-w-0 lg:order-2">
           <VereinsFenster bild={fensterBild} />
+
+          {/*
+            DAS WAPPEN TRITT AUF UND GEHT WIEDER, nur auf dem Handy.
+
+            Bis zum 23.09.2026 lief die Rollbewegung erst ab 1024 Pixeln, auf
+            dem Handy gab es sie gar nicht. Der Auftraggeber wollte sie dort
+            auch, und der erste Gedanke war ein zweites, kleineres Wappen, das
+            liegen bleibt. Sein Einwand war besser: Es soll "einmal elegant
+            erscheinen und dann verschwinden und fuer das Bild Platz machen".
+
+            Damit loest sich das Platzproblem von selbst. Auf 375 Pixeln
+            Breite konkurriert ein liegenbleibendes Wappen mit dem Foto, ein
+            auftretendes nicht.
+
+            360 PIXEL, OBWOHL DAS FOTO NUR 250 HOCH IST. Das Wappen ragt
+            damit rund 110 Pixel darunter hinaus, ueber die Zeile "Aus dem
+            Vereinsleben". Ich hatte es deshalb auf 210 verkleinert, bis der
+            Auftraggeber sagte: "das es herausragt ist garnicht schlimm."
+
+            Er hat recht, und der Grund ist der Zweck: Das hier ist ein
+            Auftritt und kein Wasserzeichen. Ein Wappen, das brav im
+            Bilderrahmen bleibt, wirkt wie ein Aufkleber; eines, das darueber
+            hinausgeht, wirkt, als komme es von woanders her und ziehe
+            weiter. Nach 2,4 Sekunden ist es ohnehin weg, und die Zeile
+            darunter ist waehrenddessen nur halb verdeckt.
+
+            ES LIEGT UEBER DEM FOTO UND NICHT DAHINTER. Dahinter waere es nur
+            an den Raendern zu sehen, also als zwei Sicheln links und rechts,
+            und niemand erkaeme darauf, dass das ein Wappen ist. Darueber
+            bleibt das Foto trotzdem sichtbar: Die Deckkraft liegt bei 0,92,
+            und nach 2,4 Sekunden ist das Wappen ganz weg.
+
+            lg:hidden, weil ab da das grosse Wappen im Hintergrund steht und
+            liegen bleibt. Zwei rollende Wappen auf einem Bildschirm waeren
+            eines zu viel.
+
+            aria-hidden und pointer-events-none: Es ist reine Zier, darf nicht
+            vorgelesen werden und keine Klicks abfangen. Das Fenster darunter
+            fuehrt zu Instagram, und das muss vom ersten Moment an anklickbar
+            sein, auch waehrend die Animation laeuft.
+          */}
+          <Image
+            src="/logo.svg"
+            alt=""
+            width={900}
+            height={900}
+            priority
+            aria-hidden="true"
+            className="wappen-rad wappen-auftritt pointer-events-none absolute left-1/2 top-1/2 h-[360px] w-[360px] lg:hidden"
+          />
         </div>
 
         <div className="flex min-w-0 flex-col gap-7 sm:gap-8 lg:order-1">
