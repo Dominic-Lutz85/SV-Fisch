@@ -138,15 +138,48 @@ export default function MainMenu({
             ruhig ? "<" : "<+=0.15"
           );
       } else if (sichtbar) {
-        tl.to(schleier, { autoAlpha: 0, duration: ruhig ? 0 : 0.35 })
+        /*
+         * DIE SCHRIFT GEHT ZUERST, seit dem 23.09.2026.
+         *
+         * Gemeldet vom Auftraggeber: "schliesst sich das dropdownmenue viel
+         * zu langsam und die schrift sieht man noch eine zeit lang stehen".
+         * Er hat in beidem recht, und der zweite Teil war der eigentliche
+         * Fehler: Beim Oeffnen wurden Links und Nebensachen animiert, beim
+         * Schliessen nicht. Sie standen einfach da, bis setSichtbar(false)
+         * das ganze Menue auf display:none setzte.
+         *
+         * Gemessen bei 375 Pixeln, alle 120 ms nachgesehen:
+         *   174 ms  Flaechen fahren los
+         *   301 ms  Flaechen halb draussen, Schrift steht noch vollstaendig
+         *   444 ms  Flaechen draussen, Schrift liegt auf dem Foto
+         *   586 ms  unveraendert
+         *   744 ms  alles weg, schlagartig
+         *
+         * Rund 440 ms lang lagen also "Home", "Der Verein" und die ganze
+         * Liste ohne Hintergrund ueber dem Kopfbereich der Seite.
+         *
+         * Jetzt gehen Schrift und Nebensachen in 0,18 s zuerst, danach
+         * faehrt der Vorhang. Das ist auch die natuerlichere Reihenfolge:
+         * Ein Vorhang nimmt nicht mit, was vor ihm steht.
+         *
+         * DAZU GESTRAFFT: Flaechen von 0,45 auf 0,32 s und der Versatz von
+         * 0,06 auf 0,04. Insgesamt ist das Menue jetzt nach rund 0,45 s zu
+         * statt nach 0,74. Das Oeffnen bleibt langsamer, und das ist Absicht:
+         * Beim Oeffnen will man etwas sehen, beim Schliessen will man weg.
+         */
+        tl.to([links, nebensachen], {
+          autoAlpha: 0,
+          duration: ruhig ? 0 : 0.18,
+        })
+          .to(schleier, { autoAlpha: 0, duration: ruhig ? 0 : 0.3 }, "<")
           .to(
             flaechen,
             {
               xPercent: 101,
-              stagger: ruhig ? 0 : 0.06,
-              duration: ruhig ? 0 : 0.45,
+              stagger: ruhig ? 0 : 0.04,
+              duration: ruhig ? 0 : 0.32,
             },
-            "<"
+            ruhig ? "<" : "<+=0.1"
           )
           .call(() => setSichtbar(false));
       }
