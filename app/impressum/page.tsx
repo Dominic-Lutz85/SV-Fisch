@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import PageHeader from "@/components/PageHeader";
 import { siteConfig } from "@/lib/config";
+import { getVorstand } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Impressum",
@@ -8,6 +9,11 @@ export const metadata: Metadata = {
 };
 
 export default function ImpressumPage() {
+  const vertretung = getVorstand()
+    .filter((m) => m.vertretungsberechtigt && m.name)
+    .map((m) => m.name)
+    .join(", ");
+
   return (
     <>
       <PageHeader title="Impressum" />
@@ -43,20 +49,29 @@ export default function ImpressumPage() {
             {siteConfig.contact.addressLines[2]}
           </p>
           {/*
-            Die Vertretungsregel ist belegt: § 8 der Satzung vom 25.11.2022,
-            "Je 2 Mitglieder gemeinsam sind vertretungsberechtigt". Wer genau
-            dem geschaeftsfuehrenden Vorstand angehoert, sagt die Satzung
-            nicht, das steht im Registerauszug. Deshalb hier die Regel und die
-            Aemter aus content/vorstand.json, nicht mehr.
+            Belegt durch § 8 der Satzung vom 25.11.2022: "Vorstand im Sinne
+            des § 26 BGB ist der geschaeftsfuehrende Vorstand. Dieser vertritt
+            den Verein gerichtlich und aussergerichtlich. Je 2 Mitglieder
+            gemeinsam sind vertretungsberechtigt." Dazu zaehlt die Satzung den
+            Schatzmeister, der im Verein "Kassenwart" heisst.
+
+            Hier stand bis zum 24.09.2026 ein Platzhalter mit dem Vermerk, die
+            Namen stuenden nur im Registerauszug. Das war zweimal falsch: Die
+            Satzung sagt sehr wohl, wer dazugehoert, und die Eintragung ins
+            Vereinsregister ist deklaratorisch. Vertretungsberechtigt ist, wer
+            gewaehlt wurde, nicht erst, wer eingetragen ist.
+
+            Die Namen kommen aus content/vorstand.json, damit ein
+            Vorstandswechsel das Impressum mitnimmt. Wer sie leer laufen
+            laesst, faellt bei scripts/pruefe-bereiche.mjs auf.
           */}
           <p className="mt-3 leading-relaxed text-text-leise">
-            Vertreten durch den geschäftsführenden Vorstand. Je zwei Mitglieder
-            gemeinsam sind vertretungsberechtigt (§ 8 der{" "}
+            Vertreten durch den geschäftsführenden Vorstand: {vertretung}. Je
+            zwei Mitglieder gemeinsam sind vertretungsberechtigt (§ 8 der{" "}
             <a href="/verein/satzung#p8" className="underline">
               Vereinssatzung
             </a>
-            ). [BITTE PRÜFEN/ERGÄNZEN – Namen der im Vereinsregister
-            eingetragenen Vorstandsmitglieder]
+            ).
           </p>
           <p className="mt-3 leading-relaxed text-text-leise">
             Registergericht: {siteConfig.register.court}

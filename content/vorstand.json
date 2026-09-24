@@ -4,25 +4,29 @@
       "name": "Benedict Britten",
       "rolle": "Geschäftsführender Vorstand",
       "bereich": "Verein",
-      "email": "vorstand@sv-fisch.de"
+      "email": "vorstand@sv-fisch.de",
+      "vertretungsberechtigt": true
     },
     {
       "name": "Robin Rauen",
       "rolle": "Geschäftsführender Vorstand",
       "bereich": "Verein",
-      "email": "vorstand@sv-fisch.de"
+      "email": "vorstand@sv-fisch.de",
+      "vertretungsberechtigt": true
     },
     {
       "name": "Alexander Roth",
       "rolle": "Kassenwart",
       "bereich": "Verein",
-      "email": "kasse@sv-fisch.de"
+      "email": "kasse@sv-fisch.de",
+      "vertretungsberechtigt": true
     },
     {
       "name": "Fabian Wacht",
       "rolle": "Geschäftsführender Vorstand, Ansprechpartner Satzung",
       "bereich": "Verein",
-      "email": "vorstand@sv-fisch.de"
+      "email": "vorstand@sv-fisch.de",
+      "vertretungsberechtigt": true
     },
     {
       "name": "Daniela Kucharski",

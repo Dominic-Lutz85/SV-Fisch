@@ -120,18 +120,37 @@ for (const b of ausTypen) {
   }
 }
 
+/* Probe 4: die Vertretungsberechtigten fuer das Impressum.
+ *
+ * /impressum nennt die Personen des geschaeftsfuehrenden Vorstands, § 5
+ * Abs. 1 Nr. 1 DDG. Es liest sie aus denselben Daten wie /verein/vorstand
+ * und filtert auf vertretungsberechtigt. Faellt das Kennzeichen weg, steht
+ * dort ein leerer Satz: "Vertreten durch den geschaeftsfuehrenden
+ * Vorstand: ." Kein Fehler, keine Warnung, und genau die Angabe, deren
+ * Fehlen ein Impressum abmahnfaehig macht, ist verschwunden.
+ *
+ * § 8 der Satzung verlangt zwei gemeinsam, also sind weniger als zwei in
+ * jedem Fall falsch. Ein Kennzeichen ohne Namen zaehlt nicht mit.
+ */
+const vertretung = eintraege.filter((p) => p.vertretungsberechtigt && p.name);
+if (vertretung.length < 2) {
+  fehler.push(
+    `Nur ${vertretung.length} Person(en) in content/vorstand.json tragen ` +
+      `vertretungsberechtigt: true. Das Impressum nennt sie namentlich, ` +
+      `und § 8 der Satzung verlangt je zwei gemeinsam. Unter zwei ist die ` +
+      `Angabe nach § 5 Abs. 1 Nr. 1 DDG unvollstaendig.`
+  );
+}
+
 if (fehler.length > 0) {
   process.stderr.write("\nVorstandsbereiche stimmen nicht ueberein:\n");
   for (const f of fehler) process.stderr.write(`  - ${f}\n`);
-  process.stderr.write(
-    "\nDie Bereiche stehen in types/content.ts (BEREICHE) und in " +
-      "public/admin/config.yml. Beide angleichen.\n\n"
-  );
+  process.stderr.write("\n");
   process.exitCode = 1;
 } else {
   process.stdout.write(
     `Vorstandsbereiche geprueft: ${ausTypen.length} Bereiche, ` +
-      `${eintraege.length} Eintraege, Seite und Redaktionswerkzeug einig.\n`
+      `${eintraege.length} Eintraege, ${vertretung.length} davon vertretungsberechtigt, Seite und Redaktionswerkzeug einig.\n`
   );
   for (const h of hinweise) process.stdout.write(`  Hinweis: ${h}\n`);
 }

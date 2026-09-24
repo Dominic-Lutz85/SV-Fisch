@@ -239,3 +239,11 @@ collections:
                 widget: select
                 options: ['Verein', 'Fußball', 'Gymnastik', 'Jugend', 'Darts']
               - { label: E-Mail, name: email, widget: string, required: false }
+              # Steht im Impressum als vertretungsberechtigt, § 8 der Satzung.
+              - {
+                  label: "Geschäftsführender Vorstand (steht im Impressum)",
+                  name: vertretungsberechtigt,
+                  widget: boolean,
+                  required: false,
+                  default: false,
+                }

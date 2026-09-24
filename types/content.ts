@@ -20,6 +20,18 @@ export interface VorstandsMitglied {
   name: string;
   rolle: string;
   bereich: Bereich;
+  /*
+     Gehoert die Person zum geschaeftsfuehrenden Vorstand nach § 26 BGB?
+     § 8 der Satzung: "Vorstand im Sinne des § 26 BGB ist der
+     geschaeftsfuehrende Vorstand. Dieser vertritt den Verein gerichtlich und
+     aussergerichtlich. Je 2 Mitglieder gemeinsam sind vertretungsberechtigt."
+     Dazu zaehlt die Satzung ausdruecklich den Schatzmeister, im Verein
+     "Kassenwart" genannt. Das Impressum nennt genau diese Personen, § 5
+     Abs. 1 Nr. 1 DDG. Deshalb ein eigenes Feld und kein Filter auf die
+     Rollenbezeichnung: die aendert sich mit der Wortwahl, die Vertretung
+     nicht.
+  */
+  vertretungsberechtigt?: boolean;
   email?: string;
   telefon?: string;
   foto?: string;
