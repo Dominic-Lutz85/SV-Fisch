@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 import ExterneEinbettung from "@/components/ExterneEinbettung";
 import PersonCard from "@/components/PersonCard";
@@ -45,13 +45,6 @@ export default function KontaktPage() {
             >
               <Mail className="h-5 w-5 shrink-0 text-text" aria-hidden="true" />
               {siteConfig.contact.email}
-            </a>
-            <a
-              href={`tel:${siteConfig.contact.phone}`}
-              className="flex items-center gap-3 text-sm text-text hover:text-text"
-            >
-              <Phone className="h-5 w-5 shrink-0 text-text" aria-hidden="true" />
-              {siteConfig.contact.phone}
             </a>
           </div>
         </div>

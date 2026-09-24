@@ -68,8 +68,6 @@ export default function ImpressumPage() {
         <section className="mb-8">
           <h2 className="font-display text-xl font-bold text-text">Kontakt</h2>
           <p className="mt-3 leading-relaxed text-text-leise">
-            Telefon: {siteConfig.contact.phone}
-            <br />
             E-Mail: {siteConfig.contact.email}
           </p>
         </section>
@@ -101,8 +99,7 @@ export default function ImpressumPage() {
             . Unsere E-Mail-Adresse finden Sie oben im Impressum. Wir sind
             nicht verpflichtet und nicht bereit, an
             Streitbeilegungsverfahren vor einer
-            Verbraucherschlichtungsstelle teilzunehmen. [BITTE
-            PRÜFEN/ERGÄNZEN]
+            Verbraucherschlichtungsstelle teilzunehmen.
           </p>
         </section>
 
@@ -112,7 +109,7 @@ export default function ImpressumPage() {
             Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine
             Haftung für die Inhalte externer Links. Für den Inhalt der
             verlinkten Seiten sind ausschließlich deren Betreiber
-            verantwortlich. [BITTE PRÜFEN/ERGÄNZEN]
+            verantwortlich.
           </p>
         </section>
       </div>

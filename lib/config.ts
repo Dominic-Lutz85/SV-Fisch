@@ -21,7 +21,10 @@ export const siteConfig = {
   // [BITTE PRÜFEN/ERGÄNZEN] echte Kontaktdaten eintragen
   contact: {
     email: "info@sv-fisch.de",
-    phone: "+49 0000 000000",
+    // Keine Nummer erfunden: das bisherige Vereinsimpressum nannte auch
+    // keine. Sobald der Verein eine nennt, hier eintragen und die Zeile auf
+    // /kontakt und /impressum wieder einbauen.
+    phone: "",
     addressLines: ["Sportplatz SV Fisch", "Im Asbüsch 10", "54439 Fisch"],
     // Jakobushaus = Vereinsheim, siehe Kontaktseite
     venueName: "Sportplatz & Jakobushaus",

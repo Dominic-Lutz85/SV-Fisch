@@ -10,12 +10,12 @@ export const metadata: Metadata = {
 const abschnitte = [
   {
     titel: "1. Verantwortlicher",
-    inhalt: `Verantwortlich für die Datenverarbeitung auf dieser Website ist der ${siteConfig.name}, [BITTE PRÜFEN/ERGÄNZEN – Anschrift], E-Mail: ${siteConfig.contact.email}.`,
+    inhalt: `Verantwortlich für die Datenverarbeitung auf dieser Website ist der ${siteConfig.name}, ${siteConfig.contact.addressLines.join(", ")}, E-Mail: ${siteConfig.contact.email}.`,
   },
   {
     titel: "2. Hosting",
     inhalt:
-      "Diese Website wird bei Vercel Inc. gehostet. Beim Aufruf der Website erhebt Vercel automatisch technische Zugriffsdaten (Server-Logs), u. a. IP-Adresse, Browsertyp, Datum und Uhrzeit des Zugriffs. [BITTE PRÜFEN/ERGÄNZEN – ggf. Auftragsverarbeitungsvertrag benennen, Serverstandort prüfen].",
+      "Diese Website wird bei Vercel Inc. gehostet. Beim Aufruf der Website erhebt Vercel automatisch technische Zugriffsdaten (Server-Logs), u. a. IP-Adresse, Browsertyp, Datum und Uhrzeit des Zugriffs. Die Auslieferung der Seiten erfolgt über einen Serverstandort in Frankfurt am Main. Serverseitige Funktionen dieser Website, etwa die Verarbeitung von Formularen, werden derzeit in einem Rechenzentrum in den USA ausgeführt; Vercel Inc. hat seinen Sitz in den Vereinigten Staaten. Grundlage der Übermittlung sind die Standardvertragsklauseln der Europäischen Kommission. [BITTE PRÜFEN/ERGÄNZEN – Auftragsverarbeitungsvertrag mit Vercel abschließen und hier benennen].",
   },
   {
     titel: "3. Cookies & Einwilligung",
@@ -49,7 +49,7 @@ const abschnitte = [
   {
     titel: "8. Deine Rechte",
     inhalt:
-      "Du hast das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit sowie Widerspruch gegen die Verarbeitung deiner personenbezogenen Daten. Wende dich hierfür an die oben genannte Kontaktadresse. Zudem besteht ein Beschwerderecht bei der zuständigen Aufsichtsbehörde. [BITTE PRÜFEN/ERGÄNZEN – zuständige Aufsichtsbehörde benennen].",
+      "Du hast das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit sowie Widerspruch gegen die Verarbeitung deiner personenbezogenen Daten. Wende dich hierfür an die oben genannte Kontaktadresse. Zudem besteht ein Beschwerderecht bei der zuständigen Aufsichtsbehörde: Der Landesbeauftragte für den Datenschutz und die Informationsfreiheit Rheinland-Pfalz, Hintere Bleiche 34, 55116 Mainz.",
   },
   {
     titel: "9. SSL-/TLS-Verschlüsselung",
