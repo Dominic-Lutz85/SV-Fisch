@@ -28,9 +28,10 @@ export const siteConfig = {
     addressLines: ["Sportplatz SV Fisch", "Im Asbüsch 10", "54439 Fisch"],
     // Jakobushaus = Vereinsheim, siehe Kontaktseite
     venueName: "Sportplatz & Jakobushaus",
-    // OpenStreetMap-Koordinaten [BITTE PRÜFEN/ERGÄNZEN]
-    lat: 49.6198,
-    lng: 6.4883,
+    // Nachgeschlagen bei OpenStreetMap fuer "Im Asbüsch 10, 54439 Fisch".
+    // Vorher standen hier 49.6198 / 6.4883, rund 300 m daneben.
+    lat: 49.6173,
+    lng: 6.4901,
   },
 
   register: {

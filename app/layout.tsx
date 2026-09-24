@@ -66,7 +66,17 @@ const jsonLd = {
   address: {
     "@type": "PostalAddress",
     streetAddress: siteConfig.contact.addressLines[1],
-    addressLocality: siteConfig.contact.addressLines[2],
+    /*
+       addressLines[2] ist eine Zeile Anschrift, "54439 Fisch". Sie stand
+       geschlossen in addressLocality, und damit hiess der Ort fuer jede
+       Suchmaschine "54439 Fisch". Hier aufgeteilt statt in lib/config.ts,
+       weil die Zeile dort so auf der Seite gedruckt wird.
+    */
+    postalCode: siteConfig.contact.addressLines[2].split(" ")[0],
+    addressLocality: siteConfig.contact.addressLines[2]
+      .split(" ")
+      .slice(1)
+      .join(" "),
     addressCountry: "DE",
   },
   sameAs: [siteConfig.social.instagram, siteConfig.social.facebook].filter(
