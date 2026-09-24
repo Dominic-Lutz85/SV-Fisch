@@ -25,14 +25,20 @@
       "email": "vorstand@sv-fisch.de"
     },
     {
+      "name": "Daniela Kucharski",
+      "rolle": "Schriftführerin",
+      "bereich": "Verein",
+      "email": "vorstand@sv-fisch.de"
+    },
+    {
       "name": "Maximilian Witt",
-      "rolle": "Abteilungsleitung Fußball",
+      "rolle": "Abteilungsleitung",
       "bereich": "Fußball",
       "email": "fussball@sv-fisch.de"
     },
     {
       "name": "Dennis Kettenhofen",
-      "rolle": "Stellvertretende Abteilungsleitung Fußball",
+      "rolle": "Stellvertretende Abteilungsleitung",
       "bereich": "Fußball",
       "email": "fussball@sv-fisch.de"
     },
@@ -43,14 +49,14 @@
       "email": "jugend@sv-fisch.de"
     },
     {
-      "name": "Isabelle Marton",
-      "rolle": "Abteilungsleitung Gymnastik",
+      "name": "Daniela Kucharski",
+      "rolle": "Ansprechpartnerin",
       "bereich": "Gymnastik",
       "email": "gymnastik@sv-fisch.de"
     },
     {
       "name": "Andreas Esser",
-      "rolle": "Abteilungsleitung Darts",
+      "rolle": "Abteilungsleitung",
       "bereich": "Darts",
       "email": "darts@sv-fisch.de"
     }

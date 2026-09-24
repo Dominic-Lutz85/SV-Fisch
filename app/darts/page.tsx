@@ -83,8 +83,15 @@ export default function DartsPage() {
           </div>
           {leitung && (
             <div className="border border-linie bg-flaeche-hoch p-6">
+              {/*
+                Das Amt kommt aus content/vorstand.json und steht nicht hier.
+                Fest eingebaut war es nur so lange richtig, wie jede Abteilung
+                eine Abteilungsleitung hatte; die Gymnastik hat eine
+                Ansprechpartnerin, und die Seite hat das Amt trotzdem
+                weiterbehauptet.
+              */}
               <p className="text-xs font-bold uppercase tracking-wide text-text-leise">
-                Abteilungsleitung
+                {leitung.rolle}
               </p>
               {/*
                 Solange niemand benannt ist, steht hier der Hinweis statt

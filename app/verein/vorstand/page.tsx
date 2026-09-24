@@ -46,7 +46,7 @@ export default function VorstandPage() {
         */}
         <p className="mt-4 text-sm text-text-leise">
           Stand: Vorstand nach der Mitgliederversammlung. Wer sich engagieren
-          moechte oder eine Frage an ein bestimmtes Amt hat, schreibt am besten
+          möchte oder eine Frage an ein bestimmtes Amt hat, schreibt am besten
           direkt an die Adresse auf der Karte.
         </p>
       </div>
