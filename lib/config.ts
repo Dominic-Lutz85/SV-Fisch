@@ -64,10 +64,24 @@ export const siteConfig = {
    * seinem Impressum, und so muss niemand seine Wohnadresse
    * veroeffentlichen.
    *
-   * Solange hier nichts steht, zeigt /impressum an dieser Stelle einen
-   * Platzhalter. Sobald der Vorstand jemanden benennt, genuegt der Name.
+   * HIER STEHT BEWUSST KEIN PERSONENNAME. Der Auftraggeber hat am
+   * 24.09.2026 entschieden, "Vorstandschaft" einzutragen, weil noch
+   * niemand benannt ist. Damit ist § 18 Abs. 2 MStV formal nicht erfuellt:
+   * die Vorschrift verlangt eine natuerliche Person. Die bisherige
+   * Vereinsseite fuehrte an derselben Stelle "Sportverein Fisch 1964 e.V."
+   * und war damit genauso unvollstaendig.
+   *
+   * Der Unterschied zum Platzhalter vorher ist die Sichtbarkeit, nicht die
+   * Rechtslage. Wer einen Namen bekommt, traegt ihn hier ein, mehr ist
+   * nicht zu tun.
+   *
+   * Warum das vertretbar ist: § 18 Abs. 2 MStV gilt ueberwiegend als nicht
+   * abmahnfaehig, weil er dem Medienrecht und nicht dem Verbraucherschutz
+   * dient; er ist eine Ordnungswidrigkeit nach § 115 MStV. Das eigentliche
+   * Abmahnrisiko liegt bei § 5 DDG, und die Angaben dort sind seit dem
+   * 24.09.2026 vollstaendig.
    */
-  mstvVerantwortlich: "",
+  mstvVerantwortlich: "Vorstandschaft",
 
   social: {
     instagram: "https://www.instagram.com/sv.fisch/",
