@@ -2,13 +2,13 @@
   "eintraege": [
     {
       "name": "Benedict Britten",
-      "rolle": "1. Vorsitzender",
+      "rolle": "Geschäftsführender Vorstand",
       "bereich": "Verein",
       "email": "vorstand@sv-fisch.de"
     },
     {
       "name": "Robin Rauen",
-      "rolle": "2. Vorsitzender",
+      "rolle": "Geschäftsführender Vorstand",
       "bereich": "Verein",
       "email": "vorstand@sv-fisch.de"
     },
@@ -20,7 +20,7 @@
     },
     {
       "name": "Fabian Wacht",
-      "rolle": "Vorstandsmitglied, Ansprechpartner Satzung",
+      "rolle": "Geschäftsführender Vorstand, Ansprechpartner Satzung",
       "bereich": "Verein",
       "email": "vorstand@sv-fisch.de"
     },
@@ -37,7 +37,7 @@
       "email": "fussball@sv-fisch.de"
     },
     {
-      "name": "Andreas Esser",
+      "name": "",
       "rolle": "Jugendwart/in",
       "bereich": "Jugend",
       "email": "jugend@sv-fisch.de"
@@ -49,7 +49,7 @@
       "email": "gymnastik@sv-fisch.de"
     },
     {
-      "name": "",
+      "name": "Andreas Esser",
       "rolle": "Abteilungsleitung Darts",
       "bereich": "Darts",
       "email": "darts@sv-fisch.de"
