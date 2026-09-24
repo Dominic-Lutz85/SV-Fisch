@@ -91,8 +91,23 @@ export default function ImpressumPage() {
           <h2 className="font-display text-xl font-bold text-text">
             Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV
           </h2>
+          {/*
+            § 18 Abs. 2 MStV verlangt eine natuerliche Person mit Namen und
+            Anschrift. Die Anschrift ist die des Vereins, nicht die der
+            Person; so haelt es auch der Fussballverband Rheinland.
+          */}
           <p className="mt-3 leading-relaxed text-text-leise">
-            [BITTE PRÜFEN/ERGÄNZEN – Name und Anschrift]
+            {siteConfig.mstvVerantwortlich ? (
+              <>
+                {siteConfig.mstvVerantwortlich}
+                <br />
+                {siteConfig.contact.addressLines[1]}
+                <br />
+                {siteConfig.contact.addressLines[2]}
+              </>
+            ) : (
+              "[BITTE PRÜFEN/ERGÄNZEN – Name der verantwortlichen Person]"
+            )}
           </p>
         </section>
 

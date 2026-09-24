@@ -54,6 +54,21 @@ export const siteConfig = {
     number: "VR 41139",
   },
 
+  /*
+   * Verantwortlich fuer die Nachrichten nach § 18 Abs. 2 MStV. Die
+   * Vorschrift verlangt eine natuerliche Person mit Namen und Anschrift,
+   * ein Vereinsname genuegt nicht.
+   *
+   * Als Anschrift steht die des Vereins dort, nicht die der Person. So
+   * macht es der Fussballverband Rheinland, der eigene Dachverband, in
+   * seinem Impressum, und so muss niemand seine Wohnadresse
+   * veroeffentlichen.
+   *
+   * Solange hier nichts steht, zeigt /impressum an dieser Stelle einen
+   * Platzhalter. Sobald der Vorstand jemanden benennt, genuegt der Name.
+   */
+  mstvVerantwortlich: "",
+
   social: {
     instagram: "https://www.instagram.com/sv.fisch/",
     facebook: "https://facebook.com/svfisch1964",
