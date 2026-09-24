@@ -15,7 +15,7 @@ const abschnitte = [
   {
     titel: "2. Hosting",
     inhalt:
-      "Diese Website wird bei Vercel Inc. gehostet. Beim Aufruf der Website erhebt Vercel automatisch technische Zugriffsdaten (Server-Logs), u. a. IP-Adresse, Browsertyp, Datum und Uhrzeit des Zugriffs. Die Auslieferung der Seiten erfolgt über einen Serverstandort in Frankfurt am Main. Serverseitige Funktionen dieser Website, etwa die Verarbeitung von Formularen, werden derzeit in einem Rechenzentrum in den USA ausgeführt; Vercel Inc. hat seinen Sitz in den Vereinigten Staaten. Grundlage der Übermittlung sind die Standardvertragsklauseln der Europäischen Kommission. [BITTE PRÜFEN/ERGÄNZEN – Auftragsverarbeitungsvertrag mit Vercel abschließen und hier benennen].",
+      "Diese Website wird bei Vercel Inc. gehostet. Beim Aufruf der Website erhebt Vercel automatisch technische Zugriffsdaten (Server-Logs), u. a. IP-Adresse, Browsertyp, Datum und Uhrzeit des Zugriffs. Auslieferung und serverseitige Verarbeitung, etwa die Entgegennahme von Formularen, erfolgen in einem Rechenzentrum in Frankfurt am Main. Vercel Inc. hat seinen Sitz in den Vereinigten Staaten; soweit dabei personenbezogene Daten in die USA übermittelt werden, geschieht dies auf Grundlage der Standardvertragsklauseln der Europäischen Kommission. [BITTE PRÜFEN/ERGÄNZEN – Auftragsverarbeitungsvertrag mit Vercel abschließen und hier benennen].",
   },
   {
     titel: "3. Cookies & Einwilligung",
