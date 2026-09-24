@@ -38,14 +38,27 @@ const GEBAUT = join(process.cwd(), ".next", "server", "app");
  * und dann mit einem Wort in der Commit-Nachricht, welche Stelle gefuellt
  * wurde.
  */
-const OBERGRENZE = 27;
+/*
+ * VON 27 AUF 39 ERHOEHT, OHNE DASS EINE STELLE DAZUGEKOMMEN WAERE.
+ *
+ * Das erste Muster unten traf nur "[BITTE PRÜFEN/ERGÄNZEN]" ohne Zusatz.
+ * Jeder Platzhalter mit Erlaeuterung, etwa
+ * "[BITTE PRÜFEN/ERGÄNZEN – Name und Anschrift]", lief daran vorbei. Das
+ * waren 12 Stellen, und ausgerechnet die, die beschreiben, was zu tun ist.
+ *
+ * Aufgefallen ist es beim Fuellen genau so einer Stelle im Impressum: die
+ * Zahl blieb stehen, obwohl sichtbar etwas verschwunden war. Wer eine Zahl
+ * nur steigen oder fallen sieht, ohne sie einmal gegen ein rohes grep zu
+ * halten, merkt so etwas nie.
+ */
+const OBERGRENZE = 39;
 
 /*
  * Die Muster. Absichtlich mehr als eines: Genau daran ist die Pruefung am
  * 09.09. gescheitert, sie kannte nur "[Name eintragen]".
  */
 const MUSTER = [
-  /\[BITTE PR(?:Ü|&#x00dc;|&uuml;)FEN\/ERG(?:Ä|&#x00c4;|&auml;)NZEN\]/g,
+  /\[BITTE PR(?:Ü|&#x00dc;|&uuml;)FEN\/ERG(?:Ä|&#x00c4;|&auml;)NZEN[^\]]*\]/g,
   /*
    * Deckt "[Name eintragen]", "[Ort eintragen]",
    * "[Vereinsregisternummer eintragen]" und alles in der Form mit ab.
