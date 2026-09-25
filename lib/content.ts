@@ -44,8 +44,48 @@ export function getVorstand(): VorstandsMitglied[] {
   return vorstandData.eintraege as VorstandsMitglied[];
 }
 
+/*
+ * Die Felder, ohne die eine Sponsorenkachel falsch aussieht oder falsch
+ * aussagt. url fehlt bewusst: ohne Internetseite wird die Kachel ein div
+ * statt eines Links, das ist ein gueltiger Zustand.
+ */
+const SPONSOR_PFLICHT = [
+  "name",
+  "stufe",
+  "logo",
+  "breite",
+  "hoehe",
+  "beschreibung",
+  "ort",
+] as const;
+
 export function getSponsoren(): Sponsor[] {
-  return (sponsorenData.eintraege as Sponsor[]).map((s) => ({
+  /*
+   * WARUM HIER GEPRUEFT WIRD UND NICHT IM TYP: "as Sponsor[]" prueft nichts.
+   * Es sagt TypeScript nur, es solle glauben, dass die JSON-Datei passt.
+   * Gemessen am 25.09.2026: ort wurde im Typ zur Pflicht, eine Anschrift
+   * testweise aus content/sponsoren.json geloescht, und der Build lief
+   * trotzdem gruen durch. Auf der Seite haette die Kachel eine leere
+   * Ortszeile gezeigt.
+   *
+   * Deshalb die Pruefung beim Laden. Sie laeuft beim Bauen, weil die Seiten
+   * vorab erzeugt werden, und ein Fehler hier bricht den Build ab.
+   */
+  const eintraege = sponsorenData.eintraege as Record<string, unknown>[];
+  for (const eintrag of eintraege) {
+    const fehlend = SPONSOR_PFLICHT.filter(
+      (feld) => eintrag[feld] === undefined || eintrag[feld] === ""
+    );
+    if (fehlend.length > 0) {
+      throw new Error(
+        `content/sponsoren.json: Bei "${eintrag.name ?? "(ohne Namen)"}" ` +
+          `fehlt ${fehlend.join(", ")}. Die Anschrift steht im Impressum ` +
+          `der Firma, die Beschreibung auf ihrer Internetseite.`
+      );
+    }
+  }
+
+  return (eintraege as unknown as Sponsor[]).map((s) => ({
     ...s,
     logo: normalizeAssetPath(s.logo)!,
   }));

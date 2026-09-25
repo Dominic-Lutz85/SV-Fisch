@@ -64,8 +64,18 @@ export interface Sponsor {
    * ruft dessen Seite auf und nimmt, was dort steht.
    */
   beschreibung: string;
-  /* Ort oder Anschrift, falls bekannt. Steht klein unter der Beschreibung. */
-  ort?: string;
+  /*
+   * Strasse und Ort, aus dem Impressum der Firma. Steht klein unter der
+   * Beschreibung.
+   *
+   * PFLICHT SEIT DEM 25.09.2026. Vorher hiess es "falls bekannt", und das
+   * Ergebnis war eine Wand, auf der acht Betriebe eine Anschrift hatten,
+   * davon drei nur mit Ortsnamen, und drei gar keine. Bekannt ist sie immer:
+   * Jede Firma mit Internetseite muss sie im Impressum fuehren, § 5 DDG.
+   *
+   * Form: "Strasse Nr, Ort", ohne Postleitzahl.
+   */
+  ort: string;
   /* Nur setzen, wenn die Adresse bekannt ist. Kein Ziel heisst kein Link. */
   url?: string;
 }

@@ -71,7 +71,7 @@ function HauptKarte({ sponsor }: { sponsor: Sponsor }) {
           <p className="max-w-prose text-sm leading-relaxed text-text-leise">
             {sponsor.beschreibung}
           </p>
-          {sponsor.ort && <Ortszeile ort={sponsor.ort} />}
+          <Ortszeile ort={sponsor.ort} />
         </div>
       </div>
     </SponsorRahmen>
@@ -98,7 +98,7 @@ function MitKarte({ sponsor }: { sponsor: Sponsor }) {
           <p className="text-[13px] leading-relaxed text-text-leise">
             {sponsor.beschreibung}
           </p>
-          {sponsor.ort && <Ortszeile ort={sponsor.ort} className="mt-auto pt-1" />}
+          <Ortszeile ort={sponsor.ort} className="mt-auto pt-1" />
         </div>
       </div>
     </SponsorRahmen>

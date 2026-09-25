@@ -219,7 +219,12 @@ collections:
                   abgeschrieben, nicht ausgedacht. Eine falsche Angabe
                   über ein fremdes Unternehmen auf der Vereinsseite ist
                   ein echtes Problem.
-              - { label: Ort, name: ort, widget: string, required: false }
+              - label: Anschrift
+                name: ort
+                widget: string
+                hint: >-
+                  Straße und Ort aus dem Impressum der Firma, zum Beispiel
+                  "Am Brunnen 14, Fisch". Ohne Postleitzahl.
               - { label: Internetseite, name: url, widget: string, required: false, hint: 'Mit https:// davor. Leer lassen, wenn die Firma keine hat.' }
 
       - name: vorstand

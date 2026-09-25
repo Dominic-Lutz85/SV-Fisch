@@ -37,6 +37,7 @@
       "breite": 282,
       "hoehe": 60,
       "beschreibung": "Elektro-Fachbetrieb. Reparieren, installieren, konfigurieren und sanieren.",
+      "ort": "Max-Planck-Straße 12, Saarburg",
       "url": "https://www.benzmueller.de/"
     },
     {
@@ -46,7 +47,7 @@
       "breite": 304,
       "hoehe": 125,
       "beschreibung": "Edelbrände und Viez vom Obst der eigenen Streuobstwiesen.",
-      "ort": "Fisch",
+      "ort": "Am Brunnen 14, Fisch",
       "url": "https://www.viezvonlutz.de/"
     },
     {
@@ -56,7 +57,7 @@
       "breite": 250,
       "hoehe": 78,
       "beschreibung": "Fleischerei, Mittagstisch und SB-Shop. Regionale Fleisch- und Wurstwaren.",
-      "ort": "Temmels",
+      "ort": "Kirchstraße 9, Temmels",
       "url": "https://fleischerei-klassen.de/"
     },
     {
@@ -66,6 +67,7 @@
       "breite": 288,
       "hoehe": 167,
       "beschreibung": "Holzbau, Bedachung, Ausbau sowie Fassaden und Terrassen.",
+      "ort": "Kümmerner Weg 1, Mannebach",
       "url": "https://www.brocker-holzbau.de/"
     },
     {
@@ -85,7 +87,7 @@
       "breite": 220,
       "hoehe": 46,
       "beschreibung": "Steuerberatungsgesellschaft, unter anderem für Grenzgänger nach Luxemburg.",
-      "ort": "Saarburg",
+      "ort": "Nikolaus-Otto-Straße 19, Saarburg",
       "url": "https://www.roth-munch.de/"
     },
     {
@@ -95,6 +97,7 @@
       "breite": 314,
       "hoehe": 219,
       "beschreibung": "Ganzheitliches Design für Marken, Unternehmen und Behörden, seit über 25 Jahren.",
+      "ort": "Im Asbüsch 4, Fisch",
       "url": "https://hoellen.de/"
     },
     {
