@@ -118,8 +118,13 @@ export default function Footer() {
       {sponsoren.length > 0 && (
         <div className="border-t border-linie py-10">
           <div className="container-fisch">
-            <p className="mb-6 text-center text-xs font-semibold uppercase tracking-wider text-text-leise">
-              Unsere Sponsoren
+            <p className="mb-6 text-center text-xs font-semibold uppercase tracking-wider">
+              <Link
+                href="/verein/sponsoren"
+                className="text-text-leise underline-offset-4 hover:text-text hover:underline hover:decoration-fisch-yellow"
+              >
+                Unsere Sponsoren
+              </Link>
             </p>
             <div className="flex flex-wrap items-center justify-center gap-6">
               {sponsoren.map((s) => {
