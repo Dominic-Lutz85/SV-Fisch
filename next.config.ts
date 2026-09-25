@@ -20,6 +20,21 @@ const nextConfig: NextConfig = {
   async redirects() {
     const HAUPTDOMAIN = "sv-fisch.com";
 
+    /*
+     * DIE BISHERIGE ADRESSE, die auf die Hauptadresse zeigt. Leer, solange
+     * es keine gibt.
+     *
+     * Beim Umzug auf sv-fisch.de bleibt sv-fisch.com bestehen und liefert
+     * ohne diese Regel denselben Inhalt unter einer zweiten Adresse. Das
+     * ist derselbe Fehler, den die www-Regel darunter verhindert, nur eine
+     * Ebene hoeher: Google sieht zwei Seiten, sucht sich eine aus, und die
+     * Bekanntheit verteilt sich auf beide.
+     *
+     * scripts/domain-umstellen.mjs traegt hier beim Umzug die bisherige
+     * Hauptdomain ein.
+     */
+    const ZWEITDOMAIN = "";
+
     return [
       /*
        * Ohne diese Weiterleitung ist die Seite unter zwei Adressen
@@ -34,6 +49,39 @@ const nextConfig: NextConfig = {
         destination: `https://${HAUPTDOMAIN}/:path*`,
         permanent: true,
       },
+      /*
+       * Die bisherige Adresse, mit und ohne www, auf die Hauptadresse. Der
+       * Pfad bleibt erhalten, damit ein alter Link auf eine Unterseite dort
+       * ankommt und nicht auf der Startseite.
+       *
+       * Die Liste ist leer, wenn ZWEITDOMAIN leer ist. Eine Regel mit
+       * leerem Host wuerde auf nichts passen, aber sie stuende in der
+       * Ausgabe von next build und liesse jeden glauben, sie tue etwas.
+       */
+      /*
+       * "as const" ist hier noetig und in der Regel darueber nicht: In einem
+       * Array-Literal, das unmittelbar gegen Redirect[] geprueft wird,
+       * erkennt TypeScript "host" als Literal. Sobald die Regeln aus einem
+       * Ternaer kommen, wird daraus string, und das passt nicht mehr auf
+       * "host" | "header" | "cookie" | "query". Der Build bricht dann mit
+       * TS2322 ab, nicht zur Laufzeit.
+       */
+      ...(ZWEITDOMAIN
+        ? [
+            {
+              source: "/:path*",
+              has: [{ type: "host" as const, value: ZWEITDOMAIN }],
+              destination: `https://${HAUPTDOMAIN}/:path*`,
+              permanent: true,
+            },
+            {
+              source: "/:path*",
+              has: [{ type: "host" as const, value: `www.${ZWEITDOMAIN}` }],
+              destination: `https://${HAUPTDOMAIN}/:path*`,
+              permanent: true,
+            },
+          ]
+        : []),
       /*
        * Die beiden Bambini-Seiten sind am 22.09.2026 weggefallen, ihre
        * Inhalte stehen jetzt als Ansprechpartner unter /fussball/jugend.

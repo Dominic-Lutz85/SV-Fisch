@@ -43,7 +43,34 @@ if (!/^[a-z0-9.-]+\.[a-z]{2,}$/i.test(ZIEL) || ZIEL.startsWith("www.")) {
 }
 
 /*
- * Die fuenf Stellen, die etwas bewirken. Jede mit dem Grund, warum sie
+ * DIE BISHERIGE DOMAIN, gelesen bevor unten irgendetwas geschrieben wird.
+ *
+ * Die Stelle ZWEITDOMAIN braucht nicht das Ziel, sondern den Wert, der
+ * vorher in HAUPTDOMAIN stand: Die alte Adresse soll nach dem Umzug auf die
+ * neue zeigen. Wer die Reihenfolge der Stellen unten aendert, aendert daran
+ * nichts, weil hier schon gelesen wurde.
+ */
+const BISHER = readFileSync(join(WURZEL, "next.config.ts"), "utf8").match(
+  /const HAUPTDOMAIN = "([a-z0-9.-]+)";/
+)?.[1];
+
+if (!BISHER) {
+  process.stderr.write(
+    "\nHAUPTDOMAIN nicht in next.config.ts gefunden. Ohne den bisherigen " +
+      "Wert kann die alte Adresse nicht weitergeleitet werden.\n\n"
+  );
+  process.exit(1);
+}
+
+if (BISHER === ZIEL) {
+  process.stderr.write(
+    `\nDie Domain steht bereits auf ${ZIEL}. Nichts zu tun.\n\n`
+  );
+  process.exit(1);
+}
+
+/*
+ * Die sechs Stellen, die etwas bewirken. Jede mit dem Grund, warum sie
  * dazugehoert: Wer hier eine ergaenzt, soll denselben Satz schreiben
  * koennen, sonst gehoert sie vermutlich nicht dazu.
  */
@@ -66,6 +93,12 @@ const STELLEN = [
     suche: /const ERLAUBTE_HERKUNFT = \[\s*"[a-z0-9.-]+",\s*"www\.[a-z0-9.-]+",/,
     ersatz: (d) =>
       `const ERLAUBTE_HERKUNFT = [\n  "${d}",\n  "www.${d}",`,
+  },
+  {
+    datei: "next.config.ts",
+    was: "Leitet die bisherige Adresse auf die neue, sonst liefern beide denselben Inhalt.",
+    suche: /const ZWEITDOMAIN = "[a-z0-9.-]*";/,
+    ersatz: () => `const ZWEITDOMAIN = "${BISHER}";`,
   },
   {
     datei: "next.config.ts",
