@@ -59,6 +59,14 @@ export default function PraesentiertVon({
    */
   groesse?: string;
 }) {
+  /*
+   * Der ERSTE Hauptsponsor in content/sponsoren.json, nicht alle. Seit dem
+   * 25.09.2026 gibt es zwei, Tobias Weber und KaWe-Bau. Hier steht bewusst
+   * nur einer: Die Marke sitzt neben einer Seitenueberschrift, und zwei
+   * Logos nebeneinander waeren dort eine Werbezeile statt einer Praesentation.
+   * KaWe-Bau ist das Partnerunternehmen von Weber, die Reihenfolge in der
+   * Datei entscheidet, wer hier steht.
+   */
   const haupt = getSponsoren().find((s) => s.stufe === "Hauptsponsor");
   if (!haupt) return null;
 

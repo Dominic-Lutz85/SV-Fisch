@@ -5,12 +5,16 @@ const stufenReihenfolge: Sponsor["stufe"][] = ["Hauptsponsor", "Co-Sponsor"];
 
 /*
  * Die Ueberschrift steht getrennt vom Wert, weil der Wert an einem einzelnen
- * Sponsor haengt und die Ueberschrift ueber einer Gruppe steht. "Co-Sponsor"
- * ist der eine, "Co-Sponsoren" sind die acht.
+ * Sponsor haengt und die Ueberschrift ueber einer Gruppe steht.
+ *
+ * Einzahl und Mehrzahl stehen beide hier und die Anzahl entscheidet. Vorher
+ * war "Hauptsponsor" fest in der Einzahl und "Co-Sponsoren" fest in der
+ * Mehrzahl. Das stimmte, bis am 25.09.2026 KaWe-Bau als zweiter Hauptsponsor
+ * dazukam und "Hauptsponsor" ueber zwei Firmen stand.
  */
-const stufenTitel: Record<Sponsor["stufe"], string> = {
-  Hauptsponsor: "Hauptsponsor",
-  "Co-Sponsor": "Co-Sponsoren",
+const stufenTitel: Record<Sponsor["stufe"], { eins: string; mehr: string }> = {
+  Hauptsponsor: { eins: "Hauptsponsor", mehr: "Hauptsponsoren" },
+  "Co-Sponsor": { eins: "Co-Sponsor", mehr: "Co-Sponsoren" },
 };
 
 /*
@@ -175,7 +179,7 @@ export default function SponsorWall({
         return (
           <div key={stufe}>
             <Stufentitel className="mb-4 text-xs font-bold uppercase tracking-wider text-text-leise">
-              {stufenTitel[stufe]}
+              {liste.length === 1 ? stufenTitel[stufe].eins : stufenTitel[stufe].mehr}
             </Stufentitel>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {liste.map((s) =>

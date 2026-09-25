@@ -12,13 +12,23 @@
     },
     {
       "name": "KaWe-Bau GmbH",
-      "stufe": "Co-Sponsor",
+      "stufe": "Hauptsponsor",
       "logo": "/sponsoren/kawe-bau.png",
       "breite": 500,
       "hoehe": 201,
       "beschreibung": "Nachhaltige Wohnkonzepte für Massivholz-Mehrfamilienhäuser im Einklang mit der Natur. Partnerunternehmen der Dachdeckerei und Zimmerei Tobias Weber.",
       "ort": "Am Saarufer 5, Saarburg",
       "url": "https://kawe-bau.de"
+    },
+    {
+      "name": "Heizung-Sanitär-Renovierung Carsten Hamacher",
+      "stufe": "Co-Sponsor",
+      "logo": "/sponsoren/carsten-hamacher.png",
+      "breite": 800,
+      "hoehe": 482,
+      "beschreibung": "Handwerksbetrieb für Heizung, Sanitär und Renovierung.",
+      "ort": "Im Werelswald 6, Palzem",
+      "url": "https://www.wasserwaermeluft.de/webvisitenkarte/carsten-hamacher-heizung-sanitaer-renovierung"
     },
     {
       "name": "Elektro Benzmüller",
