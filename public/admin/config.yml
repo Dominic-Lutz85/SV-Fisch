@@ -41,6 +41,10 @@ public_folder: /news
 
 locale: de
 
+# Das Vereinswappen auf dem Anmeldebildschirm statt des Programmlogos.
+# Wer sich hier anmeldet, kommt aus dem Verein und soll erkennen, wo er ist.
+logo_url: /logo.svg
+
 # Deutsche Beschriftung der Oberflaeche selbst.
 i18n:
   structure: single_file
